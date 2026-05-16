@@ -1,0 +1,33 @@
+{
+  "name": "operating-systems-showcase",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --no-lint",
+    "build:full": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "build-rag-index": "python3 scripts/build-rag-index.py"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-popover": "^1.1.15",
+    "fuse.js": "^7.3.0",
+    "lucide-react": "^1.14.0",
+    "next": "^15.5.15",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
