@@ -1,6 +1,15 @@
+export type QuizQuestionType =
+  | 'multiple_choice'
+  | 'true_false'
+  | 'multiple_select'
+  | 'match'
+  | 'reorder'
+  | 'fill_blank'
+  | 'open_ended';
+
 export interface QuizQuestion {
   id: string;
-  type: 'multiple_choice' | 'true_false' | 'multiple_select' | 'match' | 'reorder' | 'fill_blank' | 'open_ended';
+  type: QuizQuestionType;
   question: string;
   options?: string[];
   correctAnswer: number | boolean | string | string[];
@@ -8,8 +17,26 @@ export interface QuizQuestion {
 }
 
 export interface GlossaryEntry {
+  id: string;
   term: string;
+  shortDefinition: string;
   definition: string;
+  category: 'OS' | 'Hardware' | 'Linux' | 'Security' | 'Processes' | 'Files';
+  aliases?: string[];
+}
+
+export interface TerminalCommandBlock {
+  command: string;
+  output?: string;
+  explanation: string;
+  warning?: string;
+}
+
+export interface CommandReference {
+  command: string;
+  syntax: string;
+  description: string;
+  examples: string[];
 }
 
 export interface Section {
@@ -17,10 +44,12 @@ export interface Section {
   title: string;
   content: string;
   keyPoints?: string[];
+  terminalCommands?: TerminalCommandBlock[];
+  commandReferences?: CommandReference[];
 }
 
 export interface Chapter {
-  id: string;
+  id: number;
   slug: string;
   title: string;
   description: string;
@@ -28,6 +57,7 @@ export interface Chapter {
   objectives: string[];
   sections: Section[];
   keyTakeaways: string[];
+  discussionPrompts: string[];
   quiz: QuizQuestion[];
-  glossary: GlossaryEntry[];
+  glossary: string[];
 }
