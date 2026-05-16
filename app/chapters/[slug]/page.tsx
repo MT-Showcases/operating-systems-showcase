@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { chapters, chaptersBySlug } from '@/data/chapters';
 import { getTermsByIds } from '@/data/glossary';
@@ -57,7 +58,7 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
     <main className="min-h-screen px-6 py-10 text-text-primary sm:px-10 lg:px-16">
       <div className="mx-auto max-w-7xl">
         <div className="mb-6 flex flex-wrap items-center gap-3 text-sm text-text-secondary">
-          <a href="/" className="transition hover:text-accent-cyan">Home</a>
+          <Link href="/" className="transition hover:text-accent-cyan">Home</Link>
           <span>/</span>
           <span className="text-text-primary">{chapter.title}</span>
         </div>
