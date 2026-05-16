@@ -1,0 +1,32 @@
+{
+  "chapter": "ch6",
+  "slug": "io-devices",
+  "title": "I/O e Periferiche",
+  "policy": "Input/Output, driver dei dispositivi, interrupt handling e protocolli di comunicazione.",
+  "sources": [
+    {
+      "id": "src-601",
+      "title": "Device Drivers and I/O Management (Modern OS, Ch5)",
+      "origin": "https://www.pearson.com/en-us/subject-catalog/p/modern-operating-systems/P200000009321",
+      "type": "book"
+    },
+    {
+      "id": "src-602",
+      "title": "Linux Device Drivers (Rubini, Corbet & Hartman)",
+      "origin": "https://www.oreilly.com/library/view/linux-device-drivers/9781491900579/",
+      "type": "book"
+    },
+    {
+      "id": "src-603",
+      "title": "man 2 ioctl, select, poll — I/O multiplexing and device control",
+      "origin": "https://man7.org/linux/man-pages/man2/ioctl.2.html",
+      "type": "documentation"
+    },
+    {
+      "id": "src-604",
+      "title": "Interrupt Handling and Context Switching (Linux Kernel Architecture)",
+      "origin": "https://www.kernel.org/doc/html/latest/core-api/irq/",
+      "type": "documentation"
+    }
+  ]
+}

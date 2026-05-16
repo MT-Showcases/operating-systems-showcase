@@ -1,0 +1,32 @@
+{
+  "chapter": "ch3",
+  "slug": "kernel",
+  "title": "Kernel, User Space e System Calls",
+  "policy": "Architettura interna del kernel: privilegi, protezione, system call interface.",
+  "sources": [
+    {
+      "id": "src-301",
+      "title": "The UNIX Programming Environment — Kernighan & Pike",
+      "origin": "https://www.pearson.com/en-us/subject-catalog/p/the-unix-programming-environment/P200000003656",
+      "type": "book"
+    },
+    {
+      "id": "src-302",
+      "title": "Linux Kernel Development — Robert Love",
+      "origin": "https://www.oreilly.com/library/view/linux-kernel-development/9780768696653/",
+      "type": "book"
+    },
+    {
+      "id": "src-303",
+      "title": "man 2 intro — Introduction to system calls (Linux Manual Pages)",
+      "origin": "https://man7.org/linux/man-pages/man2/intro.2.html",
+      "type": "documentation"
+    },
+    {
+      "id": "src-304",
+      "title": "Privilege Separation and Kernel Architecture (CMU Computer Systems Lab)",
+      "origin": "https://www.cs.cmu.edu/~sylvia/labs/labproc.html",
+      "type": "course"
+    }
+  ]
+}

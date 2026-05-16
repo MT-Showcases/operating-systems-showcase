@@ -1,0 +1,32 @@
+{
+  "chapter": "ch8",
+  "slug": "security-best-practices",
+  "title": "Sicurezza Base, Buone Pratiche e Uso Reale",
+  "policy": "Sicurezza operativa: privilegi minimali, sudo, permessi, errori comuni, UNIX philosophy.",
+  "sources": [
+    {
+      "id": "src-801",
+      "title": "The UNIX Philosophy — Mike Gancarz & Joel Bourne",
+      "origin": "https://www.oreilly.com/library/view/the-unix-philosophy/9781492917472/",
+      "type": "book"
+    },
+    {
+      "id": "src-802",
+      "title": "Practical UNIX and Internet Security — Garfinkel, Spafford & Schwartz",
+      "origin": "https://www.oreilly.com/library/view/practical-unix-and-internet/9780596510305/",
+      "type": "book"
+    },
+    {
+      "id": "src-803",
+      "title": "man 8 sudo, man 1 chmod, man 1 chown — Permission and privilege management",
+      "origin": "https://man7.org/linux/man-pages/man8/sudo.8.html",
+      "type": "documentation"
+    },
+    {
+      "id": "src-804",
+      "title": "Principle of Least Privilege (NIST Cybersecurity Framework)",
+      "origin": "https://csrc.nist.gov/publications/detail/sp/800-53/rev-5",
+      "type": "documentation"
+    }
+  ]
+}

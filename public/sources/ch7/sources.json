@@ -1,0 +1,32 @@
+{
+  "chapter": "ch7",
+  "slug": "linux-cli",
+  "title": "Linux da Riga di Comando",
+  "policy": "Pratica operativa: file system navigation, permissions, comandi di base, processi da CLI.",
+  "sources": [
+    {
+      "id": "src-701",
+      "title": "The Linux Command Line: A Complete Introduction — William E. Shotts Jr.",
+      "origin": "https://linuxcommand.org/",
+      "type": "book"
+    },
+    {
+      "id": "src-702",
+      "title": "GNU coreutils Documentation",
+      "origin": "https://www.gnu.org/software/coreutils/manual/",
+      "type": "documentation"
+    },
+    {
+      "id": "src-703",
+      "title": "man 1 bash — The GNU Bourne-Again SHell reference",
+      "origin": "https://man7.org/linux/man-pages/man1/bash.1.html",
+      "type": "documentation"
+    },
+    {
+      "id": "src-704",
+      "title": "tldr pages — Simplified man pages (community)",
+      "origin": "https://tldr.sh/",
+      "type": "tutorial"
+    }
+  ]
+}

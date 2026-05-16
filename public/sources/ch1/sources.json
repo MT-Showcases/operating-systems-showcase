@@ -1,0 +1,32 @@
+{
+  "chapter": "ch1",
+  "slug": "what-is-os",
+  "title": "Cos'è un Sistema Operativo",
+  "policy": "Capitolo introduttivo teorico — overview concettuale di cosa è un OS e perché esiste.",
+  "sources": [
+    {
+      "id": "src-101",
+      "title": "Operating Systems: Three Easy Pieces — Remzi Arpaci-Dusseau & Andrea Arpaci-Dusseau",
+      "origin": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+      "type": "book"
+    },
+    {
+      "id": "src-102",
+      "title": "Modern Operating Systems — Andrew Tanenbaum & Herbert Bos",
+      "origin": "https://www.pearson.com/en-us/subject-catalog/p/modern-operating-systems/P200000009321",
+      "type": "book"
+    },
+    {
+      "id": "src-103",
+      "title": "Operating System Concepts — Silberschatz, Galvin & Gagne",
+      "origin": "https://www.wiley.com/en-us/Operating+System+Concepts-p-9781119456339",
+      "type": "book"
+    },
+    {
+      "id": "src-104",
+      "title": "Introduction to Operating Systems (MIT OpenCourseWare)",
+      "origin": "https://ocw.mit.edu/courses/6-033-computer-system-engineering-spring-2018/",
+      "type": "course"
+    }
+  ]
+}

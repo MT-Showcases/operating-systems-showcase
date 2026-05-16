@@ -1,0 +1,38 @@
+{
+  "chapter": "ch5",
+  "slug": "memory-filesystem",
+  "title": "Memoria e File System",
+  "policy": "Gestione della memoria (virtuale, paging, swapping) e organizzazione del file system.",
+  "sources": [
+    {
+      "id": "src-501",
+      "title": "Memory Management in Modern Operating Systems — Modern OS (Tanenbaum, Bos)",
+      "origin": "https://www.pearson.com/en-us/subject-catalog/p/modern-operating-systems/P200000009321",
+      "type": "book"
+    },
+    {
+      "id": "src-502",
+      "title": "Virtual Memory — Three Easy Pieces (Arpaci-Dusseau & Arpaci-Dusseau)",
+      "origin": "https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf",
+      "type": "book"
+    },
+    {
+      "id": "src-503",
+      "title": "ext4 Filesystem Architecture and Internals (Linux Kernel Docs)",
+      "origin": "https://www.kernel.org/doc/html/latest/filesystems/ext4/",
+      "type": "documentation"
+    },
+    {
+      "id": "src-504",
+      "title": "man 2 mmap — Memory mapping for files and virtual memory",
+      "origin": "https://man7.org/linux/man-pages/man2/mmap.2.html",
+      "type": "documentation"
+    },
+    {
+      "id": "src-505",
+      "title": "Page Replacement Algorithms and Swapping (CMU CS15213)",
+      "origin": "https://www.cs.cmu.edu/~213/schedule.html",
+      "type": "course"
+    }
+  ]
+}

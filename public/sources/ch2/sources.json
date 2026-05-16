@@ -1,0 +1,38 @@
+{
+  "chapter": "ch2",
+  "slug": "hardware-cpu",
+  "title": "Architettura del Computer e CPU",
+  "policy": "Fondamenti hardware che il sistema operativo deve gestire: CPU, RAM, storage e I/O.",
+  "sources": [
+    {
+      "id": "src-201",
+      "title": "Computer Architecture: A Quantitative Approach — Hennessy & Patterson",
+      "origin": "https://www.elsevier.com/books/computer-architecture/hennessy/978-0-12-811905-1",
+      "type": "book"
+    },
+    {
+      "id": "src-202",
+      "title": "The Elements of Computing Systems — Nisan & Schocken (From NAND to Tetris)",
+      "origin": "https://www.nand2tetris.org/",
+      "type": "course"
+    },
+    {
+      "id": "src-203",
+      "title": "CPU Design and Cache Coherency (ARM Architecture Reference Manual)",
+      "origin": "https://developer.arm.com/documentation/den0024/latest/",
+      "type": "documentation"
+    },
+    {
+      "id": "src-204",
+      "title": "Intel 64 and IA-32 Architectures Software Developer Manual",
+      "origin": "https://www.intel.com/content/www/en/en/developer/articles/technical/intel-sdm.html",
+      "type": "documentation"
+    },
+    {
+      "id": "src-205",
+      "title": "Memory Hierarchy and Caching — Computer Science Distilled (course content)",
+      "origin": "https://computerscience.unicom.org/",
+      "type": "tutorial"
+    }
+  ]
+}
