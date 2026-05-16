@@ -7,6 +7,7 @@ import ChapterHeader from '@/components/ChapterHeader';
 import ChapterNav from '@/components/ChapterNav';
 import ChapterQuiz from '@/components/ChapterQuiz';
 import ChapterSidebar from '@/components/ChapterSidebar';
+import ChapterSourcesDisplay from '@/components/ChapterSourcesDisplay';
 import DiscussionPrompt from '@/components/DiscussionPrompt';
 import GlossaryTerm from '@/components/GlossaryTerm';
 import KeyTakeaway from '@/components/KeyTakeaway';
@@ -77,6 +78,8 @@ export default async function ChapterPage({ params }: ChapterPageProps) {
               duration={chapter.duration}
               objectives={chapter.objectives}
             />
+
+            <ChapterSourcesDisplay chapterSlug={chapter.slug} />
 
             <section className="rounded-3xl border border-border-subtle bg-bg-surface p-6">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
