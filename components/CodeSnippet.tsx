@@ -1,0 +1,68 @@
+'use client';
+
+import { useState } from 'react';
+import Editor from '@monaco-editor/react';
+
+interface CodeSnippetProps {
+  code: string;
+  lang: 'python' | 'javascript' | 'json' | 'bash';
+  label: string;
+}
+
+const langMap: Record<CodeSnippetProps['lang'], string> = {
+  python: 'python',
+  javascript: 'javascript',
+  json: 'json',
+  bash: 'shell',
+};
+
+export default function CodeSnippet({ code, lang, label }: CodeSnippetProps) {
+  const [copied, setCopied] = useState(false);
+
+  const onCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  const lines = code.split('\n').length;
+  const height = Math.min(Math.max(lines * 20 + 24, 120), 480);
+
+  return (
+    <div className="h-auto rounded-xl border border-border-subtle overflow-hidden bg-bg-primary/70">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border-subtle bg-bg-surface/80">
+        <div>
+          <p className="text-accent-cyan font-semibold text-sm">{label}</p>
+          <p className="text-text-secondary text-xs uppercase tracking-wide">{lang}</p>
+        </div>
+        <button onClick={onCopy} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-accent-cyan/40 text-accent-cyan hover:bg-accent-cyan/10 transition">
+          {copied ? 'Copiato ✓' : 'Copia'}
+        </button>
+      </div>
+
+      <Editor
+        height={`${height}px`}
+        language={langMap[lang]}
+        value={code}
+        theme="vs-dark"
+        options={{
+          readOnly: true,
+          minimap: { enabled: false },
+          scrollBeyondLastLine: false,
+          fontSize: 13,
+          lineNumbers: 'on',
+          automaticLayout: true,
+          wordWrap: 'off',
+          tabSize: 2,
+          padding: { top: 12, bottom: 12 },
+          scrollbar: { horizontal: 'auto', vertical: 'auto' },
+          fontFamily: 'var(--font-mono)',
+        }}
+      />
+    </div>
+  );
+}
