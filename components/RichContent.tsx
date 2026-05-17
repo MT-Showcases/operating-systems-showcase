@@ -36,11 +36,14 @@ function wrapGlossaryTerms(text: string, selectedIds?: string[]): React.ReactNod
   // Sort by length (longest first) to match longer terms before substrings
   const sortedByLength = [...selectedTerms].sort((a, b) => b.term.length - a.term.length);
 
-  // Create regex patterns with word boundaries using negative lookahead/lookbehind
+  // Create regex patterns with strict word boundaries
+  // Match term as complete word, not as substring inside other words
   const regexPatterns = sortedByLength.map((entry) => {
     const escaped = entry.term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    // Negative lookbehind/lookahead ensures word boundaries even with multi-word terms
-    return `(?<!\\w)${escaped}(?!\\w)`;
+    // Negative lookbehind: not preceded by letter/digit/dash
+    // Negative lookahead: not followed by letter/digit/dash
+    // This prevents matching "RAM" inside "PROGRAMMA"
+    return `(?<![a-zA-Z0-9-])${escaped}(?![a-zA-Z0-9-])`;
   });
 
   const regex = new RegExp(`(${regexPatterns.join('|')})`, 'gi');
