@@ -74,7 +74,7 @@ export default function GlossaryTooltip({ termId, children }: GlossaryTooltipPro
           className="bg-bg-primary text-text-primary p-4 rounded-lg shadow-lg border border-accent-cyan/20 max-w-sm z-[60] transition-all duration-150"
         >
           <div className="max-w-none text-sm leading-7">
-            <p>{term.shortDef || term.shortDefinition || term.definition}</p>
+            <p>{term.shortDefinition || term.definition}</p>
             <Link href={`/glossario#${term.id}`} className="text-accent-cyan hover:text-accent-green">
               Approfondisci →
             </Link>
