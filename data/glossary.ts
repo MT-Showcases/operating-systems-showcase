@@ -1,5 +1,8 @@
 import type { GlossaryEntry } from '@/data/types';
 
+// Re-export tipo come GlossaryTerm per compatibilità con consumer
+export type GlossaryTerm = GlossaryEntry;
+
 export const glossaryTerms: GlossaryEntry[] = [
   {
     id: 'operating-system',
@@ -171,3 +174,8 @@ export function getTermById(termId: string) {
 export function getTermsByIds(termIds: string[]) {
   return glossaryTerms.filter((term) => termIds.includes(term.id));
 }
+
+// Estrai categorie uniche dal glossario
+export const CATEGORIES = Array.from(
+  new Set(glossaryTerms.map((term) => term.category))
+);

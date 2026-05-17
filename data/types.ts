@@ -20,9 +20,19 @@ export interface GlossaryEntry {
   id: string;
   term: string;
   shortDefinition: string;
+  /** Alias di shortDefinition usato da alcuni consumer */
+  shortDef?: string;
   definition: string;
   category: 'OS' | 'Hardware' | 'Linux' | 'Security' | 'Processes' | 'Files';
   aliases?: string[];
+  /** Sinonimi del termine (separati dagli alias quando serve distinzione semantica) */
+  synonyms?: string[];
+  /** Esempi pratici opzionali (codice, comandi, scenari) */
+  examples?: string[];
+  /** Slug di capitoli correlati */
+  relatedChapters?: string[];
+  /** ID di altri termini correlati */
+  relatedTerms?: string[];
 }
 
 export interface TerminalCommandBlock {
