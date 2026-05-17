@@ -100,7 +100,7 @@ SEZIONI COMPLETE:
 ${sections}
 
 TAKEAWAY FINALI:
-- ${chapter.keyTakeaways.join('\n- ')}${chapter.labNote ? `\n\nLAB NOTE / CONTESTO PRATICO:\n${chapter.labNote}` : ''}
+- ${chapter.keyTakeaways.join('\n- ')}
 
 ISTRUZIONI PER NOTEBOOKLM / GENERAZIONE CONTENUTI:
 - Usa solo il contenuto di questo capitolo come base primaria.
