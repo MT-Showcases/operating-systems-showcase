@@ -31,14 +31,23 @@ function wrapGlossaryTerms(text: string, selectedIds?: string[]): React.ReactNod
     ? SORTED_TERMS.filter((t) => selectedIds.includes(t.id))
     : SORTED_TERMS;
 
-  const escapedTerms = selectedTerms.map((t) => t.term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-  if (escapedTerms.length === 0) return [text];
+  if (selectedTerms.length === 0) return [text];
 
-  const regex = new RegExp(`\\b(${escapedTerms.join('|')})\\b`, 'gi');
+  // Sort by length (longest first) to match longer terms before substrings
+  const sortedByLength = [...selectedTerms].sort((a, b) => b.term.length - a.term.length);
+
+  // Create regex patterns with word boundaries using negative lookahead/lookbehind
+  const regexPatterns = sortedByLength.map((entry) => {
+    const escaped = entry.term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    // Negative lookbehind/lookahead ensures word boundaries even with multi-word terms
+    return `(?<!\\w)${escaped}(?!\\w)`;
+  });
+
+  const regex = new RegExp(`(${regexPatterns.join('|')})`, 'gi');
   const parts = text.split(regex).filter(Boolean);
 
   return parts.map((part, index) => {
-    const matchedTerm = selectedTerms.find((t) => t.term.toLowerCase() === part.toLowerCase());
+    const matchedTerm = sortedByLength.find((t) => t.term.toLowerCase() === part.toLowerCase());
     if (!matchedTerm) return <React.Fragment key={`${part}-${index}`}>{part}</React.Fragment>;
     return (
       <GlossaryTooltip key={`${matchedTerm.id}-${index}`} termId={matchedTerm.id}>

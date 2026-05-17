@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import GlossaryDrawer from './GlossaryDrawer';
+import GlossaryModal from './GlossaryModal';
 
 interface GlossaryTermProps {
   termId: string;
@@ -20,7 +20,7 @@ export default function GlossaryTerm({ termId, children }: GlossaryTermProps) {
       >
         {children}
       </button>
-      <GlossaryDrawer termId={termId} open={open} onOpenChange={setOpen} />
+      <GlossaryModal termId={termId} open={open} onOpenChange={setOpen} />
     </>
   );
 }

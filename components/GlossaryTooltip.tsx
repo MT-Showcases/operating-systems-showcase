@@ -4,7 +4,7 @@ import React, { useEffect, useId, useState } from 'react';
 import Link from 'next/link';
 import * as Popover from '@radix-ui/react-popover';
 import { getTermById } from '@/data/glossary';
-import GlossaryDrawer from './GlossaryDrawer';
+import GlossaryModal from './GlossaryModal';
 
 interface GlossaryTooltipProps {
   termId: string;
@@ -49,7 +49,7 @@ export default function GlossaryTooltip({ termId, children }: GlossaryTooltipPro
           {children}
         </button>
 
-        <GlossaryDrawer termId={termId} open={isDrawerOpen} onOpenChange={setIsDrawerOpen} />
+        <GlossaryModal termId={termId} open={isDrawerOpen} onOpenChange={setIsDrawerOpen} />
       </>
     );
   }
