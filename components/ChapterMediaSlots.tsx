@@ -3,10 +3,19 @@
 import { useState } from 'react';
 import type { Chapter } from '@/data/types';
 
-type MediaPlaceholder = NonNullable<Chapter['media']>[number];
+type MediaPlaceholder = {
+  type: 'video' | 'podcast' | 'infographic' | 'resource';
+  title: string;
+  description: string;
+  estimatedDuration?: string;
+  placeholderPath: string;
+  notes?: string;
+};
+
+type ChapterWithOptionalMedia = Chapter & { media?: MediaPlaceholder[] };
 
 interface Props {
-  chapter: Chapter;
+  chapter: ChapterWithOptionalMedia;
 }
 
 const badgeByType: Record<MediaPlaceholder['type'], string> = {
@@ -16,7 +25,7 @@ const badgeByType: Record<MediaPlaceholder['type'], string> = {
   resource: '📄 Risorsa',
 };
 
-function defaultSlots(chapter: Chapter): MediaPlaceholder[] {
+function defaultSlots(chapter: ChapterWithOptionalMedia): MediaPlaceholder[] {
   const base = `media/ch${String(chapter.id).padStart(2, '0')}-${chapter.slug}`;
   return [
     {
