@@ -1,7 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import type { MediaPlaceholder } from '@/data/types';
+
+type MediaPlaceholder = {
+  type: 'video' | 'podcast' | 'infographic' | 'resource';
+  title: string;
+  description: string;
+  estimatedDuration?: string;
+  placeholderPath: string;
+  notes?: string;
+};
 
 interface Props {
   chapterId: number;
