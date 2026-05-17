@@ -62,7 +62,7 @@ def parse_glossary_raw():
             "sourceType": "glossary",
             "chapterSlug": None,
             "title": "Glossario",
-            "url": "/glossario",
+            "url": "/glossary",
             "text": chunk,
         })
     return items
