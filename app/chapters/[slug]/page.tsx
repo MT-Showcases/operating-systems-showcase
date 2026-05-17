@@ -216,7 +216,6 @@ export default async function ChapterPage({ params }: Props) {
                     sectionIndex={idx}
                     sectionTitle={section.title}
                     sectionContent={section.content}
-                    media={section.media}
                   />
                 </div>
               ))}
