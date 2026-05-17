@@ -8,7 +8,6 @@ import SectionMediaSlots from '@/components/SectionMediaSlots';
 import KeyTakeaway from '@/components/KeyTakeaway';
 import DiscussionPrompt from '@/components/DiscussionPrompt';
 import ChapterQuiz from '@/components/ChapterQuiz';
-import ChapterExercises from '@/components/ChapterExercises';
 import ChapterMediaSlots from '@/components/ChapterMediaSlots';
 import SourceToggle from '@/components/SourceToggle';
 import Breadcrumb from '@/components/Breadcrumb';
@@ -227,10 +226,6 @@ export default async function ChapterPage({ params }: Props) {
               <div className="mt-8">
                 <DiscussionPrompt prompts={chapter.discussionPrompts} />
               </div>
-            ) : null}
-
-            {chapter.exercises && chapter.exercises.length > 0 ? (
-              <ChapterExercises exercises={chapter.exercises} />
             ) : null}
 
             <div className="mt-8">
