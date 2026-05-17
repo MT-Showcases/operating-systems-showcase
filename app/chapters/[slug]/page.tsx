@@ -87,12 +87,6 @@ function buildChapterSource(chapter: (typeof chapters)[number]) {
     })
     .join('\n\n');
 
-  const exercises = chapter.exercises?.length
-    ? `\n\nESERCIZI:\n${chapter.exercises
-        .map((exercise, index) => `${index + 1}) ${exercise.title}\nObiettivo: ${exercise.objective}${exercise.deliverable ? `\nDeliverable: ${exercise.deliverable}` : ''}${exercise.steps?.length ? `\nStep:\n- ${exercise.steps.join('\n- ')}` : ''}`)
-        .join('\n\n')}`
-    : '';
-
   return `CAPITOLO ${String(chapter.id).padStart(2, '0')} — ${chapter.title}
 SLUG: ${chapter.slug}
 
@@ -106,7 +100,7 @@ SEZIONI COMPLETE:
 ${sections}
 
 TAKEAWAY FINALI:
-- ${chapter.keyTakeaways.join('\n- ')}${chapter.labNote ? `\n\nLAB NOTE / CONTESTO PRATICO:\n${chapter.labNote}` : ''}${exercises}
+- ${chapter.keyTakeaways.join('\n- ')}${chapter.labNote ? `\n\nLAB NOTE / CONTESTO PRATICO:\n${chapter.labNote}` : ''}
 
 ISTRUZIONI PER NOTEBOOKLM / GENERAZIONE CONTENUTI:
 - Usa solo il contenuto di questo capitolo come base primaria.
