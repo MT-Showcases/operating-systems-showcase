@@ -165,9 +165,9 @@ const glossaryEntries: GlossaryEntry[] = [
   },
 ];
 
-export const glossarioPage: GlossarioPage = {
+export const glossaryPage: GlossarioPage = {
   title: 'Glossario — Sistemi Operativi',
-  slug: 'glossario',
+  slug: 'glossary',
   description: 'Definizioni dei termini chiave del corso Sistemi Operativi',
   entries: glossaryEntries,
 };

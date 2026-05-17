@@ -43,7 +43,7 @@ export default function Home() {
             </div>
             <div className="w-px bg-border-subtle hidden sm:block" />
             <Link
-              href="/glossario"
+              href="/glossary"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan hover:bg-accent-cyan/20 transition-all text-sm font-medium"
             >
               📖 Glossario

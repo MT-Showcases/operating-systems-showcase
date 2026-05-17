@@ -71,7 +71,7 @@ L'utente si trova sulla pagina: ${pathname}.`
     .join('\n\n');
 
   const system = `${TUTOR_SYSTEM_IDENTITY} Rispondi in italiano, pratico e breve. Usa solo fonti fornite. Se mancano info, dillo chiaramente.${pageContext}
-Rispondi SOLO JSON valido con questo schema: {"summary":"string","bullets":["string"],"suggestions":[{"label":"string","url":"/chapters/... o /glossario"}]}`;
+Rispondi SOLO JSON valido con questo schema: {"summary":"string","bullets":["string"],"suggestions":[{"label":"string","url":"/chapters/... o /glossary"}]}`;
   const compactHistory = history
     .slice(-12)
     .map((h, i) => `${i + 1}. ${h.role === 'user' ? 'Utente' : 'Tutor'}: ${h.text}`)
