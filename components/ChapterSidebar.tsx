@@ -37,28 +37,35 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
   }, [isOpen]);
 
   const sidebar = (
-    <aside className="h-full overflow-y-auto rounded-3xl border border-border-subtle bg-bg-surface p-5">
+    <aside className="h-full overflow-y-auto rounded-[2rem] border border-border-subtle bg-[linear-gradient(180deg,rgba(22,27,34,0.98),rgba(13,17,23,0.98))] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.22)]">
       <div className="border-b border-border-subtle pb-4">
         <div className="flex items-center justify-between gap-3">
           <div>
             <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-green">Roadmap</p>
-            <h2 className="mt-2 text-sm font-semibold text-text-primary">Modulo Sistemi Operativi</h2>
+            <h2 className="mt-2 text-sm font-semibold text-text-primary">Console di navigazione</h2>
+            <p className="mt-1 text-xs text-text-secondary">Modulo Sistemi Operativi</p>
           </div>
           <button
             ref={closeButtonRef}
             type="button"
             onClick={() => setIsOpen(false)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border-subtle text-text-secondary md:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border-subtle bg-bg-primary/70 text-text-secondary md:hidden"
             aria-label="Chiudi navigazione"
           >
             ✕
           </button>
         </div>
-        <div className="mt-3 h-2 rounded-full bg-black/25">
-          <div
-            className="h-2 rounded-full bg-accent-green transition-all"
-            style={{ width: `${((currentIndex + 1) / chapters.length) * 100}%` }}
-          />
+        <div className="mt-4 rounded-2xl border border-border-subtle bg-black/20 p-3">
+          <div className="flex items-center justify-between gap-3 text-xs text-text-secondary">
+            <span>Progressione modulo</span>
+            <span className="terminal-heading text-accent-cyan">{String(currentIndex + 1).padStart(2, '0')}/{String(chapters.length).padStart(2, '0')}</span>
+          </div>
+          <div className="mt-3 h-2 rounded-full bg-black/25">
+            <div
+              className="h-2 rounded-full bg-[linear-gradient(90deg,rgba(57,211,83,1),rgba(88,166,255,1))] transition-all"
+              style={{ width: `${((currentIndex + 1) / chapters.length) * 100}%` }}
+            />
+          </div>
         </div>
       </div>
 
@@ -73,27 +80,33 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
               className={`block rounded-2xl border px-4 py-3 text-sm transition ${
                 active
                   ? 'border-accent-green/30 bg-accent-green/10 text-accent-green'
-                  : 'border-transparent bg-black/10 text-text-secondary hover:border-border-subtle hover:text-text-primary'
+                  : 'border-transparent bg-black/10 text-text-secondary hover:border-border-subtle hover:bg-bg-primary/60 hover:text-text-primary'
               }`}
             >
-              <span className="terminal-heading text-xs uppercase tracking-[0.2em]">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <p className="mt-1 leading-6">{chapter.title}</p>
+              <div className="flex items-center gap-3">
+                <span className={`inline-flex h-7 w-7 items-center justify-center rounded-full border text-[11px] ${
+                  active
+                    ? 'border-accent-green/40 bg-accent-green text-bg-primary'
+                    : 'border-border-subtle bg-bg-primary/70 text-text-secondary'
+                }`}>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <p className="leading-6">{chapter.title}</p>
+              </div>
             </Link>
           );
         })}
       </nav>
 
       <div className="mt-6 border-t border-border-subtle pt-5">
-        <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Sezioni del capitolo</p>
+        <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Anchor del capitolo</p>
         <div className="mt-3 space-y-2">
           {sections.map((section) => (
             <a
               key={section.id}
               href={`#${section.id}`}
               onClick={() => setIsOpen(false)}
-              className="block rounded-2xl border border-transparent bg-black/10 px-4 py-3 text-sm text-text-secondary transition hover:border-border-subtle hover:text-text-primary"
+              className="block rounded-2xl border border-transparent bg-black/10 px-4 py-3 text-sm text-text-secondary transition hover:border-border-subtle hover:bg-bg-primary/60 hover:text-text-primary"
             >
               {section.title}
             </a>
@@ -108,7 +121,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 left-6 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full border border-accent-green/30 bg-bg-surface text-accent-green shadow-lg md:hidden"
+        className="fixed bottom-6 left-6 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full border border-accent-green/30 bg-bg-surface text-accent-green shadow-lg shadow-black/30 md:hidden"
         aria-label="Apri navigazione capitolo"
       >
         ☰

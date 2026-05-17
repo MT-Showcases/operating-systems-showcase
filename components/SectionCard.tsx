@@ -90,10 +90,20 @@ export default function SectionCard({
   const paragraphs = content.split(/\n\n+/g);
 
   return (
-    <section id={id} className="rounded-3xl border border-border-subtle bg-bg-surface p-6 scroll-mt-24">
-      <div className="flex items-center gap-3">
-        <span className="text-xl text-accent-cyan">{getSectionIcon(title)}</span>
-        <h2 className="terminal-heading text-2xl font-semibold text-text-primary">{title}</h2>
+    <section id={id} className="scroll-mt-24 overflow-hidden rounded-[2rem] border border-border-subtle bg-[linear-gradient(180deg,rgba(22,27,34,0.98),rgba(13,17,23,0.98))] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.16)]">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-accent-cyan/20 bg-accent-cyan/10 text-xl text-accent-cyan">
+            {getSectionIcon(title)}
+          </span>
+          <div>
+            <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-text-secondary">Sezione operativa</p>
+            <h2 className="terminal-heading text-2xl font-semibold text-text-primary">{title}</h2>
+          </div>
+        </div>
+        <span className="hidden rounded-full border border-accent-green/20 bg-accent-green/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-accent-green md:inline-flex">
+          focus
+        </span>
       </div>
 
       <div className="mt-5 space-y-4">
@@ -101,12 +111,12 @@ export default function SectionCard({
       </div>
 
       {keyPoints && keyPoints.length > 0 ? (
-        <div className="mt-6 rounded-2xl border border-accent-cyan/20 bg-accent-cyan/10 p-4">
-          <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-cyan">Da fissare</p>
+        <div className="mt-6 rounded-2xl border border-accent-green/20 bg-accent-green/8 p-4">
+          <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-green">Da tenere a mente</p>
           <ul className="mt-3 space-y-2 text-sm leading-7 text-text-primary">
             {keyPoints.map((point) => (
               <li key={point} className="flex gap-3">
-                <span className="text-accent-cyan">•</span>
+                <span className="text-accent-green">▸</span>
                 <span>{point}</span>
               </li>
             ))}

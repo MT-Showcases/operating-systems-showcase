@@ -1,25 +1,47 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import TutorFloatingChat from '@/components/TutorFloatingChat';
+import ServiceWorkerRegister from '@/components/ServiceWorkerRegister';
 
-const inter = Inter({
+const geistSans = Geist({
+  variable: '--font-geist-sans',
   subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
   subsets: ['latin'],
-  variable: '--font-jetbrains',
-  display: 'swap',
 });
+
+const siteUrl = 'https://os-showcase.vercel.app';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: 'Operating Systems Showcase',
-    template: '%s | Operating Systems Showcase',
+    default: 'Sistemi Operativi - Corso di Formazione',
+    template: '%s | Sistemi Operativi',
   },
-  description: 'Showcase didattico interattivo sui Sistemi Operativi per la Steve Jobs Academy Catania.',
+  description:
+    'Corso completo su Sistemi Operativi e Linux: dal kernel ai processi, dal file system ai permessi, fino alla pratica con il terminale.',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'Sistemi Operativi - Corso di Formazione',
+    description:
+      'Corso completo su Sistemi Operativi e Linux: dal kernel ai processi, dal file system ai permessi, fino alla pratica con il terminale.',
+    url: siteUrl,
+    siteName: 'Sistemi Operativi',
+    locale: 'it_IT',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sistemi Operativi - Corso di Formazione',
+    description:
+      'Corso completo su Sistemi Operativi e Linux: dal kernel ai processi, dal file system ai permessi, fino alla pratica con il terminale.',
+  },
 };
 
 export const viewport: Viewport = {
@@ -28,11 +50,20 @@ export const viewport: Viewport = {
   themeColor: '#0d1117',
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="it">
-      <body className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html
+      lang="it"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col">
+        <ServiceWorkerRegister />
         {children}
+        <TutorFloatingChat />
       </body>
     </html>
   );
