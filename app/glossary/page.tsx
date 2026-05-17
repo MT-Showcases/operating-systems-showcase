@@ -29,12 +29,16 @@ export default function GlossaryPage() {
 
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
-      <Breadcrumb
-        items={[
-          { label: 'Home', href: '/' },
-          { label: 'Glossario', href: '/glossary' },
-        ]}
-      />
+      <nav className="px-6 py-4 border-b border-border-subtle bg-bg-surface">
+        <div className="max-w-6xl mx-auto">
+          <Breadcrumb
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Glossario', href: '/glossary' },
+            ]}
+          />
+        </div>
+      </nav>
 
       <header className="border-b border-border-subtle bg-[linear-gradient(135deg,rgba(13,17,23,1),rgba(22,27,34,1),rgba(13,17,23,1))] py-12 px-6">
         <div className="max-w-6xl mx-auto">
