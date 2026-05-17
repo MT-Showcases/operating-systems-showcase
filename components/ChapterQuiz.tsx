@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { CheckCircle2, AlertCircle } from 'lucide-react';
 import type { QuizQuestion } from '@/data/types';
 import { buildQuizStorageKey } from '@/lib/quiz-storage';
 
@@ -97,9 +98,19 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
 
         {selected !== undefined ? (
           <div className="mt-4 rounded-2xl border border-border-subtle bg-bg-primary/60 p-4 text-sm leading-7 text-text-secondary">
-            <p className="font-medium text-text-primary">
-              {selected === normalized.correctIndex ? '✅ Risposta corretta.' : '⚠️ Non è la risposta giusta.'}
-            </p>
+            <div className="flex items-center gap-2">
+              {selected === normalized.correctIndex ? (
+                <>
+                  <CheckCircle2 size={20} className="text-accent-green" strokeWidth={2.5} />
+                  <span className="font-medium text-text-primary">Risposta corretta.</span>
+                </>
+              ) : (
+                <>
+                  <AlertCircle size={20} className="text-accent-amber" strokeWidth={2.5} />
+                  <span className="font-medium text-text-primary">Non è la risposta giusta.</span>
+                </>
+              )}
+            </div>
             <p className="mt-2">{currentQuestion.explanation}</p>
           </div>
         ) : null}

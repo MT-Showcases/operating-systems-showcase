@@ -1,5 +1,6 @@
 import { getTermsByIds } from '@/data/glossary';
 import type { CommandReference, TerminalCommandBlock } from '@/data/types';
+import { Lock, Terminal, Settings, Folder, Cpu, ChevronRight } from 'lucide-react';
 import GlossaryTerm from './GlossaryTerm';
 import TerminalCommand from './TerminalCommand';
 import CommandReferenceCard from './CommandReferenceCard';
@@ -70,12 +71,13 @@ function renderParagraph(paragraph: string, glossaryIds: string[], key: string) 
 
 function getSectionIcon(title: string) {
   const lower = title.toLowerCase();
-  if (lower.includes('permessi') || lower.includes('sicurezza')) return '🔐';
-  if (lower.includes('linux') || lower.includes('shell')) return '🐧';
-  if (lower.includes('process')) return '⚙️';
-  if (lower.includes('memoria') || lower.includes('file')) return '🗂️';
-  if (lower.includes('cpu') || lower.includes('architettura')) return '🧠';
-  return '▣';
+  const iconProps = 'w-6 h-6 text-accent-cyan';
+  if (lower.includes('permessi') || lower.includes('sicurezza')) return <Lock className={iconProps} strokeWidth={2} />;
+  if (lower.includes('linux') || lower.includes('shell')) return <Terminal className={iconProps} strokeWidth={2} />;
+  if (lower.includes('process')) return <Settings className={iconProps} strokeWidth={2} />;
+  if (lower.includes('memoria') || lower.includes('file')) return <Folder className={iconProps} strokeWidth={2} />;
+  if (lower.includes('cpu') || lower.includes('architettura')) return <Cpu className={iconProps} strokeWidth={2} />;
+  return null;
 }
 
 export default function SectionCard({
@@ -93,9 +95,9 @@ export default function SectionCard({
     <section id={id} className="scroll-mt-24 overflow-hidden rounded-[2rem] border border-border-subtle bg-[linear-gradient(180deg,rgba(22,27,34,0.98),rgba(13,17,23,0.98))] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.16)]">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-accent-cyan/20 bg-accent-cyan/10 text-xl text-accent-cyan">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-accent-cyan/20 bg-accent-cyan/10">
             {getSectionIcon(title)}
-          </span>
+          </div>
           <div>
             <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-text-secondary">Sezione operativa</p>
             <h2 className="terminal-heading text-2xl font-semibold text-text-primary">{title}</h2>
@@ -116,7 +118,7 @@ export default function SectionCard({
           <ul className="mt-3 space-y-2 text-sm leading-7 text-text-primary">
             {keyPoints.map((point) => (
               <li key={point} className="flex gap-3">
-                <span className="text-accent-green">▸</span>
+                <ChevronRight size={18} className="mt-0.5 flex-shrink-0 text-accent-green" />
                 <span>{point}</span>
               </li>
             ))}

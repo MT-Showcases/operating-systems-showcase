@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { BookOpen, GraduationCap, FileText, Library, Microscope, Lightbulb } from 'lucide-react';
 
 interface Source {
   id: string;
@@ -66,13 +67,31 @@ export default function ChapterSourcesDisplay({ chapterSlug }: ChapterSourcesDis
 
   const getSourceTypeLabel = (type: string) => {
     const labels: Record<string, string> = {
-      book: '📖 Libro',
-      course: '🎓 Corso online',
-      tutorial: '📝 Tutorial',
-      documentation: '📚 Documentazione',
-      paper: '🔬 Paper accademico',
+      book: 'Libro',
+      course: 'Corso online',
+      tutorial: 'Tutorial',
+      documentation: 'Documentazione',
+      paper: 'Paper accademico',
     };
     return labels[type] || type;
+  };
+
+  const getSourceTypeIcon = (type: string) => {
+    const iconProps = 'w-4 h-4 text-cyan-300';
+    switch (type) {
+      case 'book':
+        return <BookOpen className={iconProps} />;
+      case 'course':
+        return <GraduationCap className={iconProps} />;
+      case 'tutorial':
+        return <FileText className={iconProps} />;
+      case 'documentation':
+        return <Library className={iconProps} />;
+      case 'paper':
+        return <Microscope className={iconProps} />;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -97,7 +116,7 @@ export default function ChapterSourcesDisplay({ chapterSlug }: ChapterSourcesDis
           {sourcesData && (
             <div className="space-y-4">
               <div className="mb-4 pb-4 border-b border-navy-700">
-                <p className="text-xs uppercase tracking-[0.12em] text-cyan-300 font-semibold">📖 Fonti NotebookLM</p>
+                <p className="text-xs uppercase tracking-[0.12em] text-cyan-300 font-semibold flex items-center gap-2"><BookOpen className="w-4 h-4" /> Fonti NotebookLM</p>
                 <h3 className="text-base font-semibold text-text-primary mt-2">{sourcesData.title}</h3>
                 <p className="text-sm text-gray-400 mt-1 italic">{sourcesData.policy}</p>
               </div>
@@ -112,13 +131,9 @@ export default function ChapterSourcesDisplay({ chapterSlug }: ChapterSourcesDis
                     className="block p-3 rounded-lg border border-navy-600 hover:border-cyan-500/50 bg-navy-800/30 hover:bg-navy-800/60 transition"
                   >
                     <div className="flex items-start gap-3">
-                      <span className="text-lg flex-shrink-0 mt-0.5">
-                        {source.type === 'book' && '📖'}
-                        {source.type === 'course' && '🎓'}
-                        {source.type === 'tutorial' && '📝'}
-                        {source.type === 'documentation' && '📚'}
-                        {source.type === 'paper' && '🔬'}
-                      </span>
+                      <div className="flex-shrink-0 mt-0.5">
+                        {getSourceTypeIcon(source.type)}
+                      </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-text-primary text-sm break-words">{source.title}</p>
                         <p className="text-xs text-cyan-300 mt-1 break-all">{source.origin}</p>
@@ -131,8 +146,8 @@ export default function ChapterSourcesDisplay({ chapterSlug }: ChapterSourcesDis
               </div>
 
               <div className="mt-4 pt-4 border-t border-navy-700">
-                <p className="text-xs text-gray-500">
-                  💡 Queste fonti sono state utilizzate per preparare il contenuto via NotebookLM.
+                <p className="text-xs text-gray-500 flex items-center gap-2">
+                  <Lightbulb className="w-4 h-4" /> Queste fonti sono state utilizzate per preparare il contenuto via NotebookLM.
                 </p>
               </div>
             </div>
