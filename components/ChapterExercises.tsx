@@ -1,5 +1,13 @@
-import type { ChapterExercise } from '@/data/types';
 import Link from 'next/link';
+
+type ChapterExercise = {
+  title: string;
+  objective: string;
+  duration?: string;
+  steps: string[];
+  deliverable: string;
+  resources?: Array<{ label: string; path: string }>;
+};
 
 interface Props {
   exercises: ChapterExercise[];
