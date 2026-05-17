@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import type { Chapter, MediaPlaceholder } from '@/data/types';
+import type { Chapter } from '@/data/types';
+
+type MediaPlaceholder = NonNullable<Chapter['media']>[number];
 
 interface Props {
   chapter: Chapter;
