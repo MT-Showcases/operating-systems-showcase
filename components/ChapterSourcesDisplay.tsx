@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { BookOpen, GraduationCap, FileText, Library, Microscope, Lightbulb } from 'lucide-react';
+import { BookOpen, GraduationCap, FileText, Library, Microscope, Lightbulb, ChevronRight } from 'lucide-react';
 
 interface Source {
   id: string;
@@ -139,7 +139,7 @@ export default function ChapterSourcesDisplay({ chapterSlug }: ChapterSourcesDis
                         <p className="text-xs text-cyan-300 mt-1 break-all">{source.origin}</p>
                         <p className="text-xs text-gray-500 mt-1">{getSourceTypeLabel(source.type)}</p>
                       </div>
-                      <span className="text-lg flex-shrink-0">→</span>
+                      <ChevronRight className="h-5 w-5 text-cyan-300 flex-shrink-0 mt-0.5" />
                     </div>
                   </a>
                 ))}

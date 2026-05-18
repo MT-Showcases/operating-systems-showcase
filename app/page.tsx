@@ -7,6 +7,7 @@ import Button from '@/components/Button';
 import SearchBar from '@/components/SearchBar';
 import QuizScoreDashboard from '@/components/QuizScoreDashboard';
 import Link from 'next/link';
+import { ChevronRight } from 'lucide-react';
 import GlossaryTooltip from '@/components/GlossaryTooltip';
 
 const totalHours = chapters.reduce((total, chapter) => total + Number.parseFloat(chapter.duration.replace('h', '')), 0);
@@ -44,7 +45,7 @@ export default function Home() {
             <div className="w-px bg-border-subtle hidden sm:block" />
             <Link
               href="/glossary"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan hover:bg-accent-cyan/20 transition-all text-sm font-medium"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-none bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan hover:bg-accent-cyan/20 transition-all text-sm font-medium"
             >
               📖 Glossario
             </Link>
@@ -78,7 +79,7 @@ export default function Home() {
                     <span className="bg-accent-green text-bg-primary px-2 py-0.5 rounded text-xs font-bold">
                       Cap. {chapter.id}
                     </span>
-                    <span className="rounded-full border border-accent-cyan/20 bg-accent-cyan/10 px-3 py-1 text-xs text-accent-cyan">
+                    <span className="rounded-none border border-accent-cyan/20 bg-accent-cyan/10 px-3 py-1 text-xs text-accent-cyan">
                       {chapter.duration}
                     </span>
                   </div>
@@ -94,8 +95,8 @@ export default function Home() {
                   </div>
                 </div>
 
-                <Button href={`/chapters/${chapter.slug}`} className="w-full text-center py-3 mt-auto">
-                  Leggi Capitolo →
+                <Button href={`/chapters/${chapter.slug}`} className="w-full text-center py-3 mt-auto flex items-center justify-center gap-2">
+                  Leggi Capitolo <ChevronRight className="h-4 w-4" />
                 </Button>
               </Card>
             ))}

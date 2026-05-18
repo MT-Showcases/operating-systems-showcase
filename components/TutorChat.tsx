@@ -35,7 +35,7 @@ export default function TutorChat({ chapterSlug }: { chapterSlug: string }) {
   };
 
   return (
-    <div className="mt-10 rounded-3xl border border-accent-cyan/20 bg-bg-surface p-5">
+    <div className="mt-10 rounded-none border border-accent-cyan/20 bg-bg-surface p-5">
       <h3 className="text-accent-cyan font-semibold mb-2">{TUTOR_NAME} (beta)</h3>
       <p className="text-xs text-text-secondary mb-1">Fai domande sul capitolo, sul glossario o sui concetti Linux/OS trattati.</p>
       <p className="text-[11px] text-text-secondary mb-3">Disclaimer: {TUTOR_NAME} è un assistente AI e può commettere errori. Verifica sempre i passaggi importanti.</p>
@@ -45,9 +45,9 @@ export default function TutorChat({ chapterSlug }: { chapterSlug: string }) {
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Es: quando uso sudo invece di root?"
-          className="flex-1 rounded-md bg-bg-primary border border-accent-cyan/40 px-3 py-2 text-sm text-text-primary"
+          className="flex-1 rounded-none bg-bg-primary border border-accent-cyan/40 px-3 py-2 text-sm text-text-primary"
         />
-        <button onClick={ask} disabled={loading} className="rounded-md bg-accent-green/15 text-accent-green px-3 py-2 text-sm font-semibold disabled:opacity-50">
+        <button onClick={ask} disabled={loading} className="rounded-none bg-accent-green/15 text-accent-green px-3 py-2 text-sm font-semibold disabled:opacity-50">
           {loading ? '...' : 'Chiedi'}
         </button>
       </div>

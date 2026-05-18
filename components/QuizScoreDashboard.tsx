@@ -42,7 +42,7 @@ export default function QuizScoreDashboard() {
   };
 
   return (
-    <div className="rounded-2xl border border-accent-cyan/40 bg-bg-surface p-5 md:p-6">
+    <div className="rounded-none border border-accent-cyan/40 bg-bg-surface p-5 md:p-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h3 className="text-lg md:text-xl font-bold text-accent-cyan">Progress Dashboard Quiz</h3>
@@ -52,7 +52,7 @@ export default function QuizScoreDashboard() {
           <p className="text-xs text-text-secondary mt-1">Capitoli completati: {Object.keys(scores).length}/{quizChapters.length}</p>
         </div>
 
-        <button onClick={resetScores} className="min-h-11 px-4 py-2 rounded-lg border border-red-500/40 text-red-300 hover:bg-red-500/10 transition-all duration-300">
+        <button onClick={resetScores} className="min-h-11 px-4 py-2 rounded-none border border-red-500/40 text-red-300 hover:bg-red-500/10 transition-all duration-300">
           Reset score
         </button>
       </div>

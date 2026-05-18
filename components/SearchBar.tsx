@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import Fuse from 'fuse.js';
 import Link from 'next/link';
+import { Search, X } from 'lucide-react';
 import { chapters } from '@/data/chapters';
 import { chapterEmojis } from '@/data/chapterEmojis';
 
@@ -23,28 +24,28 @@ export default function SearchBar() {
   return (
     <div className="relative mx-auto w-full max-w-3xl">
       <div className="relative">
-        <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary">🔎</span>
+        <Search className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-text-secondary" />
         <input
           type="text"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Cerca capitoli, concetti o comandi..."
-          className="min-h-12 w-full rounded-2xl border border-accent-cyan/40 bg-bg-surface pl-12 pr-12 text-sm text-text-primary outline-none transition placeholder:text-text-secondary focus:border-accent-green"
+          className="min-h-12 w-full rounded-none border border-accent-cyan/40 bg-bg-surface pl-12 pr-12 text-sm text-text-primary outline-none transition placeholder:text-text-secondary focus:border-accent-green"
         />
         {query ? (
           <button
             type="button"
             onClick={() => setQuery('')}
-            className="absolute right-2 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-text-secondary transition hover:text-accent-cyan"
+            className="absolute right-2 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-none text-text-secondary transition hover:text-accent-cyan"
             aria-label="Pulisci ricerca"
           >
-            ✕
+            <X className="h-5 w-5" />
           </button>
         ) : null}
       </div>
 
       {results.length > 0 ? (
-        <div className="absolute left-0 right-0 top-full z-30 mt-3 overflow-hidden rounded-2xl border border-accent-cyan/40 bg-bg-surface shadow-2xl">
+        <div className="absolute left-0 right-0 top-full z-30 mt-3 overflow-hidden rounded-none border border-accent-cyan/40 bg-bg-surface shadow-2xl">
           {results.map(({ item }) => (
             <Link
               key={item.slug}
@@ -57,7 +58,7 @@ export default function SearchBar() {
                 <p className="text-sm font-semibold text-text-primary">{item.title}</p>
                 <p className="mt-1 text-xs leading-6 text-text-secondary">{item.description}</p>
               </div>
-              <span className="ml-auto rounded-full border border-accent-cyan/20 bg-accent-cyan/10 px-2 py-1 text-xs text-accent-cyan">
+              <span className="ml-auto rounded-none border border-accent-cyan/20 bg-accent-cyan/10 px-2 py-1 text-xs text-accent-cyan">
                 CH{item.id}
               </span>
             </Link>
@@ -66,7 +67,7 @@ export default function SearchBar() {
       ) : null}
 
       {query.trim().length >= 2 && results.length === 0 ? (
-        <div className="absolute left-0 right-0 top-full z-30 mt-3 rounded-2xl border border-accent-cyan/40 bg-bg-surface px-4 py-3 text-sm text-text-secondary">
+        <div className="absolute left-0 right-0 top-full z-30 mt-3 rounded-none border border-accent-cyan/40 bg-bg-surface px-4 py-3 text-sm text-text-secondary">
           Nessun risultato per “{query.trim()}”.
         </div>
       ) : null}

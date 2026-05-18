@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { ChevronRight, X } from 'lucide-react';
 
 type MediaPlaceholder = {
   type: 'video' | 'podcast' | 'infographic' | 'resource';
@@ -36,14 +37,14 @@ export default function SectionMediaSlots({ media }: Props) {
     <>
       <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-3">
         {media.map((slot, idx) => (
-          <div key={`${slot.type}-${idx}`} className="rounded-2xl border border-accent-cyan/40 bg-bg-surface p-4">
+          <div key={`${slot.type}-${idx}`} className="rounded-none border border-accent-cyan/40 bg-bg-surface p-4">
             <div className="flex items-center justify-between gap-3 mb-2">
               <p className="text-sm font-medium text-text-primary">{badgeByType[slot.type]}</p>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent-green/10 text-accent-green border border-accent-green/30">Ready</span>
+              <span className="text-[10px] px-2 py-0.5 rounded-none bg-accent-green/10 text-accent-green border border-accent-green/30">Ready</span>
             </div>
             <p className="text-xs text-text-secondary mb-2">{slot.description}</p>
-            <button onClick={() => setActive(slot)} className="text-sm text-accent-cyan hover:text-accent-green transition-colors">
-              Apri media →
+            <button onClick={() => setActive(slot)} className="text-sm text-accent-cyan hover:text-accent-green transition-colors flex items-center gap-1">
+              Apri media <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         ))}
@@ -51,14 +52,16 @@ export default function SectionMediaSlots({ media }: Props) {
 
       {active ? (
         <div className="fixed inset-0 z-[120] bg-black/85 flex items-center justify-center p-4" onClick={() => setActive(null)}>
-          <button onClick={() => setActive(null)} className="absolute top-4 right-4 text-white text-lg px-3 py-1.5 z-[121]">✕</button>
+          <button onClick={() => setActive(null)} className="absolute top-4 right-4 text-white text-lg px-3 py-1.5 z-[121]" aria-label="Chiudi">
+            <X className="h-5 w-5" />
+          </button>
           <div className="w-full max-w-6xl max-h-[90vh]" onClick={(event) => event.stopPropagation()}>
             {active.type === 'infographic' ? (
               <img src={`/${active.placeholderPath}`} alt={active.title} className="w-full h-auto max-h-[90vh] object-contain" />
             ) : active.type === 'video' ? (
               <video src={`/${active.placeholderPath}`} controls playsInline preload="metadata" className="w-full max-h-[90vh] bg-black" />
             ) : active.type === 'podcast' ? (
-              <div className="bg-bg-surface border border-accent-cyan/40 rounded-2xl p-6">
+              <div className="bg-bg-surface border border-accent-cyan/40 rounded-none p-6">
                 <p className="text-text-primary font-semibold mb-4">{active.title}</p>
                 <audio src={`/${active.placeholderPath}`} controls className="w-full" preload="none" />
               </div>

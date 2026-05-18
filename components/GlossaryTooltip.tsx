@@ -3,6 +3,7 @@
 import React, { useEffect, useId, useState } from 'react';
 import Link from 'next/link';
 import * as Popover from '@radix-ui/react-popover';
+import { ChevronRight } from 'lucide-react';
 import { getTermById } from '@/data/glossary';
 import GlossaryModal from './GlossaryModal';
 
@@ -71,12 +72,12 @@ export default function GlossaryTooltip({ termId, children }: GlossaryTooltipPro
           id={tooltipId}
           role="tooltip"
           sideOffset={10}
-          className="bg-bg-primary text-text-primary p-4 rounded-lg border border-accent-cyan/20 max-w-sm z-[60] transition-all duration-150"
+          className="bg-bg-primary text-text-primary p-4 rounded-none border border-accent-cyan/20 max-w-sm z-[60] transition-all duration-150"
         >
           <div className="max-w-none text-sm leading-7">
             <p>{term.shortDefinition || term.definition}</p>
-            <Link href={`/glossary#${term.id}`} className="text-accent-cyan hover:text-accent-green">
-              Approfondisci →
+            <Link href={`/glossary#${term.id}`} className="text-accent-cyan hover:text-accent-green flex items-center gap-1 inline-flex">
+              Approfondisci <ChevronRight className="h-4 w-4" />
             </Link>
           </div>
         </Popover.Content>

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { X } from 'lucide-react';
 import { TUTOR_NAME, TUTOR_PLACEHOLDER, TUTOR_TAGLINE } from '@/lib/tutor-config';
 
 type AnswerData = { summary: string; bullets?: string[]; suggestions?: Array<{ label: string; url: string }> };
@@ -94,7 +95,7 @@ export default function TutorFloatingChat() {
     <>
       <button
         onClick={() => setOpen((value) => !value)}
-        className="fixed bottom-6 right-5 z-[90] rounded-full bg-accent-green text-bg-primary px-4 py-3 font-semibold flex items-center gap-2 hover:bg-accent-cyan hover:text-bg-primary transition"
+        className="fixed bottom-6 right-5 z-[90] rounded-none bg-accent-green text-bg-primary px-4 py-3 font-semibold flex items-center gap-2 hover:bg-accent-cyan hover:text-bg-primary transition"
         aria-label={`Apri ${TUTOR_NAME}`}
       >
         ✨ {TUTOR_NAME}
@@ -103,7 +104,7 @@ export default function TutorFloatingChat() {
       {open ? (
         <>
           <div className="fixed inset-0 z-[89] bg-black/60 sm:hidden" onClick={() => setOpen(false)} aria-hidden="true" />
-          <div className="fixed bottom-24 right-4 z-[90] w-[calc(100vw-2rem)] max-w-md overflow-hidden rounded-2xl border border-accent-cyan/40 bg-bg-surface shadow-2xl">
+          <div className="fixed bottom-24 right-4 z-[90] w-[calc(100vw-2rem)] max-w-md overflow-hidden rounded-none border border-accent-cyan/40 bg-bg-surface shadow-2xl">
             <div className="p-3 border-b border-accent-cyan/40 flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold text-accent-cyan">{TUTOR_NAME}</p>
@@ -111,14 +112,14 @@ export default function TutorFloatingChat() {
               </div>
               <div className="flex items-center gap-3">
                 <button onClick={clearChat} className="text-xs text-text-secondary hover:text-text-primary">Reset</button>
-                <button onClick={() => setOpen(false)} className="text-text-secondary hover:text-text-primary" aria-label="Chiudi">✕</button>
+                <button onClick={() => setOpen(false)} className="text-text-secondary hover:text-text-primary" aria-label="Chiudi"><X className="h-4 w-4" /></button>
               </div>
             </div>
 
             <div ref={scrollRef} className="h-80 overflow-y-auto p-3 space-y-2">
               {messages.length === 0 ? <p className="text-xs text-text-secondary">{TUTOR_TAGLINE}</p> : null}
               {messages.map((message, index) => (
-                <div key={index} className={`text-sm p-2 rounded-lg ${message.role === 'user' ? 'bg-accent-cyan/10 ml-8' : 'bg-bg-primary mr-8'}`}>
+                <div key={index} className={`text-sm p-2 rounded-none ${message.role === 'user' ? 'bg-accent-cyan/10 ml-8' : 'bg-bg-primary mr-8'}`}>
                   <div className="mb-1 text-[11px] uppercase tracking-wide text-text-secondary">{message.role === 'user' ? 'Tu' : TUTOR_NAME}</div>
                   <p className="whitespace-pre-wrap text-text-primary">{message.text}</p>
                   {message.role === 'assistant' && message.data?.bullets && message.data.bullets.length > 0 ? (
@@ -137,7 +138,7 @@ export default function TutorFloatingChat() {
                   ) : null}
                 </div>
               ))}
-              {loading ? <div className="text-sm p-2 rounded-lg bg-bg-primary mr-8 text-text-secondary">Sto rispondendo…</div> : null}
+              {loading ? <div className="text-sm p-2 rounded-none bg-bg-primary mr-8 text-text-secondary">Sto rispondendo…</div> : null}
               {lastSources.length > 0 ? (
                 <div className="pt-2">
                   <p className="text-[11px] text-text-secondary mb-1">Fonti</p>
@@ -165,9 +166,9 @@ export default function TutorFloatingChat() {
                 }}
                 placeholder={TUTOR_PLACEHOLDER}
                 rows={2}
-                className="flex-1 rounded-md bg-bg-primary border border-accent-cyan/40 px-3 py-2 text-sm resize-none min-h-[44px] max-h-28 text-text-primary"
+                className="flex-1 rounded-none bg-bg-primary border border-accent-cyan/40 px-3 py-2 text-sm resize-none min-h-[44px] max-h-28 text-text-primary"
               />
-              <button onClick={ask} disabled={loading} className="rounded-md bg-accent-green/15 text-accent-green px-3 py-2 text-sm font-semibold disabled:opacity-50">
+              <button onClick={ask} disabled={loading} className="rounded-none bg-accent-green/15 text-accent-green px-3 py-2 text-sm font-semibold disabled:opacity-50">
                 {loading ? '...' : 'Invia'}
               </button>
             </div>

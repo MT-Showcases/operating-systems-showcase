@@ -63,7 +63,7 @@ export default function GlossaryPage() {
               placeholder="Cerca un termine..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-3 rounded-lg bg-bg-primary border border-border-subtle text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent-cyan"
+              className="w-full px-4 py-3 rounded-none bg-bg-primary border border-border-subtle text-text-primary placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent-cyan"
             />
           </div>
 
@@ -71,7 +71,7 @@ export default function GlossaryPage() {
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setSelectedCategory(null)}
-              className={`px-4 py-2 rounded-lg font-medium transition-all text-sm ${
+              className={`px-4 py-2 rounded-none font-medium transition-all text-sm ${
                 selectedCategory === null
                   ? 'bg-accent-cyan text-bg-primary'
                   : 'bg-bg-primary border border-border-subtle text-text-secondary hover:border-accent-cyan'
@@ -83,7 +83,7 @@ export default function GlossaryPage() {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-lg font-medium transition-all text-sm ${
+                className={`px-4 py-2 rounded-none font-medium transition-all text-sm ${
                   selectedCategory === cat
                     ? 'bg-accent-green text-bg-primary'
                     : 'bg-bg-primary border border-border-subtle text-text-secondary hover:border-accent-green'

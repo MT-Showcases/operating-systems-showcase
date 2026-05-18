@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { ChevronRight, X } from 'lucide-react';
 import type { Chapter } from '@/data/types';
 
 type MediaPlaceholder = {
@@ -83,9 +84,9 @@ export default function ChapterMediaSlots({ chapter }: Props) {
             {isReady(slot) ? (
               <button
                 onClick={() => setActive(slot)}
-                className="mt-3 text-sm text-accent-cyan hover:text-accent-green transition-colors"
+                className="mt-3 text-sm text-accent-cyan hover:text-accent-green transition-colors flex items-center gap-1"
               >
-                Apri media →
+                Apri media <ChevronRight className="h-4 w-4" />
               </button>
             ) : (
               <p className="text-[11px] text-text-secondary mt-3 font-mono break-all">{slot.placeholderPath}</p>
@@ -96,7 +97,9 @@ export default function ChapterMediaSlots({ chapter }: Props) {
 
       {active ? (
         <div className="fixed inset-0 z-[120] bg-black/85 flex items-center justify-center p-4" onClick={() => setActive(null)}>
-          <button onClick={() => setActive(null)} className="absolute top-4 right-4 text-white text-lg px-3 py-1.5 z-[121]">✕</button>
+          <button onClick={() => setActive(null)} className="absolute top-4 right-4 text-white text-lg px-3 py-1.5 z-[121]" aria-label="Chiudi">
+            <X className="h-5 w-5" />
+          </button>
           <div className="w-full max-w-6xl max-h-[90vh]" onClick={(event) => event.stopPropagation()}>
             {active.type === 'infographic' ? (
               <img src={`/${active.placeholderPath}`} alt={active.title} className="w-full h-auto max-h-[90vh] object-contain" />

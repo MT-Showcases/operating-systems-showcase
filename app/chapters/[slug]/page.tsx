@@ -148,16 +148,16 @@ export default async function ChapterPage({ params }: Props) {
           />
 
           <main className="flex-1 min-w-0">
-            <div className="bg-bg-surface/80 rounded-xl px-5 py-4 mb-6 border border-border-subtle">
+            <div className="bg-bg-surface/80 rounded-none px-5 py-4 mb-6 border border-border-subtle">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-semibold text-accent-cyan">
                   Capitolo {chapterNum} di {totalChapters}
                 </span>
                 <span className="text-xs text-text-secondary font-mono">{Math.round(progressPercent)}%</span>
               </div>
-              <div className="h-2 bg-black/30 rounded-full overflow-hidden">
+              <div className="h-2 bg-black/30 rounded-none overflow-hidden">
                 <div
-                  className="h-2 rounded-full bg-[linear-gradient(90deg,rgba(57,211,83,1),rgba(88,166,255,1))] transition-all duration-700"
+                  className="h-2 rounded-none bg-[linear-gradient(90deg,rgba(57,211,83,1),rgba(88,166,255,1))] transition-all duration-700"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
@@ -177,7 +177,7 @@ export default async function ChapterPage({ params }: Props) {
             <SourceToggle source={buildChapterSource(chapter)} label="Mostra fonte capitolo" />
 
             {glossaryTerms.length > 0 ? (
-              <section className="rounded-3xl border border-border-subtle bg-bg-surface p-6 mb-8">
+              <section className="rounded-none border border-border-subtle bg-bg-surface p-6 mb-8">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Glossario del capitolo</p>
@@ -189,7 +189,7 @@ export default async function ChapterPage({ params }: Props) {
                 </div>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {glossaryTerms.map((term) => (
-                    <span key={term.id} className="rounded-full border border-border-subtle bg-black/20 px-3 py-2 text-sm text-text-primary">
+                    <span key={term.id} className="rounded-none border border-border-subtle bg-black/20 px-3 py-2 text-sm text-text-primary">
                       <GlossaryTerm termId={term.id}>{term.term}</GlossaryTerm>
                     </span>
                   ))}

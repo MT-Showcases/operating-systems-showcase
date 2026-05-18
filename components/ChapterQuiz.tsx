@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { CheckCircle2, AlertCircle } from 'lucide-react';
+import { CheckCircle2, AlertCircle, ChevronRight } from 'lucide-react';
 import type { QuizQuestion } from '@/data/types';
 import { buildQuizStorageKey } from '@/lib/quiz-storage';
 
@@ -131,9 +131,9 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
             type="button"
             onClick={() => setCurrentIndex((value) => Math.min(value + 1, quiz.length - 1))}
             disabled={!canGoNext}
-            className="min-h-11 border-2 border-accent-green/30 bg-bg-surface px-4 py-2 text-sm text-accent-green transition disabled:cursor-not-allowed disabled:opacity-40"
+            className="min-h-11 border-2 border-accent-green/30 bg-bg-surface px-4 py-2 text-sm text-accent-green transition disabled:cursor-not-allowed disabled:opacity-40 flex items-center gap-2"
           >
-            Avanti →
+            Avanti <ChevronRight className="h-4 w-4" />
           </button>
         ) : (
           <span className=" border-2 border-accent-cyan/20 bg-bg-surface px-4 py-2 text-sm text-accent-cyan">

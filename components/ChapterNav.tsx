@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ChapterLink {
   slug: string;
@@ -40,18 +41,18 @@ export default function ChapterNav({
         {previousChapter ? (
           <Link
             href={`/chapters/${previousChapter.slug}`}
-            className="inline-flex min-h-11 items-center border-2 border-accent-cyan/40 px-4 py-2 text-sm text-text-primary transition hover:border-accent-cyan hover:text-accent-cyan"
+            className="inline-flex min-h-11 items-center gap-2 border-2 border-accent-cyan/40 px-4 py-2 text-sm text-text-primary transition hover:border-accent-cyan hover:text-accent-cyan"
           >
-            ← {previousChapter.title}
+            <ChevronLeft className="h-4 w-4" /> {previousChapter.title}
           </Link>
         ) : <div />}
 
         {nextChapter ? (
           <Link
             href={`/chapters/${nextChapter.slug}`}
-            className="inline-flex min-h-11 items-center border-2 border-accent-green/30 bg-bg-surface px-4 py-2 text-sm text-accent-green transition hover:border-accent-green hover:bg-accent-green/15"
+            className="inline-flex min-h-11 items-center gap-2 border-2 border-accent-green/30 bg-bg-surface px-4 py-2 text-sm text-accent-green transition hover:border-accent-green hover:bg-accent-green/15"
           >
-            {nextChapter.title} →
+            {nextChapter.title} <ChevronRight className="h-4 w-4" />
           </Link>
         ) : <div />}
       </div>

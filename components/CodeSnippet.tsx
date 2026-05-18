@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Editor from '@monaco-editor/react';
+import { Check } from 'lucide-react';
 
 interface CodeSnippetProps {
   code: string;
@@ -33,14 +34,20 @@ export default function CodeSnippet({ code, lang, label }: CodeSnippetProps) {
   const height = Math.min(Math.max(lines * 20 + 24, 120), 480);
 
   return (
-    <div className="h-auto rounded-xl border border-accent-cyan/40 overflow-hidden bg-bg-primary/70">
+    <div className="h-auto rounded-none border border-accent-cyan/40 overflow-hidden bg-bg-primary/70">
       <div className="flex items-center justify-between px-4 py-3 border-b border-accent-cyan/40 bg-bg-surface/80">
         <div>
           <p className="text-accent-cyan font-semibold text-sm">{label}</p>
           <p className="text-text-secondary text-xs uppercase tracking-wide">{lang}</p>
         </div>
-        <button onClick={onCopy} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-accent-cyan/40 text-accent-cyan hover:bg-accent-cyan/10 transition">
-          {copied ? 'Copiato ✓' : 'Copia'}
+        <button onClick={onCopy} className="px-3 py-1.5 rounded-none text-xs font-medium border border-accent-cyan/40 text-accent-cyan hover:bg-accent-cyan/10 transition flex items-center gap-1">
+          {copied ? (
+            <>
+              Copiato <Check className="h-3 w-3" />
+            </>
+          ) : (
+            'Copia'
+          )}
         </button>
       </div>
 

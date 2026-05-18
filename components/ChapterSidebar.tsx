@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { X, Menu } from 'lucide-react';
 import { chapters } from '@/data/chapters';
 
 interface SidebarSection {
@@ -52,7 +53,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
             className="inline-flex h-11 w-11 items-center justify-center border-2 border-accent-cyan/40 bg-bg-primary/70 text-text-secondary md:hidden"
             aria-label="Chiudi navigazione"
           >
-            ✕
+            <X className="h-5 w-5" />
           </button>
         </div>
         <div className="mt-4 border-2 border-accent-cyan/40 bg-bg-surface p-3">
@@ -124,7 +125,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
         className="fixed bottom-6 left-6 z-40 inline-flex h-12 w-12 items-center justify-center border-2 border-accent-green/30 bg-bg-surface text-accent-green shadow-black/30 md:hidden"
         aria-label="Apri navigazione capitolo"
       >
-        ☰
+        <Menu className="h-6 w-6" />
       </button>
 
       <div className="hidden lg:block lg:w-80 lg:flex-shrink-0 lg:self-start lg:sticky lg:top-6">{sidebar}</div>
