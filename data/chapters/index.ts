@@ -180,6 +180,15 @@ export const chapters: Chapter[] = [
       },
     ],
     glossary: ['cpu', 'ram', 'file-system', 'scheduler'],
+    media: [
+      {
+        type: 'infographic',
+        title: 'Infografica Capitolo 2',
+        description: 'Sintesi visiva: architettura del computer, CPU, RAM, storage e I/O.',
+        placeholderPath: 'media/ch02-hardware-cpu/infographic.webp',
+        notes: 'ready',
+      },
+    ],
   },
   {
     id: 3,
