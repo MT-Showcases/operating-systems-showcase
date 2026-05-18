@@ -14,7 +14,6 @@ import SidebarToggleWrapper from '@/components/SidebarToggleWrapper';
 import BackToTopButton from '@/components/BackToTopButton';
 import GlossaryTerm from '@/components/GlossaryTerm';
 import QuizScoreDashboard from '@/components/QuizScoreDashboard';
-import TutorChat from '@/components/TutorChat';
 import ChapterNav from '@/components/ChapterNav';
 import { getTermsByIds } from '@/data/glossary';
 
@@ -238,8 +237,6 @@ export default async function ChapterPage({ params }: Props) {
                 <ChapterQuiz quiz={chapter.quiz} chapterSlug={chapter.slug} />
               </div>
             ) : null}
-
-            <TutorChat chapterSlug={chapter.slug} />
 
             <div className="mt-8">
               <ChapterNav
