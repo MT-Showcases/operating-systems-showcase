@@ -40,28 +40,53 @@ export default function SectionMediaSlots({ media }: Props) {
 
   if (!media || media.length === 0) return null;
 
+  // Separate infographics from other media
+  const infographics = media.filter((m) => m.type === 'infographic');
+  const otherMedia = media.filter((m) => m.type !== 'infographic');
+
   return (
     <>
-      <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-3">
-        {media.map((slot, idx) => (
-          <div key={`${slot.type}-${idx}`} className="rounded-none border border-accent-cyan/40 bg-bg-surface p-4">
-            <div className="flex items-center justify-between gap-3 mb-2">
-              <div className="flex items-center gap-2">
-                {slot.type === 'video' && <Film className="h-4 w-4" />}
-                {slot.type === 'podcast' && <Headphones className="h-4 w-4" />}
-                {slot.type === 'infographic' && <Image className="h-4 w-4" />}
-                {slot.type === 'resource' && <FileText className="h-4 w-4" />}
-                <p className="text-sm font-medium text-text-primary">{badgeByType[slot.type]}</p>
-              </div>
-              <span className="text-[10px] px-2 py-0.5 rounded-none bg-accent-green/10 text-accent-green border border-accent-green/30">Ready</span>
-            </div>
-            <p className="text-xs text-text-secondary mb-2">{slot.description}</p>
-            <button onClick={() => setActive(slot)} className="text-sm text-accent-cyan hover:text-accent-green transition-colors flex items-center gap-1">
-              Apri media <ChevronRight className="h-4 w-4" />
-            </button>
+      {/* Inline infographics - no button, just render the image */}
+      {infographics.length > 0 && (
+        <div className="mb-6 border border-accent-cyan/40 bg-bg-surface p-4">
+          <div className="mb-2">
+            <p className="text-xs font-medium text-accent-green uppercase tracking-[0.22em]">Infografica</p>
           </div>
-        ))}
-      </div>
+          {infographics.map((graphic, idx) => (
+            <div key={`infographic-${idx}`} className="">
+              <img
+                src={`/${graphic.placeholderPath}`}
+                alt={graphic.title}
+                className="w-full h-auto"
+              />
+              <p className="text-xs text-text-secondary mt-2">{graphic.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Modal-based media (video, podcast, resource) */}
+      {otherMedia.length > 0 && (
+        <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-3">
+          {otherMedia.map((slot, idx) => (
+            <div key={`${slot.type}-${idx}`} className="rounded-none border border-accent-cyan/40 bg-bg-surface p-4">
+              <div className="flex items-center justify-between gap-3 mb-2">
+                <div className="flex items-center gap-2">
+                  {slot.type === 'video' && <Film className="h-4 w-4" />}
+                  {slot.type === 'podcast' && <Headphones className="h-4 w-4" />}
+                  {slot.type === 'resource' && <FileText className="h-4 w-4" />}
+                  <p className="text-sm font-medium text-text-primary">{badgeByType[slot.type]}</p>
+                </div>
+                <span className="text-[10px] px-2 py-0.5 rounded-none bg-accent-green/10 text-accent-green border border-accent-green/30">Ready</span>
+              </div>
+              <p className="text-xs text-text-secondary mb-2">{slot.description}</p>
+              <button onClick={() => setActive(slot)} className="text-sm text-accent-cyan hover:text-accent-green transition-colors flex items-center gap-1">
+                Apri media <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
 
       {active ? (
         <div className="fixed inset-0 z-[120] bg-black/85 flex items-center justify-center p-4" onClick={() => setActive(null)}>
@@ -69,9 +94,7 @@ export default function SectionMediaSlots({ media }: Props) {
             <X className="h-5 w-5" />
           </button>
           <div className="w-full max-w-6xl max-h-[90vh]" onClick={(event) => event.stopPropagation()}>
-            {active.type === 'infographic' ? (
-              <img src={`/${active.placeholderPath}`} alt={active.title} className="w-full h-auto max-h-[90vh] object-contain" />
-            ) : active.type === 'video' ? (
+            {active.type === 'video' ? (
               <video src={`/${active.placeholderPath}`} controls playsInline preload="metadata" className="w-full max-h-[90vh] bg-black" />
             ) : active.type === 'podcast' ? (
               <div className="bg-bg-surface border border-accent-cyan/40 rounded-none p-6">
