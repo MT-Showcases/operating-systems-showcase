@@ -174,6 +174,44 @@ export default async function ChapterPage({ params }: Props) {
             </div>
 
             <ChapterMediaSlots chapter={chapter} />
+            
+            <section className="rounded-none border border-border-subtle bg-bg-surface p-6 mb-8">
+              <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Media del capitolo</p>
+              <h2 className="mt-2 text-xl font-semibold text-text-primary mb-6">Contenuti generati per questo capitolo</h2>
+              <SectionMediaSlots
+                chapterId={chapter.id}
+                chapterSlug={chapter.slug}
+                sectionIndex={0}
+                sectionTitle={chapter.title}
+                sectionContent={chapter.description}
+                media={chapter.media}
+                customSourceText={`CAPITOLO ${String(chapter.id).padStart(2, '0')} — ${chapter.slug.toUpperCase()}
+
+TITOLO:
+${chapter.title}
+
+DESCRIZIONE:
+${chapter.description}
+
+OBIETTIVI DIDATTICI:
+- ${chapter.objectives.join('\n- ')}
+
+CONTESTO:
+Questo è il capitolo introduttivo dell'intero corso. Genera contenuti didattici chiari, pratici, startup-friendly basati SOLO su questi obiettivi.
+
+OUTPUT RICHIESTI (scegline uno):
+1) Script video 8-12 min
+2) Infografica (titolo + concetti principali + 1 warning + conclusione)
+3) Voiceover 5-8 min
+
+VINCOLI:
+- Linguaggio semplice, accessibile
+- Niente allucinazioni
+- Coerenza con gli obiettivi
+- Pratico e orientato all'azione`}
+              />
+            </section>
+            
             <SourceToggle source={buildChapterSource(chapter)} label="Mostra fonte capitolo" />
 
             {glossaryTerms.length > 0 ? (
@@ -208,14 +246,6 @@ export default async function ChapterPage({ params }: Props) {
                     glossaryIds={chapter.glossary ?? []}
                     terminalCommands={section.terminalCommands}
                     commandReferences={section.commandReferences}
-                  />
-                  <SectionMediaSlots
-                    chapterId={chapter.id}
-                    chapterSlug={chapter.slug}
-                    sectionIndex={idx}
-                    sectionTitle={section.title}
-                    sectionContent={section.content}
-                    media={chapter.media}
                   />
                 </div>
               ))}

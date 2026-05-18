@@ -79,6 +79,21 @@ export default function ChapterMediaSlots({ chapter }: Props) {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {slots.map((slot, idx) => (
           <div key={`${slot.type}-${idx}`} className=" border-2 border-accent-cyan/40 bg-bg-surface p-4">
+            {/* Infographic: show inline preview */}
+            {slot.type === 'infographic' && isReady(slot) ? (
+              <button
+                onClick={() => setActive(slot)}
+                className="block w-full text-left mb-3 cursor-pointer"
+              >
+                <img
+                  src={`/${slot.placeholderPath}`}
+                  alt={slot.title}
+                  className="w-full h-auto max-h-64 object-contain rounded-none border-2 border-accent-cyan/20 hover:border-accent-cyan/50 transition-colors"
+                  loading="lazy"
+                />
+              </button>
+            ) : null}
+            
             <div className="flex items-center justify-between gap-3 mb-2">
               <div className="flex items-center gap-2">
                 {slot.type === 'video' && <Film className="h-4 w-4" />}
@@ -94,12 +109,19 @@ export default function ChapterMediaSlots({ chapter }: Props) {
             <p className="text-sm text-text-primary">{slot.title}</p>
             <p className="text-xs text-text-secondary mt-2 leading-6">{slot.description}</p>
             {slot.estimatedDuration ? <p className="text-xs text-text-secondary mt-2">Durata: {slot.estimatedDuration}</p> : null}
-            {isReady(slot) ? (
+            {isReady(slot) && slot.type !== 'infographic' ? (
               <button
                 onClick={() => setActive(slot)}
                 className="mt-3 text-sm text-accent-cyan hover:text-accent-green transition-colors flex items-center gap-1"
               >
                 Apri media <ChevronRight className="h-4 w-4" />
+              </button>
+            ) : slot.type === 'infographic' && isReady(slot) ? (
+              <button
+                onClick={() => setActive(slot)}
+                className="mt-3 text-sm text-accent-cyan hover:text-accent-green transition-colors flex items-center gap-1"
+              >
+                Visualizza a schermo intero <ChevronRight className="h-4 w-4" />
               </button>
             ) : (
               <p className="text-[11px] text-text-secondary mt-3 font-mono break-all">{slot.placeholderPath}</p>
