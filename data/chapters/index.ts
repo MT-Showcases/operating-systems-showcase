@@ -188,6 +188,13 @@ export const chapters: Chapter[] = [
         placeholderPath: 'media/ch02-hardware-cpu/infographic.webp',
         notes: 'ready',
       },
+      {
+        type: 'video',
+        title: 'Video Capitolo 2',
+        description: 'Spiegazione video: architettura del computer e ruolo del sistema operativo.',
+        placeholderPath: 'media/ch02-hardware-cpu/video.mp4',
+        notes: 'ready',
+      },
     ],
   },
   {
