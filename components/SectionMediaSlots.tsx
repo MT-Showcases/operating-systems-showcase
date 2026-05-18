@@ -26,7 +26,7 @@ const mediaTypeOrder: Record<MediaPlaceholder['type'], number> = {
   resource: 3,
 };
 
-export default function SectionMediaSlots({ chapterId, chapterSlug, sectionIndex, sectionTitle, sectionContent, media, isWorkflow = false, customSourceText }: Props & { isWorkflow?: boolean; customSourceText?: string }) {
+export default function SectionMediaSlots({ chapterId, chapterSlug, sectionIndex, sectionTitle, sectionContent, media, isWorkflow = false, customSourceText, hideSourceToggle = false }: Props & { isWorkflow?: boolean; customSourceText?: string; hideSourceToggle?: boolean }) {
   // Regola: nessun media definito => nessun placeholder automatico
   const slotsRaw = media ?? [];
   // UX choice: hide resource cards until a real downloadable asset exists
@@ -99,7 +99,7 @@ export default function SectionMediaSlots({ chapterId, chapterSlug, sectionIndex
         ))}
       </div>
 
-      <div className="mb-8">
+      {!hideSourceToggle && <div className="mb-8">
         <button
           onClick={() => setShowSource((v) => !v)}
           className="text-xs px-3 py-1.5 border-2 border-accent-cyan/40 text-accent-cyan hover:bg-accent-cyan/10 transition mr-2"
@@ -127,7 +127,7 @@ export default function SectionMediaSlots({ chapterId, chapterSlug, sectionIndex
             </button>
           </div>
         )}
-      </div>
+      </div>}
 
       {active && (
         <div className="fixed inset-0 z-[120] bg-black/85 flex items-center justify-center p-4" onClick={() => setActive(null)}>

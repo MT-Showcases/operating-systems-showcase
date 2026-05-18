@@ -179,6 +179,7 @@ export default async function ChapterPage({ params }: Props) {
               sectionTitle={chapter.title}
               sectionContent={chapter.description}
               media={chapter.media}
+              hideSourceToggle
             />
             
             <SourceToggle source={buildChapterSource(chapter)} label="Mostra fonte capitolo" />
