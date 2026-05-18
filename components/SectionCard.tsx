@@ -26,7 +26,7 @@ function renderInline(text: string, glossaryIds: string[]) {
 
   if (terms.length === 0) return [text];
 
-  const regex = new RegExp(`(?<![\p{L}\p{N}])(${terms.map((term) => escapeRegExp(term.label)).join('|')})(?![\p{L}\p{N}])`, 'giu');
+  const regex = new RegExp(`\\b(${terms.map((term) => escapeRegExp(term.label)).join('|')})\\b`, 'gi');
   const parts = text.split(regex).filter(Boolean);
 
   return parts.map((part, index) => {
