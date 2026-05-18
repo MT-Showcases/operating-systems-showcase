@@ -1,14 +1,13 @@
+import SectionMediaSlots from '@/components/SectionMediaSlots';
 import { chapters, chaptersBySlug } from '@/data/chapters';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import ChapterHeader from '@/components/ChapterHeader';
 import SectionCard from '@/components/SectionCard';
-import SectionMediaSlots from '@/components/SectionMediaSlots';
 import KeyTakeaway from '@/components/KeyTakeaway';
 import DiscussionPrompt from '@/components/DiscussionPrompt';
 import ChapterQuiz from '@/components/ChapterQuiz';
-import ChapterMediaSlots from '@/components/ChapterMediaSlots';
 import SourceToggle from '@/components/SourceToggle';
 import Breadcrumb from '@/components/Breadcrumb';
 import SidebarToggleWrapper from '@/components/SidebarToggleWrapper';
@@ -173,7 +172,14 @@ export default async function ChapterPage({ params }: Props) {
               />
             </div>
 
-            <ChapterMediaSlots chapter={chapter} />
+            <SectionMediaSlots
+              chapterId={chapter.id}
+              chapterSlug={chapter.slug}
+              sectionIndex={0}
+              sectionTitle={chapter.title}
+              sectionContent={chapter.description}
+              media={chapter.media}
+            />
             
             <SourceToggle source={buildChapterSource(chapter)} label="Mostra fonte capitolo" />
 

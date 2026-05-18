@@ -13,10 +13,10 @@ interface Props {
 }
 
 const badgeByType: Record<MediaPlaceholder['type'], string> = {
-  video: 'Video',
-  podcast: 'Podcast',
-  infographic: 'Infografica',
-  resource: 'Risorsa'
+  video: '🎬 Video',
+  podcast: '🎙️ Podcast',
+  infographic: '🖼️ Infografica',
+  resource: '📄 Risorsa'
 };
 
 const mediaTypeOrder: Record<MediaPlaceholder['type'], number> = {
@@ -133,7 +133,7 @@ export default function SectionMediaSlots({ chapterId, chapterSlug, sectionIndex
         <div className="fixed inset-0 z-[120] bg-black/85 flex items-center justify-center p-4" onClick={() => setActive(null)}>
           <button
             onClick={() => setActive(null)}
-            className="absolute top-4 right-4 text-text-primary/90 hover:text-text-primary text-lg px-3 py-1.5 z-[121] cursor-pointer"
+            className="absolute top-4 right-4 text-text-primary/90 hover:text-text-primary text-lg px-3 py-1.5 z-[121]"
           >
             ✕
           </button>
