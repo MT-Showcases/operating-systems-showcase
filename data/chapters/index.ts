@@ -273,6 +273,15 @@ export const chapters: Chapter[] = [
       },
     ],
     glossary: ['kernel', 'user-space', 'system-call', 'operating-system'],
+    media: [
+      {
+        type: 'infographic',
+        title: 'Infografica Capitolo 3',
+        description: 'Sintesi visiva: kernel, user space e system call.',
+        placeholderPath: 'media/ch03-kernel/infographic.webp',
+        notes: 'ready',
+      },
+    ],
   },
   {
     id: 4,
