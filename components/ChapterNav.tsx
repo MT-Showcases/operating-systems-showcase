@@ -21,7 +21,7 @@ export default function ChapterNav({
   const progress = (currentChapter / totalChapters) * 100;
 
   return (
-    <div className="rounded-3xl border border-border-subtle bg-bg-surface p-6">
+    <div className=" border-2 border-accent-cyan/40 bg-bg-surface p-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-text-secondary">Navigazione</p>
@@ -30,8 +30,8 @@ export default function ChapterNav({
           </p>
         </div>
         <div className="w-full max-w-xs">
-          <div className="h-2 rounded-full bg-black/30">
-            <div className="h-2 rounded-full bg-accent-green transition-all" style={{ width: `${progress}%` }} />
+          <div className="h-2 bg-black/30">
+            <div className="h-2 bg-accent-green transition-all" style={{ width: `${progress}%` }} />
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@ export default function ChapterNav({
         {previousChapter ? (
           <Link
             href={`/chapters/${previousChapter.slug}`}
-            className="inline-flex min-h-11 items-center rounded-full border border-border-subtle px-4 py-2 text-sm text-text-primary transition hover:border-accent-cyan hover:text-accent-cyan"
+            className="inline-flex min-h-11 items-center border-2 border-accent-cyan/40 px-4 py-2 text-sm text-text-primary transition hover:border-accent-cyan hover:text-accent-cyan"
           >
             ← {previousChapter.title}
           </Link>
@@ -49,7 +49,7 @@ export default function ChapterNav({
         {nextChapter ? (
           <Link
             href={`/chapters/${nextChapter.slug}`}
-            className="inline-flex min-h-11 items-center rounded-full border border-accent-green/30 bg-accent-green/10 px-4 py-2 text-sm text-accent-green transition hover:border-accent-green hover:bg-accent-green/15"
+            className="inline-flex min-h-11 items-center border-2 border-accent-green/30 bg-bg-surface px-4 py-2 text-sm text-accent-green transition hover:border-accent-green hover:bg-accent-green/15"
           >
             {nextChapter.title} →
           </Link>

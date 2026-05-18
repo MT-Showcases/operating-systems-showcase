@@ -2,8 +2,8 @@ import type { TerminalCommandBlock } from '@/data/types';
 
 export default function TerminalCommand({ command, output, explanation, warning }: TerminalCommandBlock) {
   return (
-    <div className="rounded-2xl border border-border-subtle bg-black/35 overflow-hidden">
-      <div className="flex items-center gap-2 border-b border-border-subtle bg-bg-primary px-4 py-3 text-xs text-text-secondary">
+    <div className="rounded-2xl border border-accent-cyan/40 bg-black/35 overflow-hidden">
+      <div className="flex items-center gap-2 border-b border-accent-cyan/40 bg-bg-primary px-4 py-3 text-xs text-text-secondary">
         <span className="h-2.5 w-2.5 rounded-full bg-accent-amber/80" />
         <span className="h-2.5 w-2.5 rounded-full bg-accent-green/80" />
         <span className="h-2.5 w-2.5 rounded-full bg-accent-cyan/80" />
@@ -14,7 +14,7 @@ export default function TerminalCommand({ command, output, explanation, warning 
           <code>$ {command}</code>
         </pre>
         {output ? (
-          <pre className="mt-3 overflow-x-auto rounded-xl border border-border-subtle bg-bg-primary/80 p-3 text-sm text-text-secondary">
+          <pre className="mt-3 overflow-x-auto rounded-xl border border-accent-cyan/40 bg-bg-primary/80 p-3 text-sm text-text-secondary">
             <code>{output}</code>
           </pre>
         ) : null}

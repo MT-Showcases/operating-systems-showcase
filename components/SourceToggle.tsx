@@ -21,11 +21,11 @@ export default function SourceToggle({ source, label = 'Mostra sorgente operativ
       </button>
 
       {open && (
-        <div className="mt-3 rounded-2xl border border-border-subtle bg-bg-surface p-3 shadow-[0_12px_30px_rgba(0,0,0,0.18)]">
+        <div className="mt-3 rounded-2xl border border-accent-cyan/40 bg-bg-surface p-3">
           <textarea
             readOnly
             value={source}
-            className="w-full min-h-[180px] rounded-xl border border-border-subtle bg-bg-primary text-text-primary text-xs p-3 font-mono leading-6"
+            className="w-full min-h-[180px] rounded-xl border border-accent-cyan/40 bg-bg-primary text-text-primary text-xs p-3 font-mono leading-6"
           />
           <button
             onClick={async () => {

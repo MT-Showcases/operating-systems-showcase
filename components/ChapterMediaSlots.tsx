@@ -60,7 +60,7 @@ export default function ChapterMediaSlots({ chapter }: Props) {
   const isReady = (slot: MediaPlaceholder) => slot.notes?.toLowerCase().includes('ready');
 
   return (
-    <section className="mb-8 rounded-3xl border border-border-subtle bg-bg-surface p-6">
+    <section className="mb-8 border-2 border-accent-cyan/40 bg-bg-surface p-6">
       <div className="flex items-center justify-between gap-4 mb-4">
         <div>
           <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-green">Media del capitolo</p>
@@ -70,10 +70,10 @@ export default function ChapterMediaSlots({ chapter }: Props) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {slots.map((slot, idx) => (
-          <div key={`${slot.type}-${idx}`} className="rounded-2xl border border-border-subtle bg-black/15 p-4">
+          <div key={`${slot.type}-${idx}`} className=" border-2 border-accent-cyan/40 bg-bg-surface p-4">
             <div className="flex items-center justify-between gap-3 mb-2">
               <p className="text-sm font-semibold text-text-primary">{badgeByType[slot.type]}</p>
-              <span className={`text-[10px] px-2 py-0.5 rounded-full border ${isReady(slot) ? 'bg-accent-green/10 text-accent-green border-accent-green/30' : 'bg-accent-amber/10 text-accent-amber border-accent-amber/30'}`}>
+              <span className={`text-[10px] px-2 py-0.5 border-2 ${isReady(slot) ? 'bg-bg-surface text-accent-green border-accent-green/30' : 'bg-bg-surface text-accent-amber border-accent-amber/30'}`}>
                 {isReady(slot) ? 'Ready' : 'In arrivo'}
               </span>
             </div>
@@ -103,7 +103,7 @@ export default function ChapterMediaSlots({ chapter }: Props) {
             ) : active.type === 'video' ? (
               <video src={`/${active.placeholderPath}`} controls playsInline preload="metadata" className="w-full max-h-[90vh] bg-black" />
             ) : active.type === 'podcast' ? (
-              <div className="bg-bg-surface border border-border-subtle rounded-2xl p-6">
+              <div className="bg-bg-surface border-2 border-accent-cyan/40 p-6">
                 <p className="text-text-primary font-semibold mb-4">{active.title}</p>
                 <audio src={`/${active.placeholderPath}`} controls className="w-full" preload="none" />
               </div>

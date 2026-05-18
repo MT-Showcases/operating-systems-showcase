@@ -94,7 +94,7 @@ export default function TutorFloatingChat() {
     <>
       <button
         onClick={() => setOpen((value) => !value)}
-        className="fixed bottom-6 right-5 z-[90] rounded-full bg-accent-green text-bg-primary px-4 py-3 font-semibold shadow-lg flex items-center gap-2 hover:bg-accent-cyan hover:text-bg-primary transition"
+        className="fixed bottom-6 right-5 z-[90] rounded-full bg-accent-green text-bg-primary px-4 py-3 font-semibold flex items-center gap-2 hover:bg-accent-cyan hover:text-bg-primary transition"
         aria-label={`Apri ${TUTOR_NAME}`}
       >
         ✨ {TUTOR_NAME}
@@ -103,8 +103,8 @@ export default function TutorFloatingChat() {
       {open ? (
         <>
           <div className="fixed inset-0 z-[89] bg-black/60 sm:hidden" onClick={() => setOpen(false)} aria-hidden="true" />
-          <div className="fixed bottom-24 right-4 z-[90] w-[calc(100vw-2rem)] max-w-md overflow-hidden rounded-2xl border border-border-subtle bg-bg-surface shadow-2xl">
-            <div className="p-3 border-b border-border-subtle flex items-center justify-between">
+          <div className="fixed bottom-24 right-4 z-[90] w-[calc(100vw-2rem)] max-w-md overflow-hidden rounded-2xl border border-accent-cyan/40 bg-bg-surface shadow-2xl">
+            <div className="p-3 border-b border-accent-cyan/40 flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold text-accent-cyan">{TUTOR_NAME}</p>
                 <p className="text-[11px] text-text-secondary">{TUTOR_TAGLINE}</p>
@@ -153,7 +153,7 @@ export default function TutorFloatingChat() {
               ) : null}
             </div>
 
-            <div className="p-3 border-t border-border-subtle flex gap-2 items-end">
+            <div className="p-3 border-t border-accent-cyan/40 flex gap-2 items-end">
               <textarea
                 value={question}
                 onChange={(event) => setQuestion(event.target.value)}
@@ -165,7 +165,7 @@ export default function TutorFloatingChat() {
                 }}
                 placeholder={TUTOR_PLACEHOLDER}
                 rows={2}
-                className="flex-1 rounded-md bg-bg-primary border border-border-subtle px-3 py-2 text-sm resize-none min-h-[44px] max-h-28 text-text-primary"
+                className="flex-1 rounded-md bg-bg-primary border border-accent-cyan/40 px-3 py-2 text-sm resize-none min-h-[44px] max-h-28 text-text-primary"
               />
               <button onClick={ask} disabled={loading} className="rounded-md bg-accent-green/15 text-accent-green px-3 py-2 text-sm font-semibold disabled:opacity-50">
                 {loading ? '...' : 'Invia'}

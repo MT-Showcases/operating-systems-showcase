@@ -71,7 +71,7 @@ export default function GlossaryTooltip({ termId, children }: GlossaryTooltipPro
           id={tooltipId}
           role="tooltip"
           sideOffset={10}
-          className="bg-bg-primary text-text-primary p-4 rounded-lg shadow-lg border border-accent-cyan/20 max-w-sm z-[60] transition-all duration-150"
+          className="bg-bg-primary text-text-primary p-4 rounded-lg border border-accent-cyan/20 max-w-sm z-[60] transition-all duration-150"
         >
           <div className="max-w-none text-sm leading-7">
             <p>{term.shortDefinition || term.definition}</p>

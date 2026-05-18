@@ -98,13 +98,13 @@ export default function ChapterSourcesDisplay({ chapterSlug }: ChapterSourcesDis
     <div className="mb-8">
       <button
         onClick={() => setOpen(!open)}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-cyan-500/40 text-cyan-300 text-sm hover:bg-cyan-500/10 transition"
+        className="inline-flex items-center gap-2 px-4 py-2 border-2 border-cyan-500/40 text-cyan-300 text-sm hover:bg-cyan-500/10 transition"
       >
         {open ? '▼' : '▶'} {open ? 'Nascondi' : 'Mostra'} fonti capitolo
       </button>
 
       {open && (
-        <div className="mt-4 rounded-lg border border-cyan-500/30 bg-navy-900/50 p-6">
+        <div className="mt-4 border-2 border-cyan-500/30 bg-navy-900/50 p-6">
           {loading && (
             <p className="text-gray-400 text-sm">Caricamento fonti...</p>
           )}
@@ -128,7 +128,7 @@ export default function ChapterSourcesDisplay({ chapterSlug }: ChapterSourcesDis
                     href={source.origin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block p-3 rounded-lg border border-navy-600 hover:border-cyan-500/50 bg-navy-800/30 hover:bg-navy-800/60 transition"
+                    className="block p-3 border-2 border-navy-600 hover:border-cyan-500/50 bg-navy-800/30 hover:bg-navy-800/60 transition"
                   >
                     <div className="flex items-start gap-3">
                       <div className="flex-shrink-0 mt-0.5">

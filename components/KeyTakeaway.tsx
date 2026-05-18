@@ -6,9 +6,9 @@ interface KeyTakeawayProps {
 
 export default function KeyTakeaway({ items }: KeyTakeawayProps) {
   return (
-    <section className="rounded-[2rem] border border-accent-green/20 bg-[linear-gradient(180deg,rgba(57,211,83,0.10),rgba(57,211,83,0.04))] p-6">
+    <section className="border-2 border-accent-green/60 bg-bg-surface p-6">
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-accent-green/25 bg-accent-green/10 text-accent-green">
+        <div className="flex h-10 w-10 items-center justify-center border-2 border-accent-green/60 bg-bg-primary text-accent-green">
           <CheckCircle2 size={20} strokeWidth={2.5} />
         </div>
         <div>
@@ -18,7 +18,7 @@ export default function KeyTakeaway({ items }: KeyTakeawayProps) {
       </div>
       <ul className="mt-4 space-y-3 text-sm leading-7 text-text-primary">
         {items.map((item) => (
-          <li key={item} className="flex gap-3 rounded-2xl border border-accent-green/10 bg-black/10 px-4 py-3">
+          <li key={item} className="flex gap-3 border-2 border-accent-green/40 bg-bg-primary px-4 py-3">
             <ChevronRight size={18} className="mt-0.5 flex-shrink-0 text-accent-green" />
             <span>{item}</span>
           </li>

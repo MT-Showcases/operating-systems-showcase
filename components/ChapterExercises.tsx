@@ -17,7 +17,7 @@ export default function ChapterExercises({ exercises }: Props) {
   if (!exercises || exercises.length === 0) return null;
 
   return (
-    <section className="mt-8 rounded-3xl border border-border-subtle bg-bg-surface p-6">
+    <section className="mt-8 border-2 border-accent-cyan/40 bg-bg-surface p-6">
       <div className="flex items-center justify-between gap-4 mb-5">
         <div>
           <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-amber">Esercizi pratici</p>
@@ -26,11 +26,11 @@ export default function ChapterExercises({ exercises }: Props) {
       </div>
       <div className="space-y-4">
         {exercises.map((exercise, idx) => (
-          <div key={idx} className="rounded-2xl border border-border-subtle bg-black/15 p-5">
+          <div key={idx} className=" border-2 border-accent-cyan/40 bg-bg-surface p-5">
             <div className="flex items-start justify-between gap-4 mb-3">
               <h4 className="text-text-primary font-semibold">{exercise.title}</h4>
               {exercise.duration ? (
-                <span className="text-xs px-2 py-1 rounded-md bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/30 whitespace-nowrap">
+                <span className="text-xs px-2 py-1 bg-bg-surface text-accent-cyan border-2 border-accent-cyan/30 whitespace-nowrap">
                   {exercise.duration}
                 </span>
               ) : null}
@@ -48,14 +48,14 @@ export default function ChapterExercises({ exercises }: Props) {
                     key={resource.path}
                     href={resource.path}
                     target="_blank"
-                    className="inline-flex items-center px-3 py-2 rounded-lg border border-accent-green/30 text-accent-green hover:bg-accent-green/10 transition-all text-sm"
+                    className="inline-flex items-center px-3 py-2 border-2 border-accent-green/30 text-accent-green hover:bg-bg-surface transition-all text-sm"
                   >
                     {resource.label}
                   </Link>
                 ))}
               </div>
             ) : null}
-            <div className="text-sm text-text-secondary border-t border-border-subtle pt-3">
+            <div className="text-sm text-text-secondary border-t border-accent-cyan/40 pt-3">
               <span className="font-semibold text-text-primary">Consegna / checkpoint:</span> {exercise.deliverable}
             </div>
           </div>

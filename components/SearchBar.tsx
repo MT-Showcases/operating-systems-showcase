@@ -29,7 +29,7 @@ export default function SearchBar() {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Cerca capitoli, concetti o comandi..."
-          className="min-h-12 w-full rounded-2xl border border-border-subtle bg-bg-surface pl-12 pr-12 text-sm text-text-primary outline-none transition placeholder:text-text-secondary focus:border-accent-green"
+          className="min-h-12 w-full rounded-2xl border border-accent-cyan/40 bg-bg-surface pl-12 pr-12 text-sm text-text-primary outline-none transition placeholder:text-text-secondary focus:border-accent-green"
         />
         {query ? (
           <button
@@ -44,13 +44,13 @@ export default function SearchBar() {
       </div>
 
       {results.length > 0 ? (
-        <div className="absolute left-0 right-0 top-full z-30 mt-3 overflow-hidden rounded-2xl border border-border-subtle bg-bg-surface shadow-2xl">
+        <div className="absolute left-0 right-0 top-full z-30 mt-3 overflow-hidden rounded-2xl border border-accent-cyan/40 bg-bg-surface shadow-2xl">
           {results.map(({ item }) => (
             <Link
               key={item.slug}
               href={`/chapters/${item.slug}`}
               onClick={() => setQuery('')}
-              className="flex items-start gap-3 border-b border-border-subtle px-4 py-4 transition hover:bg-black/20 last:border-b-0"
+              className="flex items-start gap-3 border-b border-accent-cyan/40 px-4 py-4 transition hover:bg-bg-surface last:border-b-0"
             >
               <span className="text-xl">{chapterEmojis[item.id] ?? '📘'}</span>
               <div>
@@ -66,7 +66,7 @@ export default function SearchBar() {
       ) : null}
 
       {query.trim().length >= 2 && results.length === 0 ? (
-        <div className="absolute left-0 right-0 top-full z-30 mt-3 rounded-2xl border border-border-subtle bg-bg-surface px-4 py-3 text-sm text-text-secondary">
+        <div className="absolute left-0 right-0 top-full z-30 mt-3 rounded-2xl border border-accent-cyan/40 bg-bg-surface px-4 py-3 text-sm text-text-secondary">
           Nessun risultato per “{query.trim()}”.
         </div>
       ) : null}

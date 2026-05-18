@@ -53,22 +53,22 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
   const canGoNext = answers[currentIndex] !== undefined;
 
   return (
-    <section className="rounded-3xl border border-border-subtle bg-bg-surface p-6">
+    <section className=" border-2 border-accent-cyan/40 bg-bg-surface p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-cyan">Quiz capitolo</p>
           <h3 className="mt-2 text-xl font-semibold text-text-primary">Verifica rapida</h3>
         </div>
-        <span className="rounded-full border border-border-subtle bg-black/20 px-3 py-1 text-xs text-text-secondary">
+        <span className=" border-2 border-accent-cyan/40 bg-bg-surface px-3 py-1 text-xs text-text-secondary">
           {currentIndex + 1}/{quiz.length}
         </span>
       </div>
 
-      <div className="mt-4 h-2 rounded-full bg-black/25">
-        <div className="h-2 rounded-full bg-accent-green transition-all" style={{ width: `${((currentIndex + 1) / quiz.length) * 100}%` }} />
+      <div className="mt-4 h-2 bg-bg-surface">
+        <div className="h-2 bg-accent-green transition-all" style={{ width: `${((currentIndex + 1) / quiz.length) * 100}%` }} />
       </div>
 
-      <div className="mt-6 rounded-2xl border border-border-subtle bg-black/15 p-5">
+      <div className="mt-6 border-2 border-accent-cyan/40 bg-bg-surface p-5">
         <p className="text-base font-medium leading-8 text-text-primary">{currentQuestion.question}</p>
         <div className="mt-5 space-y-3">
           {normalized.options.map((option, optionIndex) => {
@@ -77,9 +77,9 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
             const isPicked = picked === optionIndex;
             const isCorrect = normalized.correctIndex === optionIndex;
 
-            let className = 'border-border-subtle text-text-primary hover:border-accent-cyan';
-            if (checked && isPicked && isCorrect) className = 'border-accent-green bg-accent-green/10 text-accent-green';
-            if (checked && isPicked && !isCorrect) className = 'border-accent-amber bg-accent-amber/10 text-text-primary';
+            let className = 'border-accent-cyan/40 text-text-primary hover:border-accent-cyan';
+            if (checked && isPicked && isCorrect) className = 'border-accent-green bg-bg-surface text-accent-green';
+            if (checked && isPicked && !isCorrect) className = 'border-accent-amber bg-bg-surface text-text-primary';
             if (checked && !isPicked && isCorrect) className = 'border-accent-green/40 bg-accent-green/5 text-text-primary';
 
             return (
@@ -88,7 +88,7 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
                 type="button"
                 disabled={checked}
                 onClick={() => setAnswers((previous) => ({ ...previous, [currentIndex]: optionIndex }))}
-                className={`min-h-11 w-full rounded-2xl border px-4 py-3 text-left text-sm transition disabled:cursor-not-allowed ${className}`}
+                className={`min-h-11 w-full border-2 px-4 py-3 text-left text-sm transition disabled:cursor-not-allowed ${className}`}
               >
                 {option}
               </button>
@@ -97,7 +97,7 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
         </div>
 
         {selected !== undefined ? (
-          <div className="mt-4 rounded-2xl border border-border-subtle bg-bg-primary/60 p-4 text-sm leading-7 text-text-secondary">
+          <div className="mt-4 border-2 border-accent-cyan/40 bg-bg-primary/60 p-4 text-sm leading-7 text-text-secondary">
             <div className="flex items-center gap-2">
               {selected === normalized.correctIndex ? (
                 <>
@@ -121,7 +121,7 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
           type="button"
           onClick={() => setCurrentIndex((value) => Math.max(value - 1, 0))}
           disabled={currentIndex === 0}
-          className="min-h-11 rounded-full border border-border-subtle px-4 py-2 text-sm text-text-primary transition disabled:cursor-not-allowed disabled:opacity-40"
+          className="min-h-11 border-2 border-accent-cyan/40 px-4 py-2 text-sm text-text-primary transition disabled:cursor-not-allowed disabled:opacity-40"
         >
           ← Indietro
         </button>
@@ -131,12 +131,12 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
             type="button"
             onClick={() => setCurrentIndex((value) => Math.min(value + 1, quiz.length - 1))}
             disabled={!canGoNext}
-            className="min-h-11 rounded-full border border-accent-green/30 bg-accent-green/10 px-4 py-2 text-sm text-accent-green transition disabled:cursor-not-allowed disabled:opacity-40"
+            className="min-h-11 border-2 border-accent-green/30 bg-bg-surface px-4 py-2 text-sm text-accent-green transition disabled:cursor-not-allowed disabled:opacity-40"
           >
             Avanti →
           </button>
         ) : (
-          <span className="rounded-full border border-accent-cyan/20 bg-accent-cyan/10 px-4 py-2 text-sm text-accent-cyan">
+          <span className=" border-2 border-accent-cyan/20 bg-bg-surface px-4 py-2 text-sm text-accent-cyan">
             {completed ? `Risultato finale: ${score}/${quiz.length}` : 'Rispondi per chiudere il quiz'}
           </span>
         )}

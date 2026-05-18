@@ -45,7 +45,7 @@ export default function TutorChat({ chapterSlug }: { chapterSlug: string }) {
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Es: quando uso sudo invece di root?"
-          className="flex-1 rounded-md bg-bg-primary border border-border-subtle px-3 py-2 text-sm text-text-primary"
+          className="flex-1 rounded-md bg-bg-primary border border-accent-cyan/40 px-3 py-2 text-sm text-text-primary"
         />
         <button onClick={ask} disabled={loading} className="rounded-md bg-accent-green/15 text-accent-green px-3 py-2 text-sm font-semibold disabled:opacity-50">
           {loading ? '...' : 'Chiedi'}

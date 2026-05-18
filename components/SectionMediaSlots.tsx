@@ -36,7 +36,7 @@ export default function SectionMediaSlots({ media }: Props) {
     <>
       <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-3">
         {media.map((slot, idx) => (
-          <div key={`${slot.type}-${idx}`} className="rounded-2xl border border-border-subtle bg-bg-surface p-4">
+          <div key={`${slot.type}-${idx}`} className="rounded-2xl border border-accent-cyan/40 bg-bg-surface p-4">
             <div className="flex items-center justify-between gap-3 mb-2">
               <p className="text-sm font-medium text-text-primary">{badgeByType[slot.type]}</p>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent-green/10 text-accent-green border border-accent-green/30">Ready</span>
@@ -58,7 +58,7 @@ export default function SectionMediaSlots({ media }: Props) {
             ) : active.type === 'video' ? (
               <video src={`/${active.placeholderPath}`} controls playsInline preload="metadata" className="w-full max-h-[90vh] bg-black" />
             ) : active.type === 'podcast' ? (
-              <div className="bg-bg-surface border border-border-subtle rounded-2xl p-6">
+              <div className="bg-bg-surface border border-accent-cyan/40 rounded-2xl p-6">
                 <p className="text-text-primary font-semibold mb-4">{active.title}</p>
                 <audio src={`/${active.placeholderPath}`} controls className="w-full" preload="none" />
               </div>

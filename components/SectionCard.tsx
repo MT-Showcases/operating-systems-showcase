@@ -92,10 +92,10 @@ export default function SectionCard({
   const paragraphs = content.split(/\n\n+/g);
 
   return (
-    <section id={id} className="scroll-mt-24 overflow-hidden rounded-[2rem] border border-border-subtle bg-[linear-gradient(180deg,rgba(22,27,34,0.98),rgba(13,17,23,0.98))] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.16)]">
+    <section id={id} className="scroll-mt-24 overflow-hidden border-2 border-accent-cyan bg-bg-primary p-6">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-accent-cyan/20 bg-accent-cyan/10">
+          <div className="flex h-11 w-11 items-center justify-center border-2 border-accent-cyan/60 bg-bg-surface">
             {getSectionIcon(title)}
           </div>
           <div>
@@ -103,7 +103,7 @@ export default function SectionCard({
             <h2 className="terminal-heading text-2xl font-semibold text-text-primary">{title}</h2>
           </div>
         </div>
-        <span className="hidden rounded-full border border-accent-green/20 bg-accent-green/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-accent-green md:inline-flex">
+        <span className="hidden border-2 border-accent-green/60 bg-bg-surface px-3 py-1 text-xs uppercase tracking-[0.2em] text-accent-green md:inline-flex">
           focus
         </span>
       </div>
@@ -113,7 +113,7 @@ export default function SectionCard({
       </div>
 
       {keyPoints && keyPoints.length > 0 ? (
-        <div className="mt-6 rounded-2xl border border-accent-green/20 bg-accent-green/8 p-4">
+        <div className="mt-6 border-2 border-accent-green/60 bg-bg-surface p-4">
           <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-green">Da tenere a mente</p>
           <ul className="mt-3 space-y-2 text-sm leading-7 text-text-primary">
             {keyPoints.map((point) => (

@@ -42,7 +42,7 @@ export default function QuizScoreDashboard() {
   };
 
   return (
-    <div className="rounded-2xl border border-border-subtle bg-bg-surface p-5 md:p-6">
+    <div className="rounded-2xl border border-accent-cyan/40 bg-bg-surface p-5 md:p-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h3 className="text-lg md:text-xl font-bold text-accent-cyan">Progress Dashboard Quiz</h3>

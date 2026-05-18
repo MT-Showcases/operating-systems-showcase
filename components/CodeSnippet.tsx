@@ -33,8 +33,8 @@ export default function CodeSnippet({ code, lang, label }: CodeSnippetProps) {
   const height = Math.min(Math.max(lines * 20 + 24, 120), 480);
 
   return (
-    <div className="h-auto rounded-xl border border-border-subtle overflow-hidden bg-bg-primary/70">
-      <div className="flex items-center justify-between px-4 py-3 border-b border-border-subtle bg-bg-surface/80">
+    <div className="h-auto rounded-xl border border-accent-cyan/40 overflow-hidden bg-bg-primary/70">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-accent-cyan/40 bg-bg-surface/80">
         <div>
           <p className="text-accent-cyan font-semibold text-sm">{label}</p>
           <p className="text-text-secondary text-xs uppercase tracking-wide">{lang}</p>

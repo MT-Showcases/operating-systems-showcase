@@ -14,12 +14,12 @@ export default function ChapterHeader({
   objectives,
 }: ChapterHeaderProps) {
   return (
-    <header className="overflow-hidden rounded-[2rem] border border-border-subtle bg-[linear-gradient(145deg,rgba(13,17,23,0.98),rgba(22,27,34,0.96))] p-8 shadow-[0_24px_80px_rgba(0,0,0,0.28)]">
+    <header className="overflow-hidden border-2 border-accent-green bg-bg-primary p-8">
       <div className="flex flex-wrap items-center gap-3">
-        <span className="rounded-full border border-accent-green/30 bg-accent-green/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-accent-green">
+        <span className="border-2 border-accent-green/60 bg-bg-surface px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-accent-green">
           Capitolo {String(chapterNumber).padStart(2, '0')}
         </span>
-        <span className="rounded-full border border-accent-cyan/25 bg-accent-cyan/10 px-3 py-1 text-xs text-accent-cyan">
+        <span className="border-2 border-accent-cyan/60 bg-bg-surface px-3 py-1 text-xs text-accent-cyan">
           Sessione operativa · {duration}
         </span>
       </div>
@@ -33,14 +33,14 @@ export default function ChapterHeader({
           <p className="mt-4 max-w-3xl text-base leading-8 text-text-secondary sm:text-lg">{description}</p>
         </div>
 
-        <div className="rounded-3xl border border-accent-green/20 bg-black/20 p-5">
+        <div className="border-2 border-accent-green/60 bg-bg-surface p-5">
           <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-green">Modalità</p>
           <div className="mt-3 space-y-3 text-sm text-text-secondary">
-            <div className="flex items-center justify-between gap-3 rounded-2xl border border-border-subtle bg-bg-primary/60 px-3 py-2">
+            <div className="flex items-center justify-between gap-3 border-2 border-accent-green/40 bg-bg-primary px-3 py-2">
               <span>Focus</span>
               <span className="terminal-heading text-accent-green">OS / Linux</span>
             </div>
-            <div className="flex items-center justify-between gap-3 rounded-2xl border border-border-subtle bg-bg-primary/60 px-3 py-2">
+            <div className="flex items-center justify-between gap-3 border-2 border-accent-cyan/40 bg-bg-primary px-3 py-2">
               <span>Output</span>
               <span className="terminal-heading text-accent-cyan">teoria + pratica</span>
             </div>
@@ -50,7 +50,7 @@ export default function ChapterHeader({
 
       <div className="mt-6 grid gap-3 md:grid-cols-3">
         {objectives.map((objective, index) => (
-          <div key={objective} className="rounded-2xl border border-border-subtle bg-black/20 p-4 text-sm leading-7 text-text-secondary">
+          <div key={objective} className="border-2 border-accent-amber/40 bg-bg-surface p-4 text-sm leading-7 text-text-secondary">
             <p className="terminal-heading mb-2 text-xs uppercase tracking-[0.22em] text-accent-amber">
               Checkpoint {index + 1}
             </p>
