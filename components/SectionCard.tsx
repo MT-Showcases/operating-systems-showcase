@@ -1,6 +1,6 @@
 import { getTermsByIds } from '@/data/glossary';
 import type { CommandReference, TerminalCommandBlock } from '@/data/types';
-import { Lock, Terminal, Settings, Folder, Cpu, ChevronRight } from 'lucide-react';
+import { Lock, Terminal, Settings, Folder, Cpu, ChevronRight, HardDrive, Network, BookOpen, Shield, Clock, Monitor } from 'lucide-react';
 import GlossaryTerm from './GlossaryTerm';
 import TerminalCommand from './TerminalCommand';
 import CommandReferenceCard from './CommandReferenceCard';
@@ -72,12 +72,17 @@ function renderParagraph(paragraph: string, glossaryIds: string[], key: string) 
 function getSectionIcon(title: string) {
   const lower = title.toLowerCase();
   const iconProps = 'w-6 h-6 text-accent-cyan';
-  if (lower.includes('permessi') || lower.includes('sicurezza')) return <Lock className={iconProps} strokeWidth={2} />;
-  if (lower.includes('linux') || lower.includes('shell')) return <Terminal className={iconProps} strokeWidth={2} />;
-  if (lower.includes('process')) return <Settings className={iconProps} strokeWidth={2} />;
-  if (lower.includes('memoria') || lower.includes('file')) return <Folder className={iconProps} strokeWidth={2} />;
-  if (lower.includes('cpu') || lower.includes('architettura')) return <Cpu className={iconProps} strokeWidth={2} />;
-  return null;
+  if (lower.includes('permessi') || lower.includes('sicurezza') || lower.includes('utent') || lower.includes('root') || lower.includes('sudo')) return <Lock className={iconProps} strokeWidth={2} />;
+  if (lower.includes('linux') || lower.includes('shell') || lower.includes('terminale') || lower.includes('directory') || lower.includes('navigare') || lower.includes('comando') || lower.includes('errori') || lower.includes('abitudine')) return <Terminal className={iconProps} strokeWidth={2} />;
+  if (lower.includes('process') || lower.includes('scheduling') || lower.includes('stati') || lower.includes('thread')) return <Settings className={iconProps} strokeWidth={2} />;
+  if (lower.includes('memoria') || lower.includes('file') || lower.includes('storage') || lower.includes('copiare') || lower.includes('spostare')) return <Folder className={iconProps} strokeWidth={2} />;
+  if (lower.includes('cpu') || lower.includes('architettura') || lower.includes('ram')) return <Cpu className={iconProps} strokeWidth={2} />;
+  if (lower.includes('input') || lower.includes('output') || lower.includes('dispositiv')) return <HardDrive className={iconProps} strokeWidth={2} />;
+  if (lower.includes('kernel') || lower.includes('system call') || lower.includes('user space')) return <Shield className={iconProps} strokeWidth={2} />;
+  if (lower.includes('rete') || lower.includes('network')) return <Network className={iconProps} strokeWidth={2} />;
+  if (lower.includes('virtual') || lower.includes('clock') || lower.includes('tempo')) return <Clock className={iconProps} strokeWidth={2} />;
+  if (lower.includes('monitor') || lower.includes('schermo')) return <Monitor className={iconProps} strokeWidth={2} />;
+  return <BookOpen className={iconProps} strokeWidth={2} />;
 }
 
 export default function SectionCard({
