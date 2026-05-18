@@ -29,27 +29,27 @@ export const openclawPage: Page = {
         'Operating Systems Showcase e\u0300 stato costruito da un sistema di agenti AI orchestrati con OpenClaw, ciascuno con un ruolo specifico nel creare contenuto didattico di qualita\u0300.',
       subsections: [
         {
-          title: 'Spark ✨ — Assistente alla Docenza',
+          title: 'Spark — Assistente alla Docenza',
           content:
             'Coordina tutto il materiale didattico. Decide struttura, contenuti e quali agenti attivare per ogni task. Output: Orchestrazione completa del corso.',
         },
         {
-          title: 'Showcaser 🎨 — Sviluppatore Web',
+          title: 'Showcaser — Sviluppatore Web',
           content:
             'Converte il contenuto didattico in pagine web interattive. Ha creato questo sito seguendo una pipeline strutturata di 7 fasi. Output: Le pagine che stai leggendo adesso.',
         },
         {
-          title: 'Quizard 🎯 — Creatore Quiz',
+          title: 'Quizard — Creatore Quiz',
           content:
             'Gestisce quiz interattivi e sessioni di apprendimento. Output: Esperienze di testing e pratica per ogni capitolo.',
         },
         {
-          title: 'GammaBot 🎨 — Generatore Slide',
+          title: 'GammaBot — Generatore Slide',
           content:
             'Genera presentazioni didattiche pronte per la lezione. Output: Slide PDF/PPTX per uso in aula.',
         },
         {
-          title: 'Notebook 📓 — Knowledge Companion',
+          title: 'Notebook — Knowledge Companion',
           content:
             'Prepara le fonti per audio e video sintetizzati. Output: Podcast, video riassuntivi e infografiche complementari.',
         },
@@ -100,7 +100,7 @@ export const openclawPage: Page = {
     {
       id: 'team',
       title: 'Il Team',
-      content: 'Michele Tornello — Docente e Ideatore\nDocente della Steve Jobs Academy di Catania. Ha progettato il corso "Sistemi Operativi", supervisionato ogni capitolo e guidato il sistema di agenti per creare questo sito.\n\nSpark ✨ e Team di Agenti AI\nIl sistema di agenti orchestrato con OpenClaw che ha realizzato il materiale didattico e questo sito.',
+      content: 'Michele Tornello — Docente e Ideatore\nDocente della Steve Jobs Academy di Catania. Ha progettato il corso "Sistemi Operativi", supervisionato ogni capitolo e guidato il sistema di agenti per creare questo sito.\n\nSpark e Team di Agenti AI\nIl sistema di agenti orchestrato con OpenClaw che ha realizzato il materiale didattico e questo sito.',
     },
   ],
 };

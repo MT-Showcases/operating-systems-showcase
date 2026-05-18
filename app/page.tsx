@@ -7,7 +7,7 @@ import Button from '@/components/Button';
 import SearchBar from '@/components/SearchBar';
 import QuizScoreDashboard from '@/components/QuizScoreDashboard';
 import Link from 'next/link';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Laptop, Monitor, TerminalSquare, Settings, Folder, Lock, User, Shield } from 'lucide-react';
 import GlossaryTooltip from '@/components/GlossaryTooltip';
 
 const totalHours = chapters.reduce((total, chapter) => total + Number.parseFloat(chapter.duration.replace('h', '')), 0);
@@ -47,7 +47,7 @@ export default function Home() {
               href="/glossary"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-none bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan hover:bg-accent-cyan/20 transition-all text-sm font-medium"
             >
-              📖 Glossario
+              Glossario
             </Link>
           </div>
         </div>
@@ -84,7 +84,16 @@ export default function Home() {
                     </span>
                   </div>
 
-                  <div className="text-3xl">{chapterEmojis[chapter.id] ?? '📘'}</div>
+                  <div className="text-3xl">
+                    {chapter.id === 1 && <Laptop className="h-8 w-8" />}
+                    {chapter.id === 2 && <Monitor className="h-8 w-8" />}
+                    {chapter.id === 3 && <TerminalSquare className="h-8 w-8" />}
+                    {chapter.id === 4 && <Settings className="h-8 w-8" />}
+                    {chapter.id === 5 && <Folder className="h-8 w-8" />}
+                    {chapter.id === 6 && <Lock className="h-8 w-8" />}
+                    {chapter.id === 7 && <User className="h-8 w-8" />}
+                    {chapter.id === 8 && <Shield className="h-8 w-8" />}
+                  </div>
 
                   <h3 className="text-base font-bold text-text-primary leading-snug">
                     {chapter.title}

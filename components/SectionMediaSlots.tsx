@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronRight, X } from 'lucide-react';
+import { ChevronRight, X, Film, Headphones, Image, FileText } from 'lucide-react';
 
 type MediaPlaceholder = {
   type: 'video' | 'podcast' | 'infographic' | 'resource';
@@ -22,10 +22,17 @@ interface Props {
 }
 
 const badgeByType: Record<MediaPlaceholder['type'], string> = {
-  video: '🎬 Video',
-  podcast: '🎙️ Podcast',
-  infographic: '🖼️ Infografica',
-  resource: '📄 Risorsa',
+  video: 'Video',
+  podcast: 'Podcast',
+  infographic: 'Infografica',
+  resource: 'Risorsa',
+};
+
+const iconByType: Record<MediaPlaceholder['type'], any> = {
+  video: require('lucide-react').Film,
+  podcast: require('lucide-react').Headphones,
+  infographic: require('lucide-react').Image,
+  resource: require('lucide-react').FileText,
 };
 
 export default function SectionMediaSlots({ media }: Props) {
@@ -39,7 +46,13 @@ export default function SectionMediaSlots({ media }: Props) {
         {media.map((slot, idx) => (
           <div key={`${slot.type}-${idx}`} className="rounded-none border border-accent-cyan/40 bg-bg-surface p-4">
             <div className="flex items-center justify-between gap-3 mb-2">
-              <p className="text-sm font-medium text-text-primary">{badgeByType[slot.type]}</p>
+              <div className="flex items-center gap-2">
+                {slot.type === 'video' && <Film className="h-4 w-4" />}
+                {slot.type === 'podcast' && <Headphones className="h-4 w-4" />}
+                {slot.type === 'infographic' && <Image className="h-4 w-4" />}
+                {slot.type === 'resource' && <FileText className="h-4 w-4" />}
+                <p className="text-sm font-medium text-text-primary">{badgeByType[slot.type]}</p>
+              </div>
               <span className="text-[10px] px-2 py-0.5 rounded-none bg-accent-green/10 text-accent-green border border-accent-green/30">Ready</span>
             </div>
             <p className="text-xs text-text-secondary mb-2">{slot.description}</p>

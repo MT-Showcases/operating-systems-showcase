@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronRight, X } from 'lucide-react';
+import { ChevronRight, X, Film, Headphones, Image, FileText } from 'lucide-react';
 import type { Chapter } from '@/data/types';
 
 type MediaPlaceholder = {
@@ -20,10 +20,17 @@ interface Props {
 }
 
 const badgeByType: Record<MediaPlaceholder['type'], string> = {
-  video: '🎬 Video',
-  podcast: '🎙️ Podcast',
-  infographic: '🖼️ Infografica',
-  resource: '📄 Risorsa',
+  video: 'Video',
+  podcast: 'Podcast',
+  infographic: 'Infografica',
+  resource: 'Risorsa',
+};
+
+const IconByType: Record<MediaPlaceholder['type'], React.ReactNode> = {
+  video: <Film className="h-4 w-4" />,
+  podcast: <Headphones className="h-4 w-4" />,
+  infographic: <Image className="h-4 w-4" />,
+  resource: <FileText className="h-4 w-4" />,
 };
 
 function defaultSlots(chapter: ChapterWithOptionalMedia): MediaPlaceholder[] {
@@ -73,7 +80,13 @@ export default function ChapterMediaSlots({ chapter }: Props) {
         {slots.map((slot, idx) => (
           <div key={`${slot.type}-${idx}`} className=" border-2 border-accent-cyan/40 bg-bg-surface p-4">
             <div className="flex items-center justify-between gap-3 mb-2">
-              <p className="text-sm font-semibold text-text-primary">{badgeByType[slot.type]}</p>
+              <div className="flex items-center gap-2">
+                {slot.type === 'video' && <Film className="h-4 w-4" />}
+                {slot.type === 'podcast' && <Headphones className="h-4 w-4" />}
+                {slot.type === 'infographic' && <Image className="h-4 w-4" />}
+                {slot.type === 'resource' && <FileText className="h-4 w-4" />}
+                <p className="text-sm font-semibold text-text-primary">{badgeByType[slot.type]}</p>
+              </div>
               <span className={`text-[10px] px-2 py-0.5 border-2 ${isReady(slot) ? 'bg-bg-surface text-accent-green border-accent-green/30' : 'bg-bg-surface text-accent-amber border-accent-amber/30'}`}>
                 {isReady(slot) ? 'Ready' : 'In arrivo'}
               </span>

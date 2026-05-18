@@ -98,7 +98,7 @@ export default function TutorFloatingChat() {
         className="fixed bottom-6 right-5 z-[90] rounded-none bg-accent-green text-bg-primary px-4 py-3 font-semibold flex items-center gap-2 hover:bg-accent-cyan hover:text-bg-primary transition"
         aria-label={`Apri ${TUTOR_NAME}`}
       >
-        ✨ {TUTOR_NAME}
+        ✓ {TUTOR_NAME}
       </button>
 
       {open ? (
