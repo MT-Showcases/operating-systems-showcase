@@ -86,6 +86,15 @@ export const chapters: Chapter[] = [
       },
     ],
     glossary: ['operating-system', 'kernel', 'process', 'ram', 'file-system'],
+    media: [
+      {
+        type: 'infographic',
+        title: 'Infografica capitolo',
+        description: 'Sintesi visiva dei concetti principali del capitolo.',
+        placeholderPath: 'media/ch01-what-is-os/infographic.png',
+        notes: 'ready',
+      },
+    ],
   },
   {
     id: 2,

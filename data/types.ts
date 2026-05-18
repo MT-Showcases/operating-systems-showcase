@@ -58,6 +58,15 @@ export interface Section {
   commandReferences?: CommandReference[];
 }
 
+export interface MediaPlaceholder {
+  type: 'video' | 'podcast' | 'infographic' | 'resource';
+  title: string;
+  description: string;
+  estimatedDuration?: string;
+  placeholderPath: string;
+  notes?: string;
+}
+
 export interface Chapter {
   id: number;
   slug: string;
@@ -70,4 +79,5 @@ export interface Chapter {
   discussionPrompts: string[];
   quiz: QuizQuestion[];
   glossary: string[];
+  media?: MediaPlaceholder[];
 }
