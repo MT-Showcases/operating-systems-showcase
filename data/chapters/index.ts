@@ -89,9 +89,9 @@ export const chapters: Chapter[] = [
     media: [
       {
         type: 'infographic',
-        title: 'Infografica capitolo',
-        description: 'Sintesi visiva dei concetti principali del capitolo.',
-        placeholderPath: 'media/ch01-what-is-os/infographic.png',
+        title: 'Infografica Capitolo 1',
+        description: 'Sintesi visiva: ruolo del sistema operativo, funzioni principali.',
+        placeholderPath: 'media/ch01-what-is-os/infographic.webp',
         notes: 'ready',
       },
     ],
