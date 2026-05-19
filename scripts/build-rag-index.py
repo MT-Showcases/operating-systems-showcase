@@ -6,7 +6,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-CHAPTERS_DIR = ROOT / "data" / "chapters"
+CHAPTERS_FILE = ROOT / "data" / "chapters" / "index.ts"
 GLOSSARY_FILE = ROOT / "data" / "glossary.ts"
 DOWNLOADS_DIR = ROOT / "public" / "downloads"
 PAGES_DIR = ROOT / "data" / "pages"
@@ -15,6 +15,9 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def clean_text(text: str) -> str:
+    # Rimuove marker markdown bold/italic per testo pulito nel RAG
+    text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)
+    text = re.sub(r'\*([^*]+)\*', r'\1', text)
     text = re.sub(r"\s+", " ", text)
     return text.strip()
 
@@ -31,17 +34,92 @@ def chunk_text(text: str, max_chars: int = 900, overlap: int = 120):
     return chunks
 
 
-def parse_chapters_raw():
+def extract_string_array(ts_block: str) -> list:
+    """Estrae stringhe singole da un array TypeScript."""
+    return re.findall(r"'([^']+)'", ts_block)
+
+
+def parse_chapters_structured():
+    """Estrae capitoli da index.ts in modo strutturato per Nix."""
+    if not CHAPTERS_FILE.exists():
+        return []
+
+    raw = CHAPTERS_FILE.read_text(encoding="utf-8", errors="ignore")
     items = []
-    for file in sorted(CHAPTERS_DIR.glob("ch*.ts")):
-        raw = file.read_text(encoding="utf-8", errors="ignore")
-        slug_m = re.search(r"slug:\s*'([^']+)'", raw)
-        title_m = re.search(r"title:\s*'([^']+)'", raw)
+
+    # Split per capitolo usando id: N,
+    chapter_blocks = re.split(r'(?=\{\s*\n\s*id:\s*\d+,)', raw)
+
+    for block in chapter_blocks:
+        slug_m = re.search(r"slug:\s*'([^']+)'", block)
+        title_m = re.search(r"title:\s*'([^']+)'", block)
+        desc_m = re.search(r"description:\s*'([^']+)'", block)
         if not slug_m:
             continue
+
         slug = slug_m.group(1)
         title = title_m.group(1) if title_m else slug
-        for idx, chunk in enumerate(chunk_text(raw, 1200, 160)):
+        description = desc_m.group(1) if desc_m else ''
+
+        # Estrai sezioni
+        section_blocks = re.findall(r'id:\s*\'([^\']+)\'[\s\S]*?(?=(?:id:\s*\'|keyTakeaways|\],\s*\n\s*\}))', block)
+        sections_text = []
+
+        # Estrai contenuto sezioni più robusto
+        section_matches = list(re.finditer(r"title:\s*'([^']+)'[\s\S]*?content:\s*'([^']*(?:\\'[^']*)*)'[\s\S]*?keyPoints:\s*\[([^\]]*)", block))
+        for sm in section_matches:
+            sec_title = sm.group(1)
+            sec_content = sm.group(2).replace("\\'" , "'")
+            sec_content = clean_text(sec_content)
+            key_points_raw = sm.group(3)
+            key_points = re.findall(r"'([^']+)'", key_points_raw)
+            sec_text = f"SEZIONE: {sec_title}\n{sec_content}"
+            if key_points:
+                sec_text += "\nPUNTI CHIAVE:\n- " + "\n- ".join(key_points)
+            sections_text.append(sec_text)
+
+        # Estrai pilotContent
+        pilot_parts = []
+        why_m = re.search(r'whyItMatters:\s*\[([\s\S]*?)\],', block)
+        if why_m:
+            items_list = re.findall(r"'([^']+)'", why_m.group(1))
+            if items_list:
+                pilot_parts.append("PERCHÉ CONTA:\n" + " ".join(items_list))
+
+        mistakes_m = re.search(r'commonMistakes:\s*\[([\s\S]*?)\],', block)
+        if mistakes_m:
+            items_list = re.findall(r"'([^']+)'", mistakes_m.group(1))
+            if items_list:
+                pilot_parts.append("ERRORI COMUNI:\n- " + "\n- ".join(items_list))
+
+        realworld_m = re.search(r'realWorld:\s*\[([\s\S]*?)\],', block)
+        if realworld_m:
+            items_list = re.findall(r"'([^']+)'", realworld_m.group(1))
+            if items_list:
+                pilot_parts.append("NEL MONDO REALE:\n- " + "\n- ".join(items_list))
+
+        minitask_m = re.search(r'miniTask:\s*\[([\s\S]*?)\],', block)
+        if minitask_m:
+            items_list = re.findall(r"'([^']+)'", minitask_m.group(1))
+            if items_list:
+                pilot_parts.append("MINI TASK:\n" + " ".join(items_list))
+
+        # Estrai keyTakeaways
+        takeaways_m = re.search(r'keyTakeaways:\s*\[([\s\S]*?)\],', block)
+        takeaways = []
+        if takeaways_m:
+            takeaways = re.findall(r"'([^']+)'", takeaways_m.group(1))
+
+        # Costruisci il testo completo per questo capitolo
+        full_text = f"CAPITOLO: {title}\nSLUG: {slug}\nDESCRIZIONE: {clean_text(description)}\n\n"
+        if sections_text:
+            full_text += "\n\n".join(sections_text) + "\n\n"
+        if pilot_parts:
+            full_text += "\n\n".join(pilot_parts) + "\n\n"
+        if takeaways:
+            full_text += "TAKEAWAY:\n- " + "\n- ".join(takeaways)
+
+        for idx, chunk in enumerate(chunk_text(full_text, 1200, 160)):
             items.append({
                 "id": f"chapter-{slug}-{idx}",
                 "sourceType": "chapter",
@@ -50,6 +128,7 @@ def parse_chapters_raw():
                 "url": f"/chapters/{slug}",
                 "text": chunk,
             })
+
     return items
 
 
@@ -148,7 +227,7 @@ def parse_static_pages():
 
 
 def main():
-    chapters = parse_chapters_raw()
+    chapters = parse_chapters_structured()
     glossary = parse_glossary_raw()
     labs, manifest = parse_labs()
     pages = parse_static_pages()

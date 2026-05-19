@@ -1,5 +1,165 @@
 [
   {
+    "id": "chapter-what-is-os-0",
+    "sourceType": "chapter",
+    "chapterSlug": "what-is-os",
+    "title": "Cos’è un Sistema Operativo",
+    "url": "/chapters/what-is-os",
+    "text": "CAPITOLO: Cos’è un Sistema Operativo SLUG: what-is-os DESCRIZIONE: La vista d’insieme: perché l’OS esiste, cosa controlla e perché senza di lui il computer non è davvero usabile. SEZIONE: Cos’è un Sistema Operativo Un sistema operativo è il software di base che rende un computer realmente utilizzabile. Coordina CPU, memoria, file system e dispositivi, poi offre ai programmi un ambiente stabile in cui lavorare.\\n\\nSenza questo livello intermedio, ogni applicazione dovrebbe conoscere in dettaglio l’hardware, parlare con periferiche diverse e gestire da sola conflitti, attese e priorità. È proprio qui che l’OS diventa indispensabile: trasforma componenti potenti ma scollegati in un sistema coerente e affidabile.\\n\\nSe pensi all’hardware come a una squadra di specialisti, il sistema operativo è il regista che assegna ruoli, tempi e regole: decide chi lavora, chi aspetta, chi può usare una risorsa e in che ordine. PUNTI CHIAVE: - Senza sistema operativo, usare l’hardware richiederebbe istruzioni molto più complesse. - L’OS media tra utente, applicazioni e componenti fisici. - La sua presenza è continua anche quando non lo noti. SEZIONE: Le funzioni che non possono mancare Ogni sistema o"
+  },
+  {
+    "id": "chapter-what-is-os-1",
+    "sourceType": "chapter",
+    "chapterSlug": "what-is-os",
+    "title": "Cos’è un Sistema Operativo",
+    "url": "/chapters/what-is-os",
+    "text": "tra utente, applicazioni e componenti fisici. - La sua presenza è continua anche quando non lo noti. SEZIONE: Le funzioni che non possono mancare Ogni sistema operativo serio deve almeno fare quattro cose bene: gestire processi, memoria, file e dispositivi di input/output. Sono le quattro aree che tengono insieme quasi tutto ciò che fai su un computer.\\n\\nIn pratica l’OS decide quale programma può usare la CPU, quanta RAM può occupare, dove salvare i dati e come dialogare con tastiera, schermo, disco, rete o stampante. Quando apri due app insieme, salvi un file e ascolti audio in background, stai già vedendo queste quattro responsabilità lavorare in parallelo.\\n\\nQuesto è anche il motivo per cui i capitoli successivi entrano più nel dettaglio: processi, memoria, file system e dispositivi non sono temi separati, ma i pilastri dello stesso sistema di coordinamento. PUNTI CHIAVE: - Gestione processi = ordine nell’esecuzione dei programmi. - Gestione memoria = isolamento e uso efficiente della RAM. - Gestione file = organizzazione persistente dei dati. SEZIONE: Dove lo incontri tutti i giorni Windows, macOS, Android, iOS e Linux sono tutti sistemi operativi, anche se hanno interfacce, "
+  },
+  {
+    "id": "chapter-what-is-os-2",
+    "sourceType": "chapter",
+    "chapterSlug": "what-is-os",
+    "title": "Cos’è un Sistema Operativo",
+    "url": "/chapters/what-is-os",
+    "text": "ne persistente dei dati. SEZIONE: Dove lo incontri tutti i giorni Windows, macOS, Android, iOS e Linux sono tutti sistemi operativi, anche se hanno interfacce, vincoli e obiettivi diversi. Alcuni sono pensati per desktop generici, altri per smartphone, altri ancora per server o dispositivi embedded.\\n\\nIl concetto chiave è che cambia la forma esterna, ma il compito resta lo stesso: far collaborare software e hardware in modo affidabile, sicuro e prevedibile.\\n\\nLinux è particolarmente utile per studiare questi meccanismi perché espone bene ciò che succede sotto la superficie: processi, permessi, file system, terminale e strumenti di osservazione rendono più visibile il lavoro del sistema operativo. PUNTI CHIAVE: - Desktop, server e smartphone usano OS diversi ma con principi simili. - Linux è molto importante perché espone bene i meccanismi di sistema. PERCHÉ CONTA: Ogni volta che apri un’app, salvi un file, ascolti un audio o passi da una finestra all’altra, c’è un sistema che coordina tutto dietro le quinte. Quel sistema è il sistema operativo. Capire questo capitolo significa smettere di vedere il computer come una scatola che “fa cose” e iniziare a leggerlo come un ambiente org"
+  },
+  {
+    "id": "chapter-what-is-os-3",
+    "sourceType": "chapter",
+    "chapterSlug": "what-is-os",
+    "title": "Cos’è un Sistema Operativo",
+    "url": "/chapters/what-is-os",
+    "text": " il sistema operativo. Capire questo capitolo significa smettere di vedere il computer come una scatola che “fa cose” e iniziare a leggerlo come un ambiente organizzato: qualcuno decide come usare la CPU, dove tenere i dati, come parlare con i dispositivi e come far convivere programmi diversi senza caos. Se vuoi arrivare davvero da zero a una comprensione solida di Linux e dei sistemi operativi, questo è il punto di partenza giusto: qui costruisci il modello mentale che ti servirà per tutti i capitoli successivi. ERRORI COMUNI: - Sistema operativo ≠ computer: il computer è l’insieme di hardware e software; il sistema operativo è uno dei componenti chiave che lo rende utilizzabile. - Kernel ≠ intero sistema operativo: il kernel è il nucleo che controlla le risorse, ma non coincide con tutta l’esperienza che l’utente vede. - RAM ≠ spazio di archiviazione: la RAM serve al lavoro immediato dei programmi; disco o SSD servono a conservare i dati nel tempo. - Un’app non dialoga direttamente con ogni componente: passa attraverso il sistema operativo per ottenere accesso controllato alle risorse. - Usare un computer non significa ancora capire chi coordina processi, memoria, file e disposi"
+  },
+  {
+    "id": "chapter-what-is-os-4",
+    "sourceType": "chapter",
+    "chapterSlug": "what-is-os",
+    "title": "Cos’è un Sistema Operativo",
+    "url": "/chapters/what-is-os",
+    "text": " sistema operativo per ottenere accesso controllato alle risorse. - Usare un computer non significa ancora capire chi coordina processi, memoria, file e dispositivi dietro ciò che vedi sullo schermo. NEL MONDO REALE: - Lanci un programma dal menu o dal terminale e il sistema crea un processo, prepara memoria e assegna tempo CPU. - Apri, sposti o salvi un file e l’OS usa il file system per ritrovare dati, nomi, permessi e posizione logica. - Colleghi una chiavetta USB o un dispositivo esterno e il sistema deve riconoscere l’hardware, gestire il driver e rendere la risorsa usabile. - Cambi finestra mentre un download continua in background: l’OS alterna attività visibili e invisibili senza perdere controllo. - Scrivi da tastiera o tocchi lo schermo e il sistema trasforma input fisici in eventi che i programmi possono capire. MINI TASK: Osserva il dispositivo che stai usando in questo momento e individua almeno 4 attività che il sistema operativo sta gestendo per te. Per esempio: un’app aperta, un file in uso, un input da tastiera o touch, una connessione di rete, memoria occupata da più programmi o un dispositivo collegato. Poi prova a spiegare con parole tue perché senza sistema ope"
+  },
+  {
+    "id": "chapter-what-is-os-5",
+    "sourceType": "chapter",
+    "chapterSlug": "what-is-os",
+    "title": "Cos’è un Sistema Operativo",
+    "url": "/chapters/what-is-os",
+    "text": "era o touch, una connessione di rete, memoria occupata da più programmi o un dispositivo collegato. Poi prova a spiegare con parole tue perché senza sistema operativo queste attività diventerebbero molto più difficili da coordinare. TAKEAWAY: - Il sistema operativo non è un optional: è il livello che rende il computer utilizzabile. - Le sue responsabilità principali sono risorse, isolamento e servizi ai programmi. - Capire l’OS significa capire cosa succede dietro ogni app che apri."
+  },
+  {
+    "id": "chapter-hardware-cpu-0",
+    "sourceType": "chapter",
+    "chapterSlug": "hardware-cpu",
+    "title": "Architettura del Computer e CPU",
+    "url": "/chapters/hardware-cpu",
+    "text": "CAPITOLO: Architettura del Computer e CPU SLUG: hardware-cpu DESCRIZIONE: Le basi hardware che servono davvero per capire le scelte del sistema operativo. SEZIONE: Architettura del Computer e CPU La CPU esegue istruzioni una dopo l’altra a velocità altissima. Per questo l’OS deve decidere con attenzione quale processo eseguire, quando interromperlo e quando passare a un altro.\\n\\nQuando parli di multitasking non stai dicendo che la CPU fa magia: stai dicendo che il sistema alterna il lavoro in modo intelligente. PUNTI CHIAVE: - La CPU è la risorsa più contesa quando più programmi vogliono lavorare insieme. - Lo scheduler nasce proprio per distribuire il tempo CPU. SEZIONE: RAM e storage: veloce contro persistente La RAM è veloce ma volatile: contiene ciò che serve subito ai programmi. Lo storage è più lento ma conserva i dati nel tempo.\\n\\nIl sistema operativo deve spostarsi continuamente tra queste due logiche: prestazioni immediate e persistenza dei dati. PUNTI CHIAVE: - RAM = lavoro in corso. - Storage = archivio durevole. - L’OS bilancia velocità e affidabilità. SEZIONE: Input, output e dispositivi Tastiera, mouse, monitor, rete, dischi e periferiche non parlano da soli con ogn"
+  },
+  {
+    "id": "chapter-hardware-cpu-1",
+    "sourceType": "chapter",
+    "chapterSlug": "hardware-cpu",
+    "title": "Architettura del Computer e CPU",
+    "url": "/chapters/hardware-cpu",
+    "text": ". - L’OS bilancia velocità e affidabilità. SEZIONE: Input, output e dispositivi Tastiera, mouse, monitor, rete, dischi e periferiche non parlano da soli con ogni programma. Servono regole, driver e gestione centralizzata.\\n\\nQuesto è uno dei motivi per cui il sistema operativo è indispensabile: unifica dispositivi diversi dietro interfacce più coerenti. PUNTI CHIAVE: - L’I/O ha tempi e comportamenti molto diversi rispetto alla CPU. - L’OS riduce la complessità per i programmi applicativi. TAKEAWAY: - Capire CPU, RAM e storage aiuta a capire perché l’OS deve fare scelte continue. - Il computer non è solo potenza: è coordinamento di risorse con velocità diverse. - L’I/O è centrale perché il sistema vive anche fuori dalla CPU."
+  },
+  {
+    "id": "chapter-kernel-0",
+    "sourceType": "chapter",
+    "chapterSlug": "kernel",
+    "title": "Kernel, User Space e System Calls",
+    "url": "/chapters/kernel",
+    "text": "CAPITOLO: Kernel, User Space e System Calls SLUG: kernel DESCRIZIONE: Il cuore del sistema: dove finiscono le applicazioni e dove inizia il controllo vero delle risorse. SEZIONE: Kernel, User Space e System Calls Il kernel vive in una zona privilegiata del sistema perché deve controllare operazioni sensibili: memoria, processi, dispositivi, protezioni.\\n\\nSe ogni applicazione potesse fare le stesse cose senza limiti, un bug qualsiasi diventerebbe un problema per tutta la macchina. PUNTI CHIAVE: - Più privilegio significa più potere ma anche più rischio. - La separazione protegge stabilità e sicurezza. SEZIONE: User space: libertà controllata Le applicazioni lavorano in user space, quindi con capacità limitate. Possono fare tantissimo, ma non modificare direttamente parti critiche del sistema.\\n\\nQuesto modello rende possibili isolamento, crash più contenuti e maggiore prevedibilità. PUNTI CHIAVE: - User space non significa debolezza: significa sicurezza progettata. - Ogni programma vive in un confine più controllato. SEZIONE: System call: la porta ufficiale Quando un programma deve aprire un file, creare un processo o inviare dati in rete, passa tramite una system call.\\n\\nÈ come f"
+  },
+  {
+    "id": "chapter-kernel-1",
+    "sourceType": "chapter",
+    "chapterSlug": "kernel",
+    "title": "Kernel, User Space e System Calls",
+    "url": "/chapters/kernel",
+    "text": ": System call: la porta ufficiale Quando un programma deve aprire un file, creare un processo o inviare dati in rete, passa tramite una system call.\\n\\nÈ come fare una richiesta formale al kernel: “ho bisogno di questa operazione, puoi eseguirla per me in modo sicuro?” PUNTI CHIAVE: - Le system call trasformano richieste dei programmi in azioni di sistema controllate. - Sono fondamentali per capire il rapporto tra software applicativo e OS. TAKEAWAY: - Il kernel è privilegiato perché deve proteggere e coordinare tutto il sistema. - Le applicazioni girano in user space proprio per limitare i danni di errori o abusi. - Le system call sono il ponte reale tra programmi e servizi di sistema."
+  },
+  {
+    "id": "chapter-processes-0",
+    "sourceType": "chapter",
+    "chapterSlug": "processes",
+    "title": "Processi, Thread e Scheduling",
+    "url": "/chapters/processes",
+    "text": "CAPITOLO: Processi, Thread e Scheduling SLUG: processes DESCRIZIONE: Come il sistema organizza l’esecuzione dei programmi, il multitasking e la competizione per la CPU. SEZIONE: Processi, Thread e Scheduling Un processo è un contenitore di esecuzione con memoria e risorse proprie. Un thread è un flusso di lavoro dentro quel contenitore.\\n\\nLa differenza pratica è importante: i processi sono più isolati, i thread condividono di più e quindi collaborano più velocemente ma possono intralciarsi se progettati male. PUNTI CHIAVE: - Più isolamento nei processi, più condivisione nei thread. - Confondere i due concetti porta a errori architetturali. SEZIONE: Gli stati base di un processo Un processo può essere pronto, in esecuzione, in attesa o terminato. Non sono etichette decorative: descrivono il punto del ciclo di vita in cui si trova.\\n\\nCapire questi stati aiuta a leggere meglio anche strumenti Linux come ps o top. PUNTI CHIAVE: - Non tutti i processi attivi stanno davvero usando la CPU in questo momento. - Attesa e blocco sono normali quando si aspetta I/O. SEZIONE: Scheduling: dare tempo a tutti senza caos Lo scheduler decide quale processo ottiene tempo CPU e per quanto. L’obiettiv"
+  },
+  {
+    "id": "chapter-processes-1",
+    "sourceType": "chapter",
+    "chapterSlug": "processes",
+    "title": "Processi, Thread e Scheduling",
+    "url": "/chapters/processes",
+    "text": " normali quando si aspetta I/O. SEZIONE: Scheduling: dare tempo a tutti senza caos Lo scheduler decide quale processo ottiene tempo CPU e per quanto. L’obiettivo non è solo “essere giusto”, ma mantenere il sistema reattivo e utile per l’utente.\\n\\nQui nasce il multitasking percepito: l’illusione efficace di molte cose che accadono insieme. PUNTI CHIAVE: - Lo scheduling bilancia priorità, reattività e throughput. - La CPU viene condivisa a finestre di tempo molto piccole. TAKEAWAY: - Processi e thread non sono sinonimi. - Gli stati dei processi aiutano a leggere il comportamento del sistema. - Lo scheduler è il motivo per cui il multitasking sembra naturale."
+  },
+  {
+    "id": "chapter-memory-filesystem-0",
+    "sourceType": "chapter",
+    "chapterSlug": "memory-filesystem",
+    "title": "Memoria e File System",
+    "url": "/chapters/memory-filesystem",
+    "text": "CAPITOLO: Memoria e File System SLUG: memory-filesystem DESCRIZIONE: Come il sistema organizza dati e memoria: due pilastri che influenzano ogni attività su un computer. SEZIONE: Memoria e File System La memoria non è solo “spazio libero”. È il luogo in cui i processi caricano codice e dati mentre lavorano.\\n\\nIl sistema operativo deve proteggerla, distribuirla e impedire che un processo invada il territorio di un altro. PUNTI CHIAVE: - La gestione memoria è una questione di sicurezza oltre che di prestazioni. - L’isolamento impedisce corruzione e crash a catena. SEZIONE: Memoria virtuale senza mito La memoria virtuale fa percepire a ogni processo uno spazio più ordinato e separato. Non significa “RAM infinita”, ma astrazione utile.\\n\\nPer uno studente junior basta capire due idee: isolamento e possibilità di appoggiarsi anche allo storage quando serve. PUNTI CHIAVE: - La memoria virtuale migliora protezione e flessibilità. - Swap e storage possono aiutare, ma sono più lenti della RAM. SEZIONE: File system e struttura ad albero Un file system organizza i dati in directory e file, come una mappa gerarchica.\\n\\nQuesta struttura è ciò che rende possibile cercare, salvare, spostare e p"
+  },
+  {
+    "id": "chapter-memory-filesystem-1",
+    "sourceType": "chapter",
+    "chapterSlug": "memory-filesystem",
+    "title": "Memoria e File System",
+    "url": "/chapters/memory-filesystem",
+    "text": "ero Un file system organizza i dati in directory e file, come una mappa gerarchica.\\n\\nQuesta struttura è ciò che rende possibile cercare, salvare, spostare e proteggere informazioni in modo coerente, soprattutto in Linux dove il file system è parte forte del ragionamento operativo. PUNTI CHIAVE: - File e directory non sono solo contenitori: hanno permessi e metadati. - La gerarchia riduce il caos quando il sistema cresce. TAKEAWAY: - Memoria e file system sono due forme diverse di organizzazione delle risorse. - La memoria virtuale serve soprattutto a isolare e coordinare. - Capire la gerarchia dei file prepara bene alla pratica Linux."
+  },
+  {
+    "id": "chapter-linux-fundamentals-0",
+    "sourceType": "chapter",
+    "chapterSlug": "linux-fundamentals",
+    "title": "Fondamenti di Linux",
+    "url": "/chapters/linux-fundamentals",
+    "text": "CAPITOLO: Fondamenti di Linux SLUG: linux-fundamentals DESCRIZIONE: Dalla filosofia generale fino al terminale: il punto in cui la teoria diventa ambiente reale di lavoro. SEZIONE: Fondamenti di Linux Linux non è solo “schermo nero con testo”. È un ecosistema molto usato su server, cloud, embedded e anche desktop.\\n\\nIl suo valore didattico è enorme perché espone bene concetti di sistema: processi, file, permessi, utenti, configurazioni e strumenti testuali. PUNTI CHIAVE: - Linux è sia sistema reale di lavoro sia ottimo laboratorio mentale. - Molti concetti OS diventano più concreti proprio qui. SEZIONE: Shell e terminale: differenza pratica Il terminale è l’interfaccia in cui scrivi, la shell è il programma che interpreta. Distinguere i due evita confusione inutile.\\n\\nQuando usi Bash o Zsh, stai parlando con una shell attraverso il terminale. PUNTI CHIAVE: - Terminale = spazio di interazione. - Shell = interprete dei comandi. SEZIONE: Le directory chiave da riconoscere In Linux quasi tutto parte dalla radice /. Da lì si sviluppano directory con ruoli distinti come /home, /etc, /usr e /var.\\n\\nL’obiettivo non è memorizzare tutto subito, ma capire che ogni cartella ha uno scopo ope"
+  },
+  {
+    "id": "chapter-linux-fundamentals-1",
+    "sourceType": "chapter",
+    "chapterSlug": "linux-fundamentals",
+    "title": "Fondamenti di Linux",
+    "url": "/chapters/linux-fundamentals",
+    "text": "iluppano directory con ruoli distinti come /home, /etc, /usr e /var.\\n\\nL’obiettivo non è memorizzare tutto subito, ma capire che ogni cartella ha uno scopo operativo specifico. PUNTI CHIAVE: - /home contiene lo spazio utente. - /etc ospita configurazioni di sistema. - /var raccoglie dati variabili come log e cache. TAKEAWAY: - Linux è un ambiente operativo concreto, non un esercizio astratto. - Terminale e shell sono collegati ma non identici. - La struttura del file system Linux diventa leggibile quando la associ a scopi reali."
+  },
+  {
+    "id": "chapter-linux-commands-0",
+    "sourceType": "chapter",
+    "chapterSlug": "linux-commands",
+    "title": "Comandi Linux, Utenti, Gruppi e Permessi",
+    "url": "/chapters/linux-commands",
+    "text": "CAPITOLO: Comandi Linux, Utenti, Gruppi e Permessi SLUG: linux-commands DESCRIZIONE: Il capitolo più pratico: navigazione, gestione file, processi e sicurezza operativa di base. SEZIONE: Comandi Linux, Utenti, Gruppi e Permessi I primi comandi utili non sono “da smanettoni”: servono a capire dove sei e cosa stai guardando.\\n\\nCon pwd, ls e cd costruisci orientamento. Senza orientamento, qualsiasi comando successivo diventa rischioso. PUNTI CHIAVE: - Prima di modificare, verifica sempre il contesto. - Sapere dove sei evita errori banali ma costosi. SEZIONE: Creare, copiare, spostare e leggere file touch, mkdir, cp, mv, rm e cat sono strumenti base ma potentissimi. La differenza la fa sempre lo scenario: stai creando un file? organizzando una cartella? spostando un output?\\n\\nL’errore classico è usare rm senza essere certi del percorso o del contenuto che stai cancellando. PUNTI CHIAVE: - I comandi file vanno sempre collegati a intenzione e percorso. - rm è utile ma non perdona leggerezza. SEZIONE: Utenti, gruppi, permessi e processi base In Linux ogni file e ogni processo vive dentro un contesto di identità e regole. Sapere chi è il proprietario e quali permessi sono attivi è fondam"
+  },
+  {
+    "id": "chapter-linux-commands-1",
+    "sourceType": "chapter",
+    "chapterSlug": "linux-commands",
+    "title": "Comandi Linux, Utenti, Gruppi e Permessi",
+    "url": "/chapters/linux-commands",
+    "text": "rocessi base In Linux ogni file e ogni processo vive dentro un contesto di identità e regole. Sapere chi è il proprietario e quali permessi sono attivi è fondamentale.\\n\\nQui entra in gioco il trio owner, group e others. È la base per capire chmod, chown e anche comandi come ps o kill quando lavori con processi reali. PUNTI CHIAVE: - I permessi descrivono chi può leggere, scrivere o eseguire. - ps e kill aiutano a osservare e governare processi in corso. TAKEAWAY: - Ogni comando ha senso solo se collegato a un problema concreto. - Orientamento nel file system e lettura dei permessi vengono prima della velocità. - Utenti, gruppi, processi e file fanno parte dello stesso ecosistema operativo."
+  },
+  {
+    "id": "chapter-security-best-practices-0",
+    "sourceType": "chapter",
+    "chapterSlug": "security-best-practices",
+    "title": "Sicurezza Base, Buone Pratiche e Uso Reale",
+    "url": "/chapters/security-best-practices",
+    "text": "CAPITOLO: Sicurezza Base, Buone Pratiche e Uso Reale SLUG: security-best-practices DESCRIZIONE: Chiudere il percorso con il mindset corretto: prudenza, privilegi, errori comuni e comportamento professionale. SEZIONE: Sicurezza Base, Buone Pratiche e Uso Reale Lavorare sempre come root è comodo solo in apparenza. In realtà aumenta il rischio di fare danni con un singolo comando.\\n\\nIl flusso sano è: lavori come utente normale e usi sudo solo per l’operazione che richiede davvero privilegi elevati. PUNTI CHIAVE: - Più privilegio = più responsabilità. - sudo riduce l’esposizione rispetto a sessioni root permanenti. SEZIONE: Errori comuni da evitare I danni più frequenti non nascono da comandi “super avanzati”, ma da fretta, percorsi sbagliati e privilegi usati senza contesto.\\n\\nTre esempi classici: cancellare nella cartella sbagliata, modificare permessi in modo troppo permissivo, lanciare comandi con sudo senza averli capiti. PUNTI CHIAVE: - Controllare contesto e percorso è una forma di sicurezza. - Permessi troppo aperti non sono comodità: sono rischio. SEZIONE: Uso reale e abitudini sane Nel lavoro vero conviene sviluppare piccole discipline: leggere l’output, usare la cronologia"
+  },
+  {
+    "id": "chapter-security-best-practices-1",
+    "sourceType": "chapter",
+    "chapterSlug": "security-best-practices",
+    "title": "Sicurezza Base, Buone Pratiche e Uso Reale",
+    "url": "/chapters/security-best-practices",
+    "text": "n sono comodità: sono rischio. SEZIONE: Uso reale e abitudini sane Nel lavoro vero conviene sviluppare piccole discipline: leggere l’output, usare la cronologia shell, testare prima in cartelle innocue, documentare i comandi utili.\\n\\nLa professionalità su Linux non significa ricordare cento comandi, ma saperli usare con attenzione e ragionamento. PUNTI CHIAVE: - Capire l’output conta quanto scrivere il comando. - Le abitudini sane abbassano errori e stress operativo. TAKEAWAY: - La sicurezza base in Linux è fatta di privilegi minimi e attenzione al contesto. - Root e sudo vanno usati con intenzione, non per abitudine. - Il comportamento professionale nasce da metodo, verifica e cautela."
+  },
+  {
     "id": "glossary-0",
     "sourceType": "glossary",
     "chapterSlug": null,
