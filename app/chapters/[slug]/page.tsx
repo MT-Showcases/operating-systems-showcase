@@ -16,6 +16,7 @@ import GlossaryTerm from '@/components/GlossaryTerm';
 import QuizScoreDashboard from '@/components/QuizScoreDashboard';
 import ChapterNav from '@/components/ChapterNav';
 import { getTermsByIds } from '@/data/glossary';
+import { ChevronRight } from 'lucide-react';
 
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -204,6 +205,17 @@ export default async function ChapterPage({ params }: Props) {
               </section>
             ) : null}
 
+            {chapter.pilotContent?.whyItMatters?.length ? (
+              <section className="mb-8 border-2 border-accent-green/40 bg-bg-surface p-6">
+                <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-green">Perché conta</p>
+                <div className="mt-4 space-y-4 text-sm leading-8 text-text-secondary">
+                  {chapter.pilotContent.whyItMatters.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
             <div className="space-y-8 mb-12">
               {chapter.sections.map((section, idx) => (
                 <div key={section.id}>
@@ -221,6 +233,60 @@ export default async function ChapterPage({ params }: Props) {
             </div>
 
             <KeyTakeaway items={chapter.keyTakeaways} />
+
+            {chapter.pilotContent?.commonMistakes?.length ? (
+              <section className="mt-8 border-2 border-accent-amber/40 bg-bg-surface p-6">
+                <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-amber">Errori comuni</p>
+                <ul className="mt-4 space-y-3 text-sm leading-7 text-text-secondary">
+                  {chapter.pilotContent.commonMistakes.map((mistake) => (
+                    <li key={mistake} className="flex gap-3">
+                      <ChevronRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent-amber" />
+                      <span>{mistake}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
+
+            {chapter.pilotContent?.realWorld?.length ? (
+              <section className="mt-8 border-2 border-accent-cyan/40 bg-bg-surface p-6">
+                <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Nel mondo reale</p>
+                <ul className="mt-4 space-y-3 text-sm leading-7 text-text-secondary">
+                  {chapter.pilotContent.realWorld.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <ChevronRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent-cyan" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
+
+            {chapter.pilotContent?.deepDive?.length ? (
+              <section className="mt-8 border-2 border-accent-green/30 bg-bg-surface p-6">
+                <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-green">Approfondisci</p>
+                <div className="mt-4 grid gap-4 md:grid-cols-3">
+                  {chapter.pilotContent.deepDive.map((resource) => (
+                    <div key={`${resource.level}-${resource.title}`} className="border-2 border-border-subtle bg-black/20 p-4">
+                      <p className="terminal-heading text-[11px] uppercase tracking-[0.22em] text-accent-green">{resource.level}</p>
+                      <h3 className="mt-2 text-sm font-semibold text-text-primary">{resource.title}</h3>
+                      <p className="mt-2 text-sm leading-7 text-text-secondary">{resource.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
+            {chapter.pilotContent?.miniTask?.length ? (
+              <section className="mt-8 border-2 border-accent-cyan/40 bg-bg-surface p-6">
+                <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Mini task</p>
+                <div className="mt-4 space-y-4 text-sm leading-8 text-text-secondary">
+                  {chapter.pilotContent.miniTask.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </section>
+            ) : null}
 
             {chapter.discussionPrompts && chapter.discussionPrompts.length > 0 ? (
               <div className="mt-8">

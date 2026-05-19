@@ -55,6 +55,49 @@ export const chapters: Chapter[] = [
       'Quale differenza percepisci tra cambiare applicazione e cambiare sistema operativo?',
       'Perché uno smartphone ha comunque bisogno di un OS forte anche se l’utente vede solo icone e app?',
     ],
+    pilotContent: {
+      whyItMatters: [
+        'Ogni volta che apri un’app, salvi un file, ascolti un audio o passi da una finestra all’altra, c’è un sistema che coordina tutto dietro le quinte. Quel sistema è il sistema operativo.',
+        'Capire questo capitolo significa smettere di vedere il computer come una scatola che “fa cose” e iniziare a leggerlo come un ambiente organizzato: qualcuno decide come usare la CPU, dove tenere i dati, come parlare con i dispositivi e come far convivere programmi diversi senza caos.',
+        'Se vuoi arrivare davvero da zero a una comprensione solida di Linux e dei sistemi operativi, questo è il punto di partenza giusto: qui costruisci il modello mentale che ti servirà per tutti i capitoli successivi.',
+      ],
+      commonMistakes: [
+        'Sistema operativo ≠ computer: il computer è l’insieme di hardware e software; il sistema operativo è uno dei componenti chiave che lo rende utilizzabile.',
+        'Kernel ≠ intero sistema operativo: il kernel è il nucleo che controlla le risorse, ma non coincide con tutta l’esperienza che l’utente vede.',
+        'RAM ≠ spazio di archiviazione: la RAM serve al lavoro immediato dei programmi; disco o SSD servono a conservare i dati nel tempo.',
+        'Un’app non dialoga direttamente con ogni componente: passa attraverso il sistema operativo per ottenere accesso controllato alle risorse.',
+        'Usare un computer non significa ancora capire chi coordina processi, memoria, file e dispositivi dietro ciò che vedi sullo schermo.',
+      ],
+      realWorld: [
+        'Lanci un programma dal menu o dal terminale.',
+        'Apri, sposti o salvi un file in una cartella.',
+        'Colleghi una chiavetta USB o un dispositivo esterno.',
+        'Cambi finestra mentre un download continua in background.',
+        'Scrivi da tastiera o tocchi lo schermo e vedi il risultato immediato in un’app.',
+      ],
+      miniTask: [
+        'Osserva il dispositivo che stai usando in questo momento e individua almeno 4 attività che il sistema operativo sta gestendo per te.',
+        'Per esempio: un’app aperta, un file in uso, un input da tastiera o touch, una connessione di rete, memoria occupata da più programmi o un dispositivo collegato.',
+        'Poi prova a spiegare con parole tue perché senza sistema operativo queste attività diventerebbero molto più difficili da coordinare.',
+      ],
+      deepDive: [
+        {
+          level: 'essenziale',
+          title: 'Guida introduttiva — What is an Operating System?',
+          description: 'Una spiegazione semplice per consolidare la differenza tra hardware, sistema operativo e applicazioni.',
+        },
+        {
+          level: 'vai-oltre',
+          title: 'Panoramica strutturata su kernel, processi, memoria e file system',
+          description: 'Una risorsa più completa per vedere insieme i blocchi fondamentali che il sistema operativo coordina.',
+        },
+        {
+          level: 'deep-dive',
+          title: 'Lezione universitaria introduttiva sui sistemi operativi',
+          description: 'Per chi vuole costruire un modello mentale più completo e prepararsi bene ai capitoli successivi.',
+        },
+      ],
+    },
     quiz: [
       {
         id: 'ch1-q1',

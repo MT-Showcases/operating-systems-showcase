@@ -67,6 +67,21 @@ export interface MediaPlaceholder {
   notes?: string;
 }
 
+export interface ChapterDeepDiveResource {
+  level: 'essenziale' | 'vai-oltre' | 'deep-dive';
+  title: string;
+  description: string;
+  url?: string;
+}
+
+export interface ChapterPilotContent {
+  whyItMatters?: string[];
+  commonMistakes?: string[];
+  realWorld?: string[];
+  miniTask?: string[];
+  deepDive?: ChapterDeepDiveResource[];
+}
+
 export interface Chapter {
   id: number;
   slug: string;
@@ -80,4 +95,5 @@ export interface Chapter {
   quiz: QuizQuestion[];
   glossary: string[];
   media?: MediaPlaceholder[];
+  pilotContent?: ChapterPilotContent;
 }
