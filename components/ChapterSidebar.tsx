@@ -84,8 +84,8 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
                   : 'border-transparent bg-black/10 text-text-secondary hover:border-accent-cyan/40 hover:bg-bg-primary/60 hover:text-text-primary'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <span className={`inline-flex h-7 w-7 items-center justify-center border-2 text-[11px] ${
+              <div className="flex items-start gap-3">
+                <span className={`mt-0.5 flex-shrink-0 inline-flex h-7 w-7 items-center justify-center border-2 text-[11px] ${
                   active
                     ? 'border-accent-green/40 bg-accent-green text-bg-primary'
                     : 'border-accent-cyan/40 bg-bg-primary/70 text-text-secondary'
