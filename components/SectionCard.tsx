@@ -1,11 +1,10 @@
 'use client';
 
-import { getTermsByIds } from '@/data/glossary';
 import type { CommandReference, TerminalCommandBlock } from '@/data/types';
 import { Lock, Terminal, Settings, Folder, Cpu, ChevronRight, HardDrive, Network, BookOpen, Shield, Clock, Monitor, MessageSquare } from 'lucide-react';
-import GlossaryTerm from './GlossaryTerm';
 import TerminalCommand from './TerminalCommand';
 import CommandReferenceCard from './CommandReferenceCard';
+import { renderInline, renderParagraph } from './RichText';
 
 interface SectionCardProps {
   id: string;
@@ -17,85 +16,6 @@ interface SectionCardProps {
   commandReferences?: CommandReference[];
 }
 
-function escapeRegExp(value: string) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
-function wrapGlossaryTerms(text: string, glossaryIds: string[], keyPrefix: string) {
-  const terms = getTermsByIds(glossaryIds)
-    .flatMap((term) => [term.term, ...(term.aliases ?? [])].map((label) => ({ id: term.id, label })))
-    .sort((a, b) => b.label.length - a.label.length);
-
-  if (terms.length === 0) return [text];
-
-  const regex = new RegExp(`\\b(${terms.map((term) => escapeRegExp(term.label)).join('|')})\\b`, 'gi');
-  const parts = text.split(regex).filter(Boolean);
-
-  return parts.map((part, index) => {
-    const match = terms.find((term) => term.label.toLowerCase() === part.toLowerCase());
-    if (!match) {
-      return <span key={`${keyPrefix}-${part}-${index}`}>{part}</span>;
-    }
-
-    return (
-      <GlossaryTerm key={`${keyPrefix}-${match.id}-${index}`} termId={match.id}>
-        {part}
-      </GlossaryTerm>
-    );
-  });
-}
-
-function renderInline(text: string, glossaryIds: string[], keyPrefix: string) {
-  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean);
-
-  return parts.map((part, index) => {
-    if (part.startsWith('**') && part.endsWith('**')) {
-      const content = part.slice(2, -2);
-      return (
-        <strong key={`${keyPrefix}-strong-${index}`} className="font-semibold text-text-primary">
-          {wrapGlossaryTerms(content, glossaryIds, `${keyPrefix}-strong-${index}`)}
-        </strong>
-      );
-    }
-
-    if (part.startsWith('*') && part.endsWith('*')) {
-      const content = part.slice(1, -1);
-      return (
-        <em key={`${keyPrefix}-em-${index}`} className="italic text-text-primary/90">
-          {wrapGlossaryTerms(content, glossaryIds, `${keyPrefix}-em-${index}`)}
-        </em>
-      );
-    }
-
-    return wrapGlossaryTerms(part, glossaryIds, `${keyPrefix}-plain-${index}`);
-  });
-}
-
-function renderParagraph(paragraph: string, glossaryIds: string[], key: string) {
-  const trimmed = paragraph.trim();
-  if (!trimmed) return null;
-
-  const lines = trimmed.split('\n').map((line) => line.trim()).filter(Boolean);
-  const isList = lines.every((line) => line.startsWith('- '));
-
-  if (isList) {
-    return (
-      <ul key={key} className="space-y-2 pl-5 text-sm leading-7 text-text-secondary">
-        {lines.map((line) => (
-          <li key={line} className="list-disc">
-            {renderInline(line.replace(/^-\s*/, ''), glossaryIds, `${key}-li`)}
-          </li>
-        ))}
-      </ul>
-    );
-  }
-
-  return (
-    <p key={key} className="text-sm leading-8 text-text-secondary">
-      {renderInline(trimmed, glossaryIds, key)}
-    </p>
-  );
-}
 
 function getSectionIcon(title: string) {
   const lower = title.toLowerCase();

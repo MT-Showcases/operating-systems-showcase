@@ -17,6 +17,7 @@ import QuizScoreDashboard from '@/components/QuizScoreDashboard';
 import ChapterNav from '@/components/ChapterNav';
 import { getTermsByIds } from '@/data/glossary';
 import { ChevronRight } from 'lucide-react';
+import PilotBlock from '@/components/PilotBlock';
 
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -208,11 +209,7 @@ export default async function ChapterPage({ params }: Props) {
             {chapter.pilotContent?.whyItMatters?.length ? (
               <section className="mb-8 border-2 border-accent-green/40 bg-bg-surface p-6">
                 <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-green">Perché conta</p>
-                <div className="mt-4 space-y-4 text-sm leading-8 text-text-secondary">
-                  {chapter.pilotContent.whyItMatters.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
+                <PilotBlock items={chapter.pilotContent.whyItMatters} glossaryIds={chapter.glossary ?? []} blockKey="why" />
               </section>
             ) : null}
 
@@ -237,28 +234,14 @@ export default async function ChapterPage({ params }: Props) {
             {chapter.pilotContent?.commonMistakes?.length ? (
               <section className="mt-8 border-2 border-accent-amber/40 bg-bg-surface p-6">
                 <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-amber">Errori comuni</p>
-                <ul className="mt-4 space-y-3 text-sm leading-7 text-text-secondary">
-                  {chapter.pilotContent.commonMistakes.map((mistake) => (
-                    <li key={mistake} className="flex gap-3">
-                      <ChevronRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent-amber" />
-                      <span>{mistake}</span>
-                    </li>
-                  ))}
-                </ul>
+                <PilotBlock items={chapter.pilotContent.commonMistakes} glossaryIds={chapter.glossary ?? []} blockKey="mistakes" asList />
               </section>
             ) : null}
 
             {chapter.pilotContent?.realWorld?.length ? (
               <section className="mt-8 border-2 border-accent-cyan/40 bg-bg-surface p-6">
                 <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Nel mondo reale</p>
-                <ul className="mt-4 space-y-3 text-sm leading-7 text-text-secondary">
-                  {chapter.pilotContent.realWorld.map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <ChevronRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent-cyan" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <PilotBlock items={chapter.pilotContent.realWorld} glossaryIds={chapter.glossary ?? []} blockKey="realworld" asList />
               </section>
             ) : null}
 
@@ -290,11 +273,7 @@ export default async function ChapterPage({ params }: Props) {
             {chapter.pilotContent?.miniTask?.length ? (
               <section className="mt-8 border-2 border-accent-cyan/40 bg-bg-surface p-6">
                 <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Mini task</p>
-                <div className="mt-4 space-y-4 text-sm leading-8 text-text-secondary">
-                  {chapter.pilotContent.miniTask.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
+                <PilotBlock items={chapter.pilotContent.miniTask} glossaryIds={chapter.glossary ?? []} blockKey="minitask" />
               </section>
             ) : null}
 
