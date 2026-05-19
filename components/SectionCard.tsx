@@ -1,6 +1,8 @@
+'use client';
+
 import { getTermsByIds } from '@/data/glossary';
 import type { CommandReference, TerminalCommandBlock } from '@/data/types';
-import { Lock, Terminal, Settings, Folder, Cpu, ChevronRight, HardDrive, Network, BookOpen, Shield, Clock, Monitor } from 'lucide-react';
+import { Lock, Terminal, Settings, Folder, Cpu, ChevronRight, HardDrive, Network, BookOpen, Shield, Clock, Monitor, MessageSquare } from 'lucide-react';
 import GlossaryTerm from './GlossaryTerm';
 import TerminalCommand from './TerminalCommand';
 import CommandReferenceCard from './CommandReferenceCard';
@@ -144,6 +146,20 @@ export default function SectionCard({
           ))}
         </div>
       ) : null}
+
+      <div className="mt-6 flex justify-end">
+        <button
+          onClick={() => {
+            window.dispatchEvent(
+              new CustomEvent('nix:open', { detail: { prompt: `Spiegami questa sezione: ${title}` } })
+            );
+          }}
+          className="inline-flex items-center gap-2 border border-accent-cyan/40 bg-bg-surface px-3 py-1.5 text-xs text-accent-cyan transition hover:border-accent-cyan hover:bg-accent-cyan/10"
+        >
+          <MessageSquare className="h-3.5 w-3.5" />
+          Chiedi a Nix
+        </button>
+      </div>
     </section>
   );
 }

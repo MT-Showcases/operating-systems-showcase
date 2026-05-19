@@ -56,6 +56,16 @@ export default function TutorFloatingChat() {
     };
   }, [open]);
 
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<{ prompt?: string }>).detail;
+      setOpen(true);
+      if (detail?.prompt) setQuestion(detail.prompt);
+    };
+    window.addEventListener('nix:open', handler);
+    return () => window.removeEventListener('nix:open', handler);
+  }, []);
+
   const ask = async () => {
     const q = question.trim();
     if (!q || loading) return;
