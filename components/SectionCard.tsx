@@ -21,7 +21,7 @@ function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function renderInline(text: string, glossaryIds: string[]) {
+function wrapGlossaryTerms(text: string, glossaryIds: string[], keyPrefix: string) {
   const terms = getTermsByIds(glossaryIds)
     .flatMap((term) => [term.term, ...(term.aliases ?? [])].map((label) => ({ id: term.id, label })))
     .sort((a, b) => b.label.length - a.label.length);
@@ -34,14 +34,40 @@ function renderInline(text: string, glossaryIds: string[]) {
   return parts.map((part, index) => {
     const match = terms.find((term) => term.label.toLowerCase() === part.toLowerCase());
     if (!match) {
-      return <span key={`${part}-${index}`}>{part}</span>;
+      return <span key={`${keyPrefix}-${part}-${index}`}>{part}</span>;
     }
 
     return (
-      <GlossaryTerm key={`${match.id}-${index}`} termId={match.id}>
+      <GlossaryTerm key={`${keyPrefix}-${match.id}-${index}`} termId={match.id}>
         {part}
       </GlossaryTerm>
     );
+  });
+}
+
+function renderInline(text: string, glossaryIds: string[], keyPrefix: string) {
+  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean);
+
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      const content = part.slice(2, -2);
+      return (
+        <strong key={`${keyPrefix}-strong-${index}`} className="font-semibold text-text-primary">
+          {wrapGlossaryTerms(content, glossaryIds, `${keyPrefix}-strong-${index}`)}
+        </strong>
+      );
+    }
+
+    if (part.startsWith('*') && part.endsWith('*')) {
+      const content = part.slice(1, -1);
+      return (
+        <em key={`${keyPrefix}-em-${index}`} className="italic text-text-primary/90">
+          {wrapGlossaryTerms(content, glossaryIds, `${keyPrefix}-em-${index}`)}
+        </em>
+      );
+    }
+
+    return wrapGlossaryTerms(part, glossaryIds, `${keyPrefix}-plain-${index}`);
   });
 }
 
@@ -57,7 +83,7 @@ function renderParagraph(paragraph: string, glossaryIds: string[], key: string) 
       <ul key={key} className="space-y-2 pl-5 text-sm leading-7 text-text-secondary">
         {lines.map((line) => (
           <li key={line} className="list-disc">
-            {renderInline(line.replace(/^-\s*/, ''), glossaryIds)}
+            {renderInline(line.replace(/^-\s*/, ''), glossaryIds, `${key}-li`)}
           </li>
         ))}
       </ul>
@@ -66,7 +92,7 @@ function renderParagraph(paragraph: string, glossaryIds: string[], key: string) 
 
   return (
     <p key={key} className="text-sm leading-8 text-text-secondary">
-      {renderInline(trimmed, glossaryIds)}
+      {renderInline(trimmed, glossaryIds, key)}
     </p>
   );
 }
