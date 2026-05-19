@@ -393,6 +393,13 @@ export const chapters: Chapter[] = [
         placeholderPath: 'media/ch04-processes/infographic.webp',
         notes: 'ready',
       },
+      {
+        type: 'video',
+        title: 'Video Capitolo 4',
+        description: 'Spiegazione video: processi, thread e scheduling.',
+        placeholderPath: 'media/ch04-processes/video.mp4',
+        notes: 'ready',
+      },
     ],
   },
   {
