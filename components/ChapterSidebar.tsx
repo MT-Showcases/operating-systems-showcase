@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { X, Menu } from 'lucide-react';
+import { X, Menu, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { chapters } from '@/data/chapters';
 
 interface SidebarSection {
@@ -17,6 +17,7 @@ interface ChapterSidebarProps {
 
 export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDesktopVisible, setIsDesktopVisible] = useState(true);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const currentIndex = chapters.findIndex((chapter) => chapter.slug === currentSlug);
 
@@ -46,15 +47,26 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
             <h2 className="mt-2 text-sm font-semibold text-text-primary">Console di navigazione</h2>
             <p className="mt-1 text-xs text-text-secondary">Modulo Sistemi Operativi</p>
           </div>
-          <button
-            ref={closeButtonRef}
-            type="button"
-            onClick={() => setIsOpen(false)}
-            className="inline-flex h-11 w-11 items-center justify-center border-2 border-accent-cyan/40 bg-bg-primary/70 text-text-secondary md:hidden"
-            aria-label="Chiudi navigazione"
-          >
-            <X className="h-5 w-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setIsDesktopVisible((value) => !value)}
+              className="hidden lg:inline-flex h-11 w-11 items-center justify-center border-2 border-accent-cyan/40 bg-bg-primary/70 text-text-secondary hover:text-text-primary"
+              aria-label={isDesktopVisible ? 'Nascondi sidebar' : 'Mostra sidebar'}
+              title={isDesktopVisible ? 'Nascondi sidebar' : 'Mostra sidebar'}
+            >
+              {isDesktopVisible ? <PanelLeftClose className="h-5 w-5" /> : <PanelLeftOpen className="h-5 w-5" />}
+            </button>
+            <button
+              ref={closeButtonRef}
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="inline-flex h-11 w-11 items-center justify-center border-2 border-accent-cyan/40 bg-bg-primary/70 text-text-secondary md:hidden"
+              aria-label="Chiudi navigazione"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
         </div>
         <div className="mt-4 border-2 border-accent-cyan/40 bg-bg-surface p-3">
           <div className="flex items-center justify-between gap-3 text-xs text-text-secondary">
@@ -128,7 +140,21 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
         <Menu className="h-6 w-6" />
       </button>
 
-      <div className="hidden lg:block lg:w-80 lg:flex-shrink-0 lg:self-start lg:sticky lg:top-6">{sidebar}</div>
+      {isDesktopVisible ? (
+        <div className="hidden lg:block lg:w-80 lg:flex-shrink-0 lg:self-start lg:sticky lg:top-6">{sidebar}</div>
+      ) : (
+        <div className="hidden lg:block lg:w-14 lg:flex-shrink-0 lg:self-start lg:sticky lg:top-6">
+          <button
+            type="button"
+            onClick={() => setIsDesktopVisible(true)}
+            className="inline-flex h-12 w-12 items-center justify-center border-2 border-accent-cyan/40 bg-bg-surface text-accent-cyan hover:bg-bg-primary"
+            aria-label="Mostra sidebar"
+            title="Mostra sidebar"
+          >
+            <PanelLeftOpen className="h-5 w-5" />
+          </button>
+        </div>
+      )}
 
       {isOpen ? (
         <div className="fixed inset-0 z-50 bg-black/70 px-4 py-6 lg:hidden">
