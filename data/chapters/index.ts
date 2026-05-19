@@ -490,6 +490,15 @@ export const chapters: Chapter[] = [
       },
     ],
     glossary: ['ram', 'virtual-memory', 'file-system'],
+    media: [
+      {
+        type: 'infographic',
+        title: 'Infografica Capitolo 5',
+        description: 'Sintesi visiva: memoria, file system e organizzazione dei dati.',
+        placeholderPath: 'media/ch05-memory-filesystem/infographic.webp',
+        notes: 'ready',
+      },
+    ],
   },
   {
     id: 6,
