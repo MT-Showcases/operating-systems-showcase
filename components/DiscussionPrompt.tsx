@@ -11,7 +11,7 @@ export default function DiscussionPrompt({ prompts }: DiscussionPromptProps) {
         <span className="flex h-10 w-10 items-center justify-center border-2 border-accent-cyan/60 bg-bg-primary text-lg">⟫</span>
         <div>
           <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-cyan">Prompt operativo</p>
-          <h3 className="terminal-heading text-xl font-semibold text-accent-cyan">Discussione in aula</h3>
+          <h3 className="terminal-heading text-xl font-semibold text-accent-cyan">Fermati e ragiona</h3>
         </div>
       </div>
       <ul className="mt-4 space-y-3 text-sm leading-7 text-text-primary">
