@@ -76,9 +76,9 @@ export const chapters: Chapter[] = [
         'Scrivi da tastiera o tocchi lo schermo e il sistema trasforma **input** fisici in eventi che i programmi possono capire.',
       ],
       miniTask: [
-        'Osserva il dispositivo che stai usando in questo momento e individua almeno **4 attività** che il **sistema operativo** sta gestendo per te.',
-        'Per esempio: un’app aperta, un file in uso, un input da tastiera o touch, una connessione di rete, **memoria** occupata da più programmi o un dispositivo collegato.',
-        'Poi prova a spiegare con parole tue perché *senza sistema operativo* queste attività diventerebbero molto più difficili da coordinare.',
+        '**Passo 1 — Osserva**: guarda il dispositivo che stai usando adesso e identifica almeno **4 attività** in corso simultaneamente (es. app aperta, file in uso, rete attiva, dispositivo collegato).',
+        '**Passo 2 — Collega**: per ognuna delle 4 attività, scrivi quale funzione dell’OS la gestisce — **processo**, **memoria**, **file system** o **dispositivo I/O**.',
+        '**Passo 3 — Ragiona**: prova a spiegare in una frase perché *senza sistema operativo* quelle 4 attività non potrebbero coesistere.',
       ],
       deepDive: [
         {
