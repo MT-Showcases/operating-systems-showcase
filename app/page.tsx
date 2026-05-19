@@ -8,6 +8,7 @@ import SearchBar from '@/components/SearchBar';
 import QuizScoreDashboard from '@/components/QuizScoreDashboard';
 import Link from 'next/link';
 import { ChevronRight, Laptop, Monitor, TerminalSquare, Settings, Folder, Lock, User, Shield } from 'lucide-react';
+import Image from 'next/image';
 import GlossaryTooltip from '@/components/GlossaryTooltip';
 
 const totalHours = chapters.reduce((total, chapter) => total + Number.parseFloat(chapter.duration.replace('h', '')), 0);
@@ -72,7 +73,11 @@ export default function Home() {
           <SearchBar />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {chapters.map((chapter) => (
+            {chapters.map((chapter) => {
+              const chapterInfographic = chapter.media?.find(
+                (m) => m.type === 'infographic' && m.notes?.toLowerCase().includes('ready')
+              );
+              return (
               <Card key={chapter.id} className="h-full flex flex-col">
                 <div className="space-y-3 flex-1 pb-6">
                   <div className="flex items-center justify-between gap-3">
@@ -84,6 +89,16 @@ export default function Home() {
                     </span>
                   </div>
 
+                  {chapterInfographic ? (
+                    <Image
+                      src={`/${chapterInfographic.placeholderPath}`}
+                      alt={`Anteprima infografica ${chapter.title}`}
+                      width={800}
+                      height={450}
+                      className="w-full max-h-48 object-contain bg-black/20 border border-accent-cyan/20"
+                      loading="lazy"
+                    />
+                  ) : (
                   <div className="text-3xl">
                     {chapter.id === 1 && <Laptop className="h-8 w-8" />}
                     {chapter.id === 2 && <Monitor className="h-8 w-8" />}
@@ -94,6 +109,7 @@ export default function Home() {
                     {chapter.id === 7 && <User className="h-8 w-8" />}
                     {chapter.id === 8 && <Shield className="h-8 w-8" />}
                   </div>
+                  )}
 
                   <h3 className="text-base font-bold text-text-primary leading-snug">
                     {chapter.title}
@@ -108,7 +124,8 @@ export default function Home() {
                   Leggi Capitolo <ChevronRight className="h-4 w-4" />
                 </Button>
               </Card>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
