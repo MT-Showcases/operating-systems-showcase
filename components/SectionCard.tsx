@@ -108,9 +108,7 @@ export default function SectionCard({
             <h2 className="terminal-heading text-2xl font-semibold text-text-primary">{title}</h2>
           </div>
         </div>
-        <span className="hidden border-2 border-accent-green/60 bg-bg-surface px-3 py-1 text-xs uppercase tracking-[0.2em] text-accent-green md:inline-flex">
-          focus
-        </span>
+
       </div>
 
       <div className="mt-5 space-y-4">
