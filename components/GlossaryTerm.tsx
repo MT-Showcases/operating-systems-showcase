@@ -16,7 +16,7 @@ export default function GlossaryTerm({ termId, children }: GlossaryTermProps) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline rounded-sm border-b border-dotted border-accent-cyan/70 text-accent-cyan transition hover:text-accent-green hover:border-accent-green"
+        className="inline border-b border-dotted border-accent-cyan/70 text-accent-cyan transition hover:text-accent-green hover:border-accent-green"
       >
         {children}
       </button>
