@@ -288,6 +288,13 @@ export const chapters: Chapter[] = [
         placeholderPath: 'media/ch03-kernel/infographic.webp',
         notes: 'ready',
       },
+      {
+        type: 'video',
+        title: 'Video Capitolo 3',
+        description: 'Spiegazione video: kernel, user space e system call.',
+        placeholderPath: 'media/ch03-kernel/video.mp4',
+        notes: 'ready',
+      },
     ],
   },
   {
