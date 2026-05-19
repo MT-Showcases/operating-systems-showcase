@@ -271,6 +271,16 @@ export default async function ChapterPage({ params }: Props) {
                       <p className="terminal-heading text-[11px] uppercase tracking-[0.22em] text-accent-green">{resource.level}</p>
                       <h3 className="mt-2 text-sm font-semibold text-text-primary">{resource.title}</h3>
                       <p className="mt-2 text-sm leading-7 text-text-secondary">{resource.description}</p>
+                      {resource.url ? (
+                        <a
+                          href={resource.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-3 inline-flex items-center gap-2 border border-accent-cyan/40 px-3 py-1.5 text-xs text-accent-cyan transition hover:bg-accent-cyan/10"
+                        >
+                          Apri risorsa <ChevronRight className="h-3.5 w-3.5" />
+                        </a>
+                      ) : null}
                     </div>
                   ))}
                 </div>
