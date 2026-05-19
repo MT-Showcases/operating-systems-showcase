@@ -146,16 +146,16 @@ export default async function ChapterPage({ params }: Props) {
           />
 
           <main className="flex-1 min-w-0">
-            <div className="bg-bg-surface/80 rounded-none px-5 py-4 mb-6 border border-border-subtle">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-semibold text-accent-cyan">
+            <div className="border-2 border-accent-cyan/40 bg-bg-surface px-5 py-4 mb-6">
+              <div className="flex items-center justify-between mb-3">
+                <span className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">
                   Capitolo {chapterNum} di {totalChapters}
                 </span>
-                <span className="text-xs text-text-secondary font-mono">{Math.round(progressPercent)}%</span>
+                <span className="terminal-heading text-xs text-text-secondary">{Math.round(progressPercent)}%</span>
               </div>
-              <div className="h-2 bg-black/30 rounded-none overflow-hidden">
+              <div className="h-1.5 bg-black/30 overflow-hidden">
                 <div
-                  className="h-2 rounded-none bg-[linear-gradient(90deg,rgba(57,211,83,1),rgba(88,166,255,1))] transition-all duration-700"
+                  className="h-1.5 bg-accent-green transition-all duration-700"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
