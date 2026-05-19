@@ -385,6 +385,15 @@ export const chapters: Chapter[] = [
       },
     ],
     glossary: ['process', 'thread', 'scheduler', 'cpu'],
+    media: [
+      {
+        type: 'infographic',
+        title: 'Infografica Capitolo 4',
+        description: 'Sintesi visiva: processi, thread e scheduling.',
+        placeholderPath: 'media/ch04-processes/infographic.webp',
+        notes: 'ready',
+      },
+    ],
   },
   {
     id: 5,
