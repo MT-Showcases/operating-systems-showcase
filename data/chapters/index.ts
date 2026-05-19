@@ -17,39 +17,39 @@ export const chapters: Chapter[] = [
         id: 'bridge',
         title: 'Il ponte tra macchina e persone',
         content:
-          'Un **sistema operativo** è il software di base che rende un computer realmente utilizzabile. Coordina **CPU**, **memoria**, **file system** e dispositivi, poi offre ai programmi un ambiente stabile in cui lavorare.\n\nSenza questo livello intermedio, ogni applicazione dovrebbe conoscere in dettaglio l’hardware, parlare con periferiche diverse e gestire da sola conflitti, attese e priorità. È proprio qui che l’OS diventa indispensabile: trasforma componenti potenti ma scollegati in un sistema coerente e affidabile.\n\nSe pensi all’hardware come a una squadra di specialisti, il sistema operativo è *il regista che assegna ruoli, tempi e regole*: decide chi lavora, chi aspetta, chi può usare una risorsa e in che ordine.',
+          'Un **sistema operativo** è il software che rende un computer realmente utilizzabile. Coordina **CPU**, **memoria**, **file system** e dispositivi, offrendo ai programmi un ambiente stabile in cui lavorare.\n\nSenza questo livello intermedio ogni applicazione dovrebbe gestire da sola hardware, periferiche e conflitti. *Il sistema operativo trasforma componenti scollegati in un sistema coerente*: decide chi lavora, chi aspetta e chi può usare una risorsa.',
         keyPoints: [
-          'Senza sistema operativo, usare l’hardware richiederebbe istruzioni molto più complesse.',
-          'L’OS media tra utente, applicazioni e componenti fisici.',
-          'La sua presenza è continua anche quando non lo noti.',
+          '**Senza OS**, usare l’hardware richiederebbe istruzioni molto più complesse.',
+          'L’OS **media** tra utente, applicazioni e componenti fisici.',
+          'La sua presenza è **continua** anche quando non lo noti.',
         ],
       },
       {
         id: 'core-functions',
         title: 'Le funzioni che non possono mancare',
         content:
-          'Ogni sistema operativo serio deve almeno fare quattro cose bene: gestire **processi**, **memoria**, **file** e dispositivi di **input/output**. Sono le quattro aree che tengono insieme quasi tutto ciò che fai su un computer.\n\nIn pratica l’OS decide quale programma può usare la CPU, quanta **RAM** può occupare, dove salvare i dati e come dialogare con tastiera, schermo, disco, rete o stampante. Quando apri due app insieme, salvi un file e ascolti audio in background, stai già vedendo queste quattro responsabilità lavorare in parallelo.\n\nQuesto è anche il motivo per cui i capitoli successivi entrano più nel dettaglio: *processi, memoria, file system e dispositivi non sono temi separati*, ma i pilastri dello stesso sistema di coordinamento.',
+          'Ogni OS deve fare quattro cose bene: gestire **processi**, **memoria**, **file** e **dispositivi I/O**. Queste quattro aree tengono insieme quasi tutto ciò che fai su un computer.\n\nL’OS decide quale programma usa la **CPU**, quanta **RAM** occupa, dove salvare i dati e come dialogare con tastiera, disco e rete. *Processi, memoria, file system e dispositivi non sono temi separati*: sono i pilastri dello stesso sistema.',
         keyPoints: [
-          'Gestione processi = ordine nell’esecuzione dei programmi.',
-          'Gestione memoria = isolamento e uso efficiente della RAM.',
-          'Gestione file = organizzazione persistente dei dati.',
+          '**Gestione processi** = ordine nell’esecuzione dei programmi.',
+          '**Gestione memoria** = isolamento e uso efficiente della RAM.',
+          '**Gestione file** = organizzazione persistente dei dati.',
         ],
       },
       {
         id: 'examples',
         title: 'Dove lo incontri tutti i giorni',
         content:
-          'Windows, macOS, Android, iOS e **Linux** sono tutti sistemi operativi, anche se hanno interfacce, vincoli e obiettivi diversi. Alcuni sono pensati per desktop generici, altri per smartphone, altri ancora per server o dispositivi embedded.\n\nIl concetto chiave è che cambia la forma esterna, ma il compito resta lo stesso: far collaborare software e hardware in modo **affidabile**, **sicuro** e **prevedibile**.\n\nLinux è particolarmente utile per studiare questi meccanismi perché espone bene ciò che succede sotto la superficie: **processi**, **permessi**, **file system**, **terminale** e strumenti di osservazione rendono più visibile il lavoro del sistema operativo.',
+          'Windows, macOS, Android, iOS e **Linux** sono tutti sistemi operativi con interfacce diverse, ma lo stesso compito: far collaborare software e hardware in modo **affidabile** e **sicuro**.\n\n**Linux** è particolarmente utile per studiare questi meccanismi perché espone ciò che succede sotto la superficie: **processi**, **permessi**, **file system** e **terminale** rendono visibile il lavoro del sistema operativo.',
         keyPoints: [
-          'Desktop, server e smartphone usano OS diversi ma con principi simili.',
-          'Linux è molto importante perché espone bene i meccanismi di sistema.',
+          'Desktop, server e smartphone usano **OS diversi** ma con principi simili.',
+          '**Linux** espone bene i meccanismi di sistema: ideale per imparare.',
         ],
       },
     ],
     keyTakeaways: [
-      'Il sistema operativo non è un optional: è il livello che rende il computer utilizzabile.',
-      'Le sue responsabilità principali sono risorse, isolamento e servizi ai programmi.',
-      'Capire l’OS significa capire cosa succede dietro ogni app che apri.',
+      'Il **sistema operativo** non è un optional: è il livello che rende il computer utilizzabile.',
+      'Le responsabilità principali sono **risorse**, **isolamento** e **servizi ai programmi**.',
+      'Capire l’OS significa capire cosa succede **dietro ogni app** che apri.',
     ],
     discussionPrompts: [
       'Quale differenza percepisci tra cambiare applicazione e cambiare sistema operativo?',

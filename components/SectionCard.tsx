@@ -67,10 +67,10 @@ export default function SectionCard({
         <div className="mt-6 border-2 border-accent-green/60 bg-bg-surface p-4">
           <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-green">Da tenere a mente</p>
           <ul className="mt-3 space-y-2 text-sm leading-7 text-text-primary">
-            {keyPoints.map((point) => (
-              <li key={point} className="flex gap-3">
+            {keyPoints.map((point, i) => (
+              <li key={`kp-${i}`} className="flex gap-3">
                 <ChevronRight size={18} className="mt-0.5 flex-shrink-0 text-accent-green" />
-                <span>{point}</span>
+                <span>{renderInline(point, glossaryIds, `kp-${i}`)}</span>
               </li>
             ))}
           </ul>
