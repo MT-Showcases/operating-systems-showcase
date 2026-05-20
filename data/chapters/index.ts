@@ -558,7 +558,7 @@ export const chapters: Chapter[] = [
       realWorld: [
         'Apri Visual Studio Code e Slack nello stesso momento: ogni app è un processo, lo scheduler alterna tempo CPU e mantiene entrambe reattive.',
         'Un download in background rallenta la compilazione di codice: sono stati di attesa e processamento che competono per I/O e CPU.',
-        'Un thread in un\'app Web server gestisce una richiesta mentre altri thread aspettano connessioni: è il model che rende scalabile il servizio.',
+        `Un thread in un'app Web server gestisce una richiesta mentre altri thread aspettano connessioni: è il model che rende scalabile il servizio.`,
       ],
       miniTask: [
         '**Passo 1 — Osserva**: apri un task manager (o top in Linux) e identifica almeno 3 processi in esecuzione e 3 in attesa.',
@@ -852,6 +852,50 @@ export const chapters: Chapter[] = [
       'Perché Linux è così presente su server e cloud?',
       'Quale vantaggio ti dà capire davvero /home, /etc e /var invece di ricordarli a memoria?',
     ],
+    pilotContent: {
+      whyItMatters: [
+        'Linux è dove la teoria OS diventa pratica reale: ogni comando che digiti nel terminale è un\'interazione diretta con il kernel, il file system, i permessi — i concetti che hai imparato finora.',
+        'Capire Linux non significa diventare sysadmin, significa imparare a leggere e interagire con un sistema operativo reale, cosa che sarà cruciale in qualsiasi carriera tecnica.',
+        'Il terminale e la shell sono gli strumenti in cui i concetti OS diventano tangibili: processi visibili con ps, file con permessi in ls, memoria con top.',
+      ],
+      commonMistakes: [
+        '**Terminale e shell sono la stessa cosa**: no — il terminale è il contenitore di interazione, la shell è il programma che interpreta; puoi avere lo stesso terminale con shell diverse.',
+        '**Memorizzare tutte le directory /**: non serve — l\'obiettivo è capire che ogni cartella ha uno scopo (/home per utenti, /etc per config, /var per dati variabili).',
+        '**Linux è difficile**: il terminale sembra intimidante, ma è solo un interfaccia diversa — meno clic, più logica.',
+        '**Un comando "sbagliato" farà crashare il sistema**: raramente — la maggior parte dei comandi che vedi non rischiano danni; rm / senza permessi non funziona da utente normale.',
+        '**Bash è l\'unica shell**: no — su macOS oggi è di default zsh, esiste fish, ksh, tcsh — tutte interpretano comandi simili.',
+      ],
+      realWorld: [
+        'Quando dai comandi nel terminale, stai parlando con una shell che comunica con il kernel: echo $SHELL non è una query astratta, è una lettura della variabile d\'ambiente impostata al login.',
+        'Quando usi ls /, vedi davvero la struttura del file system Linux — non in un diagramma, ma direttamente: ogni cartella ha un ruolo pratico in un sistema vero.',
+        'I comandi che impari (pwd, cd, ls, cat) sono gli stessi che usi in produzione su server: non sono "esercizi scolastici", sono strumenti reali che milioni di sysadmin usano ogni giorno.',
+      ],
+      miniTask: [
+        '**Passo 1 — Esplora**: apri un terminale (o usa KillerCoda) e digita `echo $SHELL` per vedere quale shell stai usando.',
+        '**Passo 2 — Naviga**: digita `ls /` e riconosci le 3-5 directory principali che hai letto (home, etc, var, usr, bin).',
+        '**Passo 3 — Mappa**: per ognuna, scrivi una frase su quale sia il suo ruolo (dove vivono i file? le config? i dati temporanei?).',
+        '**Bonus**: digita `pwd` e `whoami` — sono comandi che confermano dove sei e chi sei nel sistema. È la base di ogni interazione.',
+      ],
+      deepDive: [
+        {
+          level: 'essenziale',
+          title: 'Bash Manual — Basic Shell Features',
+          description: 'Riferimento pratico su come la shell legge e esegue comandi.',
+          url: 'https://www.gnu.org/software/bash/manual/html_node/Basic-Shell-Features.html',
+        },
+        {
+          level: 'vai-oltre',
+          title: 'The Linux Directory Structure — FHS (Filesystem Hierarchy Standard)',
+          description: 'Standard ufficiale che spiega perché le directory hanno nomi e ruoli specifici.',
+          url: 'https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.html',
+        },
+        {
+          level: 'deep-dive',
+          title: 'Command Line Interface Design in Practice (Carnegie Mellon)',
+          description: 'Articolo su come e perché il terminale è rimasto il modo più efficace di interagire con i sistemi.',
+        },
+      ],
+    },
     quiz: [
       {
         id: 'ch6-q1',
@@ -988,6 +1032,49 @@ export const chapters: Chapter[] = [
       'Perché Linux domina il server nonostante sia così poco usato sul desktop consumer?',
       'Cosa cambieresti nella scelta di OS se lavorassi come amministratore di sistema?',
     ],
+    pilotContent: {
+      whyItMatters: [
+        'Confrontare sistemi operativi ti evita scelte guidate da abitudine o marketing: impari a valutare in base a contesto, requisiti e trade-off reali.',
+        'Capire perché Linux domina server e cloud, pur essendo minoritario sul desktop, è uno dei passaggi chiave per leggere il mercato IT in modo professionale.',
+        'Sapere differenziare le distribuzioni Linux rende pratiche le scelte tecniche: ambiente di studio, sviluppo locale, infrastruttura e produzione non richiedono sempre la stessa distro.',
+      ],
+      commonMistakes: [
+        '**Esiste un OS migliore in assoluto**: no, esiste l\'OS più adatto a un dominio specifico (desktop, server, mobile, embedded).',
+        '**Linux è poco usato quindi è meno importante**: falso — nel server/cloud è dominante e in supercomputing è standard de facto.',
+        '**Le distribuzioni cambiano solo grafica**: no — package manager, release model e supporto LTS cambiano davvero il lavoro operativo.',
+        '**Android non c\'entra con Linux**: in realtà Android usa kernel Linux con stack applicativo diverso.',
+        '**Windows/macOS/Linux si confrontano solo per preferenze personali**: il confronto corretto include costi, ecosistema tool, manutenzione e deploy.',
+      ],
+      realWorld: [
+        'Un team backend sceglie Ubuntu LTS in cloud per stabilità, documentazione e supporto comunitario: non perché Linux sia "di moda", ma perché riduce rischio operativo.',
+        'Uno sviluppatore usa macOS sul laptop ma deploya su Linux server: conoscere differenze shell/package evita bug da ambiente.',
+        'Un progetto IoT usa Linux embedded su dispositivi e Linux su server di raccolta dati: stessa base kernel, esigenze operative diverse.',
+      ],
+      miniTask: [
+        '**Passo 1 — Definisci scenario**: scegli 3 contesti (desktop personale, server web, laboratorio didattico).',
+        '**Passo 2 — Scegli OS**: per ogni contesto proponi un sistema (o distro) e giustifica in 2 criteri concreti (stabilità, costo, ecosistema, tooling).',
+        '**Passo 3 — Verifica trade-off**: aggiungi un limite per ogni scelta (compatibilità software, curva di apprendimento, lock-in).',
+      ],
+      deepDive: [
+        {
+          level: 'essenziale',
+          title: 'Top500 Supercomputers Statistics',
+          description: 'Panoramica aggiornata sull\'uso di Linux nel supercomputing.',
+          url: 'https://www.top500.org/statistics/',
+        },
+        {
+          level: 'vai-oltre',
+          title: 'Linux Foundation - Open Source in Cloud Infrastructure',
+          description: 'Contesto su perché Linux e open source dominano stack cloud e infrastruttura moderna.',
+        },
+        {
+          level: 'deep-dive',
+          title: 'DistroWatch: Distribution Release and Lifecycle Patterns',
+          description: 'Confronto pratico tra release model (LTS, rolling, enterprise) e impatto operativo.',
+          url: 'https://distrowatch.com/',
+        },
+      ],
+    },
     quiz: [
       {
         id: 'ch7-q1',

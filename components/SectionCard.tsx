@@ -55,8 +55,8 @@ export default function SectionCard({
   const paragraphs = content.split(/\n\n+/g);
   // Collapsible state
   const [showLab, setShowLab] = useState(!isCompactChapter);
-  const [showReferences, setShowReferences] = useState(!isCompactChapter);
-  const [showTerminals, setShowTerminals] = useState(!isCompactChapter);
+  const [showReferences, setShowReferences] = useState(true);
+  const [showTerminals, setShowTerminals] = useState(true);
 
   return (
     <section id={id} className={`scroll-mt-24 overflow-hidden border-2 border-accent-cyan bg-bg-primary ${isCompactChapter ? 'p-5' : 'p-6'}`}>
@@ -104,12 +104,12 @@ export default function SectionCard({
         <div className="mt-6">
           <button
             type="button"
-            className="w-full flex items-center justify-between text-left text-accent-cyan font-semibold text-xs uppercase tracking-[0.22em] border-b border-accent-cyan/30 pb-2 mb-2"
+            className="w-full flex items-center justify-between text-left text-accent-cyan font-semibold text-[11px] uppercase tracking-[0.16em] border-b border-accent-cyan/30 pb-2 mb-2"
             onClick={() => setShowLab((v) => !v)}
             aria-expanded={showLab}
           >
             {labBlock.title || 'Laboratorio'}
-            <span className="ml-2">{showLab ? '▲' : '▼'}</span>
+            <span className="ml-2 text-text-secondary">{showLab ? '▲' : '▼'}</span>
           </button>
           {showLab ? <LabBlockComponent {...labBlock} glossaryIds={glossaryIds} /> : null}
         </div>
@@ -119,12 +119,15 @@ export default function SectionCard({
         <div className="mt-6">
           <button
             type="button"
-            className="w-full flex items-center justify-between text-left text-accent-cyan font-semibold text-xs uppercase tracking-[0.22em] border-b border-accent-cyan/30 pb-2 mb-2"
+            className="w-full flex items-center justify-between text-left text-accent-cyan font-semibold text-[11px] uppercase tracking-[0.16em] border-b border-accent-cyan/30 pb-2 mb-2"
             onClick={() => setShowTerminals((v) => !v)}
             aria-expanded={showTerminals}
           >
-            Comandi terminale
-            <span className="ml-2">{showTerminals ? '▲' : '▼'}</span>
+            <span className="inline-flex items-center gap-2">
+              <Terminal size={14} className="text-accent-cyan" />
+              Comandi terminale
+            </span>
+            <span className="ml-2 text-text-secondary">{showTerminals ? '▲' : '▼'}</span>
           </button>
           {showTerminals ? (
             <div className="space-y-4">
@@ -140,12 +143,15 @@ export default function SectionCard({
         <div className="mt-6">
           <button
             type="button"
-            className="w-full flex items-center justify-between text-left text-accent-cyan font-semibold text-xs uppercase tracking-[0.22em] border-b border-accent-cyan/30 pb-2 mb-2"
+            className="w-full flex items-center justify-between text-left text-text-secondary font-semibold text-[11px] uppercase tracking-[0.16em] border-b border-text-secondary/30 pb-2 mb-2"
             onClick={() => setShowReferences((v) => !v)}
             aria-expanded={showReferences}
           >
-            Riferimenti rapidi
-            <span className="ml-2">{showReferences ? '▲' : '▼'}</span>
+            <span className="inline-flex items-center gap-2">
+              <BookOpen size={14} className="text-text-secondary" />
+              Riferimenti rapidi
+            </span>
+            <span className="ml-2 text-text-secondary">{showReferences ? '▲' : '▼'}</span>
           </button>
           {showReferences ? (
             <div className="grid gap-4 lg:grid-cols-2">

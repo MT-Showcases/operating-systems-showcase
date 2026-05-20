@@ -38,6 +38,7 @@ For dense chapters, allow progressive disclosure (accordion/details) on secondar
 ## Chapter UI density policy
 - Always visible by default: section title, section body, key points, key takeaways.
 - Collapsible on dense chapters: real-world examples, deep-dive resources, mini-task, command-heavy support blocks.
+- Comparative chapters with dense tables (for example OS comparison chapters) may keep `commonMistakes` and `realWorld` expanded in compact mode when this improves scanability.
 - If an interactive pilot already includes an equivalent guided task, hide duplicated mini-task content for that chapter.
 
 ## Language policy

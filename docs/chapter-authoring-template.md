@@ -34,6 +34,7 @@ Use this order as the default flow:
   - deep-dive resources
   - `miniTask`
   - command-heavy support blocks
+- Comparative chapters with dense tables can keep `commonMistakes` and `real-world mapping` expanded in compact mode when readability benefits.
 - If `interactivePilot` already includes an equivalent guided task, hide duplicated `miniTask` content.
 
 ## Language rules

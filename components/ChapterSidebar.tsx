@@ -39,7 +39,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
   }, [isOpen]);
 
   const sidebar = (
-    <aside className="h-full overflow-y-auto  border-2 border-accent-cyan/40  p-5">
+    <aside className="h-full overflow-y-auto border-2 border-accent-cyan/40 bg-bg-primary p-5 shadow-2xl">
       <div className="border-b border-accent-cyan/40 pb-4">
         <div className="flex items-center justify-between gap-3">
           <div>
@@ -51,7 +51,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
             <button
               type="button"
               onClick={() => setIsDesktopVisible((value) => !value)}
-              className="hidden lg:inline-flex h-11 w-11 items-center justify-center border-2 border-accent-cyan/40 bg-bg-primary/70 text-text-secondary hover:text-text-primary"
+              className="hidden lg:inline-flex h-11 w-11 items-center justify-center border-2 border-accent-cyan/40 bg-bg-primary text-text-secondary hover:text-text-primary"
               aria-label={isDesktopVisible ? 'Nascondi sidebar' : 'Mostra sidebar'}
               title={isDesktopVisible ? 'Nascondi sidebar' : 'Mostra sidebar'}
             >
@@ -61,7 +61,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
               ref={closeButtonRef}
               type="button"
               onClick={() => setIsOpen(false)}
-              className="inline-flex h-11 w-11 items-center justify-center border-2 border-accent-cyan/40 bg-bg-primary/70 text-text-secondary md:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center border-2 border-accent-cyan/40 bg-bg-primary text-text-secondary md:hidden"
               aria-label="Chiudi navigazione"
             >
               <X className="h-5 w-5" />
@@ -75,7 +75,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
           </div>
           <div className="mt-3 h-2 bg-bg-surface">
             <div
-              className="h-2  transition-all"
+              className="h-2 bg-accent-green/70 transition-all"
               style={{ width: `${((currentIndex + 1) / chapters.length) * 100}%` }}
             />
           </div>
@@ -93,14 +93,14 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
               className={`block border-2 px-4 py-3 text-sm transition ${
                 active
                   ? 'border-accent-green/30 bg-bg-surface text-accent-green'
-                  : 'border-transparent bg-black/10 text-text-secondary hover:border-accent-cyan/40 hover:bg-bg-primary/60 hover:text-text-primary'
+                  : 'border-transparent bg-bg-surface text-text-secondary hover:border-accent-cyan/40 hover:bg-bg-primary hover:text-text-primary'
               }`}
             >
               <div className="flex items-start gap-3">
                 <span className={`mt-0.5 flex-shrink-0 inline-flex h-7 w-7 items-center justify-center border-2 text-[11px] ${
                   active
                     ? 'border-accent-green/40 bg-accent-green text-bg-primary'
-                    : 'border-accent-cyan/40 bg-bg-primary/70 text-text-secondary'
+                    : 'border-accent-cyan/40 bg-bg-primary text-text-secondary'
                 }`}>
                   {String(index + 1).padStart(2, '0')}
                 </span>
@@ -119,7 +119,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
               key={section.id}
               href={`#${section.id}`}
               onClick={() => setIsOpen(false)}
-              className="block border-2 border-transparent bg-black/10 px-4 py-3 text-sm text-text-secondary transition hover:border-accent-cyan/40 hover:bg-bg-primary/60 hover:text-text-primary"
+              className="block border-2 border-transparent bg-bg-surface px-4 py-3 text-sm text-text-secondary transition hover:border-accent-cyan/40 hover:bg-bg-primary hover:text-text-primary"
             >
               {section.title}
             </a>
@@ -157,7 +157,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
       )}
 
       {isOpen ? (
-        <div className="fixed inset-0 z-50 bg-black/70 px-4 py-6 lg:hidden">
+        <div className="fixed inset-0 z-50 bg-black/80 px-4 py-6 lg:hidden">
           <div className="mx-auto h-full max-w-sm">{sidebar}</div>
         </div>
       ) : null}

@@ -131,7 +131,10 @@ export default async function ChapterPage({ params }: Props) {
   const isChapter3 = chapter.slug === 'kernel';
   const isChapter4 = chapter.slug === 'processes';
   const isChapter5 = chapter.slug === 'memory-filesystem';
-  const isCompactChapter = isChapter1 || isChapter2 || isChapter3 || isChapter4 || isChapter5;
+  const isChapter6 = chapter.slug === 'linux-fundamentals';
+  const isChapter7 = chapter.slug === 'os-comparison';
+  const isCompactChapter = isChapter1 || isChapter2 || isChapter3 || isChapter4 || isChapter5 || isChapter6 || isChapter7;
+  const keepComparisonInsightsExpanded = isChapter7;
   const shouldShowMiniTask = Boolean(chapter.pilotContent?.miniTask?.length) && !(isChapter1 && chapter.interactivePilot);
   const glossaryTerms = getTermsByIds(chapter.glossary ?? []);
 
@@ -243,7 +246,7 @@ export default async function ChapterPage({ params }: Props) {
 
             {chapter.pilotContent?.commonMistakes?.length ? (
               <section className="mt-8 border-2 border-accent-amber/40 bg-bg-surface p-6">
-                {isCompactChapter ? (
+                {isCompactChapter && !keepComparisonInsightsExpanded ? (
                   <details>
                     <summary className="flex cursor-pointer list-none items-center justify-between terminal-heading text-[11px] uppercase tracking-[0.2em] text-accent-amber">
                       Errori comuni
@@ -264,7 +267,7 @@ export default async function ChapterPage({ params }: Props) {
 
             {chapter.pilotContent?.realWorld?.length ? (
               <section className="mt-8 border-2 border-accent-cyan/40 bg-bg-surface p-6">
-                {isCompactChapter ? (
+                {isCompactChapter && !keepComparisonInsightsExpanded ? (
                   <details>
                     <summary className="flex cursor-pointer list-none items-center justify-between terminal-heading text-[11px] uppercase tracking-[0.2em] text-accent-cyan">
                       Nel mondo reale
