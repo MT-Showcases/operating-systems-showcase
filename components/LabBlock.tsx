@@ -4,11 +4,13 @@ import type { LabBlock as LabBlockType } from '@/data/types';
 import TerminalCommand from './TerminalCommand';
 import NixButton from './NixButton';
 
+
+
 function buildStepPrompt(goal: string, command: string, explanation: string): string {
   return `Passo: "${goal}"\nComando: ${command}\n\n${explanation}\n\nPerché si fa così? Quali errori comuni si fanno in questo passaggio e come si verificano i risultati?`;
 }
 
-export default function LabBlock({ title, intro, steps }: LabBlockType) {
+export default function LabBlock({ title, intro, steps, glossaryIds = [] }: LabBlockType & { glossaryIds?: string[] }) {
   return (
     <div className="border-2 border-accent-cyan/20 bg-bg-surface/20 overflow-hidden">
       <div className="flex items-center gap-3 border-b border-accent-cyan/20 bg-bg-surface px-4 py-3">
@@ -49,7 +51,7 @@ export default function LabBlock({ title, intro, steps }: LabBlockType) {
                   prompt={buildStepPrompt(step.goal, step.command.command, step.command.explanation)}
                 />
               </div>
-              <TerminalCommand {...step.command} showNix={false} />
+              <TerminalCommand {...step.command} showNix={false} glossaryIds={glossaryIds} />
             </div>
           </div>
         ))}

@@ -2,12 +2,13 @@
 
 import type { TerminalCommandBlock } from '@/data/types';
 import NixButton from './NixButton';
+import { renderInline } from './RichText';
 
 function buildNixPrompt(command: string, explanation: string): string {
   return `Comando: ${command}\n\nSpiegami cosa fa esattamente questo comando, il significato di ogni opzione e quando usarlo nella pratica. Contesto: ${explanation}`;
 }
 
-export default function TerminalCommand({ command, output, explanation, warning, showNix = true }: TerminalCommandBlock & { showNix?: boolean }) {
+export default function TerminalCommand({ command, output, explanation, warning, showNix = true, glossaryIds = [] }: TerminalCommandBlock & { showNix?: boolean; glossaryIds?: string[] }) {
   return (
     <div className="rounded-none border border-accent-cyan/40 bg-black/35 overflow-hidden">
       <div className="flex items-center gap-2 border-b border-accent-cyan/40 bg-bg-primary px-4 py-3 text-xs text-text-secondary">
@@ -25,11 +26,11 @@ export default function TerminalCommand({ command, output, explanation, warning,
             <code>{output}</code>
           </pre>
         ) : null}
-        <p className="mt-4 text-sm leading-7 text-text-secondary">{explanation}</p>
+        <p className="mt-4 text-sm leading-7 text-text-secondary">{renderInline(explanation, glossaryIds, `tc-exp-${command}`)}</p>
         {warning ? (
           <div className="mt-4 rounded-none border border-accent-amber/30 bg-accent-amber/10 px-4 py-3 text-sm text-text-primary">
             <span className="terminal-heading mr-2 text-accent-amber">warning:</span>
-            {warning}
+            {renderInline(warning, glossaryIds, `tc-warn-${command}`)}
           </div>
         ) : null}
         {showNix ? (

@@ -581,7 +581,7 @@ export const chapters: Chapter[] = [
           {
             command: 'echo $SHELL',
             output: '/bin/bash',
-            explanation: 'Mostra quale shell stai usando nella sessione corrente.',
+            explanation: 'Mostra quale **shell** stai usando nella sessione corrente.',
           },
         ],
       },
@@ -599,7 +599,7 @@ export const chapters: Chapter[] = [
           {
             command: 'ls /',
             output: 'bin  boot  dev  etc  home  usr  var',
-            explanation: 'Elenca le directory principali alla radice del file system Linux.',
+            explanation: 'Elenca le directory principali alla radice del **file system** Linux.',
           },
         ],
         commandReferences: [
@@ -660,14 +660,337 @@ export const chapters: Chapter[] = [
   },
   {
     id: 7,
-    slug: 'linux-commands',
-    title: 'Comandi Linux, Utenti, Gruppi e Permessi',
-    description: 'Il capitolo più pratico: navigazione, gestione file, processi e sicurezza operativa di base.',
-    duration: '4h',
+    slug: 'os-comparison',
+    title: 'Sistemi Operativi a Confronto',
+    description: 'Windows, macOS, Linux e oltre: capire le differenze reali tra sistemi per scegliere con consapevolezza.',
+    duration: '1.5h',
     objectives: [
-      'Usare comandi Linux di base in scenari reali e non solo a memoria.',
-      'Capire utenti, gruppi e permessi in modo operativo.',
-      'Leggere processi e file system con strumenti essenziali.',
+      'Distinguere i principali sistemi operativi per caratteristiche e contesto d\'uso.',
+      'Capire perché Linux domina server, cloud ed embedded.',
+      'Orientarsi tra le distribuzioni Linux principali.',
+    ],
+    sections: [
+      {
+        id: 'desktop-os-comparison',
+        title: 'Windows, macOS e Linux Desktop',
+        content:
+          'I tre sistemi dominanti sul desktop hanno origini e filosofie molto diverse.\n\n**Windows** è il più diffuso sul desktop consumer e aziendale: ecosistema software ampio, compatibilità hardware quasi universale, architettura chiusa.\n\n**macOS** è il sistema Apple: ottimizzato per hardware Apple, stabile, con Unix sotto. Ideale per ambienti creativi o di sviluppo, ma ecosistema chiuso.\n\n**Linux Desktop** (Ubuntu, Fedora, Mint...) è libero, configurabile e gratuito. Meno diffuso sul desktop consumer ma dominante ovunque conti davvero: server, cloud e sviluppo professionale.',
+        keyPoints: [
+          'Windows: max compatibilità hardware, ecosistema software ampio, architettura chiusa.',
+          'macOS: integrazione hardware-software eccellente, base Unix, ecosistema Apple.',
+          'Linux: libertà, trasparenza, costo zero — e il sistema che fa girare il mondo.',
+        ],
+        infoTables: [
+          {
+            title: 'Confronto desktop — i punti che contano davvero',
+            headers: ['Criterio', 'Windows', 'macOS', 'Linux'],
+            rows: [
+              { cells: ['Licenza', 'Commerciale', 'Commerciale', 'Aperta (GPL)'] },
+              { cells: ['Hardware', 'Qualsiasi PC', 'Solo Apple', 'Qualsiasi PC/server'] },
+              { cells: ['Terminale', 'PowerShell / WSL2', 'zsh (Unix)', 'bash/zsh nativi'] },
+              { cells: ['Diffusione desktop', '~72%', '~15%', '~4%'], highlight: true },
+              { cells: ['Server/Cloud', 'Presente', 'Assente', 'Dominante (~96%)'], highlight: true },
+              { cells: ['Costo', 'Licenza', 'Incluso (hardware Apple)', 'Gratuito'] },
+              { cells: ['Personalizzazione', 'Limitata', 'Molto limitata', 'Totale'] },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'server-mobile-embedded',
+        title: 'Oltre il desktop: server, mobile ed embedded',
+        content:
+          'Il desktop è solo una piccola parte del panorama dei sistemi operativi. La maggior parte dei sistemi che usiamo quotidianamente gira su hardware che non vediamo mai.\n\n**Server e cloud**: Linux è il sistema operativo della quasi totalità dei server web, dei container Docker e delle macchine virtuali cloud. Non è una coincidenza: è il risultato di decenni di ottimizzazione per ambienti headless, multiutente e ad alta disponibilità.\n\n**Mobile**: Android (basato su kernel Linux) e iOS/iPadOS (basato su Darwin/XNU, derivato da Unix) coprono quasi tutti i dispositivi mobili.\n\n**Embedded**: router, smartTV, sistemi industriali, auto, elettrodomestici connessi — qui Linux è ubiquo.',
+        keyPoints: [
+          'Linux occupa ~96% dei server web e domina il cloud computing.',
+          'Android è Linux: kernel Linux con stack applicativo Google.',
+          'Embedded e IoT: Linux quasi ovunque.',
+        ],
+        infoTables: [
+          {
+            title: 'Sistemi operativi per dominio',
+            headers: ['Dominio', 'OS dominante', 'Quota', 'Note'],
+            rows: [
+              { cells: ['Server web', 'Linux', '~96%', 'Ubuntu, Debian, RHEL, Alpine'] },
+              { cells: ['Cloud (VM)', 'Linux', '>90%', 'AWS, GCP, Azure image di default'] },
+              { cells: ['Supercomputer', 'Linux', '100%', 'Top500: 100% Linux da anni'], highlight: true },
+              { cells: ['Mobile', 'Android + iOS', '~99%', 'Android = kernel Linux'] },
+              { cells: ['Desktop', 'Windows', '~72%', 'macOS ~15%, Linux ~4%'] },
+              { cells: ['Embedded/IoT', 'Linux', '>80%', 'Router, TV, auto, industriale'] },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'linux-distributions',
+        title: 'Le distribuzioni Linux principali',
+        content:
+          'Linux non è un unico sistema monolitico: è un kernel attorno a cui esistono centinaia di **distribuzioni** (distro), ognuna con scelte diverse di package manager, configurazione predefinita e ciclo di rilascio.\n\nLe differenze superficiali (interfaccia grafica, colori) contano meno di quelle strutturali: package manager (apt vs dnf vs pacman), stabilità vs rolling release, supporto a lungo termine (LTS).\n\nPer uno studente che vuole imparare, **Ubuntu LTS** è la scelta più sicura: documentazione enorme, community attiva, comportamento prevedibile.',
+        keyPoints: [
+          'Tutte le distro condividono lo stesso kernel Linux — le differenze sono nello stack sopra.',
+          'Ubuntu LTS = scelta sicura per imparare (supporto 5 anni, community enorme).',
+          'Il package manager (apt, dnf, pacman) è una delle differenze operative più concrete.',
+        ],
+        infoTables: [
+          {
+            title: 'Distribuzioni principali — dove usarle',
+            headers: ['Distro', 'Base', 'Package Manager', 'Target', 'Note'],
+            rows: [
+              { cells: ['Ubuntu LTS', 'Debian', 'apt', 'Desktop, server, cloud, studenti', 'Consigliata per iniziare'], highlight: true },
+              { cells: ['Debian', '—', 'apt', 'Server stabili, base per altre distro', 'Massima stabilità'] },
+              { cells: ['Fedora', '—', 'dnf', 'Desktop sviluppatori', 'Novità upstream'] },
+              { cells: ['Rocky Linux', 'RHEL', 'dnf', 'Enterprise server', 'Alternativa RHEL gratuita'] },
+              { cells: ['Arch Linux', '—', 'pacman', 'Utenti avanzati', 'Rolling release, pieno controllo'] },
+              { cells: ['Alpine', '—', 'apk', 'Container Docker, embedded', 'Minimalismo estremo'] },
+              { cells: ['Linux Mint', 'Ubuntu', 'apt', 'Desktop per utenti Windows', 'Approccio familiare'] },
+            ],
+          },
+        ],
+      },
+    ],
+    keyTakeaways: [
+      'Non esiste un OS migliore in assoluto: conta il contesto — desktop, server, mobile, embedded.',
+      'Linux è minoritario sul desktop ma dominante ovunque conti davvero: server, cloud, supercomputer.',
+      'Le distribuzioni Linux differiscono in package manager e stabilità — il kernel è lo stesso.',
+    ],
+    discussionPrompts: [
+      'Perché Linux domina il server nonostante sia così poco usato sul desktop consumer?',
+      'Cosa cambieresti nella scelta di OS se lavorassi come amministratore di sistema?',
+    ],
+    quiz: [
+      {
+        id: 'ch7-q1',
+        type: 'multiple_choice',
+        question: 'Quale sistema operativo domina il mercato server e cloud?',
+        options: ['Linux', 'Windows Server', 'macOS Server', 'FreeBSD'],
+        correctAnswer: 0,
+        explanation: 'Linux occupa circa il 96% dei server web e la grande maggioranza delle istanze cloud.',
+      },
+      {
+        id: 'ch7-q2',
+        type: 'true_false',
+        question: 'Android è basato sul kernel Linux.',
+        correctAnswer: true,
+        explanation: 'Sì: Android usa il kernel Linux con uno stack applicativo proprietario Google sopra.',
+      },
+      {
+        id: 'ch7-q3',
+        type: 'multiple_choice',
+        question: 'Qual è la differenza pratica più importante tra distribuzioni Linux?',
+        options: [
+          'Package manager, stabilità e ciclo di rilascio',
+          'Il colore dell\'interfaccia grafica',
+          'Il kernel utilizzato',
+          'La velocità della CPU richiesta',
+        ],
+        correctAnswer: 0,
+        explanation: 'Il kernel è lo stesso per tutte le distro — le differenze reali sono nel package manager e nella filosofia di stabilità.',
+      },
+    ],
+    glossary: ['operating-system', 'distribution', 'kernel', 'shell'],
+  },
+  {
+    id: 8,
+    slug: 'linux-environment-setup',
+    title: 'Il Tuo Ambiente Linux',
+    description: 'Tre modi concreti per avere Linux funzionante: nel browser senza installare nulla, dentro Windows con WSL2, o in una macchina virtuale completa.',
+    duration: '1.5h',
+    objectives: [
+      'Scegliere l\'opzione di ambiente più adatta al proprio hardware e obiettivo.',
+      'Avviare una sessione Linux funzionante con almeno uno dei metodi.',
+      'Capire limiti e vantaggi di ogni approccio.',
+    ],
+    sections: [
+      {
+        id: 'killercoda-browser',
+        title: 'KillerCoda — Linux nel browser, zero install',
+        content:
+          'La via più rapida per iniziare è **KillerCoda** (killercoda.com): ambienti Linux completi che girano nel browser, senza installare nulla. Funziona su qualsiasi sistema operativo, anche Chromebook.\n\nOgni scenario mette a disposizione uno o più terminali Ubuntu/Debian con accesso root, connessione a internet e strumenti preinstallati. Puoi esercitarti con tutti i comandi del corso.\n\n**Limite principale**: la sessione scade dopo inattività e i dati non persistono tra sessioni. Ideale per esercitarsi, non per lavorare su progetti reali.',
+        keyPoints: [
+          'Nessuna installazione richiesta — funziona da qualsiasi browser.',
+          'Ambienti Ubuntu/Debian con accesso root completo.',
+          'Sessioni temporanee: ideale per esercizi, non per dati persistenti.',
+        ],
+        labBlock: {
+          title: 'Prima sessione su KillerCoda',
+          intro: 'Avvia il tuo primo ambiente Linux nel browser in meno di un minuto.',
+          steps: [
+            {
+              goal: 'Apri un ambiente Ubuntu',
+              command: {
+                command: '# Vai su killercoda.com → Ubuntu Playground',
+                output: '',
+                explanation: 'Scegli Ubuntu Playground dalla home di KillerCoda. Il terminale si apre in pochi secondi — nessuna registrazione richiesta.',
+              },
+            },
+            {
+              goal: 'Verifica chi sei e dove ti trovi',
+              command: {
+                command: 'whoami && pwd',
+                output: 'root\n/root',
+                explanation: 'In KillerCoda sei root per default. pwd conferma che sei nella home di root. Puoi usare tutti i comandi del corso senza sudo.',
+              },
+            },
+            {
+              goal: 'Identifica la distribuzione',
+              command: {
+                command: 'cat /etc/os-release | grep PRETTY',
+                output: 'PRETTY_NAME="Ubuntu 22.04.3 LTS"',
+                explanation: 'Conferma che stai usando Ubuntu 22.04 LTS — la stessa versione su milioni di server in produzione.',
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 'wsl2-windows',
+        title: 'WSL2 — Linux dentro Windows',
+        content:
+          '**Windows Subsystem for Linux 2** (WSL2) integra un vero kernel Linux dentro Windows 10/11. Non è emulazione: è un kernel Linux in un ambiente virtualizzato leggero, con accesso al file system Windows e alle porte di rete.\n\nWSL2 è ideale per chi vuole Linux disponibile stabilmente senza riavviare il computer o gestire una VM separata. VS Code con l\'estensione Remote - WSL si connette direttamente all\'ambiente.\n\n**Requisiti**: Windows 10 versione 2004+ o Windows 11. La virtualizzazione deve essere abilitata nel BIOS.',
+        keyPoints: [
+          'Kernel Linux reale, non emulazione — prestazioni quasi native.',
+          'Accesso ai file Windows da Linux: /mnt/c/ punta al disco C:.',
+          'Si installa in una sola riga da PowerShell con privilegi amministrativi.',
+        ],
+        labBlock: {
+          title: 'Installare WSL2 con Ubuntu',
+          intro: 'Installazione completa in pochi minuti da PowerShell come amministratore.',
+          steps: [
+            {
+              goal: 'Abilita e installa WSL2 con Ubuntu',
+              command: {
+                command: 'wsl --install',
+                output: 'Installazione in corso...\nRiavvio necessario.',
+                explanation: 'Esegui in PowerShell come Amministratore. Installa WSL2 e Ubuntu di default. Richiede riavvio del sistema.',
+                warning: 'Esegui PowerShell come Amministratore (click destro → Esegui come amministratore). La virtualizzazione deve essere abilitata nel BIOS.',
+              },
+            },
+            {
+              goal: 'Configura utente Ubuntu al primo avvio',
+              command: {
+                command: '# Ubuntu chiede username e password al primo avvio',
+                output: 'Inserisci il nuovo nome utente UNIX: studente\nNuova password:',
+                explanation: 'Crea un utente Linux separato dall\'account Windows. Questa password viene usata per sudo.',
+              },
+            },
+            {
+              goal: 'Verifica l\'installazione',
+              command: {
+                command: 'wsl --list --verbose',
+                output: '  NAME      STATE    VERSION\n* Ubuntu    Running  2',
+                explanation: 'Esegui in PowerShell per verificare che Ubuntu usi WSL2 (Version 2). Poi dentro Ubuntu: sudo apt update && sudo apt upgrade -y',
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 'virtualbox-utm',
+        title: 'Macchina Virtuale — VirtualBox e UTM',
+        content:
+          'Una **macchina virtuale** (VM) è un computer completo simulato dentro il tuo sistema operativo. Hai Linux con desktop grafico, filesystem persistente e isolamento totale dall\'host — ideale per esperimenti rischiosi o ambienti server reali.\n\n**VirtualBox** (gratuito, Oracle) funziona su Windows, Linux e Intel Mac. **UTM** (gratuito, open source) è la scelta su Mac Apple Silicon (M1/M2/M3) perché supporta la virtualizzazione ARM nativa.\n\nL\'immagine Ubuntu da scaricare è un file **.iso** di circa 2GB da ubuntu.com.',
+        keyPoints: [
+          'VirtualBox: Windows, Linux, Intel Mac — scarica da virtualbox.org.',
+          'UTM: Mac Apple Silicon (M1/M2/M3) — scarica da mac.getutm.app.',
+          'Ubuntu LTS ISO: ubuntu.com/download/desktop — versione 22.04 o 24.04.',
+        ],
+        infoTables: [
+          {
+            title: 'Confronto opzioni ambiente Linux',
+            headers: ['Opzione', 'Piattaforma', 'Persistenza', 'Isolamento', 'Difficoltà'],
+            rows: [
+              { cells: ['KillerCoda', 'Qualsiasi browser', 'No (sessione)', 'Totale', 'Minima'] },
+              { cells: ['WSL2', 'Windows 10/11', 'Sì', 'Parziale', 'Bassa'] },
+              { cells: ['VirtualBox', 'Win/Linux/Intel Mac', 'Sì', 'Totale', 'Media'], highlight: true },
+              { cells: ['UTM', 'Mac Apple Silicon', 'Sì', 'Totale', 'Media'] },
+              { cells: ['Dual boot', 'Qualsiasi', 'Sì', 'Totale', 'Alta'] },
+            ],
+          },
+        ],
+        labBlock: {
+          title: 'Creare una VM Ubuntu con VirtualBox',
+          intro: 'Da zero a Ubuntu funzionante in VirtualBox.',
+          steps: [
+            {
+              goal: 'Scarica VirtualBox e l\'ISO Ubuntu',
+              command: {
+                command: '# virtualbox.org → Downloads  |  ubuntu.com/download/desktop → 24.04 LTS',
+                output: '',
+                explanation: 'Scarica VirtualBox per il tuo OS e l\'ISO Ubuntu LTS (circa 2GB). Tieni entrambi i file pronti prima di iniziare.',
+              },
+            },
+            {
+              goal: 'Crea una nuova VM in VirtualBox',
+              command: {
+                command: '# VirtualBox → Nuova → Nome: Ubuntu → Tipo: Linux 64-bit',
+                output: '',
+                explanation: 'Assegna almeno 2GB RAM (consigliati 4GB) e 25GB di disco. VirtualBox crea un disco virtuale VDI — è un file sul tuo disco, non partiziona nulla.',
+              },
+            },
+            {
+              goal: 'Collega l\'ISO e avvia l\'installazione',
+              command: {
+                command: '# Impostazioni → Archiviazione → Controller IDE → Scegli ISO',
+                output: '',
+                explanation: 'Collega l\'ISO come CD virtuale. Al primo avvio parte l\'installer Ubuntu. Scegli installazione normale e lascia le opzioni predefinite.',
+                warning: 'Seleziona Cancella disco e installa Ubuntu — opera solo sul disco virtuale della VM, non tocca il tuo disco reale.',
+              },
+            },
+          ],
+        },
+      },
+    ],
+    keyTakeaways: [
+      'KillerCoda per esercitarsi subito senza installare nulla — perfetto per seguire i prossimi capitoli.',
+      'WSL2 per chi usa Windows e vuole Linux integrato nel workflow quotidiano.',
+      'VirtualBox/UTM per un ambiente Linux completo, persistente e isolato.',
+    ],
+    discussionPrompts: [
+      'Quale opzione sceglieresti per seguire questo corso e perché?',
+      'In che situazioni una macchina virtuale è preferibile a WSL2?',
+    ],
+    quiz: [
+      {
+        id: 'ch8-q1',
+        type: 'multiple_choice',
+        question: 'Qual è il vantaggio principale di KillerCoda rispetto alle altre opzioni?',
+        options: [
+          'Funziona nel browser senza installare nulla',
+          'Ha prestazioni migliori di una macchina virtuale',
+          'Permette di salvare dati permanentemente',
+          'È disponibile solo su Linux',
+        ],
+        correctAnswer: 0,
+        explanation: 'KillerCoda non richiede installazione: basta un browser. Il limite è che le sessioni sono temporanee.',
+      },
+      {
+        id: 'ch8-q2',
+        type: 'true_false',
+        question: 'WSL2 usa un kernel Linux reale, non un emulatore.',
+        correctAnswer: true,
+        explanation: 'Esatto: WSL2 virtualizza un kernel Linux vero, garantendo compatibilità e prestazioni molto più alte di WSL1.',
+      },
+      {
+        id: 'ch8-q3',
+        type: 'multiple_choice',
+        question: 'Su un Mac con chip Apple Silicon (M1/M2/M3), quale software è consigliato per le VM?',
+        options: ['UTM', 'VirtualBox', 'Hyper-V', 'Parallels Desktop'],
+        correctAnswer: 0,
+        explanation: 'VirtualBox non supporta ancora pienamente Apple Silicon. UTM è la scelta gratuita e matura per ARM.',
+      },
+    ],
+    glossary: ['operating-system', 'distribution', 'shell', 'terminal'],
+  },
+  {
+    id: 9,
+    slug: 'linux-commands',
+    title: 'Comandi Linux Pratici',
+    description: 'Navigazione, gestione file e identità utente: i comandi essenziali per lavorare sul terminale.',
+    duration: '2h',
+    objectives: [
+      'Usare pwd, ls, cd per orientarsi nel file system senza perdersi.',
+      'Creare, leggere, spostare e cancellare file con consapevolezza.',
+      'Capire la propria identità di sistema con whoami e id.',
     ],
     sections: [
       {
@@ -688,7 +1011,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'pwd',
                 output: '/home/studente/progetto-linux',
-                explanation: 'Mostra la directory corrente: è il tuo punto di partenza operativo. Eseguilo sempre prima di qualsiasi modifica.',
+                explanation: 'Mostra la **directory corrente**: è il tuo punto di partenza operativo. Eseguilo sempre prima di qualsiasi modifica.',
               },
             },
             {
@@ -696,7 +1019,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'ls -la',
                 output: 'drwxr-xr-x  studente studente  .\ndrwxr-xr-x  studente studente  ..\n-rw-r--r--  studente studente  appunti.txt',
-                explanation: 'Elenca file normali e nascosti con permessi, owner e dimensioni. Il formato lungo (-l) rende leggibile tutto in colonne.',
+                explanation: 'Elenca file normali e nascosti con permessi, owner e dimensioni. Il formato lungo (**-l**) rende leggibile tutto in colonne.',
               },
             },
           ],
@@ -728,7 +1051,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'mkdir appunti-os && touch appunti-os/comandi.txt',
                 output: '',
-                explanation: 'mkdir crea la cartella, touch crea il file vuoto. Il && esegue il secondo comando solo se il primo riesce.',
+                explanation: '**mkdir** crea la cartella, **touch** crea il file vuoto. Il **&&** esegue il secondo comando solo se il primo riesce.',
               },
             },
             {
@@ -736,7 +1059,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'cat appunti-os/comandi.txt',
                 output: '',
-                explanation: 'cat stampa il contenuto nel terminale. Su file grandi usa less per scorrere senza riempire lo schermo.',
+                explanation: '**cat** stampa il contenuto nel terminale. Su file grandi usa **less** per scorrere senza riempire lo schermo.',
               },
             },
             {
@@ -744,8 +1067,8 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'rm -i appunti-os/comandi.txt',
                 output: "rm: remove regular empty file 'appunti-os/comandi.txt'?",
-                explanation: 'La flag -i chiede conferma prima di cancellare. Prenditi un secondo per leggere il percorso che stai per eliminare.',
-                warning: 'Mai usare rm su percorsi che non hai verificato con pwd o ls. Non c\'è cestino.',
+                explanation: 'La flag **-i** chiede conferma prima di cancellare. Prenditi un secondo per leggere il percorso che stai per eliminare.',
+                warning: 'Mai usare **rm** su percorsi che non hai verificato con **pwd** o **ls**. Non c\'è cestino.',
               },
             },
           ],
@@ -783,7 +1106,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'whoami',
                 output: 'studente',
-                explanation: 'Risposta immediata: sei questo utente. Utile nei contesti in cui non sei sicuro di chi sta eseguendo lo script.',
+                explanation: 'Risposta immediata: sei questo utente. Utile nei contesti in cui non sei sicuro di chi sta eseguendo lo script o il comando.',
               },
             },
             {
@@ -791,12 +1114,59 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'id',
                 output: 'uid=1000(studente) gid=1000(studente) gruppi=1000(studente),27(sudo),1001(developers)',
-                explanation: 'Mostra tutto: UID, gruppo primario e gruppi secondari. Se vedi "sudo" nell\'elenco, puoi usare sudo sul sistema.',
+                explanation: 'Mostra tutto: **UID**, gruppo primario e gruppi secondari. Se vedi **sudo** nell\'elenco, puoi usare sudo sul sistema.',
               },
             },
           ],
         },
       },
+    ],
+    keyTakeaways: [
+      'Ogni comando ha senso solo se collegato a un problema concreto.',
+      'Orientarsi nel file system viene prima di qualsiasi operazione più avanzata.',
+      'Conoscere la propria identità di sistema (whoami, id) evita errori su permessi e accessi.',
+    ],
+    discussionPrompts: [
+      'Perché pwd e ls sono spesso più importanti di un comando avanzato?',
+      'Quando conviene usare cat, less o head per leggere un file?',
+    ],
+    quiz: [
+      {
+        id: 'ch9-q1',
+        type: 'multiple_choice',
+        question: 'Quale comando ti mostra la directory corrente?',
+        options: ['pwd', 'ps', 'grep', 'kill'],
+        correctAnswer: 0,
+        explanation: 'pwd significa print working directory.',
+      },
+      {
+        id: 'ch9-q2',
+        type: 'multiple_choice',
+        question: 'Perché usare rm -i può essere utile?',
+        options: [
+          'Per aggiungere una conferma prima della cancellazione',
+          'Per rendere il file invisibile',
+          'Per cambiare owner',
+          'Per trasformare rm in comando di copia',
+        ],
+        correctAnswer: 0,
+        explanation: 'La conferma interattiva riduce il rischio di cancellazioni impulsive.',
+      },
+    ],
+    glossary: ['shell', 'terminal', 'process', 'file-system', 'root', 'sudo'],
+  },
+  {
+    id: 10,
+    slug: 'permissions-users',
+    title: 'Permessi, Utenti e Gruppi',
+    description: 'Controllo degli accessi in Linux: permessi file, chmod, chown e gestione completa di utenti e gruppi.',
+    duration: '3h',
+    objectives: [
+      'Leggere e modificare permessi con chmod in notazione ottale e simbolica.',
+      'Cambiare proprietario e gruppo con chown.',
+      'Creare, configurare e rimuovere utenti e gruppi in modo operativo.',
+    ],
+    sections: [
       {
         id: 'permissions-chmod',
         title: 'Permessi, chmod e chown',
@@ -844,7 +1214,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'ls -la script.sh',
                 output: '-rw-r--r-- 1 studente developers 512 mag 20 10:00 script.sh',
-                explanation: 'Il primo campo mostra: tipo file (-), poi 3 bit owner (rw-), 3 bit group (r--), 3 bit others (r--). Owner e gruppo sono nella terza e quarta colonna.',
+                explanation: 'Il primo campo mostra: tipo file (**-**), poi 3 bit **owner** (rw-), 3 bit **group** (r--), 3 bit **others** (r--). Owner e gruppo sono nella terza e quarta colonna.',
               },
             },
             {
@@ -852,7 +1222,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'chmod 755 script.sh',
                 output: '',
-                explanation: 'Riscrive tutti i permessi in una volta: owner ottiene rwx (7), group e others ottengono r-x (5). Pattern standard per script eseguibili.',
+                explanation: 'Riscrive tutti i permessi in una volta: **owner** ottiene **rwx** (7), **group** e **others** ottengono **r-x** (5). Pattern standard per script eseguibili.',
               },
             },
             {
@@ -860,7 +1230,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'chmod u+x deploy.sh',
                 output: '',
-                explanation: 'u = user/owner, + = aggiungi, x = execute. Solo il bit execute dell\'owner cambia — group e others restano invariati.',
+                explanation: '**u** = user/owner, **+** = aggiungi, **x** = execute. Solo il bit execute dell\'owner cambia — group e others restano invariati.',
               },
             },
             {
@@ -868,8 +1238,8 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'chown michele:developers progetto/',
                 output: '',
-                explanation: 'Assegna il file all\'utente michele e al gruppo developers. Richiede sudo se non sei il proprietario attuale.',
-                warning: 'chown su directory intere usa -R per ricorsività. Verifica sempre il percorso prima.',
+                explanation: 'Assegna il file all\'utente **michele** e al gruppo **developers**. Richiede **sudo** se non sei il proprietario attuale.',
+                warning: '**chown** su directory intere usa **-R** per ricorsività. Verifica sempre il percorso prima.',
               },
             },
           ],
@@ -878,13 +1248,13 @@ export const chapters: Chapter[] = [
           {
             command: 'ps aux | grep node',
             output: 'studente  1823 ... node server.js',
-            explanation: 'Cerca processi Node attivi: ps aux elenca tutto, grep filtra per nome. Il PID (1823) è l\'identificatore del processo.',
+            explanation: 'Cerca processi Node attivi: **ps aux** elenca tutto, **grep** filtra per nome. Il **PID** (1823) è l\'identificatore del processo.',
           },
           {
             command: 'kill 1823',
             output: '',
-            explanation: 'Invia SIGTERM al processo con quel PID. Il processo riceve il segnale e può terminare in modo controllato.',
-            warning: 'Termina processi solo se sai cosa sono. Per processi che non rispondono: kill -9 <PID>, ma è l\'ultima risorsa.',
+            explanation: 'Invia **SIGTERM** al processo con quel **PID**. Il processo riceve il segnale e può terminare in modo controllato.',
+            warning: 'Termina processi solo se sai cosa sono. Per processi che non rispondono: **kill -9 \<PID\>**, ma è l\'ultima risorsa.',
           },
         ],
         commandReferences: [
@@ -953,7 +1323,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'sudo useradd -m -s /bin/bash -c "Mario Rossi" mario',
                 output: '',
-                explanation: '-m crea la home directory (/home/mario), -s imposta la shell di default, -c aggiunge un commento leggibile (nome completo). Senza -m la home non viene creata.',
+                explanation: '**-m** crea la home directory (/home/mario), **-s** imposta la shell di default, **-c** aggiunge un commento leggibile (nome completo). Senza **-m** la home non viene creata.',
               },
             },
             {
@@ -961,7 +1331,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'sudo passwd mario',
                 output: 'Nuova password:\nRipetere la nuova password:\npasswd: password aggiornata correttamente',
-                explanation: 'L\'hash della password viene scritto in /etc/shadow, non in /etc/passwd. Solo root può impostare password per altri utenti.',
+                explanation: 'L\'hash della password viene scritto in **/etc/shadow**, non in **/etc/passwd**. Solo **root** può impostare password per altri utenti.',
               },
             },
             {
@@ -969,7 +1339,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'getent passwd mario',
                 output: 'mario:x:1001:1001:Mario Rossi:/home/mario:/bin/bash',
-                explanation: 'Tutti i campi in un colpo solo: UID, GID, commento, home, shell. Se il comando non restituisce nulla, l\'utente non esiste.',
+                explanation: 'Tutti i campi in un colpo solo: **UID**, **GID**, commento, home, **shell**. Se il comando non restituisce nulla, l\'utente non esiste.',
               },
             },
             {
@@ -977,7 +1347,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'sudo groupadd developers',
                 output: '',
-                explanation: 'Crea il gruppo con il primo GID disponibile. Puoi specificarne uno manuale con -g <numero> se hai bisogno di un GID fisso (utile in ambienti con NFS o condivisioni).',
+                explanation: 'Crea il gruppo con il primo **GID** disponibile. Puoi specificarne uno manuale con **-g \<numero\>** se hai bisogno di un GID fisso (utile in ambienti con NFS o condivisioni).',
               },
             },
             {
@@ -985,8 +1355,8 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'sudo usermod -aG developers mario',
                 output: '',
-                explanation: '-aG significa "append to Groups": aggiunge developers ai gruppi secondari di mario senza toccare quelli già presenti. Senza -a sovrascriveresti tutti i gruppi secondari.',
-                warning: 'La flag -a è obbligatoria insieme a -G. Dimenticarla rimuove mario da tutti gli altri gruppi secondari.',
+                explanation: '**-aG** significa "append to Groups": aggiunge **developers** ai gruppi secondari di mario senza toccare quelli già presenti. Senza **-a** sovrascriveresti tutti i gruppi secondari.',
+                warning: 'La flag **-a** è obbligatoria insieme a **-G**. Dimenticarla rimuove mario da tutti gli altri gruppi secondari.',
               },
             },
             {
@@ -994,7 +1364,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'id mario',
                 output: 'uid=1001(mario) gid=1001(mario) gruppi=1001(mario),1002(developers)',
-                explanation: 'Conferma che mario appartiene ora a entrambi i gruppi. Nota: questa modifica sarà visibile a mario solo dopo un nuovo login.',
+                explanation: 'Conferma che **mario** appartiene ora a entrambi i gruppi. Nota: questa modifica sarà visibile a mario solo dopo un nuovo login.',
               },
             },
             {
@@ -1002,7 +1372,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'sudo usermod -s /bin/zsh mario',
                 output: '',
-                explanation: 'usermod permette di cambiare qualsiasi attributo post-creazione: shell (-s), home (-d), commento (-c), nome di login (-l), account bloccato (-L) o sbloccato (-U).',
+                explanation: '**usermod** permette di cambiare qualsiasi attributo post-creazione: **shell** (**-s**), home (**-d**), commento (**-c**), nome di login (**-l**), account bloccato (**-L**) o sbloccato (**-U**).',
               },
             },
           ],
@@ -1011,23 +1381,23 @@ export const chapters: Chapter[] = [
           {
             command: 'getent group developers',
             output: 'developers:x:1002:mario',
-            explanation: 'Mostra il gruppo developers con GID e lista dei membri. Equivale a cercare la riga corrispondente in /etc/group.',
+            explanation: 'Mostra il gruppo **developers** con **GID** e lista dei membri. Equivale a cercare la riga corrispondente in **/etc/group**.',
           },
           {
             command: 'sudo gpasswd -d mario developers',
             output: 'Rimozione dell\'utente mario dal gruppo developers',
-            explanation: 'Rimuove mario dal gruppo senza toccare altri attributi. Alternativa a usermod quando devi rimuovere da un gruppo specifico.',
+            explanation: 'Rimuove **mario** dal gruppo senza toccare altri attributi. Alternativa a **usermod** quando devi rimuovere da un gruppo specifico.',
           },
           {
             command: 'sudo userdel -r mario',
             output: '',
-            explanation: 'Rimuove l\'utente e cancella la home directory con tutto il contenuto.',
-            warning: 'userdel -r è irreversibile: la home e i file dell\'utente vengono eliminati. Fai sempre un backup prima.',
+            explanation: 'Rimuove l\'utente e cancella la **home directory** con tutto il contenuto.',
+            warning: '**userdel -r** è irreversibile: la home e i file dell\'utente vengono eliminati. Fai sempre un backup prima.',
           },
           {
             command: 'sudo groupdel developers',
             output: '',
-            explanation: 'Elimina il gruppo. I file che appartenevano al gruppo restano nel sistema ma il GID diventa un numero senza nome associato.',
+            explanation: 'Elimina il gruppo. I file che appartenevano al gruppo restano nel sistema ma il **GID** diventa un numero senza nome associato.',
           },
         ],
         commandReferences: [
@@ -1056,27 +1426,17 @@ export const chapters: Chapter[] = [
       },
     ],
     keyTakeaways: [
-      'Ogni comando ha senso solo se collegato a un problema concreto.',
-      'Orientamento nel file system e lettura dei permessi vengono prima della velocità.',
-      'Utenti, gruppi, processi e file fanno parte dello stesso ecosistema operativo.',
-      'La gestione utenti è amministrazione: ogni modifica va verificata con `id` o `getent` prima di considerarla conclusa.',
+      'I permessi Linux sono tre livelli (owner/group/others) con tre operazioni (r/w/x).',
+      'La notazione ottale riscrive tutto; quella simbolica modifica un bit alla volta.',
+      'Ogni modifica a utenti o gruppi va verificata con id o getent.',
     ],
     discussionPrompts: [
-      'Perché pwd e ls sono spesso più importanti di un comando avanzato?',
-      'Quando un chmod sbagliato può creare un problema di sicurezza o di collaborazione?',
-      'Perché assegnare a ogni servizio (web server, database) un utente dedicato invece di usare root?',
+      'Quando un chmod sbagliato crea un problema di sicurezza o di collaborazione?',
+      'Perché assegnare a ogni servizio un utente dedicato invece di usare root?',
     ],
     quiz: [
       {
-        id: 'ch7-q1',
-        type: 'multiple_choice',
-        question: 'Quale comando ti mostra la directory corrente?',
-        options: ['pwd', 'ps', 'grep', 'kill'],
-        correctAnswer: 0,
-        explanation: 'pwd significa print working directory.',
-      },
-      {
-        id: 'ch7-q2',
+        id: 'ch10-q1',
         type: 'multiple_choice',
         question: 'Cosa esprime chmod 755?',
         options: [
@@ -1089,27 +1449,14 @@ export const chapters: Chapter[] = [
         explanation: '7 = rwx, 5 = r-x, 5 = r-x.',
       },
       {
-        id: 'ch7-q3',
+        id: 'ch10-q2',
         type: 'true_false',
         question: 'ps può aiutarti a osservare i processi attivi nel sistema.',
         correctAnswer: true,
         explanation: 'Sì: è uno dei comandi base per leggere lo stato dei processi.',
       },
       {
-        id: 'ch7-q4',
-        type: 'multiple_choice',
-        question: 'Perché usare rm -i può essere utile?',
-        options: [
-          'Per aggiungere una conferma prima della cancellazione',
-          'Per rendere il file invisibile',
-          'Per cambiare owner',
-          'Per trasformare rm in comando di copia',
-        ],
-        correctAnswer: 0,
-        explanation: 'La conferma interattiva riduce il rischio di cancellazioni impulsive.',
-      },
-      {
-        id: 'ch7-q5',
+        id: 'ch10-q3',
         type: 'multiple_choice',
         question: 'Qual è il rischio di usare usermod -G developers mario (senza -a)?',
         options: [
@@ -1122,14 +1469,14 @@ export const chapters: Chapter[] = [
         explanation: 'Senza -a, -G sovrascrive l\'elenco completo dei gruppi secondari con solo quello indicato.',
       },
       {
-        id: 'ch7-q6',
+        id: 'ch10-q4',
         type: 'true_false',
         question: 'Dopo aver aggiunto un utente a un gruppo con usermod -aG, le modifiche sono visibili immediatamente nella sessione corrente.',
         correctAnswer: false,
         explanation: 'Le modifiche ai gruppi richiedono un nuovo login. La sessione attiva mantiene i token di gruppo precedenti.',
       },
       {
-        id: 'ch7-q7',
+        id: 'ch10-q5',
         type: 'multiple_choice',
         question: 'Quale comando rimuove un utente E la sua home directory?',
         options: [
@@ -1142,10 +1489,10 @@ export const chapters: Chapter[] = [
         explanation: 'userdel senza -r rimuove solo l\'utente dal database; -r elimina anche home e mail spool.',
       },
     ],
-    glossary: ['shell', 'terminal', 'permissions', 'chmod', 'chown', 'process', 'root', 'sudo'],
+    glossary: ['permissions', 'chmod', 'chown', 'root', 'sudo', 'shell', 'process'],
   },
   {
-    id: 8,
+    id: 11,
     slug: 'security-best-practices',
     title: 'Sicurezza Base, Buone Pratiche e Uso Reale',
     description: 'Chiudere il percorso con il mindset corretto: prudenza, privilegi, errori comuni e comportamento professionale.',
@@ -1169,8 +1516,8 @@ export const chapters: Chapter[] = [
           {
             command: 'sudo apt update',
             output: 'Hit:1 ...\nReading package lists... Done',
-            explanation: 'Esegue un’operazione amministrativa mantenendo la sessione utente normale.',
-            warning: 'Usa sudo solo se hai chiaro cosa stai per eseguire e perché.',
+            explanation: 'Esegue un’operazione amministrativa mantenendo la sessione **utente normale**.',
+            warning: 'Usa **sudo** solo se hai chiaro cosa stai per eseguire e perché.',
           },
         ],
       },
@@ -1206,7 +1553,7 @@ export const chapters: Chapter[] = [
     ],
     quiz: [
       {
-        id: 'ch8-q1',
+        id: 'ch11-q1',
         type: 'multiple_choice',
         question: 'Qual è l’approccio più sano ai privilegi elevati?',
         options: [
@@ -1219,14 +1566,14 @@ export const chapters: Chapter[] = [
         explanation: 'Il principio del privilegio minimo riduce errori e danni potenziali.',
       },
       {
-        id: 'ch8-q2',
+        id: 'ch11-q2',
         type: 'true_false',
         question: 'Permessi troppo aperti possono creare un problema di sicurezza.',
         correctAnswer: true,
         explanation: 'Sì: concedere accessi inutili espone dati e script a modifiche indesiderate.',
       },
       {
-        id: 'ch8-q3',
+        id: 'ch11-q3',
         type: 'multiple_choice',
         question: 'Quale abitudine è più professionale?',
         options: [

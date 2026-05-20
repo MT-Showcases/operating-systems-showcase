@@ -94,14 +94,14 @@ export default function SectionCard({
 
       {labBlock ? (
         <div className="mt-6">
-          <LabBlockComponent {...labBlock} />
+          <LabBlockComponent {...labBlock} glossaryIds={glossaryIds} />
         </div>
       ) : null}
 
       {terminalCommands && terminalCommands.length > 0 ? (
         <div className="mt-6 space-y-4">
           {terminalCommands.map((block) => (
-            <TerminalCommand key={`${id}-${block.command}`} {...block} />
+            <TerminalCommand key={`${id}-${block.command}`} {...block} glossaryIds={glossaryIds} />
           ))}
         </div>
       ) : null}
