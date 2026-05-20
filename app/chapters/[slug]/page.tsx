@@ -129,7 +129,9 @@ export default async function ChapterPage({ params }: Props) {
   const isChapter1 = chapter.slug === 'what-is-os';
   const isChapter2 = chapter.slug === 'hardware-cpu';
   const isChapter3 = chapter.slug === 'kernel';
-  const isCompactChapter = isChapter1 || isChapter2 || isChapter3;
+  const isChapter4 = chapter.slug === 'processes';
+  const isChapter5 = chapter.slug === 'memory-filesystem';
+  const isCompactChapter = isChapter1 || isChapter2 || isChapter3 || isChapter4 || isChapter5;
   const shouldShowMiniTask = Boolean(chapter.pilotContent?.miniTask?.length) && !(isChapter1 && chapter.interactivePilot);
   const glossaryTerms = getTermsByIds(chapter.glossary ?? []);
 

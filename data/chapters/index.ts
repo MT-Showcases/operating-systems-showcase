@@ -543,6 +543,48 @@ export const chapters: Chapter[] = [
       'Quando conviene usare più thread invece di più processi?',
       'Perché un processo in attesa non è per forza "bloccato male"?',
     ],
+    pilotContent: {
+      whyItMatters: [
+        'Capire processi, thread e scheduling ti permette di leggere il sistema come un atto di coordinamento intelligente, non come magia.',
+        'Quando un programma rallenta o blocca, il problema spesso non è il programma ma come il sistema sta allocando o escludendo tempo CPU — e qui lo scheduler è il protagonista.',
+      ],
+      commonMistakes: [
+        '**Processo e thread sono sinonimi**: no — il processo è il contenitore, il thread è il flusso di lavoro dentro quel contenitore.',
+        '**Più processi = sempre meglio**: falso — il sovraccarico di context switching aumenta, e i processi non condividono dati facilmente.',
+        '**Un processo "in attesa" è bloccato male**: spesso no — è normal esperare I/O; lo scheduler lo sospende temporaneamente.',
+        '**Lo scheduler sceglie il processo più veloce**: non sempre — il goal è reattività percepita e throughput equilibrato, non solo velocità pura.',
+        'Confondere gli stati di un processo porta a diagnosi sbagliate quando si legge un tool come top o ps.',
+      ],
+      realWorld: [
+        'Apri Visual Studio Code e Slack nello stesso momento: ogni app è un processo, lo scheduler alterna tempo CPU e mantiene entrambe reattive.',
+        'Un download in background rallenta la compilazione di codice: sono stati di attesa e processamento che competono per I/O e CPU.',
+        'Un thread in un\'app Web server gestisce una richiesta mentre altri thread aspettano connessioni: è il model che rende scalabile il servizio.',
+      ],
+      miniTask: [
+        '**Passo 1 — Osserva**: apri un task manager (o top in Linux) e identifica almeno 3 processi in esecuzione e 3 in attesa.',
+        '**Passo 2 — Leggi**: per uno dei processi, cerca di capire se è in esecuzione, in attesa di I/O o sospeso.',
+        '**Passo 3 — Concludi**: scrivi una frase su perché il multitasking fluido dipende da uno scheduler intelligente, non solo da processori veloci.',
+      ],
+      deepDive: [
+        {
+          level: 'essenziale',
+          title: 'Linux man pages: ps, top, htop',
+          description: 'Riferimento pratico per osservare processi e stati in tempo reale.',
+          url: 'https://man7.org/linux/man-pages/man1/ps.1.html',
+        },
+        {
+          level: 'vai-oltre',
+          title: 'Operating Systems: Three Easy Pieces - Scheduling',
+          description: 'Approfondimento didattico chiaro su come e perché lo scheduler prende decisioni.',
+          url: 'https://pages.cs.wisc.edu/~remzi/OSTEP/',
+        },
+        {
+          level: 'deep-dive',
+          title: 'Linux Kernel Scheduler Documentation',
+          description: 'Riferimento tecnico avanzato su algoritmi e policy dello scheduler Linux moderno.',
+        },
+      ],
+    },
     quiz: [
       {
         id: 'ch4-q1',
@@ -648,6 +690,47 @@ export const chapters: Chapter[] = [
       'Perché un sistema con poca RAM può comunque restare utilizzabile, anche se più lento?',
       'In che modo una buona struttura di directory aiuta davvero il lavoro tecnico?',
     ],
+    pilotContent: {
+      whyItMatters: [
+        'Memoria e file system sono i due pilastri su cui poggia tutto il resto: senza buona gestione, il sistema opera a scatti e perde dati.',
+        'Capire come il sistema operativo organizza memoria e archiviazione ti permette di leggere perché un PC con poca RAM rallenta, come si salvano i file e perché i backup contano.',
+      ],
+      commonMistakes: [
+        '**Memoria virtuale = RAM infinita**: no, è un meccanismo di isolamento e protezione; lo swap lo aiuta ma è più lento.',
+        '**RAM perca dati quando spegni**: sì, è la natura della RAM — è per questo che il file system esiste.',
+        '**File system è solo un "contenitore neutro"**: no, ha permessi, metadati, gerarchia — non è magazzino passivo.',
+        '**Una volta salvato un file, è al sicuro**: non sempre — dipende dal file system, da backup e da come il sistema gestisce i crash.',
+        'Confondere memoria con storage porta a decisioni di design fragili (pensare che tutto resti in RAM, per es.).',
+      ],
+      realWorld: [
+        'Quando usi un app mobile con poca memoria, il sistema muove processi inattivi su storage lento e la app diventare lenta: è memoria virtuale in azione.',
+        'Salvi un file: prima va in RAM del processo, poi il sistema operativo lo scritto sul file system del disco, con metadati e permessi.',
+        'Il file system Linux ha una gerarchia forte (/home, /etc, /var): è esattamente quello che rende possibile capire dove cercare configurazioni o log.',
+      ],
+      miniTask: [
+        '**Passo 1 — Mappa**: scegli 3 attività (aprire una foto grande, salvare un documento, navigare cartelle).',
+        '**Passo 2 — Traccia**: per ogni attività, distingui cosa passa per memoria e cosa per file system.',
+        '**Passo 3 — Rifletti**: scrivi una frase su perché entrambi i livelli sono necessari (non si potrebbe usare solo uno).',
+      ],
+      deepDive: [
+        {
+          level: 'essenziale',
+          title: 'Linux man page: ls, stat, file',
+          description: 'Comandi pratici per esplorare file system, permessi e metadati.',
+          url: 'https://man7.org/linux/man-pages/man1/ls.1.html',
+        },
+        {
+          level: 'vai-oltre',
+          title: 'The Linux Programming Interface - Chapter 3 (File System)',
+          description: 'Approfondimento su file, directory e struttura gerarchica del file system Linux.',
+        },
+        {
+          level: 'deep-dive',
+          title: 'Understanding Memory Management',
+          description: 'Riferimento tecnico su virtual memory, paging e swap nei sistemi Unix-like.',
+        },
+      ],
+    },
     quiz: [
       {
         id: 'ch5-q1',
