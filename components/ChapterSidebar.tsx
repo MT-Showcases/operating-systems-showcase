@@ -39,8 +39,8 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
   }, [isOpen]);
 
   const sidebar = (
-    <aside className="h-full overflow-y-auto border-2 border-accent-cyan/40 bg-bg-primary p-5 shadow-2xl">
-      <div className="border-b border-accent-cyan/40 pb-4">
+    <aside className="h-full overflow-y-auto border-2 border-accent-cyan/40 bg-bg-primary shadow-2xl">
+      <div className="sticky top-0 z-10 border-b border-accent-cyan/40 bg-bg-primary px-5 pb-4 pt-5">
         <div className="flex items-center justify-between gap-3">
           <div>
             <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-green">Roadmap</p>
@@ -82,7 +82,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
         </div>
       </div>
 
-      <nav className="mt-5 space-y-2" aria-label="Capitoli">
+      <nav className="space-y-2 px-5 pt-5" aria-label="Capitoli">
         {chapters.map((chapter, index) => {
           const active = chapter.slug === currentSlug;
           return (
@@ -111,7 +111,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
         })}
       </nav>
 
-      <div className="mt-6 border-t border-accent-cyan/40 pt-5">
+      <div className="mt-6 border-t border-accent-cyan/40 px-5 pb-5 pt-5">
         <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Anchor del capitolo</p>
         <div className="mt-3 space-y-2">
           {sections.map((section) => (
@@ -157,7 +157,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
       )}
 
       {isOpen ? (
-        <div className="fixed inset-0 z-50 bg-black/80 px-4 py-6 lg:hidden">
+        <div className="fixed inset-0 z-50 bg-black/75 px-4 py-6 lg:hidden">
           <div className="mx-auto h-full max-w-sm">{sidebar}</div>
         </div>
       ) : null}

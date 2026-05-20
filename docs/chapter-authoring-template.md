@@ -50,6 +50,18 @@ Use this order as the default flow:
 - [ ] No hydration mismatch introduced
 - [ ] No lint errors in touched files
 
+## Mobile Sidebar QA checklist
+- [ ] Open chapter page on mobile viewport (for example `390x844`) and trigger hamburger sidebar.
+- [ ] Overlay is opaque enough to preserve readability of sidebar text over page content.
+- [ ] Sidebar panel background is opaque (no bleed-through from page content while scrolling).
+- [ ] Sticky roadmap header remains visible while scrolling the chapter list.
+- [ ] Close action (`X`) stays visible and reachable at all times.
+- [ ] No visible top/bottom gap appears behind sticky header during scroll.
+- [ ] Bottom "Anchor del capitolo" block keeps horizontal and bottom padding.
+- [ ] Capture QA screenshots for at least:
+  - sidebar open at top
+  - sidebar open after internal scroll
+
 ## Acceptance scorecard (quick review)
 Score each area 0-2.
 

@@ -33,3 +33,8 @@ Add ESLint import restrictions so `data/` stays presentation-free and `lib/` doe
 - Route-level splitting: automatic per Next.js route (`/` and `/chapters/[slug]`).
 - Heavy interactive components (e.g. tutor chat, Monaco, media viewers) should be dynamically imported later.
 - Chapter-specific datasets stay separate so future chapters can be loaded or indexed independently.
+
+## Mobile chapter navigation guardrail
+- The chapter sidebar opened from the hamburger menu must use an opaque overlay and an opaque panel background to preserve text readability over page content.
+- The roadmap header block (title, close action, and progress) should stay sticky within the sidebar scroll area so close/navigation controls remain immediately reachable.
+- Avoid sticky layouts that depend on negative margins when they introduce visible gaps during scroll.
