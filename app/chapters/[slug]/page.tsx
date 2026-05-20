@@ -224,6 +224,7 @@ export default async function ChapterPage({ params }: Props) {
                     glossaryIds={chapter.glossary ?? []}
                     terminalCommands={section.terminalCommands}
                     commandReferences={section.commandReferences}
+                    infoTables={section.infoTables}
                   />
                 </div>
               ))}

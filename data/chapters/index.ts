@@ -746,16 +746,66 @@ export const chapters: Chapter[] = [
         id: 'users-permissions',
         title: 'Utenti, gruppi, permessi e processi base',
         content:
-          'In Linux ogni file e ogni processo vive dentro un contesto di identità e regole. Sapere chi è il proprietario e quali permessi sono attivi è fondamentale.\n\nQui entra in gioco il trio owner, group e others. È la base per capire chmod, chown e anche comandi come ps o kill quando lavori con processi reali.',
+          'In Linux ogni file e ogni processo appartiene a un **utente** e a un **gruppo**. Prima di modificare permessi, conviene sempre capire chi sei per il sistema.\n\nOgni file ha tre livelli di accesso: **owner** (proprietario), **group** (gruppo di appartenenza) e **others** (tutti gli altri). Per ognuno il sistema verifica tre operazioni: **r** (read — lettura), **w** (write — scrittura), **x** (execute — esecuzione).\n\nI permessi si esprimono in **notazione ottale**: ogni lettera vale un numero (r=4, w=2, x=1) che si sommano per formare una cifra da 0 a 7. `chmod 755` significa owner=7 (rwx), group=5 (r-x), others=5 (r-x). La notazione simbolica come `chmod u+x` aggiunge o rimuove un singolo bit senza toccare gli altri.',
         keyPoints: [
+          '**Prima di chmod**, controlla sempre i permessi attuali con `ls -la`.',
+          'La notazione ottale cambia tutti i permessi; quella simbolica (`u+x`) ne modifica uno solo.',
           'I permessi descrivono chi può leggere, scrivere o eseguire.',
-          'ps e kill aiutano a osservare e governare processi in corso.',
+          '`ps` e `kill` aiutano a osservare e governare processi in corso.',
+        ],
+        infoTables: [
+          {
+            title: 'Valori dei bit — come si calcola ogni cifra',
+            headers: ['Valore ottale', 'Simbolico', 'r', 'w', 'x', 'Permessi attivi'],
+            rows: [
+              { cells: ['0', '---', '—', '—', '—', 'nessun accesso'] },
+              { cells: ['1', '--x', '—', '—', '✓', 'solo esecuzione'] },
+              { cells: ['2', '-w-', '—', '✓', '—', 'solo scrittura'] },
+              { cells: ['3', '-wx', '—', '✓', '✓', 'scrittura + esecuzione'] },
+              { cells: ['4', 'r--', '✓', '—', '—', 'solo lettura'] },
+              { cells: ['5', 'r-x', '✓', '—', '✓', 'lettura + esecuzione'] },
+              { cells: ['6', 'rw-', '✓', '✓', '—', 'lettura + scrittura'] },
+              { cells: ['7', 'rwx', '✓', '✓', '✓', 'accesso completo'] },
+            ],
+          },
+          {
+            title: 'Pattern più comuni — owner / group / others',
+            headers: ['chmod', 'Owner', 'Group', 'Others', 'Uso tipico'],
+            rows: [
+              { cells: ['600', 'rw-', '---', '---', 'file privati, chiavi SSH (~/.ssh/id_rsa)'] },
+              { cells: ['644', 'rw-', 'r--', 'r--', 'file di testo, configurazioni, HTML'], highlight: true },
+              { cells: ['700', 'rwx', '---', '---', 'script e directory strettamente personali'] },
+              { cells: ['755', 'rwx', 'r-x', 'r-x', 'script eseguibili, directory pubbliche'], highlight: true },
+              { cells: ['775', 'rwx', 'rwx', 'r-x', 'directory condivise tra membri dello stesso gruppo'] },
+              { cells: ['777', 'rwx', 'rwx', 'rwx', 'pericoloso — evitare in produzione'] },
+            ],
+          },
         ],
         terminalCommands: [
           {
+            command: 'whoami',
+            output: 'studente',
+            explanation: 'Mostra il nome dell\'utente corrente — punto di partenza prima di qualsiasi operazione su permessi.',
+          },
+          {
+            command: 'id',
+            output: 'uid=1000(studente) gid=1000(studente) gruppi=1000(studente),27(sudo),1001(developers)',
+            explanation: 'Mostra UID, GID e tutti i gruppi a cui appartieni: è il "documento d\'identità" del tuo utente nel sistema.',
+          },
+          {
+            command: 'ls -la script.sh',
+            output: '-rw-r--r-- 1 studente developers 512 mag 20 10:00 script.sh',
+            explanation: 'Legge i permessi attuali: il primo campo mostra tipo file + permessi owner/group/others, poi utente e gruppo proprietari.',
+          },
+          {
             command: 'chmod 755 script.sh',
             output: '',
-            explanation: 'Assegna pieno accesso al proprietario e lettura/esecuzione a gruppo e altri.',
+            explanation: 'Assegna pieno accesso al proprietario e lettura/esecuzione a gruppo e altri — pattern standard per script eseguibili.',
+          },
+          {
+            command: 'chmod u+x deploy.sh',
+            output: '',
+            explanation: 'Notazione simbolica: aggiunge il bit execute solo all\'owner (u), senza toccare group e others.',
           },
           {
             command: 'ps aux | grep node',
@@ -773,14 +823,14 @@ export const chapters: Chapter[] = [
           {
             command: 'chmod',
             syntax: 'chmod [opzioni] permessi file',
-            description: 'Modifica i permessi di file e directory.',
-            examples: ['chmod 644 note.txt', 'chmod u+x script.sh', 'chmod -R 755 public/'],
+            description: 'Modifica i permessi di file e directory. Accetta notazione ottale (755) o simbolica (u+x, g-w, o=r).',
+            examples: ['chmod 644 note.txt', 'chmod u+x script.sh', 'chmod g-w config.yml', 'chmod -R 755 public/'],
           },
           {
             command: 'chown',
             syntax: 'chown [utente][:gruppo] file',
-            description: 'Cambia proprietario e gruppo di un file.',
-            examples: ['chown michele note.txt', 'chown root:root config.yml'],
+            description: 'Cambia proprietario e gruppo di un file. Richiede sudo se non sei il proprietario attuale.',
+            examples: ['chown michele note.txt', 'chown michele:developers progetto/', 'chown root:root config.yml'],
           },
         ],
       },

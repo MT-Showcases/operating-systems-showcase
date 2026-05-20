@@ -49,6 +49,17 @@ export interface CommandReference {
   examples: string[];
 }
 
+export interface InfoTableRow {
+  cells: string[];
+  highlight?: boolean;
+}
+
+export interface InfoTable {
+  title?: string;
+  headers: string[];
+  rows: InfoTableRow[];
+}
+
 export interface Section {
   id: string;
   title: string;
@@ -56,6 +67,7 @@ export interface Section {
   keyPoints?: string[];
   terminalCommands?: TerminalCommandBlock[];
   commandReferences?: CommandReference[];
+  infoTables?: InfoTable[];
 }
 
 export interface MediaPlaceholder {

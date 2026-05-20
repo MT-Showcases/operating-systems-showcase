@@ -1,9 +1,10 @@
 'use client';
 
-import type { CommandReference, TerminalCommandBlock } from '@/data/types';
+import type { CommandReference, InfoTable, TerminalCommandBlock } from '@/data/types';
 import { Lock, Terminal, Settings, Folder, Cpu, ChevronRight, HardDrive, Network, BookOpen, Shield, Clock, Monitor, MessageSquare } from 'lucide-react';
 import TerminalCommand from './TerminalCommand';
 import CommandReferenceCard from './CommandReferenceCard';
+import InfoTableComponent from './InfoTable';
 import { renderInline, renderParagraph } from './RichText';
 
 interface SectionCardProps {
@@ -14,6 +15,7 @@ interface SectionCardProps {
   glossaryIds: string[];
   terminalCommands?: TerminalCommandBlock[];
   commandReferences?: CommandReference[];
+  infoTables?: InfoTable[];
 }
 
 
@@ -41,6 +43,7 @@ export default function SectionCard({
   glossaryIds,
   terminalCommands,
   commandReferences,
+  infoTables,
 }: SectionCardProps) {
   const paragraphs = content.split(/\n\n+/g);
 
@@ -69,11 +72,19 @@ export default function SectionCard({
           <ul className="mt-3 space-y-2 text-sm leading-7 text-text-primary">
             {keyPoints.map((point, i) => (
               <li key={`kp-${i}`} className="flex gap-3">
-                <ChevronRight size={18} className="mt-0.5 flex-shrink-0 text-accent-green" />
+                <ChevronRight size={18} className="mt-0.5 shrink-0 text-accent-green" />
                 <span>{renderInline(point, glossaryIds, `kp-${i}`)}</span>
               </li>
             ))}
           </ul>
+        </div>
+      ) : null}
+
+      {infoTables && infoTables.length > 0 ? (
+        <div className="mt-6 space-y-4">
+          {infoTables.map((table, i) => (
+            <InfoTableComponent key={`${id}-table-${i}`} {...table} />
+          ))}
         </div>
       ) : null}
 
