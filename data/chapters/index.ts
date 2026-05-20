@@ -902,15 +902,169 @@ export const chapters: Chapter[] = [
           },
         ],
       },
+      {
+        id: 'user-group-management',
+        title: 'Creare e gestire utenti e gruppi',
+        content:
+          'In Linux ogni utente ha un **UID** (identificatore numerico), una **home directory**, una **shell** di default e appartiene a uno o più **gruppi**. Queste informazioni sono registrate in due file di sistema: `/etc/passwd` (utenti) e `/etc/group` (gruppi).\n\nIl modo corretto per interrogarli non è leggerli direttamente con cat, ma usare **`getent`** — che funziona anche con directory di rete come LDAP o NIS, non solo con i file locali.\n\nSu sistemi **Debian/Ubuntu** coesistono due comandi per creare utenti: `useradd` (basso livello, richiede tutte le opzioni esplicite) e `adduser` (script interattivo che guida il processo). Su **RHEL/Fedora/Arch** esiste solo `useradd`. Per gli esempi usiamo `useradd` perché è universale e rende esplicito ogni parametro.',
+        keyPoints: [
+          'Le modifiche ai gruppi di un utente **richiedono un nuovo login** per essere attive nella sessione.',
+          '`userdel` senza `-r` **non rimuove** la home directory — i file restano orfani nel sistema.',
+          'Verifica sempre con `id` o `getent` dopo ogni operazione: è l\'unico modo per confermare che la modifica sia andata a buon fine.',
+          '`getent` è preferibile a `cat /etc/passwd` perché interroga tutte le sorgenti di identità configurate.',
+        ],
+        infoTables: [
+          {
+            title: 'Struttura di /etc/passwd — un campo per volta',
+            headers: ['Campo', 'Esempio', 'Significato'],
+            rows: [
+              { cells: ['username', 'mario', 'nome di login, deve essere unico'] },
+              { cells: ['password', 'x', 'x = hash in /etc/shadow (mai in chiaro qui)'] },
+              { cells: ['UID', '1001', 'identificatore numerico utente (root = 0)'] },
+              { cells: ['GID', '1001', 'gruppo primario dell\'utente'] },
+              { cells: ['commento', 'Mario Rossi', 'nome completo o descrizione (GECOS)'] },
+              { cells: ['home', '/home/mario', 'directory personale dell\'utente'] },
+              { cells: ['shell', '/bin/bash', 'shell di default al login'] },
+            ],
+          },
+          {
+            title: 'Comandi di gestione — riferimento rapido',
+            headers: ['Comando', 'Scopo', 'Sudo'],
+            rows: [
+              { cells: ['useradd', 'crea utente (parametrico, universale)', 'sì'] },
+              { cells: ['adduser', 'crea utente (interattivo, Debian/Ubuntu)', 'sì'] },
+              { cells: ['usermod', 'modifica attributi di un utente esistente', 'sì'] },
+              { cells: ['userdel', 'rimuove utente (con -r anche la home)', 'sì'] },
+              { cells: ['passwd', 'imposta o cambia la password', 'sì (per altri)'] },
+              { cells: ['groupadd', 'crea un nuovo gruppo', 'sì'] },
+              { cells: ['groupdel', 'elimina un gruppo (non rimuove i file)', 'sì'] },
+              { cells: ['gpasswd -a/-d', 'aggiunge (-a) o rimuove (-d) utente da gruppo', 'sì'] },
+              { cells: ['getent passwd', 'interroga il database utenti', 'no'], highlight: true },
+              { cells: ['getent group', 'interroga il database gruppi', 'no'], highlight: true },
+            ],
+          },
+        ],
+        labBlock: {
+          title: 'Ciclo completo: crea, configura, verifica, rimuovi',
+          intro: 'Il flusso reale di un amministratore: creare un utente funzionante, assegnarlo a un gruppo, verificare ogni passaggio.',
+          steps: [
+            {
+              goal: 'Crea l\'utente con home directory e shell esplicita',
+              command: {
+                command: 'sudo useradd -m -s /bin/bash -c "Mario Rossi" mario',
+                output: '',
+                explanation: '-m crea la home directory (/home/mario), -s imposta la shell di default, -c aggiunge un commento leggibile (nome completo). Senza -m la home non viene creata.',
+              },
+            },
+            {
+              goal: 'Imposta la password',
+              command: {
+                command: 'sudo passwd mario',
+                output: 'Nuova password:\nRipetere la nuova password:\npasswd: password aggiornata correttamente',
+                explanation: 'L\'hash della password viene scritto in /etc/shadow, non in /etc/passwd. Solo root può impostare password per altri utenti.',
+              },
+            },
+            {
+              goal: 'Verifica che l\'utente sia stato creato correttamente',
+              command: {
+                command: 'getent passwd mario',
+                output: 'mario:x:1001:1001:Mario Rossi:/home/mario:/bin/bash',
+                explanation: 'Tutti i campi in un colpo solo: UID, GID, commento, home, shell. Se il comando non restituisce nulla, l\'utente non esiste.',
+              },
+            },
+            {
+              goal: 'Crea un gruppo di progetto',
+              command: {
+                command: 'sudo groupadd developers',
+                output: '',
+                explanation: 'Crea il gruppo con il primo GID disponibile. Puoi specificarne uno manuale con -g <numero> se hai bisogno di un GID fisso (utile in ambienti con NFS o condivisioni).',
+              },
+            },
+            {
+              goal: 'Aggiungi l\'utente al gruppo (senza rimuoverlo da quelli esistenti)',
+              command: {
+                command: 'sudo usermod -aG developers mario',
+                output: '',
+                explanation: '-aG significa "append to Groups": aggiunge developers ai gruppi secondari di mario senza toccare quelli già presenti. Senza -a sovrascriveresti tutti i gruppi secondari.',
+                warning: 'La flag -a è obbligatoria insieme a -G. Dimenticarla rimuove mario da tutti gli altri gruppi secondari.',
+              },
+            },
+            {
+              goal: 'Verifica UID, GID e appartenenza ai gruppi',
+              command: {
+                command: 'id mario',
+                output: 'uid=1001(mario) gid=1001(mario) gruppi=1001(mario),1002(developers)',
+                explanation: 'Conferma che mario appartiene ora a entrambi i gruppi. Nota: questa modifica sarà visibile a mario solo dopo un nuovo login.',
+              },
+            },
+            {
+              goal: 'Modifica la shell o altri attributi in seguito',
+              command: {
+                command: 'sudo usermod -s /bin/zsh mario',
+                output: '',
+                explanation: 'usermod permette di cambiare qualsiasi attributo post-creazione: shell (-s), home (-d), commento (-c), nome di login (-l), account bloccato (-L) o sbloccato (-U).',
+              },
+            },
+          ],
+        },
+        terminalCommands: [
+          {
+            command: 'getent group developers',
+            output: 'developers:x:1002:mario',
+            explanation: 'Mostra il gruppo developers con GID e lista dei membri. Equivale a cercare la riga corrispondente in /etc/group.',
+          },
+          {
+            command: 'sudo gpasswd -d mario developers',
+            output: 'Rimozione dell\'utente mario dal gruppo developers',
+            explanation: 'Rimuove mario dal gruppo senza toccare altri attributi. Alternativa a usermod quando devi rimuovere da un gruppo specifico.',
+          },
+          {
+            command: 'sudo userdel -r mario',
+            output: '',
+            explanation: 'Rimuove l\'utente e cancella la home directory con tutto il contenuto.',
+            warning: 'userdel -r è irreversibile: la home e i file dell\'utente vengono eliminati. Fai sempre un backup prima.',
+          },
+          {
+            command: 'sudo groupdel developers',
+            output: '',
+            explanation: 'Elimina il gruppo. I file che appartenevano al gruppo restano nel sistema ma il GID diventa un numero senza nome associato.',
+          },
+        ],
+        commandReferences: [
+          {
+            command: 'useradd',
+            syntax: 'useradd [opzioni] <username>',
+            description: 'Crea un nuovo utente. Senza opzioni crea l\'utente senza home, shell di default /bin/sh e senza password.',
+            examples: [
+              'sudo useradd -m -s /bin/bash mario',
+              'sudo useradd -m -s /bin/bash -G sudo,developers mario',
+              'sudo useradd -u 1500 -g staff -m mario',
+            ],
+          },
+          {
+            command: 'usermod',
+            syntax: 'usermod [opzioni] <username>',
+            description: 'Modifica gli attributi di un utente esistente. -aG è la combinazione più usata per aggiungere ai gruppi.',
+            examples: [
+              'sudo usermod -aG sudo mario',
+              'sudo usermod -s /bin/zsh mario',
+              'sudo usermod -l nuovonome mario',
+              'sudo usermod -L mario',
+            ],
+          },
+        ],
+      },
     ],
     keyTakeaways: [
       'Ogni comando ha senso solo se collegato a un problema concreto.',
       'Orientamento nel file system e lettura dei permessi vengono prima della velocità.',
       'Utenti, gruppi, processi e file fanno parte dello stesso ecosistema operativo.',
+      'La gestione utenti è amministrazione: ogni modifica va verificata con `id` o `getent` prima di considerarla conclusa.',
     ],
     discussionPrompts: [
       'Perché pwd e ls sono spesso più importanti di un comando avanzato?',
       'Quando un chmod sbagliato può creare un problema di sicurezza o di collaborazione?',
+      'Perché assegnare a ogni servizio (web server, database) un utente dedicato invece di usare root?',
     ],
     quiz: [
       {
@@ -953,6 +1107,39 @@ export const chapters: Chapter[] = [
         ],
         correctAnswer: 0,
         explanation: 'La conferma interattiva riduce il rischio di cancellazioni impulsive.',
+      },
+      {
+        id: 'ch7-q5',
+        type: 'multiple_choice',
+        question: 'Qual è il rischio di usare usermod -G developers mario (senza -a)?',
+        options: [
+          'Mario viene rimosso da tutti gli altri gruppi secondari',
+          'Il comando fallisce senza -a',
+          'Mario perde la home directory',
+          'Il gruppo developers viene eliminato',
+        ],
+        correctAnswer: 0,
+        explanation: 'Senza -a, -G sovrascrive l\'elenco completo dei gruppi secondari con solo quello indicato.',
+      },
+      {
+        id: 'ch7-q6',
+        type: 'true_false',
+        question: 'Dopo aver aggiunto un utente a un gruppo con usermod -aG, le modifiche sono visibili immediatamente nella sessione corrente.',
+        correctAnswer: false,
+        explanation: 'Le modifiche ai gruppi richiedono un nuovo login. La sessione attiva mantiene i token di gruppo precedenti.',
+      },
+      {
+        id: 'ch7-q7',
+        type: 'multiple_choice',
+        question: 'Quale comando rimuove un utente E la sua home directory?',
+        options: [
+          'sudo userdel -r mario',
+          'sudo userdel mario',
+          'sudo usermod -d mario',
+          'sudo rmuser mario',
+        ],
+        correctAnswer: 0,
+        explanation: 'userdel senza -r rimuove solo l\'utente dal database; -r elimina anche home e mail spool.',
       },
     ],
     glossary: ['shell', 'terminal', 'permissions', 'chmod', 'chown', 'process', 'root', 'sudo'],
