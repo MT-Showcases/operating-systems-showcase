@@ -28,6 +28,14 @@ export default function Home() {
           <p className="text-text-secondary text-base mb-8 max-w-3xl leading-8">
             Dal <GlossaryTooltip termId="kernel">kernel</GlossaryTooltip> ai comandi Linux, dai <GlossaryTooltip termId="process">processi</GlossaryTooltip> ai <GlossaryTooltip termId="permissions">permessi</GlossaryTooltip>: un percorso completo pensato per chi vuole usare Linux con consapevolezza reale.
           </p>
+          <div className="mb-8">
+            <Link
+              href="/openclaw"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-none bg-accent-green/10 border border-accent-green/40 text-accent-green hover:bg-accent-green/20 transition-all text-sm font-semibold"
+            >
+              Scopri OpenClaw: come nasce questo corso <ChevronRight className="h-4 w-4" />
+            </Link>
+          </div>
           <div className="flex flex-wrap gap-6 text-sm text-text-secondary items-center">
             <div className="flex items-center gap-2">
               <span className="text-accent-green font-extrabold text-3xl">{chapters.length}</span>
@@ -140,6 +148,10 @@ export default function Home() {
             <div className="text-center sm:text-right">
               <p className="text-text-primary text-sm">Docente: <span className="text-accent-cyan font-medium">Michele Tornello</span></p>
               <div className="flex items-center justify-center sm:justify-end gap-3 mt-1">
+                <Link href="/openclaw" className="text-text-secondary hover:text-accent-cyan text-xs transition-colors">
+                  OpenClaw
+                </Link>
+                <span className="text-text-secondary/40" aria-hidden="true">·</span>
                 <Link href="/privacy" className="text-text-secondary hover:text-accent-cyan text-xs transition-colors">
                   Privacy Policy
                 </Link>
