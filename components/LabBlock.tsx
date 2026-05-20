@@ -49,7 +49,7 @@ export default function LabBlock({ title, intro, steps }: LabBlockType) {
                   prompt={buildStepPrompt(step.goal, step.command.command, step.command.explanation)}
                 />
               </div>
-              <TerminalCommand {...step.command} />
+              <TerminalCommand {...step.command} showNix={false} />
             </div>
           </div>
         ))}

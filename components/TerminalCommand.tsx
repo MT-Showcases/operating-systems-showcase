@@ -7,7 +7,7 @@ function buildNixPrompt(command: string, explanation: string): string {
   return `Comando: ${command}\n\nSpiegami cosa fa esattamente questo comando, il significato di ogni opzione e quando usarlo nella pratica. Contesto: ${explanation}`;
 }
 
-export default function TerminalCommand({ command, output, explanation, warning }: TerminalCommandBlock) {
+export default function TerminalCommand({ command, output, explanation, warning, showNix = true }: TerminalCommandBlock & { showNix?: boolean }) {
   return (
     <div className="rounded-none border border-accent-cyan/40 bg-black/35 overflow-hidden">
       <div className="flex items-center gap-2 border-b border-accent-cyan/40 bg-bg-primary px-4 py-3 text-xs text-text-secondary">
@@ -32,9 +32,11 @@ export default function TerminalCommand({ command, output, explanation, warning 
             {warning}
           </div>
         ) : null}
-        <div className="mt-4 flex justify-end">
-          <NixButton size="xs" prompt={buildNixPrompt(command, explanation)} />
-        </div>
+        {showNix ? (
+          <div className="mt-4 flex justify-end">
+            <NixButton size="xs" prompt={buildNixPrompt(command, explanation)} />
+          </div>
+        ) : null}
       </div>
     </div>
   );

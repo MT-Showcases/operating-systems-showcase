@@ -25,6 +25,7 @@ export default function TutorFloatingChat() {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [lastSources, setLastSources] = useState<Source[]>([]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
     try {
@@ -55,6 +56,13 @@ export default function TutorFloatingChat() {
       document.body.style.overflow = '';
     };
   }, [open]);
+
+  useEffect(() => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = `${el.scrollHeight}px`;
+  }, [question]);
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -166,6 +174,7 @@ export default function TutorFloatingChat() {
 
             <div className="p-3 border-t border-accent-cyan/40 flex gap-2 items-end">
               <textarea
+                ref={textareaRef}
                 value={question}
                 onChange={(event) => setQuestion(event.target.value)}
                 onKeyDown={(event) => {
@@ -175,8 +184,8 @@ export default function TutorFloatingChat() {
                   }
                 }}
                 placeholder={TUTOR_PLACEHOLDER}
-                rows={2}
-                className="flex-1 rounded-none bg-bg-primary border border-accent-cyan/40 px-3 py-2 text-sm resize-none min-h-[44px] max-h-28 text-text-primary"
+                rows={1}
+                className="flex-1 rounded-none bg-bg-primary border border-accent-cyan/40 px-3 py-2 text-sm resize-none min-h-[44px] max-h-48 overflow-y-auto text-text-primary"
               />
               <button onClick={ask} disabled={loading} className="rounded-none bg-accent-green/15 text-accent-green px-3 py-2 text-sm font-semibold disabled:opacity-50">
                 {loading ? '...' : 'Invia'}
