@@ -401,6 +401,48 @@ export const chapters: Chapter[] = [
       'Perché è meglio impedire a un’app di toccare direttamente la memoria di un’altra?',
       'In quali casi una system call rende il sistema più affidabile rispetto all’accesso diretto?',
     ],
+    pilotContent: {
+      whyItMatters: [
+        'Capire kernel, user space e system call ti permette di leggere il sistema operativo come un modello di controllo, non come una "scatola nera".',
+        'Questa distinzione spiega perché un bug in un’app di solito non distrugge tutta la macchina: i privilegi sono separati e le richieste passano da canali controllati.',
+      ],
+      commonMistakes: [
+        '**Kernel ≠ intero sistema operativo**: il kernel è il nucleo privilegiato, ma non coincide con tutta l’esperienza utente.',
+        '**User space non è “inutile” o “debole”**: è uno spazio intenzionalmente limitato per proteggere stabilità e sicurezza.',
+        '**System call ≠ funzione qualsiasi**: è l’interfaccia ufficiale per chiedere servizi privilegiati al kernel.',
+        'Un programma non dovrebbe accedere direttamente all’hardware: bypassare il kernel rompe isolamento e controllo.',
+        'Più privilegi non significa automaticamente “migliore”: significa più rischio se il codice è fragile o malevolo.',
+      ],
+      realWorld: [
+        'Un editor apre un file: l’app invoca una system call, il kernel valida permessi e risorse, poi restituisce il risultato in modo controllato.',
+        'Un browser in crash non manda giù tutto il sistema: gira in user space e resta confinato nel suo dominio.',
+        'Una richiesta di rete passa da API utente a system call e poi a componenti kernel per la gestione reale del dispositivo.',
+      ],
+      miniTask: [
+        '**Passo 1 — Mappa**: scegli 3 azioni comuni (aprire file, avviare app, inviare dati in rete).',
+        '**Passo 2 — Classifica**: per ogni azione, separa cosa avviene in user space e cosa richiede intervento del kernel.',
+        '**Passo 3 — Spiega**: scrivi una frase su perché usare system call è più sicuro dell’accesso diretto alle risorse.',
+      ],
+      deepDive: [
+        {
+          level: 'essenziale',
+          title: 'Linux man-pages project',
+          description: 'Riferimento pratico per osservare il comportamento reale delle system call e delle API utente.',
+          url: 'https://www.kernel.org/doc/man-pages/',
+        },
+        {
+          level: 'vai-oltre',
+          title: 'Operating Systems: Three Easy Pieces - Interlude on System Calls',
+          description: 'Approfondimento didattico molto chiaro sul passaggio da user space a kernel space.',
+          url: 'https://pages.cs.wisc.edu/~remzi/OSTEP/',
+        },
+        {
+          level: 'deep-dive',
+          title: 'The Linux Programming Interface',
+          description: 'Riferimento avanzato per comprendere in dettaglio processi, syscall e interfaccia kernel-utente.',
+        },
+      ],
+    },
     quiz: [
       {
         id: 'ch3-q1',

@@ -128,7 +128,8 @@ export default async function ChapterPage({ params }: Props) {
   const progressPercent = (chapterNum / totalChapters) * 100;
   const isChapter1 = chapter.slug === 'what-is-os';
   const isChapter2 = chapter.slug === 'hardware-cpu';
-  const isCompactChapter = isChapter1 || isChapter2;
+  const isChapter3 = chapter.slug === 'kernel';
+  const isCompactChapter = isChapter1 || isChapter2 || isChapter3;
   const shouldShowMiniTask = Boolean(chapter.pilotContent?.miniTask?.length) && !(isChapter1 && chapter.interactivePilot);
   const glossaryTerms = getTermsByIds(chapter.glossary ?? []);
 
