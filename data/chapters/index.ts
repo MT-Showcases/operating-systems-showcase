@@ -101,6 +101,70 @@ export const chapters: Chapter[] = [
         },
       ],
     },
+    interactivePilot: {
+      mission: {
+        title: 'Missione 01 — Vedere l’OS dietro quello che fai',
+        intro:
+          'Questa prova serve a farti passare dalla teoria alla lettura del mondo reale. Non devi scrivere codice: devi osservare il tuo dispositivo e riconoscere quali funzioni del sistema operativo stanno lavorando davvero.',
+        winCondition:
+          'La missione è completata quando sai collegare almeno 4 attività reali a una funzione dell’OS e riesci a spiegare, in modo semplice, perché senza OS quelle attività andrebbero in conflitto.',
+        steps: [
+          {
+            title: 'Mappa 4 attività reali',
+            instruction:
+              'Guarda il dispositivo che stai usando e annota 4 attività in corso: per esempio browser aperto, audio, rete attiva, file aperto, tastiera o touch in uso.',
+            whyItMatters:
+              'Serve a capire che il sistema operativo non è teoria astratta: coordina già adesso tutto ciò che stai facendo.',
+          },
+          {
+            title: 'Assegna il reparto giusto',
+            instruction:
+              'Per ogni attività, chiediti quale funzione dell’OS la governa meglio: processi, memoria, file system o dispositivi I/O.',
+            whyItMatters:
+              'Qui costruisci il collegamento corretto tra azione visibile e meccanismo di sistema.',
+          },
+          {
+            title: 'Spiega il caos senza OS',
+            instruction:
+              'Chiudi la prova scrivendo una frase: cosa andrebbe storto se tutte quelle attività provassero a usare hardware e risorse senza un sistema operativo a coordinarle?',
+            whyItMatters:
+              'Questo passaggio consolida il vero concetto del capitolo: l’OS serve per ordine, isolamento e servizi.',
+          },
+        ],
+      },
+      scenario: {
+        title: 'Decisione rapida — Chi sta lavorando qui?',
+        situation:
+          'Hai il browser aperto con questa lezione, la tastiera risponde, il Wi-Fi è attivo e hai appena salvato un file. Tutto sembra normale, ma dietro stanno lavorando più parti del sistema operativo nello stesso momento.',
+        question:
+          'Se devi spiegare quale funzione dell’OS rende possibile salvare il file e ritrovarlo dopo, quale scegli come risposta principale?',
+        options: [
+          {
+            label: 'Gestione processi',
+            feedback:
+              'Non è la risposta principale. I processi gestiscono l’esecuzione dei programmi, ma non organizzano la persistenza dei dati sul disco.',
+          },
+          {
+            label: 'Gestione memoria',
+            feedback:
+              'Non basta. La memoria aiuta il lavoro immediato, ma da sola non garantisce dove e come i dati restano salvati.',
+          },
+          {
+            label: 'Gestione file system',
+            feedback:
+              'Corretto. Il file system organizza nomi, struttura, posizione logica e persistenza dei dati nel tempo.',
+            isCorrect: true,
+          },
+          {
+            label: 'Gestione dispositivi I/O',
+            feedback:
+              'È coinvolta nel dialogo con il disco, ma la risposta più corretta qui è il file system, perché il focus è il salvataggio persistente e l’organizzazione dei file.',
+          },
+        ],
+        takeaway:
+          'Il punto non è indovinare una parola, ma imparare a leggere un’azione quotidiana come risultato di più funzioni coordinate dall’OS.',
+      },
+    },
     quiz: [
       {
         id: 'ch1-q1',

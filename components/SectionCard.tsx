@@ -8,6 +8,7 @@ import InfoTableComponent from './InfoTable';
 import LabBlockComponent from './LabBlock';
 import NixButton from './NixButton';
 import { renderInline, renderParagraph } from './RichText';
+import { useState } from 'react';
 
 interface SectionCardProps {
   id: string;
@@ -19,6 +20,7 @@ interface SectionCardProps {
   commandReferences?: CommandReference[];
   infoTables?: InfoTable[];
   labBlock?: LabBlock;
+  isChapter1?: boolean;
 }
 
 
@@ -48,11 +50,16 @@ export default function SectionCard({
   commandReferences,
   infoTables,
   labBlock,
+  isChapter1 = false,
 }: SectionCardProps) {
   const paragraphs = content.split(/\n\n+/g);
+  // Collapsible state
+  const [showLab, setShowLab] = useState(!isChapter1);
+  const [showReferences, setShowReferences] = useState(!isChapter1);
+  const [showTerminals, setShowTerminals] = useState(!isChapter1);
 
   return (
-    <section id={id} className="scroll-mt-24 overflow-hidden border-2 border-accent-cyan bg-bg-primary p-6">
+    <section id={id} className={`scroll-mt-24 overflow-hidden border-2 border-accent-cyan bg-bg-primary ${isChapter1 ? 'p-5' : 'p-6'}`}>
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center border-2 border-accent-cyan/60 bg-bg-surface">
@@ -60,10 +67,9 @@ export default function SectionCard({
           </div>
           <div>
             <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-text-secondary">Sezione operativa</p>
-            <h2 className="terminal-heading text-2xl font-semibold text-text-primary">{title}</h2>
+            <h2 className={`terminal-heading font-semibold text-text-primary ${isChapter1 ? 'text-xl' : 'text-2xl'}`}>{title}</h2>
           </div>
         </div>
-
       </div>
 
       <div className="mt-5 space-y-4">
@@ -71,12 +77,14 @@ export default function SectionCard({
       </div>
 
       {keyPoints && keyPoints.length > 0 ? (
-        <div className="mt-6 border-2 border-accent-green/60 bg-bg-surface p-4">
-          <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-green">Da tenere a mente</p>
-          <ul className="mt-3 space-y-2 text-sm leading-7 text-text-primary">
+        <div className={`mt-6 border-2 border-accent-green/60 bg-bg-surface ${isChapter1 ? 'p-3' : 'p-4'}`}>
+          <p className="text-left text-accent-green font-medium text-[10px] uppercase tracking-[0.18em]">
+            Da tenere a mente
+          </p>
+          <ul className="mt-3 space-y-2 text-xs leading-5 text-text-primary">
             {keyPoints.map((point, i) => (
-              <li key={`kp-${i}`} className="flex gap-3">
-                <ChevronRight size={18} className="mt-0.5 shrink-0 text-accent-green" />
+              <li key={`kp-${i}`} className="flex gap-2">
+                <ChevronRight size={15} className="mt-0.5 shrink-0 text-accent-green" />
                 <span>{renderInline(point, glossaryIds, `kp-${i}`)}</span>
               </li>
             ))}
@@ -94,23 +102,58 @@ export default function SectionCard({
 
       {labBlock ? (
         <div className="mt-6">
-          <LabBlockComponent {...labBlock} glossaryIds={glossaryIds} />
+          <button
+            type="button"
+            className="w-full flex items-center justify-between text-left text-accent-cyan font-semibold text-xs uppercase tracking-[0.22em] border-b border-accent-cyan/30 pb-2 mb-2"
+            onClick={() => setShowLab((v) => !v)}
+            aria-expanded={showLab}
+          >
+            {labBlock.title || 'Laboratorio'}
+            <span className="ml-2">{showLab ? '▲' : '▼'}</span>
+          </button>
+          {showLab ? <LabBlockComponent {...labBlock} glossaryIds={glossaryIds} /> : null}
         </div>
       ) : null}
 
       {terminalCommands && terminalCommands.length > 0 ? (
-        <div className="mt-6 space-y-4">
-          {terminalCommands.map((block) => (
-            <TerminalCommand key={`${id}-${block.command}`} {...block} glossaryIds={glossaryIds} />
-          ))}
+        <div className="mt-6">
+          <button
+            type="button"
+            className="w-full flex items-center justify-between text-left text-accent-cyan font-semibold text-xs uppercase tracking-[0.22em] border-b border-accent-cyan/30 pb-2 mb-2"
+            onClick={() => setShowTerminals((v) => !v)}
+            aria-expanded={showTerminals}
+          >
+            Comandi terminale
+            <span className="ml-2">{showTerminals ? '▲' : '▼'}</span>
+          </button>
+          {showTerminals ? (
+            <div className="space-y-4">
+              {terminalCommands.map((block) => (
+                <TerminalCommand key={`${id}-${block.command}`} {...block} glossaryIds={glossaryIds} />
+              ))}
+            </div>
+          ) : null}
         </div>
       ) : null}
 
       {commandReferences && commandReferences.length > 0 ? (
-        <div className="mt-6 grid gap-4 lg:grid-cols-2">
-          {commandReferences.map((reference) => (
-            <CommandReferenceCard key={`${id}-${reference.command}`} {...reference} />
-          ))}
+        <div className="mt-6">
+          <button
+            type="button"
+            className="w-full flex items-center justify-between text-left text-accent-cyan font-semibold text-xs uppercase tracking-[0.22em] border-b border-accent-cyan/30 pb-2 mb-2"
+            onClick={() => setShowReferences((v) => !v)}
+            aria-expanded={showReferences}
+          >
+            Riferimenti rapidi
+            <span className="ml-2">{showReferences ? '▲' : '▼'}</span>
+          </button>
+          {showReferences ? (
+            <div className="grid gap-4 lg:grid-cols-2">
+              {commandReferences.map((reference) => (
+                <CommandReferenceCard key={`${id}-${reference.command}`} {...reference} />
+              ))}
+            </div>
+          ) : null}
         </div>
       ) : null}
 

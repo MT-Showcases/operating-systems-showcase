@@ -2,7 +2,6 @@ import SectionMediaSlots from '@/components/SectionMediaSlots';
 import { chapters, chaptersBySlug } from '@/data/chapters';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import ChapterHeader from '@/components/ChapterHeader';
 import SectionCard from '@/components/SectionCard';
 import KeyTakeaway from '@/components/KeyTakeaway';
@@ -18,6 +17,7 @@ import ChapterNav from '@/components/ChapterNav';
 import { getTermsByIds } from '@/data/glossary';
 import { ChevronRight } from 'lucide-react';
 import PilotBlock from '@/components/PilotBlock';
+import ChapterInteractivePilot from '@/components/ChapterInteractivePilot';
 
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -126,6 +126,8 @@ export default async function ChapterPage({ params }: Props) {
   const chapterNum = currentIndex + 1;
   const totalChapters = chapters.length;
   const progressPercent = (chapterNum / totalChapters) * 100;
+  const isChapter1 = chapter.slug === 'what-is-os';
+  const shouldShowMiniTask = Boolean(chapter.pilotContent?.miniTask?.length) && !(isChapter1 && chapter.interactivePilot);
   const glossaryTerms = getTermsByIds(chapter.glossary ?? []);
 
   return (
@@ -192,7 +194,7 @@ export default async function ChapterPage({ params }: Props) {
                     <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Glossario del capitolo</p>
                     <h2 className="mt-2 text-xl font-semibold text-text-primary">Termini da tenere aperti mentre studi</h2>
                   </div>
-                  <p className="max-w-xl text-sm leading-7 text-text-secondary">
+                  <p className={`max-w-xl text-sm text-text-secondary ${isChapter1 ? 'leading-6' : 'leading-7'}`}>
                     Tocca un termine per aprire il drawer e collegare teoria, comandi e pratica Linux.
                   </p>
                 </div>
@@ -214,7 +216,7 @@ export default async function ChapterPage({ params }: Props) {
             ) : null}
 
             <div className="space-y-8 mb-12">
-              {chapter.sections.map((section, idx) => (
+              {chapter.sections.map((section) => (
                 <div key={section.id}>
                   <SectionCard
                     id={section.id}
@@ -226,6 +228,7 @@ export default async function ChapterPage({ params }: Props) {
                     commandReferences={section.commandReferences}
                     infoTables={section.infoTables}
                     labBlock={section.labBlock}
+                    isChapter1={isChapter1}
                   />
                 </div>
               ))}
@@ -235,48 +238,124 @@ export default async function ChapterPage({ params }: Props) {
 
             {chapter.pilotContent?.commonMistakes?.length ? (
               <section className="mt-8 border-2 border-accent-amber/40 bg-bg-surface p-6">
-                <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-amber">Errori comuni</p>
-                <PilotBlock items={chapter.pilotContent.commonMistakes} glossaryIds={chapter.glossary ?? []} blockKey="mistakes" asList />
+                {isChapter1 ? (
+                  <details>
+                    <summary className="flex cursor-pointer list-none items-center justify-between terminal-heading text-[11px] uppercase tracking-[0.2em] text-accent-amber">
+                      Errori comuni
+                      <ChevronRight className="h-4 w-4" />
+                    </summary>
+                    <div className="mt-4">
+                      <PilotBlock items={chapter.pilotContent.commonMistakes} glossaryIds={chapter.glossary ?? []} blockKey="mistakes" asList />
+                    </div>
+                  </details>
+                ) : (
+                  <>
+                    <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-amber">Errori comuni</p>
+                    <PilotBlock items={chapter.pilotContent.commonMistakes} glossaryIds={chapter.glossary ?? []} blockKey="mistakes" asList />
+                  </>
+                )}
               </section>
             ) : null}
 
             {chapter.pilotContent?.realWorld?.length ? (
               <section className="mt-8 border-2 border-accent-cyan/40 bg-bg-surface p-6">
-                <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Nel mondo reale</p>
-                <PilotBlock items={chapter.pilotContent.realWorld} glossaryIds={chapter.glossary ?? []} blockKey="realworld" asList />
+                {isChapter1 ? (
+                  <details>
+                    <summary className="flex cursor-pointer list-none items-center justify-between terminal-heading text-[11px] uppercase tracking-[0.2em] text-accent-cyan">
+                      Nel mondo reale
+                      <ChevronRight className="h-4 w-4" />
+                    </summary>
+                    <div className="mt-4">
+                      <PilotBlock items={chapter.pilotContent.realWorld} glossaryIds={chapter.glossary ?? []} blockKey="realworld" asList />
+                    </div>
+                  </details>
+                ) : (
+                  <>
+                    <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Nel mondo reale</p>
+                    <PilotBlock items={chapter.pilotContent.realWorld} glossaryIds={chapter.glossary ?? []} blockKey="realworld" asList />
+                  </>
+                )}
               </section>
             ) : null}
 
             {chapter.pilotContent?.deepDive?.length ? (
               <section className="mt-8 border-2 border-accent-green/30 bg-bg-surface p-6">
-                <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-green">Approfondisci</p>
-                <div className="mt-4 grid gap-4 md:grid-cols-3">
-                  {chapter.pilotContent.deepDive.map((resource) => (
-                    <div key={`${resource.level}-${resource.title}`} className="border-2 border-border-subtle bg-black/20 p-4">
-                      <p className="terminal-heading text-[11px] uppercase tracking-[0.22em] text-accent-green">{resource.level}</p>
-                      <h3 className="mt-2 text-sm font-semibold text-text-primary">{resource.title}</h3>
-                      <p className="mt-2 text-sm leading-7 text-text-secondary">{resource.description}</p>
-                      {resource.url ? (
-                        <a
-                          href={resource.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="mt-3 inline-flex items-center gap-2 border border-accent-cyan/40 px-3 py-1.5 text-xs text-accent-cyan transition hover:bg-accent-cyan/10"
-                        >
-                          Apri risorsa <ChevronRight className="h-3.5 w-3.5" />
-                        </a>
-                      ) : null}
+                {isChapter1 ? (
+                  <details>
+                    <summary className="flex cursor-pointer list-none items-center justify-between terminal-heading text-[11px] uppercase tracking-[0.2em] text-accent-green">
+                      Approfondisci
+                      <ChevronRight className="h-4 w-4" />
+                    </summary>
+                    <div className="mt-4 grid gap-4 md:grid-cols-3">
+                      {chapter.pilotContent.deepDive.map((resource) => (
+                        <div key={`${resource.level}-${resource.title}`} className="border-2 border-border-subtle bg-black/20 p-4">
+                          <p className="terminal-heading text-[11px] uppercase tracking-[0.22em] text-accent-green">{resource.level}</p>
+                          <h3 className="mt-2 text-sm font-semibold text-text-primary">{resource.title}</h3>
+                          <p className="mt-2 text-sm leading-6 text-text-secondary">{resource.description}</p>
+                          {resource.url ? (
+                            <a
+                              href={resource.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="mt-3 inline-flex items-center gap-2 border border-accent-cyan/40 px-3 py-1.5 text-xs text-accent-cyan transition hover:bg-accent-cyan/10"
+                            >
+                              Apri risorsa <ChevronRight className="h-3.5 w-3.5" />
+                            </a>
+                          ) : null}
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </details>
+                ) : (
+                  <>
+                    <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-green">Approfondisci</p>
+                    <div className="mt-4 grid gap-4 md:grid-cols-3">
+                      {chapter.pilotContent.deepDive.map((resource) => (
+                        <div key={`${resource.level}-${resource.title}`} className="border-2 border-border-subtle bg-black/20 p-4">
+                          <p className="terminal-heading text-[11px] uppercase tracking-[0.22em] text-accent-green">{resource.level}</p>
+                          <h3 className="mt-2 text-sm font-semibold text-text-primary">{resource.title}</h3>
+                          <p className="mt-2 text-sm leading-7 text-text-secondary">{resource.description}</p>
+                          {resource.url ? (
+                            <a
+                              href={resource.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="mt-3 inline-flex items-center gap-2 border border-accent-cyan/40 px-3 py-1.5 text-xs text-accent-cyan transition hover:bg-accent-cyan/10"
+                            >
+                              Apri risorsa <ChevronRight className="h-3.5 w-3.5" />
+                            </a>
+                          ) : null}
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
               </section>
             ) : null}
 
-            {chapter.pilotContent?.miniTask?.length ? (
+            {shouldShowMiniTask ? (
               <section className="mt-8 border-2 border-accent-cyan/40 bg-bg-surface p-6">
-                <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Mini task</p>
-                <PilotBlock items={chapter.pilotContent.miniTask} glossaryIds={chapter.glossary ?? []} blockKey="minitask" />
+                {isChapter1 ? (
+                  <details>
+                    <summary className="flex cursor-pointer list-none items-center justify-between terminal-heading text-[11px] uppercase tracking-[0.2em] text-accent-cyan">
+                      Mini task
+                      <ChevronRight className="h-4 w-4" />
+                    </summary>
+                    <div className="mt-4">
+                      <PilotBlock items={chapter.pilotContent.miniTask} glossaryIds={chapter.glossary ?? []} blockKey="minitask" />
+                    </div>
+                  </details>
+                ) : (
+                  <>
+                    <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Mini task</p>
+                    <PilotBlock items={chapter.pilotContent.miniTask} glossaryIds={chapter.glossary ?? []} blockKey="minitask" />
+                  </>
+                )}
               </section>
+            ) : null}
+
+            {chapter.interactivePilot ? (
+              <ChapterInteractivePilot pilot={chapter.interactivePilot} chapterTitle={chapter.title} />
             ) : null}
 
             {chapter.discussionPrompts && chapter.discussionPrompts.length > 0 ? (

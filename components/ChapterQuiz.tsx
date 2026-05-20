@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { CheckCircle2, AlertCircle, ChevronRight } from 'lucide-react';
 import type { QuizQuestion } from '@/data/types';
 import { buildQuizStorageKey } from '@/lib/quiz-storage';
+import NixButton from './NixButton';
 
 interface ChapterQuizProps {
   quiz: QuizQuestion[];
@@ -24,6 +25,17 @@ function normalizeQuestion(question: QuizQuestion) {
   };
 }
 
+function buildWrongAnswerPrompt(question: QuizQuestion, selectedLabel: string, correctLabel: string) {
+  return [
+    `Domanda quiz: ${question.question}`,
+    `Risposta scelta: ${selectedLabel}`,
+    `Risposta corretta: ${correctLabel}`,
+    `Spiegazione disponibile: ${question.explanation}`,
+    '',
+    'Spiegami in modo semplice perche la mia risposta e sbagliata, quale concetto del sistema operativo sto confondendo e fammi un esempio concreto.',
+  ].join('\n');
+}
+
 export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
@@ -32,6 +44,8 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
   const normalized = normalizeQuestion(currentQuestion);
   const selected = answers[currentIndex];
   const completed = Object.keys(answers).length === quiz.length;
+  const correctLabel = normalized.options[normalized.correctIndex] ?? String(currentQuestion.correctAnswer);
+  const selectedLabel = selected !== undefined ? normalized.options[selected] ?? String(selected) : null;
 
   const score = useMemo(
     () =>
@@ -112,6 +126,11 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
               )}
             </div>
             <p className="mt-2">{currentQuestion.explanation}</p>
+            {selected !== normalized.correctIndex && selectedLabel ? (
+              <div className="mt-3 flex justify-end">
+                <NixButton prompt={buildWrongAnswerPrompt(currentQuestion, selectedLabel, correctLabel)} size="xs" />
+              </div>
+            ) : null}
           </div>
         ) : null}
       </div>

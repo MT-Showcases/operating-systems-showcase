@@ -98,6 +98,38 @@ export interface ChapterDeepDiveResource {
   url?: string;
 }
 
+export interface ChapterMissionStep {
+  title: string;
+  instruction: string;
+  whyItMatters: string;
+}
+
+export interface ChapterMission {
+  title: string;
+  intro: string;
+  winCondition: string;
+  steps: ChapterMissionStep[];
+}
+
+export interface ChapterScenarioOption {
+  label: string;
+  feedback: string;
+  isCorrect?: boolean;
+}
+
+export interface ChapterScenario {
+  title: string;
+  situation: string;
+  question: string;
+  options: ChapterScenarioOption[];
+  takeaway: string;
+}
+
+export interface ChapterInteractivePilot {
+  mission: ChapterMission;
+  scenario: ChapterScenario;
+}
+
 export interface ChapterPilotContent {
   whyItMatters?: string[];
   commonMistakes?: string[];
@@ -120,4 +152,5 @@ export interface Chapter {
   glossary: string[];
   media?: MediaPlaceholder[];
   pilotContent?: ChapterPilotContent;
+  interactivePilot?: ChapterInteractivePilot;
 }
