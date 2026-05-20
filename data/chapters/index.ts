@@ -1118,6 +1118,51 @@ export const chapters: Chapter[] = [
       'Avviare una sessione Linux funzionante con almeno uno dei metodi.',
       'Capire limiti e vantaggi di ogni approccio.',
     ],
+    pilotContent: {
+      whyItMatters: [
+        'Un ambiente Linux pronto riduce frizione: inizi a praticare subito invece di perdere tempo in setup improvvisati.',
+        'Scegliere bene il contesto (browser, WSL2, VM) evita blocchi tecnici nei capitoli successivi.',
+        'Capire persistenza e isolamento ti protegge da aspettative sbagliate su file, performance e sicurezza.',
+      ],
+      commonMistakes: [
+        'KillerCoda non e un PC personale permanente: le sessioni possono scadere e i file non sono garantiti tra accessi.',
+        'WSL2 non e una distro separata dal tuo workflow Windows: va integrato con percorso, editor e backup.',
+        'VirtualBox e UTM non sono identici: su Apple Silicon devi verificare compatibilita ARM prima di partire.',
+        'Piu RAM assegnata alla VM non significa sempre meglio: se saturi l\'host ottieni il risultato opposto.',
+        'Installare Linux non equivale a saperlo usare: il valore arriva quando testi davvero comandi e flussi.',
+      ],
+      realWorld: [
+        'Team di formazione usano browser lab temporanei per onboarding rapido senza toccare i laptop aziendali.',
+        'Sviluppatori Windows lavorano con WSL2 + VS Code Remote per unire tool Linux e produttivita desktop.',
+        'Ambienti VM isolati sono standard per test rischiosi, malware analysis e prove di hardening.',
+      ],
+      miniTask: [
+        'Scegli un ambiente primario (KillerCoda, WSL2 o VM) e scrivi in due righe il motivo della scelta.',
+        'Esegui whoami, pwd e cat /etc/os-release nel tuo ambiente e salva l\'output in un file note-setup.txt.',
+        'Valuta persistenza: crea un file, chiudi la sessione, riapri e verifica se il file esiste ancora.',
+        'Definisci un piano B: quale seconda opzione userai se il tuo ambiente principale non parte?',
+      ],
+      deepDive: [
+        {
+          level: 'essenziale',
+          title: 'WSL official docs',
+          description: 'Guida Microsoft per installazione, troubleshooting e best practice di WSL2.',
+          url: 'https://learn.microsoft.com/windows/wsl/',
+        },
+        {
+          level: 'vai-oltre',
+          title: 'VirtualBox user manual',
+          description: 'Riferimento completo su networking, storage e snapshot in ambienti VM.',
+          url: 'https://www.virtualbox.org/manual/',
+        },
+        {
+          level: 'deep-dive',
+          title: 'UTM documentation',
+          description: 'Approccio consigliato per virtualizzazione Linux su Mac Apple Silicon.',
+          url: 'https://docs.getutm.app/',
+        },
+      ],
+    },
     sections: [
       {
         id: 'killercoda-browser',
@@ -1310,6 +1355,51 @@ export const chapters: Chapter[] = [
       'Creare, leggere, spostare e cancellare file con consapevolezza.',
       'Capire la propria identità di sistema con whoami e id.',
     ],
+    pilotContent: {
+      whyItMatters: [
+        'Questi comandi sono la grammatica minima del terminale: senza orientamento, ogni comando avanzato diventa fragile.',
+        'Lavorare bene su file e directory riduce errori irreversibili e tempo perso in recovery.',
+        'Capire chi sei nel sistema (utente e gruppi) e il primo passo per non rompere permessi e workflow condivisi.',
+      ],
+      commonMistakes: [
+        'ls non sostituisce pwd: vedere i file non ti dice con certezza dove sei nella gerarchia.',
+        'rm non e una funzione "annulla": in shell standard non esiste cestino automatico.',
+        'cd relativo e cd assoluto non sono intercambiabili: confonderli sposta il contesto operativo.',
+        'whoami mostra il nome, non i privilegi completi: per decisioni su accessi devi leggere id.',
+        'Copiare comandi a memoria senza controllare il percorso e la causa principale di danni banali.',
+      ],
+      realWorld: [
+        'Pipeline CI e script di deploy assumono sempre contesto directory corretto prima di build e release.',
+        'Incident postmortem includono spesso cancellazioni in path sbagliati dovute a shell context non verificato.',
+        'Runbook operativi maturi partono da check minimi: whoami, pwd, ls -la prima di ogni azione critica.',
+      ],
+      miniTask: [
+        'Crea una cartella sandbox-linux e lavora solo li per tutta la sessione.',
+        'Esegui un ciclo completo: mkdir, touch, cp, mv, cat, rm -i e documenta output e risultato atteso.',
+        'Confronta whoami e id e annota differenza tra nome utente, UID e gruppi secondari.',
+        'Scrivi tre regole personali anti-errore da usare prima di rm o mv in progetti reali.',
+      ],
+      deepDive: [
+        {
+          level: 'essenziale',
+          title: 'GNU coreutils overview',
+          description: 'Panoramica ufficiale degli strumenti base del terminale (cp, mv, rm, ls, cat).',
+          url: 'https://www.gnu.org/software/coreutils/manual/coreutils.html',
+        },
+        {
+          level: 'vai-oltre',
+          title: 'The Linux command line basics',
+          description: 'Approccio progressivo per consolidare navigazione, path e manipolazione file.',
+          url: 'https://linuxcommand.org/',
+        },
+        {
+          level: 'deep-dive',
+          title: 'Filesystem hierarchy standard',
+          description: 'Riferimento per capire struttura directory Linux in modo sistematico.',
+          url: 'https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html',
+        },
+      ],
+    },
     sections: [
       {
         id: 'navigation',
@@ -1484,6 +1574,51 @@ export const chapters: Chapter[] = [
       'Cambiare proprietario e gruppo con chown.',
       'Creare, configurare e rimuovere utenti e gruppi in modo operativo.',
     ],
+    pilotContent: {
+      whyItMatters: [
+        'Permessi e ownership sono il cuore della sicurezza Linux quotidiana: un bit sbagliato puo esporre dati e servizi.',
+        'Sapere creare utenti e gruppi in modo ripetibile e un requisito base per ambienti multiutente e server.',
+        'Verificare ogni modifica con id/getent evita stato inconsistente e debugging costoso.',
+      ],
+      commonMistakes: [
+        'chmod 777 non e una scorciatoia innocua: apre tutto a tutti e aumenta la superficie di attacco.',
+        'La notazione ottale non "aggiunge" permessi: riscrive completamente i tre blocchi owner/group/others.',
+        'usermod -G senza -a non estende i gruppi: sovrascrive la lista e puo togliere accessi critici.',
+        'userdel senza -r non pulisce automaticamente la home: lascia file orfani e confusione operativa.',
+        'Cambiare owner con chown -R senza validare il path puo compromettere interi alberi applicativi.',
+      ],
+      realWorld: [
+        'Deployment web standard usa owner applicativo dedicato e chmod minimi su directory esposte.',
+        'Team DevOps creano gruppi per progetto per separare accessi write tra sviluppo, CI e produzione.',
+        'Audit di sicurezza partono da permessi filesystem e membership gruppi prima di analizzare codice.',
+      ],
+      miniTask: [
+        'Crea un utente test e un gruppo progetto, poi verifica mapping UID/GID con id e getent.',
+        'Imposta un file di configurazione con chmod 640 e una directory script con chmod 750, spiegando la scelta.',
+        'Simula errore controllato: usa chmod ottale e poi correggi con notazione simbolica su singolo bit.',
+        'Documenta una checklist di 5 controlli da fare prima di qualsiasi chown -R in produzione.',
+      ],
+      deepDive: [
+        {
+          level: 'essenziale',
+          title: 'GNU chmod and chown manual',
+          description: 'Sintassi ufficiale e comportamento dettagliato di chmod/chown.',
+          url: 'https://www.gnu.org/software/coreutils/manual/coreutils.html#File-permissions',
+        },
+        {
+          level: 'vai-oltre',
+          title: 'Linux users and groups administration',
+          description: 'Riferimento pratico per useradd/usermod/userdel e gestione gruppi.',
+          url: 'https://wiki.archlinux.org/title/Users_and_groups',
+        },
+        {
+          level: 'deep-dive',
+          title: 'Principle of least privilege',
+          description: 'Fondamenti di sicurezza per minimizzare privilegi su sistemi reali.',
+          url: 'https://csrc.nist.gov/glossary/term/least_privilege',
+        },
+      ],
+    },
     sections: [
       {
         id: 'permissions-chmod',
@@ -1820,6 +1955,51 @@ export const chapters: Chapter[] = [
       'Riconoscere errori operativi comuni su Linux.',
       'Adottare un comportamento più professionale e sicuro sul sistema.',
     ],
+    pilotContent: {
+      whyItMatters: [
+        'La maggior parte degli incidenti operativi nasce da abitudini, non da complessita tecnica estrema.',
+        'Adottare principio di privilegio minimo riduce impatto di errori umani e comandi sbagliati.',
+        'Un mindset professionale rende ripetibili le operazioni e migliora affidabilita del team.',
+      ],
+      commonMistakes: [
+        'sudo non e un prefisso standard da aggiungere sempre: va usato solo con una motivazione esplicita.',
+        'Leggere solo la prima riga dell\'errore porta a fix superficiali: serve interpretare tutto l\'output.',
+        'Automatizzare prima di capire il flusso moltiplica errori: prima comprensione, poi script.',
+        'Saltare backup e rollback su operazioni delicate non e velocita: e debito operativo immediato.',
+        'Confondere familiarita con sicurezza porta a overconfidence e comandi lanciati senza verifica.',
+      ],
+      realWorld: [
+        'SRE team usano checklist pre-change e post-change per ridurre incidenti durante manutenzione.',
+        'Policy aziendali mature impongono account separati e tracciamento comandi privilegiati.',
+        'Runbook efficaci descrivono anche cosa non fare, non solo la procedura ideale.',
+      ],
+      miniTask: [
+        'Prendi un comando con sudo dal tuo storico e riscrivi il motivo tecnico per cui serviva davvero.',
+        'Definisci una mini checklist personale pre-comando critico: contesto, target, impatto, rollback.',
+        'Simula una review: scegli un comando rischioso e chiediti quali segnali d\'allarme avresti prima di inviarlo.',
+        'Crea un file sicurezza-operativa.md con 5 regole pratiche che adotterai nei prossimi capitoli.',
+      ],
+      deepDive: [
+        {
+          level: 'essenziale',
+          title: 'OWASP developer security principles',
+          description: 'Principi generali utili anche per operazioni sysadmin quotidiane.',
+          url: 'https://owasp.org/www-project-developer-guide/',
+        },
+        {
+          level: 'vai-oltre',
+          title: 'NIST least privilege guidance',
+          description: 'Riferimenti formali su riduzione privilegi e controllo accessi.',
+          url: 'https://csrc.nist.gov/glossary/term/least_privilege',
+        },
+        {
+          level: 'deep-dive',
+          title: 'Linux hardening checklist',
+          description: 'Checklist operativa per trasformare buone pratiche in controlli ripetibili.',
+          url: 'https://cheatsheetseries.owasp.org/cheatsheets/Linux_Hardening_Cheat_Sheet.html',
+        },
+      ],
+    },
     sections: [
       {
         id: 'root-sudo',

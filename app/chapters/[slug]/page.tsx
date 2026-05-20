@@ -133,9 +133,24 @@ export default async function ChapterPage({ params }: Props) {
   const isChapter5 = chapter.slug === 'memory-filesystem';
   const isChapter6 = chapter.slug === 'linux-fundamentals';
   const isChapter7 = chapter.slug === 'os-comparison';
-  const isCompactChapter = isChapter1 || isChapter2 || isChapter3 || isChapter4 || isChapter5 || isChapter6 || isChapter7;
+  const isChapter8 = chapter.slug === 'linux-environment-setup';
+  const isChapter9 = chapter.slug === 'linux-commands';
+  const isChapter10 = chapter.slug === 'permissions-users';
+  const isChapter11 = chapter.slug === 'security-best-practices';
+  const isCompactChapter =
+    isChapter1 ||
+    isChapter2 ||
+    isChapter3 ||
+    isChapter4 ||
+    isChapter5 ||
+    isChapter6 ||
+    isChapter7 ||
+    isChapter8 ||
+    isChapter9 ||
+    isChapter10 ||
+    isChapter11;
   const keepComparisonInsightsExpanded = isChapter7;
-  const shouldShowMiniTask = Boolean(chapter.pilotContent?.miniTask?.length) && !(isChapter1 && chapter.interactivePilot);
+  const shouldShowMiniTask = Boolean(chapter.pilotContent?.miniTask?.length) && !chapter.interactivePilot;
   const glossaryTerms = getTermsByIds(chapter.glossary ?? []);
 
   return (
