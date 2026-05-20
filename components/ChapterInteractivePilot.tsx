@@ -19,7 +19,7 @@ export default function ChapterInteractivePilot({ pilot, chapterTitle }: Chapter
     [completedSteps]
   );
 
-  const selectedScenario = selectedOption !== null ? pilot.scenario.options[selectedOption] : null;
+  const selectedScenario = pilot.scenario && selectedOption !== null ? pilot.scenario.options[selectedOption] : null;
 
   const toggleStep = (index: number) => {
     setCompletedSteps((previous) => ({
@@ -83,44 +83,46 @@ export default function ChapterInteractivePilot({ pilot, chapterTitle }: Chapter
         <NixButton prompt={missionPrompt} />
       </div>
 
-      <div className="mt-8 border-2 border-accent-cyan/40 bg-bg-primary p-5">
-        <div className="flex items-center gap-2 text-accent-cyan">
-          <Sparkles className="h-4 w-4" />
-          <p className="terminal-heading text-xs uppercase tracking-[0.22em]">Mini gioco decisionale</p>
-        </div>
-        <h3 className="mt-3 text-xl font-semibold text-text-primary">{pilot.scenario.title}</h3>
-        <p className="mt-3 text-sm leading-7 text-text-secondary">{pilot.scenario.situation}</p>
-        <p className="mt-4 text-sm font-medium text-text-primary">{pilot.scenario.question}</p>
-
-        <div className="mt-4 grid gap-3 md:grid-cols-2">
-          {pilot.scenario.options.map((option, index) => {
-            const isSelected = selectedOption === index;
-            const isCorrect = Boolean(option.isCorrect);
-            let className = 'border-accent-cyan/40 text-text-primary hover:border-accent-cyan';
-
-            if (isSelected && isCorrect) className = 'border-accent-green bg-accent-green/5 text-accent-green';
-            if (isSelected && !isCorrect) className = 'border-accent-amber bg-accent-amber/5 text-text-primary';
-
-            return (
-              <button
-                key={option.label}
-                type="button"
-                onClick={() => setSelectedOption(index)}
-                className={`min-h-11 border-2 px-4 py-3 text-left text-sm transition ${className}`}
-              >
-                {option.label}
-              </button>
-            );
-          })}
-        </div>
-
-        {selectedScenario ? (
-          <div className="mt-4 border border-accent-cyan/30 bg-black/20 p-4">
-            <p className="text-sm leading-7 text-text-primary">{selectedScenario.feedback}</p>
-            <p className="mt-2 text-xs leading-6 text-text-secondary">{pilot.scenario.takeaway}</p>
+      {pilot.scenario ? (
+        <div className="mt-8 border-2 border-accent-cyan/40 bg-bg-primary p-5">
+          <div className="flex items-center gap-2 text-accent-cyan">
+            <Sparkles className="h-4 w-4" />
+            <p className="terminal-heading text-xs uppercase tracking-[0.22em]">Mini gioco decisionale</p>
           </div>
-        ) : null}
-      </div>
+          <h3 className="mt-3 text-xl font-semibold text-text-primary">{pilot.scenario.title}</h3>
+          <p className="mt-3 text-sm leading-7 text-text-secondary">{pilot.scenario.situation}</p>
+          <p className="mt-4 text-sm font-medium text-text-primary">{pilot.scenario.question}</p>
+
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {pilot.scenario.options.map((option, index) => {
+              const isSelected = selectedOption === index;
+              const isCorrect = Boolean(option.isCorrect);
+              let className = 'border-accent-cyan/40 text-text-primary hover:border-accent-cyan';
+
+              if (isSelected && isCorrect) className = 'border-accent-green bg-accent-green/5 text-accent-green';
+              if (isSelected && !isCorrect) className = 'border-accent-amber bg-accent-amber/5 text-text-primary';
+
+              return (
+                <button
+                  key={option.label}
+                  type="button"
+                  onClick={() => setSelectedOption(index)}
+                  className={`min-h-11 border-2 px-4 py-3 text-left text-sm transition ${className}`}
+                >
+                  {option.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {selectedScenario ? (
+            <div className="mt-4 border border-accent-cyan/30 bg-black/20 p-4">
+              <p className="text-sm leading-7 text-text-primary">{selectedScenario.feedback}</p>
+              <p className="mt-2 text-xs leading-6 text-text-secondary">{pilot.scenario.takeaway}</p>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
     </section>
   );
 }

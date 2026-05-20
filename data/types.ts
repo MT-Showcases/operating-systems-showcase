@@ -127,7 +127,7 @@ export interface ChapterScenario {
 
 export interface ChapterInteractivePilot {
   mission: ChapterMission;
-  scenario: ChapterScenario;
+  scenario?: ChapterScenario;
 }
 
 export interface ChapterPilotContent {

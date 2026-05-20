@@ -1163,6 +1163,38 @@ export const chapters: Chapter[] = [
         },
       ],
     },
+    interactivePilot: {
+      mission: {
+        title: 'Missione 08 — Decisione setup con vincoli reali',
+        intro:
+          'Questa missione simula una scelta da mondo reale: devi proporre un setup Linux che parta subito, regga il lavoro dei prossimi capitoli e abbia un fallback se qualcosa va storto.',
+        winCondition:
+          'La missione e completata quando produci una decisione motivata con 3 vincoli tecnici, 1 rischio operativo esplicito e 1 piano B attivabile in meno di 10 minuti.',
+        steps: [
+          {
+            title: 'Mappa i vincoli hard',
+            instruction:
+              'Rileva OS host, RAM, privilegi admin, qualita rete e bisogno di persistenza. Segna almeno 3 vincoli non negoziabili.',
+            whyItMatters:
+              'La stessa soluzione puo essere ottima o pessima a seconda dei vincoli: il contesto decide la qualita del setup.',
+          },
+          {
+            title: 'Scegli primario con criterio',
+            instruction:
+              'Scegli tra KillerCoda, WSL2 e VM indicando due benefici concreti e un limite tecnico della tua scelta.',
+            whyItMatters:
+              'Una scelta robusta non nasconde i limiti: li rende espliciti e gestibili prima che blocchino lo studio.',
+          },
+          {
+            title: 'Definisci fallback operativo',
+            instruction:
+              'Definisci un piano B con trigger chiaro (quando scatta) e procedura breve (massimo 3 passi) da eseguire subito.',
+            whyItMatters:
+              'Il fallback riduce downtime: non perdi la sessione anche se installazione o ambiente principale falliscono.',
+          },
+        ],
+      },
+    },
     sections: [
       {
         id: 'killercoda-browser',
@@ -1618,6 +1650,70 @@ export const chapters: Chapter[] = [
           url: 'https://csrc.nist.gov/glossary/term/least_privilege',
         },
       ],
+    },
+    interactivePilot: {
+      mission: {
+        title: 'Missione 10 — Applica permessi minimi senza rompere tutto',
+        intro:
+          'Questa missione simula un hardening reale su un file usato da persone e pipeline: devi correggere accessi senza introdurre regressioni.',
+        winCondition:
+          'La missione e completata quando scegli permessi coerenti, eviti scorciatoie pericolose e verifichi il risultato con comandi di controllo.',
+        steps: [
+          {
+            title: 'Leggi stato iniziale',
+            instruction:
+              'Raccogli baseline con ls -l deploy.sh, id alice e getent group developers prima di qualsiasi modifica.',
+            whyItMatters:
+              'Senza baseline verificabile, ogni fix e potenzialmente cieco e difficile da giustificare in audit.',
+          },
+          {
+            title: 'Applica modifica minima necessaria',
+            instruction:
+              'Se trovi mismatch, applica solo il delta necessario con chown/chmod (evita cambi blanket non richiesti).',
+            whyItMatters:
+              'Riduci superficie di attacco ed eviti effetti collaterali su team e servizi.',
+          },
+          {
+            title: 'Verifica e documenta',
+            instruction:
+              'Riesegui gli stessi controlli e annota in 2 righe: stato iniziale, delta applicato, stato finale.',
+            whyItMatters:
+              'Verifica e tracciabilita rendono il processo ripetibile e auditabile.',
+          },
+        ],
+      },
+      scenario: {
+        title: 'Scenario realistico — Hardening senza regressioni',
+        situation:
+          'deploy.sh e usato in CI e da un team misto. Policy target: owner alice, gruppo developers, permessi 750. Non sai se lo stato attuale e gia conforme e vuoi evitare cambiamenti inutili che possano rompere audit o pipeline.',
+        question:
+          'Qual e la strategia iniziale migliore per rispettare least privilege minimizzando rischio di regressione?',
+        options: [
+          {
+            label: 'Verifica stato corrente, poi applica solo delta necessari (owner/gruppo/permessi)',
+            feedback:
+              'Scelta migliore: prima osservi, poi cambi solo cio che serve. Sequenza raccomandata: baseline, delta minimo, verifica finale.',
+            isCorrect: true,
+          },
+          {
+            label: 'chown alice:developers deploy.sh + chmod 750 deploy.sh',
+            feedback:
+              'Robusta ma meno conservativa: funziona, pero forza cambi anche quando non necessari e puo alterare metadati osservati da controlli/audit.',
+          },
+          {
+            label: 'chmod 750 deploy.sh senza verificare owner e gruppo',
+            feedback:
+              'Parziale: se owner/gruppo non sono corretti, non soddisfa il requisito completo e lascia ambiguita sui responsabili del file.',
+          },
+          {
+            label: 'Lascia stato attuale e compensa via policy esterna',
+            feedback:
+              'Debole: rimandi il problema. Il file resta potenzialmente incoerente e dipende da controlli indiretti piu fragili.',
+          },
+        ],
+        takeaway:
+          'Nel controllo accessi professionale la sequenza vincente e: osserva stato, applica delta minimi, verifica risultato. Correttezza e stabilita devono andare insieme.',
+      },
     },
     sections: [
       {
