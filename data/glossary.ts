@@ -1,6 +1,6 @@
 import type { GlossaryEntry } from '@/data/types';
 
-// Re-export tipo come GlossaryTerm per compatibilità con consumer
+// Re-export type as GlossaryTerm for consumer compatibility
 export type GlossaryTerm = GlossaryEntry;
 
 export const glossaryTerms: GlossaryEntry[] = [

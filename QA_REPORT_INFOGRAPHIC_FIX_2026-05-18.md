@@ -16,7 +16,7 @@
 2. Keep modal behavior for video/podcast/resource media
 3. Pass `media` prop from chapter level to section component
 
-**Result:** ✅ Infografica CH01 now displays inline on all pages, no modal interaction required.
+**Result:** ✅ CH01 infographic now displays inline on all pages, no modal interaction required.
 
 ---
 

@@ -7,7 +7,7 @@ export interface GlossarioPage {
   entries: GlossaryEntry[];
 }
 
-// Glossario estratto da tutti i capitoli OS
+// Glossary entries aggregated from all OS chapters
 const glossaryEntries: GlossaryEntry[] = [
   {
     id: 'operating-system',

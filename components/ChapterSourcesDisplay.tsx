@@ -34,7 +34,7 @@ export default function ChapterSourcesDisplay({ chapterSlug }: ChapterSourcesDis
     setLoading(true);
     setError(null);
 
-    // Carica il file sources.json per questo capitolo
+    // Load sources.json for the current chapter
     const chapterNum = chapterSlug === 'what-is-os' ? 'ch1' :
                        chapterSlug === 'hardware-cpu' ? 'ch2' :
                        chapterSlug === 'kernel' ? 'ch3' :

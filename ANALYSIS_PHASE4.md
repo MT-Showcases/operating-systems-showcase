@@ -1,121 +1,121 @@
 # 🎨 Operating Systems Showcase — Phase 4 Analysis
 
-**Data:** 2026-05-16  
-**Agente:** Showcaser 🎨  
-**Task:** Replica struttura AI Fundamentals → popola `public/sources/` + `data/pages/` + media structure
+**Date:** 2026-05-16  
+**Agent:** Showcaser 🎨  
+**Task:** Replicate AI Fundamentals structure -> populate `public/sources/` + `data/pages/` + media structure
 
 ---
 
-## 📊 Struttura Confronto
+## 📊 Structure Comparison
 
 ### AI Fundamentals Template ✅
-- **Capitoli:** 15 (ch01 → ch15)
-- **File sources:** 15 JSON (uno per chapter)
-- **Schema sources.json:**
+- **Chapters:** 15 (ch01 -> ch15)
+- **Source files:** 15 JSON files (one per chapter)
+- **`sources.json` schema:**
   ```json
   {
     "chapter": "chX",
     "slug": "[slug]",
     "title": "[title]",
-    "policy": "[descrizione tipo fonti]",
+    "policy": "[source policy description]",
     "sources": [
       { "id": "src-XXX", "title": "...", "origin": "URL", "type": "book|course|tutorial|documentation|paper" }
     ]
   }
   ```
-- **Pages:** `data/pages/` esiste con openclaw.ts, glossario.ts, terms.ts, privacy.ts
-- **Media:** Struttura cartellas creata (`public/media/`)
+- **Pages:** `data/pages/` exists with openclaw.ts, glossario.ts, terms.ts, privacy.ts
+- **Media:** Folder structure created (`public/media/`)
 - **Build:** Vercel auto-deploy
 
 ### Operating Systems Showcase 🎯
-- **Capitoli:** 8 (ch1 → ch8)
-- **File sources:** ❌ MANCA `public/sources/`
-- **Chapters TypeScript:** ✅ Esistono in `/data/chapters/index.ts` con struttura completa
-- **Pages:** ❌ MANCA `data/pages/` (non creato)
-- **Media:** ❌ MANCA struttura cartelle
-- **Build:** Non testato
+- **Chapters:** 8 (ch1 -> ch8)
+- **Source files:** ❌ `public/sources/` missing
+- **Chapters TypeScript:** ✅ Existing in `/data/chapters/index.ts` with complete structure
+- **Pages:** ❌ `data/pages/` missing (not created)
+- **Media:** ❌ Folder structure missing
+- **Build:** Not tested
 
 ---
 
-## 8️⃣ Mapping Capitoli OS
+## 8️⃣ OS Chapter Mapping
 
 | ID | Slug | Title | Theme | Sources Count |
 |----|------|-------|-------|----------------|
-| 1 | `what-is-os` | Cos'è un Sistema Operativo | Teoria di base | 3-4 |
-| 2 | `hardware-cpu` | Architettura del Computer e CPU | Hardware → OS decisions | 4-5 |
-| 3 | `kernel` | Kernel, User Space e System Calls | Architettura interna | 3-4 |
-| 4 | `processes` | Processi, Thread e Scheduling | Gestione esecuzione | 4-5 |
-| 5 | `memory-filesystem` | Memoria e File System | Risorse persistenti | 4-5 |
-| 6 | `io-devices` | I/O e Periferiche | Comunicazione esterna | 3-4 |
-| 7 | `linux-cli` | Linux da Riga di Comando | Pratica operativa | 3-4 |
-| 8 | `security-best-practices` | Sicurezza Base e Buone Pratiche | Mindset professionale | 3-4 |
+| 1 | `what-is-os` | Cos'e un Sistema Operativo | Core theory | 3-4 |
+| 2 | `hardware-cpu` | Architettura del Computer e CPU | Hardware -> OS decisions | 4-5 |
+| 3 | `kernel` | Kernel, User Space e System Calls | Internal architecture | 3-4 |
+| 4 | `processes` | Processi, Thread e Scheduling | Execution management | 4-5 |
+| 5 | `memory-filesystem` | Memoria e File System | Persistent resources | 4-5 |
+| 6 | `io-devices` | I/O e Periferiche | External communication | 3-4 |
+| 7 | `linux-cli` | Linux da Riga di Comando | Operational practice | 3-4 |
+| 8 | `security-best-practices` | Sicurezza Base e Buone Pratiche | Professional mindset | 3-4 |
 
-**TOTALE:** 8 capitoli × ~4 fonti = **~32 fonti reali** da ricercare
+**TOTAL:** 8 chapters x ~4 sources = **~32 real sources** to collect
 
 ---
 
-## 📋 Workflow Esecuzione
+## 📋 Execution Workflow
 
 ### 1️⃣ **public/sources/ — 8 JSON files**
-✅ Creazione file per OGNI capitolo  
-✅ Fonte reali verificabili (niente invenzioni)  
-✅ Mix: libri, corsi online, documentation, paper  
-✅ MIN 3, MAX 8 per capitolo (target ~4)
+✅ Create one file for each chapter  
+✅ Real, verifiable sources only (no fabrication)  
+✅ Mix: books, online courses, documentation, papers  
+✅ MIN 3, MAX 8 per chapter (target ~4)
 
 ### 2️⃣ **data/pages/ — 4 TypeScript files**
-✅ `openclaw.ts` — Chi sono gli agenti che creano il sito  
-✅ `glossario.ts` — Glossario estratto da chapters.glossary[]  
-✅ `terms.ts` — Termini di servizio (generico)  
-✅ `privacy.ts` — Privacy policy (generico)
+✅ `openclaw.ts` — who the site-building agents are  
+✅ `glossario.ts` — glossary extracted from chapters.glossary[]  
+✅ `terms.ts` — generic terms of service  
+✅ `privacy.ts` — generic privacy policy
 
-### 3️⃣ **data/chapters/index.ts — Check struttura**
-✅ Verifica ogni capitolo ha `glossary: [...]`  
-✅ Verifica sections, keyTakeaways, discussionPrompts  
-✅ NO modifiche contenuto
+### 3️⃣ **data/chapters/index.ts — Structure check**
+✅ Verify each chapter has `glossary: [...]`  
+✅ Verify sections, keyTakeaways, discussionPrompts  
+✅ No content changes
 
 ### 4️⃣ **public/media/ — Folder structure**
-✅ `public/media/os/` (nome corso)  
+✅ `public/media/os/` (course name)  
 ✅ `/infographics/`, `/videos/`, `/labs/`, `/openclaw/` (vuoti per ora)
 
 ### 5️⃣ **Build & Test Vercel**
-✅ `npm install && npm run build` → nessun errore  
+✅ `npm install && npm run build` -> no errors  
 ✅ Test homepage + 1-2 chapter pages  
-✅ Screenshot per Michele
+✅ Screenshots for Michele
 
 ### 6️⃣ **Git commit + push**
 ✅ `git add . && git commit -m "feat: populate sources, pages, media structure"`  
 ✅ Push to main (auto-deploy Vercel)
 
-### 7️⃣ **Telegram Update realtime**
-✅ Dopo OGNI milestone: update a Michele con progresso
+### 7️⃣ **Real-time Telegram update**
+✅ After EACH milestone: update Michele with progress
 
 ---
 
 ## 🔍 Validation Rules
 
-- **Fonti:** Reali e verificabili — niente inventato
+- **Sources:** Real and verifiable — no fabricated references
 - **JSON:** Valido, conforme schema AI
 - **Glossary:** Estratto da chapters.glossary[] — non nuovo
-- **Build:** Zero errori TypeScript
-- **Git:** Commit descrittivo + push main
+- **Build:** Zero TypeScript errors
+- **Git:** Descriptive commit + push to main
 
 ---
 
 ## 🎯 Success Criteria
 
-- ✅ `public/sources/` completato (8 JSON, 1 per chapter)
-- ✅ `data/pages/` completato (4 TypeScript)
-- ✅ `data/chapters/index.ts` verificato
-- ✅ `public/media/` struttura creato
+- ✅ `public/sources/` completed (8 JSON, 1 per chapter)
+- ✅ `data/pages/` completed (4 TypeScript)
+- ✅ `data/chapters/index.ts` verified
+- ✅ `public/media/` structure created
 - ✅ Build Vercel OK
 - ✅ GitHub push main
-- ✅ Telegram update Michele con screenshot
+- ✅ Telegram update sent to Michele with screenshots
 
 ---
 
-## 📚 Note Implementazione
+## 📚 Implementation Notes
 
-1. **Fonti per categoria:**
+1. **Sources by category:**
    - **Ch1 (Teoria OS):** Tanenbaum, Silberschatz, corso MIT, Google Cloud
    - **Ch2 (Hardware):** Intel CPU docs, ARM, Raspberry Pi, datasheets
    - **Ch3 (Kernel):** Linux source code, OS design papers, Bell Labs
@@ -126,29 +126,29 @@
    - **Ch8 (Security):** UNIX philosophy, sudo, SELinux, capabilities
 
 2. **Glossary integration:**
-   - Ogni capitolo ha `glossary: [...]` array in TypeScript
-   - Il `glossario.ts` page aggrega e deduplica
+  - Each chapter has a `glossary: [...]` array in TypeScript
+  - The `glossario.ts` page aggregates and deduplicates
 
-3. **Media folder** (per fase successiva):
+3. **Media folder** (for next phase):
    - `/infographics/` — diagram PNG per concetti (CPU, memory, FS)
    - `/videos/` — link o embed video tutorial
-   - `/labs/` — file esercitazioni (Bash, C, vedi Ch7)
-   - `/openclaw/` — media pagina "come nasce il sito"
+  - `/labs/` — lab files (Bash, C, see Ch7)
+  - `/openclaw/` — media for the "how the site is built" page
 
 ---
 
-## ⏱️ Timeline Stimato
+## ⏱️ Estimated Timeline
 
 | Milestone | Time | Status |
 |-----------|------|--------|
-| Analisi | 10 min | ✅ In progress |
+| Analysis | 10 min | ✅ In progress |
 | public/sources/ | 30 min | ⏳ Next |
 | data/pages/ | 20 min | ⏳ Next |
-| Verifiche + media | 15 min | ⏳ Next |
+| Verification + media | 15 min | ⏳ Next |
 | Build & test | 15 min | ⏳ Next |
 | Git + Telegram | 10 min | ⏳ Next |
 | **TOTALE** | **≈100 min** | |
 
 ---
 
-**Prossimo passo:** Creare i file JSON per `public/sources/ch1` → `ch8`
+**Next step:** Create JSON files for `public/sources/ch1` -> `ch8`

@@ -1,6 +1,6 @@
 # Operating Systems Showcase
 
-Showcase didattico interattivo sui Sistemi Operativi per la Steve Jobs Academy Catania.
+Interactive educational showcase about Operating Systems for Steve Jobs Academy Catania.
 
 ## Stack
 - Next.js 15
@@ -8,15 +8,15 @@ Showcase didattico interattivo sui Sistemi Operativi per la Steve Jobs Academy C
 - Tailwind CSS v4
 - Vercel
 
-## Struttura iniziale
-- `app/` — layout, homepage e route placeholder capitolo
-- `components/` — componenti riusabili (vuota per ora)
-- `data/` — tipi e dataset capitoli
-- `lib/` — utility e configurazioni tutor/quiz
-- `scripts/` — script build RAG placeholder
-- `docs/adr/` — decisioni architetturali
+## Initial structure
+- `app/` — layout, homepage, and chapter route placeholder
+- `components/` — reusable components
+- `data/` — chapter types and datasets
+- `lib/` — utilities and tutor/quiz configuration
+- `scripts/` — placeholder scripts for RAG build
+- `docs/adr/` — architecture and policy decisions
 
-## Avvio locale
+## Local development
 ```bash
 npm install
 npm run dev
@@ -26,3 +26,12 @@ npm run dev
 ```bash
 npm run build
 ```
+
+## Quick onboarding (humans and agents)
+- `AGENTS.md` - cross-agent operational guide.
+- `docs/README.md` - documentation index.
+- `docs/adr/` - stable project decisions.
+
+## Language policy
+- Documentation, code comments, and internal developer-facing text must be in English.
+- User-facing UI text is currently allowed in Italian.

@@ -9,25 +9,25 @@
 
 ## 📋 Task Summary
 
-Replica struttura completa di **AI Fundamentals** (template) in **Operating Systems Showcase** (target):
-- ✅ Popola `public/sources/` con 8 JSON (uno per capitolo)
-- ✅ Crea `data/pages/` con 4 file TypeScript
-- ✅ Struttura `public/media/` come AI Fundamentals
-- ✅ Verifica integrità `data/chapters/index.ts`
-- ✅ Build Vercel: OK (zero errori)
+Replicate full **AI Fundamentals** structure (template) in **Operating Systems Showcase** (target):
+- ✅ Populate `public/sources/` with 8 JSON files (one per chapter)
+- ✅ Create `data/pages/` with 4 TypeScript files
+- ✅ Build `public/media/` structure matching AI Fundamentals
+- ✅ Verify integrity of `data/chapters/index.ts`
+- ✅ Vercel build: OK (zero errors)
 - ✅ Git commit + push main
 
 ---
 
-## 📊 Risultati per Milestone
+## 📊 Milestone Results
 
-### 1️⃣ Analisi Struttura ✅ (10 min)
-- Confronto AI Fundamentals (15 capitoli) vs OS (8 capitoli)
-- Mapping completo delle fonti necessarie
+### 1️⃣ Structure Analysis ✅ (10 min)
+- Comparison: AI Fundamentals (15 chapters) vs OS (8 chapters)
+- Full mapping of required sources
 - Documento: `ANALYSIS_PHASE4.md`
 
 ### 2️⃣ Public Sources JSON ✅ (30 min)
-**8 file creati** — `public/sources/chX/sources.json` (X = 1-8)
+**8 files created** — `public/sources/chX/sources.json` (X = 1-8)
 
 Schema rispettato:
 ```json
@@ -42,9 +42,9 @@ Schema rispettato:
 }
 ```
 
-**Fonti verificabili per capitolo:**
+**Verifiable sources by chapter:**
 
-| Capitolo | Slug | Sources | Type Mix |
+| Chapter | Slug | Sources | Type Mix |
 |----------|------|---------|----------|
 | 1 | what-is-os | 4 | Books (Tanenbaum, Silberschatz, Arpaci-Dusseau), MIT OCW |
 | 2 | hardware-cpu | 5 | Books (Hennessy/Patterson), Nand2Tetris course, ARM/Intel docs |
@@ -55,48 +55,48 @@ Schema rispettato:
 | 7 | linux-cli | 4 | Books (Linux Command Line), GNU coreutils, bash man, tldr |
 | 8 | security-best-practices | 4 | Books (UNIX Philosophy, Practical Unix), NIST, man pages |
 
-**TOTALE: 35 fonti reali, nessuna inventata**
+**TOTAL: 35 real sources, none fabricated**
 
 ### 3️⃣ Data Pages TypeScript ✅ (20 min)
-**4 file creati** — `data/pages/*.ts`
+**4 files created** — `data/pages/*.ts`
 
 - **openclaw.ts** (4.7 KB)
-  - Descrizione del sistema di agenti OpenClaw
-  - Timeline "Come nasce un capitolo"
-  - Stack tecnologico (Next.js, Vercel, OpenClaw, Wayground, Gamma.app, NotebookLM)
-  - Crediti team (Michele Tornello, agenti AI)
+  - Description of the OpenClaw agent system
+  - Timeline: "How a chapter is produced"
+  - Technology stack (Next.js, Vercel, OpenClaw, Wayground, Gamma.app, NotebookLM)
+  - Team credits (Michele Tornello, AI agents)
 
 - **glossario.ts** (8.9 KB)
-  - 18 termini chiave estratti dai capitoli
-  - Categorizzati per dominio (OS, Hardware, Linux, Processes, Files, Security)
-  - Definizioni estese + aliases
-  - Termini di riferimento nel corso
+  - 18 key terms extracted from chapters
+  - Categorized by domain (OS, Hardware, Linux, Processes, Files, Security)
+  - Extended definitions + aliases
+  - Reference terms used in the course
 
 - **terms.ts** (2.4 KB)
-  - Termini di servizio generici ma completi
-  - Uso autorizzato, disclaimer, proprietà intellettuale
-  - Limitazioni di responsabilità, contatti
+  - Generic but complete terms of service
+  - Authorized use, disclaimer, intellectual property
+  - Liability limits, contacts
 
 - **privacy.ts** (3.2 KB)
-  - Privacy policy GDPR-aligned
-  - Tracciamento minimo (Vercel analytics, local storage)
-  - Diritti sulla privacy, conformità normative
+  - GDPR-aligned privacy policy
+  - Minimal tracking (Vercel analytics, local storage)
+  - Privacy rights, compliance statements
 
 ### 4️⃣ Data Chapters Verification ✅ (5 min)
-- Controllato: tutti gli 8 capitoli hanno `glossary: [...]` definito
-- Struttura interna OK (sections, keyTakeaways, discussionPrompts)
-- Nessuna modifica al contenuto (solo check)
+- Checked: all 8 chapters define `glossary: [...]`
+- Internal structure OK (sections, keyTakeaways, discussionPrompts)
+- No content changes (verification only)
 
 ### 5️⃣ Media Folder Structure ✅ (5 min)
 ```
 public/media/os/
-├── infographics/  (per diagrammi chapter)
-├── videos/        (per embed/link video)
-├── labs/          (per file esercitazioni)
-└── openclaw/      (per media pagina openclaw)
+├── infographics/  (for chapter diagrams)
+├── videos/        (for video embeds/links)
+├── labs/          (for exercise files)
+└── openclaw/      (for openclaw page media)
 ```
 
-Pronto per population (fase successiva).
+Ready for population (next phase).
 
 ### 6️⃣ Build Verification ✅ (15 min)
 
@@ -111,7 +111,7 @@ Pronto per population (fase successiva).
 Routes generated:
 - `/` (homepage) — 125 KB first load
 - `/_not-found` (error page) — 103 KB
-- `/chapters/[slug]` — SSG per tutti gli 8 capitoli (132 KB first load)
+- `/chapters/[slug]` — SSG for all 8 chapters (132 KB first load)
 
 Zero warnings, zero type errors.
 
@@ -129,33 +129,33 @@ feat: Phase 4 QA/Polish — populate sources, pages, media structure + build ver
 - Parity achieved with AI Fundamentals template structure
 ```
 
-Push: `main` ← auto-deploy Vercel attivato
+Push: `main` <- Vercel auto-deploy activated
 
 ---
 
 ## 🎯 Success Criteria — All Met ✅
 
-| Criterio | Status | Note |
+| Criterion | Status | Notes |
 |----------|--------|------|
-| public/sources/ completato (8 JSON) | ✅ | 8/8 file con ~4 fonti reali ciascuno |
-| data/pages/ completato (4 TS) | ✅ | 4/4 file: openclaw, glossario, terms, privacy |
-| data/chapters/index.ts verificato | ✅ | Tutti 8 capitoli hanno glossary[] |
-| public/media/ struttura creata | ✅ | 4 subdirectory per content futur |
-| Build Vercel: OK | ✅ | 0 errori, 12 pagine generate |
+| public/sources/ completed (8 JSON) | ✅ | 8/8 files with ~4 real sources each |
+| data/pages/ completed (4 TS) | ✅ | 4/4 files: openclaw, glossario, terms, privacy |
+| data/chapters/index.ts verified | ✅ | All 8 chapters include glossary[] |
+| public/media/ structure created | ✅ | 4 subdirectories for future content |
+| Build Vercel: OK | ✅ | 0 errors, 12 pages generated |
 | GitHub push main | ✅ | Commit 86a732c, auto-deploy ON |
-| Telegram update Michele | ✅ | Completamento report inviato |
+| Telegram update Michele | ✅ | Completion report sent |
 
 ---
 
-## 📈 Parity AI Fundamentals ✅
+## 📈 AI Fundamentals Parity ✅
 
 | Elemento | AI Fundamentals | OS Showcase | Status |
 |----------|-----------------|-------------|--------|
-| Capitoli | 15 | 8 | ✅ Appropriato per corso |
+| Chapters | 15 | 8 | ✅ Appropriate for course scope |
 | public/sources/ | 15 JSON | 8 JSON | ✅ Parity pattern |
-| data/pages/ | 4 TS | 4 TS | ✅ Identico |
+| data/pages/ | 4 TS | 4 TS | ✅ Equivalent |
 | public/media/ | os-ai/ tree | os/ tree | ✅ Parity structure |
-| Build | SSG per capitoli | SSG per capitoli | ✅ Identico |
+| Build | SSG per chapters | SSG per chapters | ✅ Equivalent |
 | Deploy | Vercel auto-deploy | Vercel auto-deploy | ✅ Identico |
 
 ---
@@ -163,19 +163,19 @@ Push: `main` ← auto-deploy Vercel attivato
 ## 🔍 Technical Details
 
 ### JSON Validation
-- 8 file sources.json validi
+- 8 valid `sources.json` files
 - Schema conforme (chapter, slug, title, policy, sources[])
-- Tutti gli origin sono URL verificabili
+- All `origin` values are verifiable URLs
 
 ### TypeScript Compilation
-- 0 type errors dopo fix encoding (unicode escapes per caratteri accentati)
-- Interfacce coerenti (Page, PageSection, GlossarioPage, TermsPage, PrivacyPage)
-- Imports/exports corretti
+- 0 type errors after encoding fix (unicode escapes for accented characters)
+- Coherent interfaces (Page, PageSection, GlossarioPage, TermsPage, PrivacyPage)
+- Correct imports/exports
 
 ### Static Generation
-- Tutte le 8 chapter pages generate come SSG (Small-Static-Generation)
-- Revalidate: 1 minuto (ISR Incremental Static Regeneration)
-- Expire: 1 anno (cache header)
+- All 8 chapter pages generated as SSG (Static Site Generation)
+- Revalidate: 1 minute (ISR Incremental Static Regeneration)
+- Expire: 1 year (cache header)
 
 ---
 

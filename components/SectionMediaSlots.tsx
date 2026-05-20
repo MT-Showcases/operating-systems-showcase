@@ -27,7 +27,7 @@ const mediaTypeOrder: Record<MediaPlaceholder['type'], number> = {
 };
 
 export default function SectionMediaSlots({ chapterId, chapterSlug, sectionIndex, sectionTitle, sectionContent, media, isWorkflow = false, customSourceText, hideSourceToggle = false }: Props & { isWorkflow?: boolean; customSourceText?: string; hideSourceToggle?: boolean }) {
-  // Regola: nessun media definito => nessun placeholder automatico
+  // Rule: no defined media means no automatic placeholder rendering
   const slotsRaw = media ?? [];
   // UX choice: hide resource cards until a real downloadable asset exists
   const visible = slotsRaw.filter((slot) => !(slot.type === 'resource' && !slot.notes?.toLowerCase().includes('ready')));
