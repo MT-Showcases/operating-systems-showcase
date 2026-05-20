@@ -1,11 +1,12 @@
 'use client';
 
 import type { CommandReference, InfoTable, LabBlock, TerminalCommandBlock } from '@/data/types';
-import { Lock, Terminal, Settings, Folder, Cpu, ChevronRight, HardDrive, Network, BookOpen, Shield, Clock, Monitor, MessageSquare } from 'lucide-react';
+import { Lock, Terminal, Settings, Folder, Cpu, ChevronRight, HardDrive, Network, BookOpen, Shield, Clock, Monitor } from 'lucide-react';
 import TerminalCommand from './TerminalCommand';
 import CommandReferenceCard from './CommandReferenceCard';
 import InfoTableComponent from './InfoTable';
 import LabBlockComponent from './LabBlock';
+import NixButton from './NixButton';
 import { renderInline, renderParagraph } from './RichText';
 
 interface SectionCardProps {
@@ -114,17 +115,9 @@ export default function SectionCard({
       ) : null}
 
       <div className="mt-6 flex justify-end">
-        <button
-          onClick={() => {
-            window.dispatchEvent(
-              new CustomEvent('nix:open', { detail: { prompt: `Spiegami questa sezione: ${title}` } })
-            );
-          }}
-          className="inline-flex items-center gap-2 border border-accent-cyan/40 bg-bg-surface px-3 py-1.5 text-xs text-accent-cyan transition hover:border-accent-cyan hover:bg-accent-cyan/10"
-        >
-          <MessageSquare className="h-3.5 w-3.5" />
-          Chiedi a Nix
-        </button>
+        <NixButton
+          prompt={`Sezione: "${title}"\n\n${keyPoints?.length ? 'Concetti chiave: ' + keyPoints.join(' | ') + '\n\n' : ''}Riassumi i concetti principali di questa sezione e chiarisci eventuali punti che possono creare confusione.`}
+        />
       </div>
     </section>
   );

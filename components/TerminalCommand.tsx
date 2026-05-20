@@ -1,4 +1,11 @@
+'use client';
+
 import type { TerminalCommandBlock } from '@/data/types';
+import NixButton from './NixButton';
+
+function buildNixPrompt(command: string, explanation: string): string {
+  return `Comando: ${command}\n\nSpiegami cosa fa esattamente questo comando, il significato di ogni opzione e quando usarlo nella pratica. Contesto: ${explanation}`;
+}
 
 export default function TerminalCommand({ command, output, explanation, warning }: TerminalCommandBlock) {
   return (
@@ -25,6 +32,9 @@ export default function TerminalCommand({ command, output, explanation, warning 
             {warning}
           </div>
         ) : null}
+        <div className="mt-4 flex justify-end">
+          <NixButton size="xs" prompt={buildNixPrompt(command, explanation)} />
+        </div>
       </div>
     </div>
   );

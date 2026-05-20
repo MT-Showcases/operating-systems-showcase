@@ -1,5 +1,12 @@
+'use client';
+
 import type { LabBlock as LabBlockType } from '@/data/types';
 import TerminalCommand from './TerminalCommand';
+import NixButton from './NixButton';
+
+function buildStepPrompt(goal: string, command: string, explanation: string): string {
+  return `Passo: "${goal}"\nComando: ${command}\n\n${explanation}\n\nPerché si fa così? Quali errori comuni si fanno in questo passaggio e come si verificano i risultati?`;
+}
 
 export default function LabBlock({ title, intro, steps }: LabBlockType) {
   return (
@@ -33,9 +40,15 @@ export default function LabBlock({ title, intro, steps }: LabBlockType) {
             </div>
 
             <div className="flex-1 min-w-0 pb-2">
-              <p className="terminal-heading mb-3 text-xs uppercase tracking-[0.2em] text-accent-cyan/80">
-                {step.goal}
-              </p>
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <p className="terminal-heading text-xs uppercase tracking-[0.2em] text-accent-cyan/80">
+                  {step.goal}
+                </p>
+                <NixButton
+                  size="xs"
+                  prompt={buildStepPrompt(step.goal, step.command.command, step.command.explanation)}
+                />
+              </div>
               <TerminalCommand {...step.command} />
             </div>
           </div>
