@@ -127,6 +127,8 @@ export default async function ChapterPage({ params }: Props) {
   const totalChapters = chapters.length;
   const progressPercent = (chapterNum / totalChapters) * 100;
   const isChapter1 = chapter.slug === 'what-is-os';
+  const isChapter2 = chapter.slug === 'hardware-cpu';
+  const isCompactChapter = isChapter1 || isChapter2;
   const shouldShowMiniTask = Boolean(chapter.pilotContent?.miniTask?.length) && !(isChapter1 && chapter.interactivePilot);
   const glossaryTerms = getTermsByIds(chapter.glossary ?? []);
 
@@ -194,7 +196,7 @@ export default async function ChapterPage({ params }: Props) {
                     <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Glossario del capitolo</p>
                     <h2 className="mt-2 text-xl font-semibold text-text-primary">Termini da tenere aperti mentre studi</h2>
                   </div>
-                  <p className={`max-w-xl text-sm text-text-secondary ${isChapter1 ? 'leading-6' : 'leading-7'}`}>
+                  <p className={`max-w-xl text-sm text-text-secondary ${isCompactChapter ? 'leading-6' : 'leading-7'}`}>
                     Tocca un termine per aprire il drawer e collegare teoria, comandi e pratica Linux.
                   </p>
                 </div>
@@ -228,7 +230,7 @@ export default async function ChapterPage({ params }: Props) {
                     commandReferences={section.commandReferences}
                     infoTables={section.infoTables}
                     labBlock={section.labBlock}
-                    isChapter1={isChapter1}
+                    isCompactChapter={isCompactChapter}
                   />
                 </div>
               ))}
@@ -238,7 +240,7 @@ export default async function ChapterPage({ params }: Props) {
 
             {chapter.pilotContent?.commonMistakes?.length ? (
               <section className="mt-8 border-2 border-accent-amber/40 bg-bg-surface p-6">
-                {isChapter1 ? (
+                {isCompactChapter ? (
                   <details>
                     <summary className="flex cursor-pointer list-none items-center justify-between terminal-heading text-[11px] uppercase tracking-[0.2em] text-accent-amber">
                       Errori comuni
@@ -259,7 +261,7 @@ export default async function ChapterPage({ params }: Props) {
 
             {chapter.pilotContent?.realWorld?.length ? (
               <section className="mt-8 border-2 border-accent-cyan/40 bg-bg-surface p-6">
-                {isChapter1 ? (
+                {isCompactChapter ? (
                   <details>
                     <summary className="flex cursor-pointer list-none items-center justify-between terminal-heading text-[11px] uppercase tracking-[0.2em] text-accent-cyan">
                       Nel mondo reale
@@ -280,7 +282,7 @@ export default async function ChapterPage({ params }: Props) {
 
             {chapter.pilotContent?.deepDive?.length ? (
               <section className="mt-8 border-2 border-accent-green/30 bg-bg-surface p-6">
-                {isChapter1 ? (
+                {isCompactChapter ? (
                   <details>
                     <summary className="flex cursor-pointer list-none items-center justify-between terminal-heading text-[11px] uppercase tracking-[0.2em] text-accent-green">
                       Approfondisci
@@ -335,7 +337,7 @@ export default async function ChapterPage({ params }: Props) {
 
             {shouldShowMiniTask ? (
               <section className="mt-8 border-2 border-accent-cyan/40 bg-bg-surface p-6">
-                {isChapter1 ? (
+                {isCompactChapter ? (
                   <details>
                     <summary className="flex cursor-pointer list-none items-center justify-between terminal-heading text-[11px] uppercase tracking-[0.2em] text-accent-cyan">
                       Mini task

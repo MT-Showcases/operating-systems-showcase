@@ -259,6 +259,48 @@ export const chapters: Chapter[] = [
       'Perché un PC può sembrare lento anche con una CPU buona?',
       'Quali problemi nascerebbero se ogni app dovesse parlare direttamente con ogni dispositivo?',
     ],
+    pilotContent: {
+      whyItMatters: [
+        'Quando un computer sembra "lento", quasi mai il problema è una sola parte. CPU, RAM, storage e I/O hanno tempi diversi e il sistema operativo deve orchestrare tutto in modo continuo.',
+        'Capire questo capitolo ti aiuta a leggere i colli di bottiglia reali: non solo quanta potenza hai, ma come le risorse vengono coordinate mentre usi app, rete e file nello stesso momento.',
+      ],
+      commonMistakes: [
+        '**CPU veloce ≠ sistema sempre veloce**: se storage o I/O sono il collo di bottiglia, la CPU da sola non risolve.',
+        '**RAM ≠ storage**: la RAM serve al lavoro immediato, SSD/HDD servono alla persistenza.',
+        '**Multitasking ≠ esecuzione infinita in parallelo**: spesso è alternanza intelligente del tempo CPU.',
+        '**I/O non è “secondario”**: tastiera, rete, disco e periferiche influenzano direttamente la reattività percepita.',
+        'Valutare le prestazioni guardando una sola metrica porta a diagnosi sbagliate: serve una vista di insieme delle risorse.',
+      ],
+      realWorld: [
+        'Apri molte tab del browser: la RAM cresce, la CPU schedula più processi, e il sistema può iniziare a usare swap se la memoria si satura.',
+        'Salvi un file grande durante una videochiamata: storage, rete e CPU competono per attenzione, e la latenza percepita può aumentare.',
+        'Avvii un programma da disco lento: anche con CPU potente, il caricamento resta vincolato alla velocità di I/O.',
+      ],
+      miniTask: [
+        '**Passo 1 — Osserva**: apri monitor risorse o task manager e identifica CPU, RAM e disco mentre usi 2-3 app insieme.',
+        '**Passo 2 — Collega**: annota quale risorsa sale di più in ogni attività (apertura app, salvataggio file, navigazione web).',
+        '**Passo 3 — Concludi**: scrivi una frase su quale collo di bottiglia stai vedendo e perché non dipende solo dalla CPU.',
+      ],
+      deepDive: [
+        {
+          level: 'essenziale',
+          title: 'Computer Architecture Course - Princeton (overview)',
+          description: 'Panoramica chiara su CPU, memoria e I/O per collegare hardware e comportamento del sistema operativo.',
+          url: 'https://www.coursera.org/learn/comparch',
+        },
+        {
+          level: 'vai-oltre',
+          title: 'Nand2Tetris - Part I',
+          description: 'Percorso pratico per capire come le componenti hardware si combinano e perché il software di sistema deve coordinarle.',
+          url: 'https://www.coursera.org/learn/build-a-computer',
+        },
+        {
+          level: 'deep-dive',
+          title: 'Computer Architecture: A Quantitative Approach',
+          description: 'Riferimento avanzato per analizzare trade-off reali tra CPU, memoria e I/O.',
+        },
+      ],
+    },
     quiz: [
       {
         id: 'ch2-q1',

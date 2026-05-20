@@ -20,7 +20,7 @@ interface SectionCardProps {
   commandReferences?: CommandReference[];
   infoTables?: InfoTable[];
   labBlock?: LabBlock;
-  isChapter1?: boolean;
+  isCompactChapter?: boolean;
 }
 
 
@@ -50,16 +50,16 @@ export default function SectionCard({
   commandReferences,
   infoTables,
   labBlock,
-  isChapter1 = false,
+  isCompactChapter = false,
 }: SectionCardProps) {
   const paragraphs = content.split(/\n\n+/g);
   // Collapsible state
-  const [showLab, setShowLab] = useState(!isChapter1);
-  const [showReferences, setShowReferences] = useState(!isChapter1);
-  const [showTerminals, setShowTerminals] = useState(!isChapter1);
+  const [showLab, setShowLab] = useState(!isCompactChapter);
+  const [showReferences, setShowReferences] = useState(!isCompactChapter);
+  const [showTerminals, setShowTerminals] = useState(!isCompactChapter);
 
   return (
-    <section id={id} className={`scroll-mt-24 overflow-hidden border-2 border-accent-cyan bg-bg-primary ${isChapter1 ? 'p-5' : 'p-6'}`}>
+    <section id={id} className={`scroll-mt-24 overflow-hidden border-2 border-accent-cyan bg-bg-primary ${isCompactChapter ? 'p-5' : 'p-6'}`}>
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center border-2 border-accent-cyan/60 bg-bg-surface">
@@ -67,7 +67,7 @@ export default function SectionCard({
           </div>
           <div>
             <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-text-secondary">Sezione operativa</p>
-            <h2 className={`terminal-heading font-semibold text-text-primary ${isChapter1 ? 'text-xl' : 'text-2xl'}`}>{title}</h2>
+            <h2 className={`terminal-heading font-semibold text-text-primary ${isCompactChapter ? 'text-xl' : 'text-2xl'}`}>{title}</h2>
           </div>
         </div>
       </div>
@@ -77,7 +77,7 @@ export default function SectionCard({
       </div>
 
       {keyPoints && keyPoints.length > 0 ? (
-        <div className={`mt-6 border-2 border-accent-green/60 bg-bg-surface ${isChapter1 ? 'p-3' : 'p-4'}`}>
+        <div className={`mt-6 border-2 border-accent-green/60 bg-bg-surface ${isCompactChapter ? 'p-3' : 'p-4'}`}>
           <p className="text-left text-accent-green font-medium text-[10px] uppercase tracking-[0.18em]">
             Da tenere a mente
           </p>
