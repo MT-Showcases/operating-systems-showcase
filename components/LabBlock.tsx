@@ -1,0 +1,46 @@
+import type { LabBlock as LabBlockType } from '@/data/types';
+import TerminalCommand from './TerminalCommand';
+
+export default function LabBlock({ title, intro, steps }: LabBlockType) {
+  return (
+    <div className="border-2 border-accent-cyan/20 bg-bg-surface/20 overflow-hidden">
+      <div className="flex items-center gap-3 border-b border-accent-cyan/20 bg-bg-surface px-4 py-3">
+        <span className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">
+          Laboratorio guidato
+        </span>
+        {title && (
+          <>
+            <span className="text-accent-cyan/30">—</span>
+            <span className="terminal-heading text-xs text-text-secondary">{title}</span>
+          </>
+        )}
+      </div>
+
+      {intro && (
+        <p className="px-5 pt-4 text-sm leading-7 text-text-secondary">{intro}</p>
+      )}
+
+      <div className="px-5 py-4 space-y-6">
+        {steps.map((step, i) => (
+          <div key={i} className="flex gap-4">
+            <div className="flex flex-col items-center gap-2 shrink-0">
+              <div className="flex h-7 w-7 items-center justify-center border border-accent-cyan/60 bg-bg-primary terminal-heading text-xs text-accent-cyan">
+                {i + 1}
+              </div>
+              {i < steps.length - 1 && (
+                <div className="w-px flex-1 bg-accent-cyan/15" />
+              )}
+            </div>
+
+            <div className="flex-1 min-w-0 pb-2">
+              <p className="terminal-heading mb-3 text-xs uppercase tracking-[0.2em] text-accent-cyan/80">
+                {step.goal}
+              </p>
+              <TerminalCommand {...step.command} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

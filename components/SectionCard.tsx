@@ -1,10 +1,11 @@
 'use client';
 
-import type { CommandReference, InfoTable, TerminalCommandBlock } from '@/data/types';
+import type { CommandReference, InfoTable, LabBlock, TerminalCommandBlock } from '@/data/types';
 import { Lock, Terminal, Settings, Folder, Cpu, ChevronRight, HardDrive, Network, BookOpen, Shield, Clock, Monitor, MessageSquare } from 'lucide-react';
 import TerminalCommand from './TerminalCommand';
 import CommandReferenceCard from './CommandReferenceCard';
 import InfoTableComponent from './InfoTable';
+import LabBlockComponent from './LabBlock';
 import { renderInline, renderParagraph } from './RichText';
 
 interface SectionCardProps {
@@ -16,6 +17,7 @@ interface SectionCardProps {
   terminalCommands?: TerminalCommandBlock[];
   commandReferences?: CommandReference[];
   infoTables?: InfoTable[];
+  labBlock?: LabBlock;
 }
 
 
@@ -44,6 +46,7 @@ export default function SectionCard({
   terminalCommands,
   commandReferences,
   infoTables,
+  labBlock,
 }: SectionCardProps) {
   const paragraphs = content.split(/\n\n+/g);
 
@@ -85,6 +88,12 @@ export default function SectionCard({
           {infoTables.map((table, i) => (
             <InfoTableComponent key={`${id}-table-${i}`} {...table} />
           ))}
+        </div>
+      ) : null}
+
+      {labBlock ? (
+        <div className="mt-6">
+          <LabBlockComponent {...labBlock} />
         </div>
       ) : null}
 

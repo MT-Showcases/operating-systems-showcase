@@ -225,6 +225,7 @@ export default async function ChapterPage({ params }: Props) {
                     terminalCommands={section.terminalCommands}
                     commandReferences={section.commandReferences}
                     infoTables={section.infoTables}
+                    labBlock={section.labBlock}
                   />
                 </div>
               ))}

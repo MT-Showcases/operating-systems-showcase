@@ -59,7 +59,7 @@ export const chapters: Chapter[] = [
     pilotContent: {
       whyItMatters: [
         'Ogni volta che apri un’app, salvi un file, ascolti un audio o passi da una finestra all’altra, c’è un sistema che **coordina tutto dietro le quinte**. Quel sistema è il **sistema operativo**.',
-        'Capire questo capitolo significa smettere di vedere il computer come una scatola che “fa cose” e iniziare a leggerlo come un *ambiente organizzato*: qualcuno decide come usare la **CPU**, dove tenere i dati, come parlare con i dispositivi e come far convivere **processi** diversi senza caos.',
+        'Capire questo capitolo significa smettere di vedere il computer come una scatola che "fa cose" e iniziare a leggerlo come un *ambiente organizzato*: qualcuno decide come usare la **CPU**, dove tenere i dati, come parlare con i dispositivi e come far convivere **processi** diversi senza caos.',
       ],
       commonMistakes: [
         '**Sistema operativo ≠ computer**: il computer è l’insieme di hardware e software; il sistema operativo è uno dei componenti chiave che lo rende utilizzabile.',
@@ -279,7 +279,7 @@ export const chapters: Chapter[] = [
         id: 'syscalls',
         title: 'System call: la porta ufficiale',
         content:
-          'Quando un programma deve aprire un file, creare un processo o inviare dati in rete, passa tramite una system call.\n\nÈ come fare una richiesta formale al kernel: “ho bisogno di questa operazione, puoi eseguirla per me in modo sicuro?”',
+          'Quando un programma deve aprire un file, creare un processo o inviare dati in rete, passa tramite una system call.\n\nÈ come fare una richiesta formale al kernel: "ho bisogno di questa operazione, puoi eseguirla per me in modo sicuro?"',
         keyPoints: [
           'Le system call trasformano richieste dei programmi in azioni di sistema controllate.',
           'Sono fondamentali per capire il rapporto tra software applicativo e OS.',
@@ -379,7 +379,7 @@ export const chapters: Chapter[] = [
         id: 'scheduling',
         title: 'Scheduling: dare tempo a tutti senza caos',
         content:
-          'Lo scheduler decide quale processo ottiene tempo CPU e per quanto. L’obiettivo non è solo “essere giusto”, ma mantenere il sistema reattivo e utile per l’utente.\n\nQui nasce il multitasking percepito: l’illusione efficace di molte cose che accadono insieme.',
+          'Lo scheduler decide quale processo ottiene tempo CPU e per quanto. L’obiettivo non è solo "essere giusto", ma mantenere il sistema reattivo e utile per l’utente.\n\nQui nasce il multitasking percepito: l’illusione efficace di molte cose che accadono insieme.',
         keyPoints: [
           'Lo scheduling bilancia priorità, reattività e throughput.',
           'La CPU viene condivisa a finestre di tempo molto piccole.',
@@ -393,7 +393,7 @@ export const chapters: Chapter[] = [
     ],
     discussionPrompts: [
       'Quando conviene usare più thread invece di più processi?',
-      'Perché un processo in attesa non è per forza “bloccato male”?',
+      'Perché un processo in attesa non è per forza "bloccato male"?',
     ],
     quiz: [
       {
@@ -464,7 +464,7 @@ export const chapters: Chapter[] = [
         id: 'memory-model',
         title: 'Memoria: spazio, isolamento e ordine',
         content:
-          'La memoria non è solo “spazio libero”. È il luogo in cui i processi caricano codice e dati mentre lavorano.\n\nIl sistema operativo deve proteggerla, distribuirla e impedire che un processo invada il territorio di un altro.',
+          'La memoria non è solo "spazio libero". È il luogo in cui i processi caricano codice e dati mentre lavorano.\n\nIl sistema operativo deve proteggerla, distribuirla e impedire che un processo invada il territorio di un altro.',
         keyPoints: [
           'La gestione memoria è una questione di sicurezza oltre che di prestazioni.',
           'L’isolamento impedisce corruzione e crash a catena.',
@@ -474,7 +474,7 @@ export const chapters: Chapter[] = [
         id: 'virtual-memory',
         title: 'Memoria virtuale senza mito',
         content:
-          'La memoria virtuale fa percepire a ogni processo uno spazio più ordinato e separato. Non significa “RAM infinita”, ma astrazione utile.\n\nPer uno studente junior basta capire due idee: isolamento e possibilità di appoggiarsi anche allo storage quando serve.',
+          'La memoria virtuale fa percepire a ogni processo uno spazio più ordinato e separato. Non significa "RAM infinita", ma astrazione utile.\n\nPer uno studente junior basta capire due idee: isolamento e possibilità di appoggiarsi anche allo storage quando serve.',
         keyPoints: [
           'La memoria virtuale migliora protezione e flessibilità.',
           'Swap e storage possono aiutare, ma sono più lenti della RAM.',
@@ -562,7 +562,7 @@ export const chapters: Chapter[] = [
         id: 'linux-overview',
         title: 'Linux come ecosistema operativo',
         content:
-          'Linux non è solo “schermo nero con testo”. È un ecosistema molto usato su server, cloud, embedded e anche desktop.\n\nIl suo valore didattico è enorme perché espone bene concetti di sistema: processi, file, permessi, utenti, configurazioni e strumenti testuali.',
+          'Linux non è solo "schermo nero con testo". È un ecosistema molto usato su server, cloud, embedded e anche desktop.\n\nIl suo valore didattico è enorme perché espone bene concetti di sistema: processi, file, permessi, utenti, configurazioni e strumenti testuali.',
         keyPoints: [
           'Linux è sia sistema reale di lavoro sia ottimo laboratorio mentale.',
           'Molti concetti OS diventano più concreti proprio qui.',
@@ -674,28 +674,38 @@ export const chapters: Chapter[] = [
         id: 'navigation',
         title: 'Navigare senza perdersi',
         content:
-          'I primi comandi utili non sono “da smanettoni”: servono a capire dove sei e cosa stai guardando.\n\nCon pwd, ls e cd costruisci orientamento. Senza orientamento, qualsiasi comando successivo diventa rischioso.',
+          'I primi comandi utili non sono "da smanettoni": servono a capire dove sei e cosa stai guardando.\n\nCon pwd, ls e cd costruisci orientamento. Senza orientamento, qualsiasi comando successivo diventa rischioso.',
         keyPoints: [
           'Prima di modificare, verifica sempre il contesto.',
           'Sapere dove sei evita errori banali ma costosi.',
         ],
-        terminalCommands: [
-          {
-            command: 'pwd',
-            output: '/home/studente/progetto-linux',
-            explanation: 'Mostra la directory corrente: è il tuo punto di partenza operativo.',
-          },
-          {
-            command: 'ls -la',
-            output: 'drwxr-xr-x .\ndrwxr-xr-x ..\n-rw-r--r-- appunti.txt',
-            explanation: 'Elenca file normali e nascosti con dettagli su permessi, owner e dimensioni.',
-          },
-        ],
+        labBlock: {
+          title: 'Orientarsi nel file system',
+          intro: 'Due comandi, un solo obiettivo: sapere dove sei e cosa c\'è intorno.',
+          steps: [
+            {
+              goal: 'Dove sono adesso?',
+              command: {
+                command: 'pwd',
+                output: '/home/studente/progetto-linux',
+                explanation: 'Mostra la directory corrente: è il tuo punto di partenza operativo. Eseguilo sempre prima di qualsiasi modifica.',
+              },
+            },
+            {
+              goal: 'Cosa c\'è qui dentro?',
+              command: {
+                command: 'ls -la',
+                output: 'drwxr-xr-x  studente studente  .\ndrwxr-xr-x  studente studente  ..\n-rw-r--r--  studente studente  appunti.txt',
+                explanation: 'Elenca file normali e nascosti con permessi, owner e dimensioni. Il formato lungo (-l) rende leggibile tutto in colonne.',
+              },
+            },
+          ],
+        },
         commandReferences: [
           {
             command: 'cd',
             syntax: 'cd <percorso>',
-            description: 'Sposta la shell in un’altra directory.',
+            description: 'Sposta la shell in un\'altra directory.',
             examples: ['cd /etc', 'cd ..', 'cd ~/Documenti'],
           },
         ],
@@ -709,24 +719,37 @@ export const chapters: Chapter[] = [
           'I comandi file vanno sempre collegati a intenzione e percorso.',
           'rm è utile ma non perdona leggerezza.',
         ],
-        terminalCommands: [
-          {
-            command: 'mkdir appunti-os && touch appunti-os/comandi.txt',
-            output: '',
-            explanation: 'Crea una cartella di lavoro e un file iniziale per raccogliere note o risultati.',
-          },
-          {
-            command: 'cat appunti-os/comandi.txt',
-            output: '',
-            explanation: 'Legge il contenuto di un file testuale direttamente dal terminale.',
-          },
-          {
-            command: 'rm -i appunti-os/comandi.txt',
-            output: "rm: remove regular empty file 'appunti-os/comandi.txt'?",
-            explanation: 'La flag -i aggiunge una conferma interattiva, utile quando vuoi evitare errori rapidi.',
-            warning: 'Mai usare rm in modo impulsivo su percorsi che non hai verificato con pwd o ls.',
-          },
-        ],
+        labBlock: {
+          title: 'Flusso pratico di gestione file',
+          intro: 'Un ciclo completo: crea, leggi, rimuovi con cautela.',
+          steps: [
+            {
+              goal: 'Crea una directory di lavoro e un file iniziale',
+              command: {
+                command: 'mkdir appunti-os && touch appunti-os/comandi.txt',
+                output: '',
+                explanation: 'mkdir crea la cartella, touch crea il file vuoto. Il && esegue il secondo comando solo se il primo riesce.',
+              },
+            },
+            {
+              goal: 'Leggi il contenuto del file',
+              command: {
+                command: 'cat appunti-os/comandi.txt',
+                output: '',
+                explanation: 'cat stampa il contenuto nel terminale. Su file grandi usa less per scorrere senza riempire lo schermo.',
+              },
+            },
+            {
+              goal: 'Rimuovi con conferma interattiva',
+              command: {
+                command: 'rm -i appunti-os/comandi.txt',
+                output: "rm: remove regular empty file 'appunti-os/comandi.txt'?",
+                explanation: 'La flag -i chiede conferma prima di cancellare. Prenditi un secondo per leggere il percorso che stai per eliminare.',
+                warning: 'Mai usare rm su percorsi che non hai verificato con pwd o ls. Non c\'è cestino.',
+              },
+            },
+          ],
+        },
         commandReferences: [
           {
             command: 'cp',
@@ -743,20 +766,51 @@ export const chapters: Chapter[] = [
         ],
       },
       {
-        id: 'users-permissions',
-        title: 'Utenti, gruppi, permessi e processi base',
+        id: 'user-context',
+        title: 'Chi sei per il sistema: utente, UID e gruppi',
         content:
-          'In Linux ogni file e ogni processo appartiene a un **utente** e a un **gruppo**. Prima di modificare permessi, conviene sempre capire chi sei per il sistema.\n\nOgni file ha tre livelli di accesso: **owner** (proprietario), **group** (gruppo di appartenenza) e **others** (tutti gli altri). Per ognuno il sistema verifica tre operazioni: **r** (read — lettura), **w** (write — scrittura), **x** (execute — esecuzione).\n\nI permessi si esprimono in **notazione ottale**: ogni lettera vale un numero (r=4, w=2, x=1) che si sommano per formare una cifra da 0 a 7. `chmod 755` significa owner=7 (rwx), group=5 (r-x), others=5 (r-x). La notazione simbolica come `chmod u+x` aggiunge o rimuove un singolo bit senza toccare gli altri.',
+          'In Linux ogni file e ogni processo appartiene a un **utente** e a un **gruppo**. Prima di toccare permessi o processi, il punto di partenza è sempre uno: capire chi è il tuo utente agli occhi del sistema.\n\n`whoami` restituisce il nome, ma è `id` il comando che ti dà il quadro completo: **UID** (identificatore numerico), **GID** (gruppo primario) e tutti i gruppi secondari a cui appartieni. Questi determinano cosa puoi fare su ogni file.',
         keyPoints: [
-          '**Prima di chmod**, controlla sempre i permessi attuali con `ls -la`.',
-          'La notazione ottale cambia tutti i permessi; quella simbolica (`u+x`) ne modifica uno solo.',
-          'I permessi descrivono chi può leggere, scrivere o eseguire.',
-          '`ps` e `kill` aiutano a osservare e governare processi in corso.',
+          '**UID e GID** sono i valori numerici che il kernel usa internamente, non i nomi leggibili.',
+          'Appartenere al gruppo **sudo** significa poter usare privilegi elevati.',
+          'Controllare la tua identità prima di chmod o chown evita errori difficili da correggere.',
+        ],
+        labBlock: {
+          title: 'Scopri la tua identità di sistema',
+          steps: [
+            {
+              goal: 'Nome utente corrente',
+              command: {
+                command: 'whoami',
+                output: 'studente',
+                explanation: 'Risposta immediata: sei questo utente. Utile nei contesti in cui non sei sicuro di chi sta eseguendo lo script.',
+              },
+            },
+            {
+              goal: 'UID, GID e gruppi completi',
+              command: {
+                command: 'id',
+                output: 'uid=1000(studente) gid=1000(studente) gruppi=1000(studente),27(sudo),1001(developers)',
+                explanation: 'Mostra tutto: UID, gruppo primario e gruppi secondari. Se vedi "sudo" nell\'elenco, puoi usare sudo sul sistema.',
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 'permissions-chmod',
+        title: 'Permessi, chmod e chown',
+        content:
+          'Ogni file ha tre livelli di accesso: **owner**, **group** e **others**. Per ognuno il sistema controlla tre operazioni: **r** (read), **w** (write), **x** (execute).\n\nI permessi si esprimono in **notazione ottale**: r=4, w=2, x=1 — le tre cifre si sommano per formare un valore da 0 a 7. `chmod 755` significa owner=7 (rwx), group=5 (r-x), others=5 (r-x). La **notazione simbolica** (`chmod u+x`) modifica un singolo bit senza toccare gli altri.',
+        keyPoints: [
+          '**Leggi prima, cambia dopo**: `ls -la` ti mostra i permessi attuali prima di qualsiasi chmod.',
+          'La notazione ottale riscrive tutti i permessi; quella simbolica (`u+x`, `g-w`) agisce su uno solo.',
+          'Usare permessi **troppo aperti** (777) non è comodità: è un rischio di sicurezza reale.',
         ],
         infoTables: [
           {
-            title: 'Valori dei bit — come si calcola ogni cifra',
-            headers: ['Valore ottale', 'Simbolico', 'r', 'w', 'x', 'Permessi attivi'],
+            title: 'Valori dei bit — come si calcola ogni cifra ottale',
+            headers: ['Ottale', 'Simbolico', 'r', 'w', 'x', 'Permessi attivi'],
             rows: [
               { cells: ['0', '---', '—', '—', '—', 'nessun accesso'] },
               { cells: ['1', '--x', '—', '—', '✓', 'solo esecuzione'] },
@@ -769,54 +823,68 @@ export const chapters: Chapter[] = [
             ],
           },
           {
-            title: 'Pattern più comuni — owner / group / others',
+            title: 'Pattern comuni — owner / group / others',
             headers: ['chmod', 'Owner', 'Group', 'Others', 'Uso tipico'],
             rows: [
               { cells: ['600', 'rw-', '---', '---', 'file privati, chiavi SSH (~/.ssh/id_rsa)'] },
               { cells: ['644', 'rw-', 'r--', 'r--', 'file di testo, configurazioni, HTML'], highlight: true },
               { cells: ['700', 'rwx', '---', '---', 'script e directory strettamente personali'] },
               { cells: ['755', 'rwx', 'r-x', 'r-x', 'script eseguibili, directory pubbliche'], highlight: true },
-              { cells: ['775', 'rwx', 'rwx', 'r-x', 'directory condivise tra membri dello stesso gruppo'] },
+              { cells: ['775', 'rwx', 'rwx', 'r-x', 'directory condivise nello stesso gruppo'] },
               { cells: ['777', 'rwx', 'rwx', 'rwx', 'pericoloso — evitare in produzione'] },
             ],
           },
         ],
+        labBlock: {
+          title: 'Leggere e modificare i permessi',
+          intro: 'Il flusso corretto è sempre lo stesso: leggi lo stato attuale, poi agisci.',
+          steps: [
+            {
+              goal: 'Leggi i permessi correnti del file',
+              command: {
+                command: 'ls -la script.sh',
+                output: '-rw-r--r-- 1 studente developers 512 mag 20 10:00 script.sh',
+                explanation: 'Il primo campo mostra: tipo file (-), poi 3 bit owner (rw-), 3 bit group (r--), 3 bit others (r--). Owner e gruppo sono nella terza e quarta colonna.',
+              },
+            },
+            {
+              goal: 'Assegna permessi con notazione ottale',
+              command: {
+                command: 'chmod 755 script.sh',
+                output: '',
+                explanation: 'Riscrive tutti i permessi in una volta: owner ottiene rwx (7), group e others ottengono r-x (5). Pattern standard per script eseguibili.',
+              },
+            },
+            {
+              goal: 'Aggiungi un bit senza toccare gli altri',
+              command: {
+                command: 'chmod u+x deploy.sh',
+                output: '',
+                explanation: 'u = user/owner, + = aggiungi, x = execute. Solo il bit execute dell\'owner cambia — group e others restano invariati.',
+              },
+            },
+            {
+              goal: 'Cambia proprietario e gruppo',
+              command: {
+                command: 'chown michele:developers progetto/',
+                output: '',
+                explanation: 'Assegna il file all\'utente michele e al gruppo developers. Richiede sudo se non sei il proprietario attuale.',
+                warning: 'chown su directory intere usa -R per ricorsività. Verifica sempre il percorso prima.',
+              },
+            },
+          ],
+        },
         terminalCommands: [
-          {
-            command: 'whoami',
-            output: 'studente',
-            explanation: 'Mostra il nome dell\'utente corrente — punto di partenza prima di qualsiasi operazione su permessi.',
-          },
-          {
-            command: 'id',
-            output: 'uid=1000(studente) gid=1000(studente) gruppi=1000(studente),27(sudo),1001(developers)',
-            explanation: 'Mostra UID, GID e tutti i gruppi a cui appartieni: è il "documento d\'identità" del tuo utente nel sistema.',
-          },
-          {
-            command: 'ls -la script.sh',
-            output: '-rw-r--r-- 1 studente developers 512 mag 20 10:00 script.sh',
-            explanation: 'Legge i permessi attuali: il primo campo mostra tipo file + permessi owner/group/others, poi utente e gruppo proprietari.',
-          },
-          {
-            command: 'chmod 755 script.sh',
-            output: '',
-            explanation: 'Assegna pieno accesso al proprietario e lettura/esecuzione a gruppo e altri — pattern standard per script eseguibili.',
-          },
-          {
-            command: 'chmod u+x deploy.sh',
-            output: '',
-            explanation: 'Notazione simbolica: aggiunge il bit execute solo all\'owner (u), senza toccare group e others.',
-          },
           {
             command: 'ps aux | grep node',
             output: 'studente  1823 ... node server.js',
-            explanation: 'Cerca processi Node attivi combinando lista processi e filtro testuale.',
+            explanation: 'Cerca processi Node attivi: ps aux elenca tutto, grep filtra per nome. Il PID (1823) è l\'identificatore del processo.',
           },
           {
             command: 'kill 1823',
             output: '',
-            explanation: 'Invia un segnale di terminazione a un processo specifico tramite PID.',
-            warning: 'Termina processi solo se sai cosa sono: potresti interrompere un servizio utile.',
+            explanation: 'Invia SIGTERM al processo con quel PID. Il processo riceve il segnale e può terminare in modo controllato.',
+            warning: 'Termina processi solo se sai cosa sono. Per processi che non rispondono: kill -9 <PID>, ma è l\'ultima risorsa.',
           },
         ],
         commandReferences: [
@@ -830,7 +898,7 @@ export const chapters: Chapter[] = [
             command: 'chown',
             syntax: 'chown [utente][:gruppo] file',
             description: 'Cambia proprietario e gruppo di un file. Richiede sudo se non sei il proprietario attuale.',
-            examples: ['chown michele note.txt', 'chown michele:developers progetto/', 'chown root:root config.yml'],
+            examples: ['chown michele note.txt', 'chown michele:developers progetto/', 'sudo chown root:root /etc/config'],
           },
         ],
       },
@@ -923,7 +991,7 @@ export const chapters: Chapter[] = [
         id: 'common-mistakes',
         title: 'Errori comuni da evitare',
         content:
-          'I danni più frequenti non nascono da comandi “super avanzati”, ma da fretta, percorsi sbagliati e privilegi usati senza contesto.\n\nTre esempi classici: cancellare nella cartella sbagliata, modificare permessi in modo troppo permissivo, lanciare comandi con sudo senza averli capiti.',
+          'I danni più frequenti non nascono da comandi "super avanzati", ma da fretta, percorsi sbagliati e privilegi usati senza contesto.\n\nTre esempi classici: cancellare nella cartella sbagliata, modificare permessi in modo troppo permissivo, lanciare comandi con sudo senza averli capiti.',
         keyPoints: [
           'Controllare contesto e percorso è una forma di sicurezza.',
           'Permessi troppo aperti non sono comodità: sono rischio.',
@@ -946,7 +1014,7 @@ export const chapters: Chapter[] = [
       'Il comportamento professionale nasce da metodo, verifica e cautela.',
     ],
     discussionPrompts: [
-      'Quale differenza pratica c’è tra “sapere un comando” e “saperlo usare bene”?',
+      'Quale differenza pratica c’è tra "sapere un comando" e "saperlo usare bene"?',
       'Perché la fretta è una delle principali cause di errore operativo su Linux?',
     ],
     quiz: [

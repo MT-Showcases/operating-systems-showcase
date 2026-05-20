@@ -60,6 +60,17 @@ export interface InfoTable {
   rows: InfoTableRow[];
 }
 
+export interface LabStep {
+  goal: string;
+  command: TerminalCommandBlock;
+}
+
+export interface LabBlock {
+  title?: string;
+  intro?: string;
+  steps: LabStep[];
+}
+
 export interface Section {
   id: string;
   title: string;
@@ -68,6 +79,7 @@ export interface Section {
   terminalCommands?: TerminalCommandBlock[];
   commandReferences?: CommandReference[];
   infoTables?: InfoTable[];
+  labBlock?: LabBlock;
 }
 
 export interface MediaPlaceholder {
