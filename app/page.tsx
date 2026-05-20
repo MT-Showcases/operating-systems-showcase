@@ -140,6 +140,10 @@ export default function Home() {
             <div className="text-center sm:text-right">
               <p className="text-text-primary text-sm">Docente: <span className="text-accent-cyan font-medium">Michele Tornello</span></p>
               <div className="flex items-center justify-center sm:justify-end gap-3 mt-1">
+                <Link href="/openclaw" className="text-text-secondary hover:text-accent-cyan text-xs transition-colors">
+                  OpenClaw
+                </Link>
+                <span className="text-text-secondary/40" aria-hidden="true">·</span>
                 <Link href="/privacy" className="text-text-secondary hover:text-accent-cyan text-xs transition-colors">
                   Privacy Policy
                 </Link>
