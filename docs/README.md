@@ -7,6 +7,7 @@ Quick index to understand project structure, rules, and decisions without manual
 2. `../AGENTS.md` - operational onboarding for all agents.
 3. `adr/ADR-001-project-architecture.md` - architecture and layering.
 4. `adr/ADR-002-common-mistakes-and-content-density.md` - pedagogy and content-density policy.
+5. `chapter-authoring-template.md` - chapter template, checklist, and acceptance scorecard.
 
 ## Language policy
 - Documentation and developer-facing code comments must be in English.

@@ -12,8 +12,9 @@ If the user request is generic (for example "review the structure and documentat
 2. `docs/README.md`
 3. `docs/adr/ADR-001-project-architecture.md`
 4. `docs/adr/ADR-002-common-mistakes-and-content-density.md`
-5. `data/chapters/index.ts` and `data/types.ts`
-6. `app/chapters/[slug]/page.tsx` and `components/SectionCard.tsx`
+5. `docs/chapter-authoring-template.md`
+6. `data/chapters/index.ts` and `data/types.ts`
+7. `app/chapters/[slug]/page.tsx` and `components/SectionCard.tsx`
 
 ## Established operating decisions
 1. Keep `commonMistakes`: it does not replace quiz feedback, it complements it.
@@ -40,7 +41,8 @@ If the user request is generic (for example "review the structure and documentat
 2. Apply the smallest effective change.
 3. Validate at least the touched files (`npm run lint -- <file>`).
 4. If you change a cross-cutting rule or pattern, update an ADR.
-5. Do not introduce new UX variants without a clear rationale.
+5. Use `docs/chapter-authoring-template.md` when creating/updating chapters.
+6. Do not introduce new UX variants without a clear rationale.
 
 ## Definition of done
 - No lint errors in changed files.
