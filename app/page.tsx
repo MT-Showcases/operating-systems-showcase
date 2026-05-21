@@ -1,7 +1,6 @@
 'use client';
 
 import { chapters } from '@/data/chapters';
-import { chapterEmojis } from '@/data/chapterEmojis';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
 import SearchBar from '@/components/SearchBar';
@@ -29,12 +28,20 @@ export default function Home() {
             Dal <GlossaryTooltip termId="kernel">kernel</GlossaryTooltip> ai comandi Linux, dai <GlossaryTooltip termId="process">processi</GlossaryTooltip> ai <GlossaryTooltip termId="permissions">permessi</GlossaryTooltip>: un percorso completo pensato per chi vuole usare Linux con consapevolezza reale.
           </p>
           <div className="mb-8">
-            <Link
-              href="/openclaw"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-none bg-accent-green/10 border border-accent-green/40 text-accent-green hover:bg-accent-green/20 transition-all text-sm font-semibold"
-            >
-              Scopri OpenClaw: come nasce questo corso <ChevronRight className="h-4 w-4" />
-            </Link>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/openclaw"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-none bg-accent-green/10 border border-accent-green/40 text-accent-green hover:bg-accent-green/20 transition-all text-sm font-semibold"
+              >
+                Scopri OpenClaw: come nasce questo corso <ChevronRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/sandbox"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-none bg-accent-cyan/10 border border-accent-cyan/40 text-accent-cyan hover:bg-accent-cyan/20 transition-all text-sm font-semibold"
+              >
+                Apri terminale libero (beta) <ChevronRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
           <div className="flex flex-wrap gap-6 text-sm text-text-secondary items-center">
             <div className="flex items-center gap-2">

@@ -14,6 +14,7 @@ interface SectionCardProps {
   id: string;
   title: string;
   content: string;
+  chapterSlug?: string;
   keyPoints?: string[];
   glossaryIds: string[];
   terminalCommands?: TerminalCommandBlock[];
@@ -44,6 +45,7 @@ export default function SectionCard({
   id,
   title,
   content,
+  chapterSlug,
   keyPoints,
   glossaryIds,
   terminalCommands,
@@ -111,7 +113,7 @@ export default function SectionCard({
             {labBlock.title || 'Laboratorio'}
             <span className="ml-2 text-text-secondary">{showLab ? '▲' : '▼'}</span>
           </button>
-          {showLab ? <LabBlockComponent {...labBlock} glossaryIds={glossaryIds} /> : null}
+          {showLab ? <LabBlockComponent {...labBlock} glossaryIds={glossaryIds} chapterSlug={chapterSlug} /> : null}
         </div>
       ) : null}
 

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import TutorFloatingChat from '@/components/TutorFloatingChat';
 import ServiceWorkerRegister from '@/components/ServiceWorkerRegister';
+import SandboxFloatingButton from '@/components/SandboxFloatingButton';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -63,6 +64,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <ServiceWorkerRegister />
         {children}
+        <SandboxFloatingButton />
         <TutorFloatingChat />
       </body>
     </html>

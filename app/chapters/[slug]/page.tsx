@@ -245,6 +245,7 @@ export default async function ChapterPage({ params }: Props) {
                     id={section.id}
                     title={section.title}
                     content={section.content}
+                    chapterSlug={chapter.slug}
                     keyPoints={section.keyPoints}
                     glossaryIds={chapter.glossary ?? []}
                     terminalCommands={section.terminalCommands}

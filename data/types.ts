@@ -71,6 +71,21 @@ export interface LabBlock {
   steps: LabStep[];
 }
 
+export interface SandboxExecuteRequest {
+  command: string;
+  chapterSlug?: string;
+  stepGoal?: string;
+}
+
+export interface SandboxExecuteResponse {
+  provider: 'mock';
+  stdout: string;
+  stderr?: string;
+  exitCode: number;
+  durationMs: number;
+  blocked?: boolean;
+}
+
 export interface Section {
   id: string;
   title: string;
