@@ -365,13 +365,13 @@ export default async function ChapterPage({ params }: Props) {
                       <ChevronRight className="h-4 w-4" />
                     </summary>
                     <div className="mt-4">
-                      <PilotBlock items={chapter.pilotContent.miniTask} glossaryIds={chapter.glossary ?? []} blockKey="minitask" />
+                      <PilotBlock items={chapter.pilotContent?.miniTask ?? []} glossaryIds={chapter.glossary ?? []} blockKey="minitask" />
                     </div>
                   </details>
                 ) : (
                   <>
                     <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Mini task</p>
-                    <PilotBlock items={chapter.pilotContent.miniTask} glossaryIds={chapter.glossary ?? []} blockKey="minitask" />
+                    <PilotBlock items={chapter.pilotContent?.miniTask ?? []} glossaryIds={chapter.glossary ?? []} blockKey="minitask" />
                   </>
                 )}
               </section>
