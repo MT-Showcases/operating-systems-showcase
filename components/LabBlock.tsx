@@ -17,6 +17,17 @@ type StepRunState = {
   error?: string;
 };
 
+function isSandboxExecuteResponse(payload: unknown): payload is SandboxExecuteResponse {
+  if (!payload || typeof payload !== 'object') return false;
+  const candidate = payload as Partial<SandboxExecuteResponse>;
+  return (
+    candidate.provider === 'mock' &&
+    typeof candidate.stdout === 'string' &&
+    typeof candidate.exitCode === 'number' &&
+    typeof candidate.durationMs === 'number'
+  );
+}
+
 export default function LabBlock({ title, intro, steps, glossaryIds = [], chapterSlug }: LabBlockType & { glossaryIds?: string[]; chapterSlug?: string }) {
   const [runStates, setRunStates] = useState<Record<number, StepRunState>>({});
 
@@ -33,14 +44,26 @@ export default function LabBlock({ title, intro, steps, glossaryIds = [], chapte
         body: JSON.stringify({ command, chapterSlug, stepGoal: goal }),
       });
 
-      const data = (await res.json()) as SandboxExecuteResponse | { error?: string };
+      const data: unknown = await res.json();
 
-      if (!res.ok || 'error' in data) {
+      if (!res.ok || (typeof data === 'object' && data !== null && 'error' in data)) {
+        const errorData = data as { error?: string };
         setRunStates((prev) => ({
           ...prev,
           [index]: {
             loading: false,
-            error: ('error' in data && data.error) || 'Errore durante l\'esecuzione sandbox.',
+            error: errorData.error || 'Errore durante l\'esecuzione sandbox.',
+          },
+        }));
+        return;
+      }
+
+      if (!isSandboxExecuteResponse(data)) {
+        setRunStates((prev) => ({
+          ...prev,
+          [index]: {
+            loading: false,
+            error: 'Risposta sandbox non valida.',
           },
         }));
         return;
