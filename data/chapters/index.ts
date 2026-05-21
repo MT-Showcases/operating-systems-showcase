@@ -1557,8 +1557,44 @@ export const chapters: Chapter[] = [
                 explanation: 'Mostra tutto: **UID**, gruppo primario e gruppi secondari. Se vedi **sudo** nell\'elenco, puoi usare sudo sul sistema.',
               },
             },
+            {
+              goal: 'Micro-test: verifica accesso reale tra utenti',
+              command: {
+                command: 'touch prova-accesso.txt && chmod 600 prova-accesso.txt && sudo -u altrostudente cat prova-accesso.txt',
+                output: 'cat: prova-accesso.txt: Permission denied',
+                explanation: 'Colleghi identita e permessi con un test concreto: l\'utente diverso viene bloccato se non e owner o nel gruppo corretto.',
+              },
+            },
+            {
+              goal: 'Conferma motivo del blocco',
+              command: {
+                command: 'id altrostudente && ls -l prova-accesso.txt',
+                output: 'uid=1002(altrostudente) gid=1002(altrostudente) groups=1002(altrostudente)',
+                explanation: 'Verifica sempre le due fonti della decisione: membership gruppi e bit attivi su file/directory.',
+              },
+            },
           ],
         },
+        commandReferences: [
+          {
+            command: 'sudo -u',
+            syntax: 'sudo -u <utente> <comando>',
+            description: 'Esegue un singolo comando come un altro utente senza aprire una nuova sessione completa.',
+            examples: ['sudo -u mario whoami', 'sudo -u mario cat /home/mario/file.txt'],
+          },
+          {
+            command: 'sudo -iu',
+            syntax: 'sudo -iu <utente>',
+            description: 'Apre una shell login completa come un altro utente. Utile per più operazioni consecutive.',
+            examples: ['sudo -iu mario', 'sudo -iu mario && whoami'],
+          },
+          {
+            command: 'groups',
+            syntax: 'groups <utente>',
+            description: 'Mostra i gruppi di appartenenza dell\'utente in formato rapido.',
+            examples: ['groups mario', 'groups'],
+          },
+        ],
       },
     ],
     keyTakeaways: [
@@ -1756,7 +1792,7 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Leggere e modificare i permessi',
-          intro: 'Il flusso corretto è sempre lo stesso: leggi lo stato attuale, poi agisci.',
+          intro: 'Il flusso corretto è sempre lo stesso: leggi lo stato attuale, poi agisci. Micro-test: accesso reale tra utenti in 3 step.',
           steps: [
             {
               goal: 'Leggi i permessi correnti del file',
@@ -1789,6 +1825,30 @@ export const chapters: Chapter[] = [
                 output: '',
                 explanation: 'Assegna il file all\'utente **michele** e al gruppo **developers**. Richiede **sudo** se non sei il proprietario attuale.',
                 warning: '**chown** su directory intere usa **-R** per ricorsività. Verifica sempre il percorso prima.',
+              },
+            },
+            {
+              goal: 'Micro-test 1/3: setup restrittivo e test negato',
+              command: {
+                command: 'touch segreto.txt && chmod 600 segreto.txt && sudo -u altrostudente cat segreto.txt',
+                output: 'cat: segreto.txt: Permission denied',
+                explanation: 'Con **600** solo l\'owner accede. Se provi come altro utente, ottieni errore: è il test pratico più chiaro per validare i permessi.',
+              },
+            },
+            {
+              goal: 'Micro-test 2/3: abilita gruppo e ritesta',
+              command: {
+                command: 'sudo chown :progetto segreto.txt && chmod 660 segreto.txt && sudo -u altrostudente cat segreto.txt',
+                output: '',
+                explanation: 'Con **660** l\'accesso passa dal gruppo. Il comando funziona solo se l\'utente è membro del gruppo corretto.',
+              },
+            },
+            {
+              goal: 'Micro-test 3/3: verifica finale policy',
+              command: {
+                command: 'id altrostudente && ls -l segreto.txt',
+                output: 'uid=1002(altrostudente) gid=1002(altrostudente) groups=1002(altrostudente),1005(progetto)',
+                explanation: 'Controlla sempre **chi è l\'utente**, **a quali gruppi appartiene** e **quali bit sono attivi** prima di concludere che una policy funzioni.',
               },
             },
           ],
@@ -1831,6 +1891,7 @@ export const chapters: Chapter[] = [
           '`userdel` senza `-r` **non rimuove** la home directory — i file restano orfani nel sistema.',
           'Verifica sempre con `id` o `getent` dopo ogni operazione: è l\'unico modo per confermare che la modifica sia andata a buon fine.',
           '`getent` è preferibile a `cat /etc/passwd` perché interroga tutte le sorgenti di identità configurate.',
+          'Per test puntuali di accesso usa `sudo -u <utente> <comando>`; usa shell completa (`sudo -iu`) solo se devi fare più azioni come quell\'utente.',
         ],
         infoTables: [
           {
@@ -2105,7 +2166,38 @@ export const chapters: Chapter[] = [
         keyPoints: [
           'Più privilegio = più responsabilità.',
           'sudo riduce l’esposizione rispetto a sessioni root permanenti.',
+          'Preferisci `sudo -u <utente> <comando>` per test mirati; entra in shell con `sudo -iu` solo quando serve davvero una sessione completa.',
         ],
+        labBlock: {
+          title: 'Micro-check pre-sudo in 3 passi',
+          intro: 'Prima di qualsiasi comando privilegiato, fai tre controlli veloci: contesto, target, impatto.',
+          steps: [
+            {
+              goal: 'Contesto: chi sei e dove sei',
+              command: {
+                command: 'whoami && pwd',
+                output: 'studente\n/home/studente/progetto',
+                explanation: 'Eviti errori banali verificando utente e directory corrente prima di operazioni sensibili.',
+              },
+            },
+            {
+              goal: 'Target: cosa stai per toccare',
+              command: {
+                command: 'ls -la /etc/hosts',
+                output: '-rw-r--r-- 1 root root 244 mag 21 09:10 /etc/hosts',
+                explanation: 'Leggi owner, gruppo e permessi del target per capire se sudo serve davvero e quale rischio comporta.',
+              },
+            },
+            {
+              goal: 'Impatto: esegui solo dopo check esplicito',
+              command: {
+                command: 'sudo cp /etc/hosts /etc/hosts.bak',
+                output: '',
+                explanation: 'Prima azione privilegiata minima e reversibile: backup immediato per ridurre impatto e facilitare rollback.',
+              },
+            },
+          ],
+        },
         terminalCommands: [
           {
             command: 'sudo apt update',
