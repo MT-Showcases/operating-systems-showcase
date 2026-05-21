@@ -23,6 +23,15 @@ Use this order as the default flow:
 - At least one `commonMistakes` item must add value beyond quiz explanations.
 - Avoid duplicating the same sentence between `commonMistakes` and quiz explanation text.
 
+## Quiz quality rules
+- Keep quiz options cognitively meaningful: avoid joke answers and obviously impossible distractors.
+- Use plausible distractors that reflect common reasoning errors, not random wrong facts.
+- Balance option length to avoid visual clues (for example, the correct answer being consistently the longest).
+- Do not keep the correct option in a predictable position (for example, always first or always among the first two).
+- Avoid deterministic ordering patterns across chapters (for example, fixed rotations that become guessable).
+- Include at least one application-oriented question per chapter quiz (scenario, trade-off, or troubleshooting context).
+- Explanations should justify why the correct answer is best and briefly clarify why nearby distractors are weaker.
+
 ## UX density rules
 - Always visible by default:
   - section title
@@ -90,7 +99,12 @@ Score each area 0-2.
 1 = minor issues
 2 = clean and validated
 
+6. Quiz robustness:
+0 = predictable/obvious options
+1 = partially robust (some clues remain)
+2 = balanced, non-predictable, and reasoning-oriented
+
 Interpretation:
-- 9-10: ready
-- 7-8: ready with small follow-ups
-- <=6: revise before merge
+- 11-12: ready
+- 8-10: ready with small follow-ups
+- <=7: revise before merge

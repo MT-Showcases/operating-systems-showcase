@@ -17,6 +17,8 @@ Do not remove it as a replacement for quiz explanations. Quiz explanations and c
 
 For dense chapters, allow progressive disclosure (accordion/details) on secondary blocks. Keep core learning flow always visible.
 
+Adopt a quiz-quality policy that prevents answer guessing from visual or positional patterns.
+
 ## Rationale
 - Preventive + corrective learning together reduce misconception persistence.
 - A dedicated misconception list gives a quicker mental model than scattered per-question feedback.
@@ -26,6 +28,7 @@ For dense chapters, allow progressive disclosure (accordion/details) on secondar
 - Positive: better conceptual clarity, especially for beginners.
 - Positive: reusable chapter authoring pattern for future content.
 - Risk: content bloat if common mistakes duplicate quiz wording.
+- Risk: quiz answers become guessable if option length/order follows visible patterns.
 - Mitigation: add authoring constraints and checklist.
 
 ## Authoring rules
@@ -34,6 +37,15 @@ For dense chapters, allow progressive disclosure (accordion/details) on secondar
 - At least one misconception must add value beyond quiz explanations.
 - Avoid copy/paste from quiz explanation text.
 - Keep each item short and concrete.
+
+## Quiz authoring policy
+- Distractors must be plausible and tied to realistic misconceptions.
+- Avoid trivial distractors that can be rejected without reasoning.
+- Balance option length to remove visual hints (for example, "the longest answer is usually correct").
+- Distribute correct-option positions in a non-predictable way.
+- Do not use fixed rotations or deterministic ordering patterns across chapters.
+- Prefer at least one scenario-style question per chapter to test transfer, not just recall.
+- Quiz explanation text should explain both correctness and nearby confusion points.
 
 ## Chapter UI density policy
 - Always visible by default: section title, section body, key points, key takeaways.
