@@ -165,6 +165,111 @@ export const glossaryTerms: GlossaryEntry[] = [
       'chown serve a trasferire ownership di file e cartelle. È utile quando un servizio o uno script non riesce a lavorare perché il proprietario attuale è sbagliato.',
     category: 'Linux',
   },
+  {
+    id: 'stdin',
+    term: 'stdin',
+    shortDefinition: 'Stream di input standard che un comando riceve da tastiera o da un altro comando.',
+    definition:
+      'stdin è il canale di ingresso standard di un processo. Può ricevere dati dalla tastiera, da un file o dall’output di un altro comando collegato tramite pipe.',
+    category: 'Linux',
+    aliases: ['standard input'],
+  },
+  {
+    id: 'stdout',
+    term: 'stdout',
+    shortDefinition: 'Stream di output standard che contiene il risultato normale di un comando.',
+    definition:
+      'stdout è il canale su cui un comando scrive il suo output normale. Può essere mostrato a schermo, salvato in file o passato come input a un altro comando.',
+    category: 'Linux',
+    aliases: ['standard output'],
+  },
+  {
+    id: 'stderr',
+    term: 'stderr',
+    shortDefinition: 'Stream di errore standard usato per warning, errori e diagnostica.',
+    definition:
+      'stderr è il canale separato da stdout usato per errori e messaggi diagnostici. Tenerlo distinto dall’output normale rende debug e automazione più affidabili.',
+    category: 'Linux',
+    aliases: ['standard error'],
+  },
+  {
+    id: 'pipe',
+    term: 'pipe',
+    shortDefinition: 'Meccanismo shell che collega l’output di un comando all’input del successivo.',
+    definition:
+      'Una pipe collega stdout di un comando a stdin del comando successivo. È uno dei meccanismi più potenti della shell perché permette di comporre strumenti piccoli in workflow più ricchi.',
+    category: 'Linux',
+    aliases: ['pipeline', 'pipeline'],
+  },
+  {
+    id: 'redirection',
+    term: 'redirection',
+    shortDefinition: 'Tecnica shell per inviare output o errori verso file, dispositivi o altri flussi.',
+    definition:
+      'La redirection cambia destinazione o origine di stdin, stdout e stderr. Serve per salvare risultati, separare errori o costruire comandi più osservabili.',
+    category: 'Linux',
+    aliases: ['reindirizzamento'],
+  },
+  {
+    id: 'log',
+    term: 'log',
+    shortDefinition: 'Traccia di eventi, errori o attività registrata da sistema e applicazioni.',
+    definition:
+      'I log registrano eventi utili per capire cosa è successo nel sistema o in un servizio. Sono fondamentali per troubleshooting, audit e osservabilità operativa.',
+    category: 'Linux',
+    aliases: ['logs'],
+  },
+  {
+    id: 'pid',
+    term: 'PID',
+    shortDefinition: 'Identificatore numerico di un processo in esecuzione.',
+    definition:
+      'Il PID è il numero con cui il sistema identifica un processo attivo. Serve per monitorarlo, segnalarlo o terminarlo in modo preciso.',
+    category: 'Processes',
+  },
+  {
+    id: 'inode',
+    term: 'inode',
+    shortDefinition: 'Struttura del file system che contiene i metadati reali di un file.',
+    definition:
+      'L’inode contiene metadati come permessi, owner, timestamp, dimensione e riferimenti ai dati del file. Il nome del file, invece, vive nella directory che punta a quell’inode.',
+    category: 'Files',
+  },
+  {
+    id: 'hard-link',
+    term: 'hard link',
+    shortDefinition: 'Voce aggiuntiva di directory che punta allo stesso inode di un file.',
+    definition:
+      'Un hard link è un altro nome per lo stesso inode del file originale. Non è un riferimento a un percorso: condivide proprio la stessa identità del file sul file system.',
+    category: 'Files',
+    aliases: ['hard links'],
+  },
+  {
+    id: 'symlink',
+    term: 'symlink',
+    shortDefinition: 'Link simbolico che punta a un percorso invece che allo stesso inode.',
+    definition:
+      'Un symlink è un riferimento a un percorso. È più flessibile di un hard link, ma può rompersi se il target viene spostato, rinominato o rimosso.',
+    category: 'Files',
+    aliases: ['symbolic link', 'symbolic links', 'soft link', 'soft links'],
+  },
+  {
+    id: 'cron',
+    term: 'cron',
+    shortDefinition: 'Servizio Unix-like che esegue comandi in modo schedulato.',
+    definition:
+      'Cron è il servizio che esegue comandi a orari o intervalli prefissati. È usato per backup, cleanup, report periodici e automazioni semplici ma affidabili.',
+    category: 'Linux',
+  },
+  {
+    id: 'crontab',
+    term: 'crontab',
+    shortDefinition: 'Tabella di scheduling dei cron job di un utente.',
+    definition:
+      'La crontab è la configurazione che definisce quando eseguire i comandi schedulati di un utente. Può essere letta, modificata e rimossa con il comando crontab.',
+    category: 'Linux',
+    aliases: ['cron job', 'cron jobs'],
+  },
 ];
 
 export function getTermById(termId: string) {

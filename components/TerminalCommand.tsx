@@ -6,11 +6,12 @@ import type { TerminalCommandBlock } from '@/data/types';
 import NixButton from './NixButton';
 import { renderInline } from './RichText';
 
-function buildNixPrompt(command: string, explanation: string): string {
-  return `Comando: ${command}\n\nSpiegami cosa fa esattamente questo comando, il significato di ogni opzione e quando usarlo nella pratica. Contesto: ${explanation}`;
+function buildNixPrompt(command: string, explanation: string, title?: string): string {
+  const contextPrefix = title ? `Obiettivo operativo: ${title}\n` : '';
+  return `Comando: ${command}\n\n${contextPrefix}Spiegami cosa fa esattamente questo comando, il significato di ogni opzione e quando usarlo nella pratica. Contesto: ${explanation}`;
 }
 
-export default function TerminalCommand({ command, output, explanation, warning, showNix = true, glossaryIds = [] }: TerminalCommandBlock & { showNix?: boolean; glossaryIds?: string[] }) {
+export default function TerminalCommand({ title, command, output, explanation, warning, showNix = true, glossaryIds = [] }: TerminalCommandBlock & { showNix?: boolean; glossaryIds?: string[] }) {
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle');
   const copyResetTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -48,6 +49,11 @@ export default function TerminalCommand({ command, output, explanation, warning,
         <span className="ml-2 terminal-heading uppercase tracking-[0.22em]">terminal</span>
       </div>
       <div className="border-l-4 border-accent-green p-4">
+        {title ? (
+          <p className="terminal-heading mb-3 text-[10px] uppercase tracking-[0.18em] text-accent-cyan/80">
+            {title}
+          </p>
+        ) : null}
         <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
           <pre className="terminal-heading min-w-0 flex-1 overflow-x-auto text-sm text-accent-green">
             <code>$ {command}</code>
@@ -77,7 +83,7 @@ export default function TerminalCommand({ command, output, explanation, warning,
         ) : null}
         {showNix ? (
           <div className="mt-4 flex justify-end">
-            <NixButton size="xs" prompt={buildNixPrompt(command, explanation)} />
+            <NixButton size="xs" prompt={buildNixPrompt(command, explanation, title)} />
           </div>
         ) : null}
       </div>

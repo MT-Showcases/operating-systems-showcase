@@ -7,4 +7,11 @@ export const chapterEmojis: Record<number, string> = {
   6: 'Lock',
   7: 'User',
   8: 'Shield',
+  9: 'Terminal',
+  10: 'Lock',
+  11: 'Shield',
+  12: 'Terminal',
+  13: 'Settings',
+  14: 'Folder',
+  15: 'Clock',
 };

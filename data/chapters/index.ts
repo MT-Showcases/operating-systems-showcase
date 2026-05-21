@@ -1861,15 +1861,15 @@ export const chapters: Chapter[] = [
         },
         terminalCommands: [
           {
-            command: 'ps aux | grep node',
-            output: 'mike  1823 ... node server.js',
-            explanation: 'Cerca processi Node attivi: **ps aux** elenca tutto, **grep** filtra per nome. Il **PID** (1823) è l\'identificatore del processo.',
+            command: 'stat -c "%A %a %U:%G %n" script.sh',
+            output: '-rwxr-xr-x 755 mike:developers script.sh',
+            explanation: 'Con **stat** leggi in una riga permessi simbolici, ottali, owner e gruppo: è un check rapido prima di chmod/chown.',
           },
           {
-            command: 'kill 1823',
-            output: '',
-            explanation: 'Invia **SIGTERM** al processo con quel **PID**. Il processo riceve il segnale e può terminare in modo controllato.',
-            warning: 'Termina processi solo se sai cosa sono. Per processi che non rispondono: **kill -9 \<PID\>**, ma è l\'ultima risorsa.',
+            command: 'namei -l /home/mike/progetto/deploy.sh',
+            output: 'drwxr-xr-x root root /\ndrwxr-xr-x root root home\ndrwx------ mike mike mike\ndrwxr-x--- mike developers progetto\n-rwxr-x--- mike developers deploy.sh',
+            explanation: 'Mostra i permessi di ogni segmento del percorso. Utile quando un file "sembra giusto" ma l\'accesso fallisce per colpa di una directory intermedia.',
+            warning: 'Se una directory nel path non ha bit **x** per il tuo utente/gruppo, non puoi attraversarla anche se il file finale è leggibile.',
           },
         ],
         commandReferences: [
@@ -1932,11 +1932,12 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Ciclo completo: crea, configura, verifica, rimuovi',
-          intro: 'Il flusso reale di un amministratore: creare un utente funzionante, assegnarlo a un gruppo, verificare ogni passaggio.',
+          intro: 'Il flusso reale di un amministratore: creare un utente funzionante, assegnarlo a un gruppo, verificare ogni passaggio e chiudere il ciclo con rimozione controllata.',
           steps: [
             {
               goal: 'Crea l\'utente in modo rapido con wizard interattivo',
               command: {
+                title: 'Create utente',
                 command: 'sudo adduser mike',
                 output: 'Adding user `mike` ...\nNew password:\nRetype new password:\nFull Name []: Mike Rossi\n...\nIs the information correct? [Y/n] Y',
                 explanation: 'Su Debian/Ubuntu, **adduser** è il percorso più veloce: crea home directory, imposta la password e raccoglie i metadati in un unico flusso guidato.',
@@ -1945,6 +1946,7 @@ export const chapters: Chapter[] = [
             {
               goal: 'Fallback universale: usa useradd + passwd dove adduser non c\'è',
               command: {
+                title: 'Fallback creazione account',
                 command: 'sudo passwd mike',
                 output: 'Nuova password:\nRipetere la nuova password:\npasswd: password aggiornata correttamente',
                 explanation: 'Su distro dove **adduser** non è disponibile (o è diverso), crea l\'utente con **useradd** e poi imposta la password con **passwd**. L\'hash viene scritto in **/etc/shadow**, non in **/etc/passwd**.',
@@ -1953,6 +1955,7 @@ export const chapters: Chapter[] = [
             {
               goal: 'Verifica che l\'utente sia stato creato correttamente',
               command: {
+                title: 'Verify creazione utente',
                 command: 'getent passwd mike',
                 output: 'mike:x:1001:1001:Mike Rossi:/home/mike:/bin/bash',
                 explanation: 'Tutti i campi in un colpo solo: **UID**, **GID**, commento, home, **shell**. Se il comando non restituisce nulla, l\'utente non esiste.',
@@ -1961,6 +1964,7 @@ export const chapters: Chapter[] = [
             {
               goal: 'Crea un gruppo di progetto',
               command: {
+                title: 'Create gruppo',
                 command: 'sudo groupadd developers',
                 output: '',
                 explanation: 'Crea il gruppo con il primo **GID** disponibile. Puoi specificarne uno manuale con **-g \<numero\>** se hai bisogno di un GID fisso (utile in ambienti con NFS o condivisioni).',
@@ -1969,6 +1973,7 @@ export const chapters: Chapter[] = [
             {
               goal: 'Aggiungi l\'utente al gruppo (senza rimuoverlo da quelli esistenti)',
               command: {
+                title: 'Configure membership',
                 command: 'sudo usermod -aG developers mike',
                 output: '',
                 explanation: '**-aG** significa "append to Groups": aggiunge **developers** ai gruppi secondari di mike senza toccare quelli già presenti. Senza **-a** sovrascriveresti tutti i gruppi secondari.',
@@ -1978,6 +1983,7 @@ export const chapters: Chapter[] = [
             {
               goal: 'Verifica UID, GID e appartenenza ai gruppi',
               command: {
+                title: 'Verify membership',
                 command: 'id mike',
                 output: 'uid=1001(mike) gid=1001(mike) gruppi=1001(mike),1002(developers)',
                 explanation: 'Conferma che **mike** appartiene ora a entrambi i gruppi. Nota: questa modifica sarà visibile a mike solo dopo un nuovo login.',
@@ -1986,31 +1992,91 @@ export const chapters: Chapter[] = [
             {
               goal: 'Modifica la shell o altri attributi in seguito',
               command: {
+                title: 'Adjust attributi post-creazione',
                 command: 'sudo usermod -s /bin/zsh mike',
                 output: '',
                 explanation: '**usermod** permette di cambiare qualsiasi attributo post-creazione: **shell** (**-s**), home (**-d**), commento (**-c**), nome di login (**-l**), account bloccato (**-L**) o sbloccato (**-U**).',
+              },
+            },
+            {
+              goal: 'Rimuovi l\'utente dal gruppo e valida il risultato',
+              command: {
+                title: 'Remove membership',
+                command: 'sudo gpasswd -d mike developers',
+                output: 'Rimozione dell\'utente mike dal gruppo developers',
+                explanation: 'Prima di eliminare account o gruppi, sgancia l\'utente in modo esplicito dal gruppo secondario: semplifica teardown e verifica dello stato finale.',
+              },
+            },
+            {
+              goal: 'Verifica che il gruppo non includa più l\'utente',
+              command: {
+                title: 'Verify group state',
+                command: 'getent group developers',
+                output: 'developers:x:1002:',
+                explanation: 'Conferma che la membership è stata rimossa: il gruppo esiste ancora ma non contiene più mike.',
+              },
+            },
+            {
+              goal: 'Rimuovi l\'utente e la home directory con cautela',
+              command: {
+                title: 'Remove user',
+                command: 'sudo userdel -r mike',
+                output: '',
+                explanation: 'Esegue il teardown dell\'account e pulisce la home. Fallo solo quando hai già verificato backup e ownership dei file importanti.',
+                warning: '**userdel -r** è irreversibile: la home e i file dell\'utente vengono eliminati. Verifica backup e ownership prima di procedere.',
+              },
+            },
+            {
+              goal: 'Verifica che l\'utente non esista più',
+              command: {
+                title: 'Verify user removal',
+                command: 'getent passwd mike',
+                output: '',
+                explanation: 'Se il comando non produce output, l\'utente è stato rimosso dal database identità del sistema.',
+              },
+            },
+            {
+              goal: 'Rimuovi il gruppo di progetto se non più necessario',
+              command: {
+                title: 'Remove group',
+                command: 'sudo groupdel developers',
+                output: '',
+                explanation: 'Chiude il ciclo completo: elimina il gruppo quando non è più usato da utenti o processi.',
+              },
+            },
+            {
+              goal: 'Verifica finale teardown completo',
+              command: {
+                title: 'Verify teardown completeness',
+                command: 'getent group developers',
+                output: '',
+                explanation: 'Nessun output conferma che anche il gruppo è stato rimosso. A questo punto il ciclo create-configure-verify-remove è concluso.',
               },
             },
           ],
         },
         terminalCommands: [
           {
+            title: 'Check stato gruppo',
             command: 'getent group developers',
             output: 'developers:x:1002:mike',
             explanation: 'Mostra il gruppo **developers** con **GID** e lista dei membri. Equivale a cercare la riga corrispondente in **/etc/group**.',
           },
           {
+            title: 'Rimuovi membership specifica',
             command: 'sudo gpasswd -d mike developers',
             output: 'Rimozione dell\'utente mike dal gruppo developers',
             explanation: 'Rimuove **mike** dal gruppo senza toccare altri attributi. Alternativa a **usermod** quando devi rimuovere da un gruppo specifico.',
           },
           {
+            title: 'Elimina account utente',
             command: 'sudo userdel -r mike',
             output: '',
             explanation: 'Rimuove l\'utente e cancella la **home directory** con tutto il contenuto.',
             warning: '**userdel -r** è irreversibile: la home e i file dell\'utente vengono eliminati. Fai sempre un backup prima.',
           },
           {
+            title: 'Elimina gruppo di progetto',
             command: 'sudo groupdel developers',
             output: '',
             explanation: 'Elimina il gruppo. I file che appartenevano al gruppo restano nel sistema ma il **GID** diventa un numero senza nome associato.',
@@ -2279,6 +2345,634 @@ export const chapters: Chapter[] = [
       },
     ],
     glossary: ['sudo', 'root', 'permissions', 'shell', 'terminal'],
+  },
+  {
+    id: 12,
+    slug: 'streams-pipes-redirection',
+    title: 'Streams, Pipe e Redirection',
+    description: 'Passare da comandi isolati a flussi reali: **stdin**, **stdout**, **stderr**, **redirection** e **pipe** operative.',
+    duration: '2.5h',
+    objectives: [
+      'Distinguere **stdin**, **stdout** e **stderr** senza confonderli.',
+      'Usare **redirection** con >, >>, 2> e 2>&1 in modo intenzionale.',
+      'Comporre **pipe** utili con grep, wc, sort e uniq.',
+    ],
+    sections: [
+      {
+        id: 'streams-basics',
+        title: 'I tre stream: stdin, stdout, stderr',
+        content:
+          'In shell non tutto l\'output è uguale: **stdout** è il risultato normale, **stderr** contiene errori o diagnostica, **stdin** è l\'ingresso che un comando può ricevere da tastiera o da un altro comando. È questa separazione che rende possibile costruire workflow affidabili invece di one-liner confusi.\n\nIl salto di qualità operativo arriva quando inizi a chiederti: questo comando sta producendo dati, errori, o entrambi? Da lì nasce la differenza tra debug casuale e troubleshooting ordinato.',
+        keyPoints: [
+          'stdout e stderr vanno trattati come canali diversi.',
+          'stdin è il punto di aggancio tra un comando e il successivo.',
+          'Separare i flussi riduce diagnosi sbagliate e output sporco.',
+        ],
+        terminalCommands: [
+          {
+            title: 'Osserva output normale',
+            command: 'echo "deploy ok"',
+            output: 'deploy ok',
+            explanation: 'Produce solo **stdout**: è il caso più semplice, utile per capire cosa succede quando non ci sono errori o diagnostica separata.',
+          },
+          {
+            title: 'Genera un errore controllato',
+            command: 'ls /percorso-inesistente',
+            output: 'ls: cannot access /percorso-inesistente: No such file or directory',
+            explanation: 'Qui il contenuto va su **stderr**. È il caso base per capire perché salvare output e catturare errori non sono la stessa operazione.',
+          },
+        ],
+      },
+      {
+        id: 'redirection-pipes',
+        title: 'Redirection e pipe in pratica',
+        content:
+          'Con **>** sovrascrivi file, con **>>** appendi, con **2>** separi gli errori, con **2>&1** unisci stream diversi quando ti serve un log unico. Il carattere **|** collega stdout del primo comando allo stdin del secondo, cioè trasforma output grezzo in input elaborabile.\n\nIl punto non è memorizzare simboli: è saperli usare per costruire una procedura osservabile, verificabile e riusabile.',
+        keyPoints: [
+          '> sovrascrive, >> aggiunge, 2> isola stderr.',
+          '2>&1 serve quando vuoi un log unico e ordinato.',
+          'Le pipeline sono forti quando ogni step ha uno scopo leggibile.',
+        ],
+        labBlock: {
+          title: 'Workflow operativo: raccogli, filtra, consolida',
+          intro: 'Sequenza breve in stile runbook: prima osservi output e errori, poi li separi, poi li trasformi in informazione utile.',
+          steps: [
+            {
+              goal: 'Salva output normale in file',
+              command: {
+                title: 'Capture stdout',
+                command: 'ls -la > elenco.txt',
+                output: '',
+                explanation: 'Reindirizza **stdout** in elenco.txt. Se il file esiste viene sovrascritto.',
+              },
+            },
+            {
+              goal: 'Aggiungi contenuto senza sovrascrivere',
+              command: {
+                title: 'Append risultati',
+                command: 'pwd >> elenco.txt',
+                output: '',
+                explanation: 'Con **>>** appendi al file esistente senza perdere il contenuto precedente.',
+              },
+            },
+            {
+              goal: 'Separa gli errori in un file dedicato',
+              command: {
+                title: 'Capture stderr',
+                command: 'ls /cartella-che-non-esiste 2> errori.txt',
+                output: '',
+                explanation: 'L\'errore non va a schermo: finisce in errori.txt perché è stream **stderr**.',
+              },
+            },
+            {
+              goal: 'Filtra e conta con una pipeline',
+              command: {
+                title: 'Pipeline leggibile',
+                command: 'cat /etc/passwd | grep bash | wc -l',
+                output: '3',
+                explanation: 'Prima filtri le righe, poi le conti. Tre comandi semplici collegati da pipe.',
+              },
+            },
+            {
+              goal: 'Consolida output ed errori in un log unico quando serve',
+              command: {
+                title: 'Unify streams',
+                command: 'find /etc -maxdepth 1 -name "*.conf" > report.txt 2>&1',
+                output: '',
+                explanation: 'Quando vuoi un solo artefatto da condividere o allegare a un ticket, unisci stdout e stderr nello stesso file in modo esplicito.',
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 'workflow-patterns',
+        title: 'Pattern di workflow da riusare',
+        content:
+          'Quando una pipeline è chiara e ripetibile, hai già un runbook in miniatura. Non serve partire da script complessi: serve prima una procedura manuale che puoi spiegare a voce e verificare passo dopo passo.\n\nLa regola pratica è sempre la stessa: osserva output grezzo, isola errori, filtra il rumore, salva solo ciò che serve davvero.',
+        keyPoints: [
+          'Osserva -> filtra -> salva: sequenza base affidabile.',
+          'Pipeline corte e leggibili battono one-liner opachi.',
+          'Separare errori riduce diagnosi sbagliate.',
+        ],
+        terminalCommands: [
+          {
+            title: 'Conta gli shell user interattivi',
+            command: 'grep bash /etc/passwd | cut -d: -f1 | sort',
+            output: 'mike\nroot',
+            explanation: 'Esempio semplice di pipeline con scopo chiaro: filtrare, estrarre un campo, ordinare il risultato finale.',
+          },
+        ],
+      },
+    ],
+    keyTakeaways: [
+      'Gli stream sono il fondamento dei workflow shell moderni.',
+      'Pipe e redirection permettono composizione invece di comandi isolati.',
+      'Separare stdout/stderr rende debug e automazione molto più robusti.',
+    ],
+    discussionPrompts: [
+      'Quando conviene separare stderr in un file e quando no?',
+      'Perché una pipeline leggibile è spesso meglio di un comando monolitico?',
+    ],
+    quiz: [
+      {
+        id: 'ch12-q1',
+        type: 'multiple_choice',
+        question: 'Stai costruendo un log incrementale di diagnostica. Quale operatore evita di perdere il contenuto precedente?',
+        options: ['>', '2>', '>>', '|'],
+        correctAnswer: 2,
+        explanation: '>> fa append e conserva il contenuto precedente. > sovrascrive, 2> gestisce stderr e | collega l’output di un comando all’input del successivo.',
+      },
+      {
+        id: 'ch12-q2',
+        type: 'multiple_choice',
+        question: 'Vuoi nascondere a schermo solo gli errori di un comando, senza toccare l’output normale. Quale sintassi è corretta?',
+        options: [
+          'ls /nope > errori.txt',
+          'ls /nope 2> errori.txt',
+          'ls /nope >> errori.txt',
+          'ls /nope | errori.txt',
+        ],
+        correctAnswer: 1,
+        explanation: '2> reindirizza solo stderr. Le altre forme o sovrascrivono stdout o non rappresentano una pipeline valida.',
+      },
+      {
+        id: 'ch12-q3',
+        type: 'multiple_choice',
+        question: 'Quale pattern è più professionale quando inizi a costruire una pipeline nuova?',
+        options: [
+          'Scrivere subito un one-liner lungo per fare tutto in un colpo',
+          'Provare prima output grezzo, poi aggiungere filtri uno step alla volta',
+          'Unire sempre stdout e stderr fin dall’inizio senza distinguerli',
+          'Saltare la verifica dei file generati se il comando non mostra errori',
+        ],
+        correctAnswer: 1,
+        explanation: 'Partire da output grezzo e aggiungere filtri progressivamente rende la pipeline osservabile e molto più facile da correggere. Le alternative aumentano opacità o rischio di perdere segnali utili.',
+      },
+    ],
+    glossary: ['shell', 'terminal', 'file-system', 'process', 'stdin', 'stdout', 'stderr', 'pipe', 'redirection', 'log'],
+  },
+  {
+    id: 13,
+    slug: 'process-logs-troubleshooting',
+    title: 'Processi, Log e Troubleshooting',
+    description: 'Osservabilità operativa Linux: leggere **processi**, seguire **log** e diagnosticare problemi senza andare a tentoni.',
+    duration: '3h',
+    objectives: [
+      'Usare ps, top e pgrep per capire cosa sta succedendo nel sistema.',
+      'Leggere **log** in modo progressivo con tail e journalctl.',
+      'Applicare un flusso di troubleshooting ripetibile.',
+    ],
+    sections: [
+      {
+        id: 'process-visibility',
+        title: 'Visibilità processi: snapshot vs live',
+        content:
+          '**ps** ti dà una fotografia istantanea, **top/htop** una vista continua, **pgrep** ti aiuta a trovare subito il PID giusto senza rumore inutile. Nessuno di questi comandi è "migliore in assoluto": diventano potenti quando li usi in sequenza.\n\nIl comportamento professionale non è partire da kill: è identificare, osservare, correlare e solo dopo decidere se intervenire.',
+        keyPoints: [
+          'ps = snapshot.',
+          'top = monitor continuo.',
+          'pgrep riduce rumore quando cerchi per nome processo.',
+        ],
+        terminalCommands: [
+          {
+            title: 'Fotografia rapida processi',
+            command: 'ps aux | head',
+            output: 'USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND',
+            explanation: 'Usa **ps** quando vuoi una fotografia veloce da leggere, salvare o condividere in un ticket.',
+          },
+          {
+            title: 'Trova PID per nome',
+            command: 'pgrep -a ssh',
+            output: '912 /usr/sbin/sshd -D',
+            explanation: 'Riduce il rumore rispetto a ps | grep e produce direttamente PID e comando completo.',
+          },
+        ],
+      },
+      {
+        id: 'logs-reading',
+        title: 'Leggere log senza annegare',
+        content:
+          'Log utility come **tail -f** e **journalctl** permettono di seguire eventi mentre accadono. Il punto però non è leggere tutto: è leggere abbastanza da collegare il sintomo a un evento reale, senza sommergerti di rumore.\n\nTroubleshooting efficace significa raccogliere evidenza prima di agire e lasciare una traccia chiara di ciò che hai osservato.',
+        keyPoints: [
+          'tail -f segue eventi in tempo reale.',
+          'journalctl aiuta su sistemi con systemd.',
+          'Prima evidenza, poi azione.',
+        ],
+        labBlock: {
+          title: 'Workflow di diagnosi: identifica, osserva, intervieni',
+          intro: 'Scenario realistico: un servizio sembra lento o bloccato. L’obiettivo non è “riavviare e sperare”, ma produrre evidenza prima di cambiare stato al sistema.',
+          steps: [
+            {
+              goal: 'Trova processo e PID',
+              command: {
+                title: 'Identify process',
+                command: 'pgrep -a node',
+                output: '1823 node server.js',
+                explanation: 'Recuperi PID e comando completo in modo più pulito di un grep generico.',
+              },
+            },
+            {
+              goal: 'Osserva carico live',
+              command: {
+                title: 'Observe live behavior',
+                command: 'top',
+                output: '',
+                explanation: 'Verifica se CPU/memoria mostrano picchi coerenti con il problema riportato.',
+              },
+            },
+            {
+              goal: 'Segui log in tempo reale',
+              command: {
+                title: 'Correlate logs',
+                command: 'tail -f /var/log/syslog',
+                output: '',
+                explanation: 'Correla errori o warning al momento in cui il servizio mostra il sintomo.',
+              },
+            },
+            {
+              goal: 'Controlla gli eventi recenti del servizio se usi systemd',
+              command: {
+                title: 'Inspect journal',
+                command: 'journalctl -u nginx --since "10 minutes ago"',
+                output: '',
+                explanation: 'Su sistemi con systemd, **journalctl** permette di restringere il contesto e leggere solo l’intervallo temporale utile alla diagnosi.',
+              },
+            },
+            {
+              goal: 'Termina in modo controllato se necessario',
+              command: {
+                title: 'Controlled stop',
+                command: 'kill 1823',
+                output: '',
+                explanation: 'Invia SIGTERM prima di usare approcci forzati. È la strada più sicura in produzione.',
+                warning: 'Usa kill -9 solo come ultima risorsa e dopo aver verificato impatto sul servizio.',
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 'troubleshooting-method',
+        title: 'Metodo operativo: sintomo -> evidenza -> azione',
+        content:
+          'Quando qualcosa non funziona, evita il "riavvio riflesso". Parti dal sintomo, raccogli evidenza, formula un\'ipotesi, valida con comandi e solo dopo applica un cambiamento.\n\nQuesto approccio riduce fix casuali, aiuta i postmortem e rende il troubleshooting trasferibile a un altro membro del team.',
+        keyPoints: [
+          'No debug cieco: osserva prima di cambiare stato.',
+          'Ogni comando deve rispondere a una domanda specifica.',
+          'Documentare output chiave accelera i postmortem.',
+        ],
+        terminalCommands: [
+          {
+            title: 'Salva evidenza prima di agire',
+            command: 'ps aux > baseline-processes.txt',
+            output: '',
+            explanation: 'Quando la situazione è instabile, salvare una baseline prima di intervenire ti permette di confrontare stato prima/dopo e condividere evidenza nel team.',
+          },
+        ],
+      },
+    ],
+    keyTakeaways: [
+      'Osservabilità è una competenza, non un comando singolo.',
+      'Log e process inspection vanno usati insieme.',
+      'Troubleshooting robusto segue un metodo ripetibile.',
+    ],
+    discussionPrompts: [
+      'Qual è il rischio principale del "kill e poi vediamo"?',
+      'Quando preferiresti pgrep rispetto a ps | grep?',
+    ],
+    quiz: [
+      {
+        id: 'ch13-q1',
+        type: 'multiple_choice',
+        question: 'Devi allegare lo stato attuale dei processi a un ticket. Quale strumento parte meglio dal requisito?',
+        options: [
+          'top, perché produce uno snapshot statico più condivisibile',
+          'ps, perché produce una fotografia istantanea facile da salvare',
+          'journalctl, perché mostra sempre tutti i processi attivi',
+          'kill, perché chiude i processi rumorosi prima dell’analisi',
+        ],
+        correctAnswer: 1,
+        explanation: 'ps è adatto a una fotografia istantanea da salvare o condividere. top è pensato per osservazione live, journalctl riguarda i log e kill non è uno strumento di osservazione.',
+      },
+      {
+        id: 'ch13-q2',
+        type: 'multiple_choice',
+        question: 'Quale sequenza è più robusta per indagare un servizio lento?',
+        options: [
+          'kill -9 subito, poi guardare i log',
+          'Trovare PID, osservare risorse, leggere log, poi decidere azione',
+          'Riavviare il server e ignorare output temporanei',
+          'Cambiare permessi random finché il servizio risponde',
+        ],
+        correctAnswer: 1,
+        explanation: 'Prima osservi e raccogli evidenza, poi applichi azioni mirate. È il metodo più affidabile.',
+      },
+      {
+        id: 'ch13-q3',
+        type: 'multiple_choice',
+        question: 'Quale comportamento è più pericoloso in troubleshooting?',
+        options: [
+          'Usare pgrep per trovare il PID corretto',
+          'Salvare una baseline prima di intervenire',
+          'Lanciare kill -9 come prima mossa senza evidenza',
+          'Seguire i log mentre il problema si ripresenta',
+        ],
+        correctAnswer: 2,
+        explanation: 'kill -9 come prima mossa distrugge contesto utile e può peggiorare l’impatto operativo. Le altre opzioni migliorano osservabilità e qualità della diagnosi.',
+      },
+    ],
+    glossary: ['process', 'shell', 'terminal', 'sudo', 'log', 'pid'],
+  },
+  {
+    id: 14,
+    slug: 'inode-links-filesystem-ops',
+    title: 'Inode, Link e Metadati del File System',
+    description: 'Capire cosa c’è davvero dietro file e percorsi: **inode**, stat, namei, **hard link** e **symlink** in pratica.',
+    duration: '2.5h',
+    objectives: [
+      'Leggere metadati di file e directory con stat e namei.',
+      'Distinguere **inode**, **hard link** e **symlink** senza confonderli.',
+      'Usare i link in modo operativo e sapere quando diventano fragili.',
+    ],
+    sections: [
+      {
+        id: 'inode-basics',
+        title: 'Inode: il file dietro al nome',
+        content:
+          'Nel file system Unix-like il nome del file e il suo contenuto non sono la stessa cosa. Il nome è una voce di directory; i metadati reali del file stanno nell’**inode**: permessi, owner, timestamp, dimensione e puntatori ai blocchi dati.\n\nQuesto spiega perché puoi avere più nomi che puntano allo stesso contenuto e perché alcuni problemi di path non sono problemi “del file” ma del percorso che lo raggiunge.',
+        keyPoints: [
+          'Il nome del file non coincide con l’inode.',
+          'I metadati stanno nell’inode, non nella directory come testo libero.',
+          'Capire questa distinzione rende più chiari link, rename e troubleshooting del file system.',
+        ],
+        terminalCommands: [
+          {
+            title: 'Leggi inode e metadati principali',
+            command: 'stat notes.txt',
+            output: '  File: notes.txt\n  Size: 142       Blocks: 8   IO Block: 4096 regular file\nDevice: 802h/2050d Inode: 1234567   Links: 1',
+            explanation: '**stat** è il punto di partenza più pratico per vedere inode, numero di link, permessi e timestamp senza interpretare output ambiguo.',
+          },
+        ],
+      },
+      {
+        id: 'path-resolution',
+        title: 'Leggere i percorsi con namei',
+        content:
+          'Quando un comando fallisce su un percorso, spesso il problema non è il file finale ma uno dei segmenti intermedi: una directory senza permessi, un symlink rotto, un mount inatteso. **namei** serve proprio a scomporre il path e farti vedere ogni passaggio.\n\nÈ uno strumento molto più utile di quanto sembri perché sposta l’attenzione dal solo file finale al percorso di risoluzione.',
+        keyPoints: [
+          'Un path è una catena di directory, non un blocco unico.',
+          'namei mostra dove il percorso si spezza davvero.',
+          'Permessi e symlink intermedi contano quanto il file finale.',
+        ],
+        labBlock: {
+          title: 'Workflow: metadati e path resolution',
+          intro: 'Mini laboratorio in stile operativo: prima leggi il file, poi scomponi il percorso e infine confronti i tipi di link.',
+          steps: [
+            {
+              goal: 'Leggi inode e numero di link',
+              command: {
+                title: 'Inspect file metadata',
+                command: 'stat /var/log/syslog',
+                output: '',
+                explanation: 'Osservi inode, numero di link, owner, gruppo e timestamp in una sola vista.',
+              },
+            },
+            {
+              goal: 'Scomponi il percorso passo passo',
+              command: {
+                title: 'Resolve path components',
+                command: 'namei -l /var/log/syslog',
+                output: 'f: /var/log/syslog\ndrwxr-xr-x root root /\ndrwxr-xr-x root root var\ndrwxr-xr-x root adm  log\n-rw-r----- syslog adm syslog',
+                explanation: 'Mostra ogni segmento del path con relativi permessi e ownership. È perfetto quando “il file esiste ma non riesco ad aprirlo”.',
+              },
+            },
+            {
+              goal: 'Crea un hard link e confronta l’inode',
+              command: {
+                title: 'Compare hard link inode',
+                command: 'ln notes.txt notes-hardlink.txt && stat notes.txt notes-hardlink.txt',
+                output: '',
+                explanation: 'Un hard link condivide lo stesso inode del file originale: cambiano i nomi, non l’identità del file.',
+              },
+            },
+            {
+              goal: 'Crea un symlink e verifica la differenza',
+              command: {
+                title: 'Compare symbolic link',
+                command: 'ln -s notes.txt notes-link.txt && ls -l notes-link.txt',
+                output: 'lrwxr-xr-x 1 mike staff 9 May 21 10:00 notes-link.txt -> notes.txt',
+                explanation: 'Il symlink è un riferimento a un percorso, non allo stesso inode del file di partenza. Per questo può rompersi se il target cambia o sparisce.',
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 'hard-vs-soft',
+        title: 'Hard link vs symlink: quando usare cosa',
+        content:
+          'Gli **hard link** condividono lo stesso inode e funzionano solo sullo stesso file system; i **symlink** puntano a un percorso e sono più flessibili, ma anche più fragili se il target cambia.\n\nLa regola pratica è semplice: hard link quando ti serve la stessa identità del file, symlink quando ti serve un alias di percorso facile da leggere o spostare.',
+        keyPoints: [
+          'Hard link = stessa identità del file.',
+          'Symlink = riferimento a un percorso.',
+          'I symlink rotti sono un problema di path, non di inode condiviso.',
+        ],
+      },
+    ],
+    keyTakeaways: [
+      'L’inode è l’identità tecnica del file, il nome è solo una voce di directory.',
+      'stat e namei sono strumenti concreti per capire metadati e percorsi.',
+      'Hard link e symlink risolvono problemi diversi e non vanno confusi.',
+    ],
+    discussionPrompts: [
+      'Quando un symlink è una comodità e quando diventa una fonte di errori?',
+      'Perché capire il path completo aiuta più di guardare solo il file finale?',
+    ],
+    quiz: [
+      {
+        id: 'ch14-q1',
+        type: 'multiple_choice',
+        question: 'Quale strumento è più adatto per vedere inode, numero di link e timestamp di un file?',
+        options: ['grep', 'stat', 'wc', 'top'],
+        correctAnswer: 1,
+        explanation: 'stat mostra metadati strutturati del file, inclusi inode e link count. Gli altri strumenti hanno scopi diversi.',
+      },
+      {
+        id: 'ch14-q2',
+        type: 'multiple_choice',
+        question: 'Qual è la differenza più importante tra hard link e symlink?',
+        options: [
+          'Il symlink condivide sempre lo stesso inode del target',
+          'L’hard link punta a un percorso testuale, il symlink a un inode',
+          'L’hard link condivide l’inode; il symlink punta a un percorso',
+          'Non c’è differenza pratica in ambienti reali',
+        ],
+        correctAnswer: 2,
+        explanation: 'L’hard link rappresenta un altro nome per lo stesso inode; il symlink è un riferimento a un percorso che può rompersi se il target cambia.',
+      },
+      {
+        id: 'ch14-q3',
+        type: 'multiple_choice',
+        question: 'Hai un percorso che “esiste” ma non si apre correttamente. Quale comando aiuta di più a capire dove si spezza la risoluzione?',
+        options: ['namei -l', 'pwd', 'echo', 'uniq'],
+        correctAnswer: 0,
+        explanation: 'namei -l scompone il path in tutti i suoi segmenti e mostra permessi e ownership intermedi. È lo strumento giusto per diagnosticare problemi di percorso.',
+      },
+    ],
+    glossary: ['file-system', 'permissions', 'shell', 'terminal', 'inode', 'hard-link', 'symlink'],
+  },
+  {
+    id: 15,
+    slug: 'cron-jobs-automation-basics',
+    title: 'Cron Jobs e Automazione di Base',
+    description: 'Automatizzare senza perdere controllo: **crontab**, scheduling, verifica risultati ed errori comuni dei **cron job** periodici.',
+    duration: '2.5h',
+    objectives: [
+      'Capire come ragiona **cron** e come leggere una schedule base.',
+      'Creare **cron job** semplici in modo verificabile e prudente.',
+      'Diagnosticare i problemi più comuni di automazione periodica.',
+    ],
+    sections: [
+      {
+        id: 'cron-basics',
+        title: 'Come ragiona cron',
+        content:
+          'Cron esegue comandi a orari prefissati seguendo una sintassi compatta basata su minuti, ore, giorni e mesi. La difficoltà vera non è ricordare gli asterischi, ma sapere cosa succede quando il job parte senza la tua shell interattiva, senza il tuo PATH abituale e senza contesto visivo.\n\nPer questo i cron job affidabili sono sempre piccoli, espliciti e facili da verificare dopo l’esecuzione.',
+        keyPoints: [
+          'Cron gira senza la tua sessione interattiva.',
+          'PATH e ambiente possono essere diversi da quelli della shell manuale.',
+          'Un job periodico va sempre pensato insieme alla sua verifica.',
+        ],
+        terminalCommands: [
+          {
+            title: 'Visualizza i job attuali',
+            command: 'crontab -l',
+            output: '# nessun crontab per mike',
+            explanation: 'È il primo controllo da fare prima di aggiungere o modificare automazioni: capire lo stato corrente evita duplicazioni o conflitti.',
+          },
+        ],
+      },
+      {
+        id: 'create-verify-job',
+        title: 'Creare e verificare un job semplice',
+        content:
+          'Il pattern giusto è sempre lo stesso: scrivi un comando banale, schedulalo a frequenza prevedibile, fai scrivere un output su file e verifica che il risultato compaia davvero.\n\nSe inizi con job complessi senza osservabilità, confonderai subito errori di schedule, permessi, path o redirection.',
+        keyPoints: [
+          'Prima job semplice, poi automazione reale.',
+          'Scrivere output su file è il modo più rapido per verificare esecuzione.',
+          'Usa percorsi assoluti nei job periodici.',
+        ],
+        labBlock: {
+          title: 'Workflow: crea, osserva, correggi',
+          intro: 'Mini laboratorio di automazione prudente: prima controlli lo stato, poi aggiungi un job semplice, infine verifichi l’effetto concreto.',
+          steps: [
+            {
+              goal: 'Controlla i job attuali',
+              command: {
+                title: 'Inspect current crontab',
+                command: 'crontab -l',
+                output: '',
+                explanation: 'Leggi il contesto corrente prima di aggiungere automazioni nuove o duplicate.',
+              },
+            },
+            {
+              goal: 'Aggiungi un job che scrive timestamp su file',
+              command: {
+                title: 'Create observable job',
+                command: '(crontab -l 2>/dev/null; echo "*/5 * * * * date >> /tmp/cron-heartbeat.log") | crontab -',
+                output: '',
+                explanation: 'Job semplice e osservabile: ogni 5 minuti aggiunge una riga a un file. È il modo più pratico per verificare che la schedule funzioni davvero.',
+              },
+            },
+            {
+              goal: 'Verifica che il job sia presente',
+              command: {
+                title: 'Verify schedule',
+                command: 'crontab -l',
+                output: '*/5 * * * * date >> /tmp/cron-heartbeat.log',
+                explanation: 'Prima verifichi la definizione, poi il suo effetto. Sono due check diversi e servono entrambi.',
+              },
+            },
+            {
+              goal: 'Controlla l’effetto concreto sul file di output',
+              command: {
+                title: 'Verify job output',
+                command: 'tail -n 5 /tmp/cron-heartbeat.log',
+                output: 'Thu May 21 10:00:00 CEST 2026',
+                explanation: 'Il job non va considerato “funzionante” finché non vedi l’effetto osservabile che hai deciso di produrre.',
+              },
+            },
+          ],
+        },
+      },
+      {
+        id: 'cron-failures',
+        title: 'Errori comuni nei cron job',
+        content:
+          'I fallimenti più comuni non dipendono da cron “che non parte”, ma da script che funzionano solo nella shell interattiva, percorsi relativi, permessi mancanti o output che nessuno controlla.\n\nLa disciplina minima è: usare path assoluti, reindirizzare output o errori, e partire sempre da un job facile da osservare.',
+        keyPoints: [
+          'Path relativi e PATH implicito sono fonti classiche di errore.',
+          'Senza output verificabile un cron job è opaco.',
+          'Automazione prudente significa piccoli passi e conferme concrete.',
+        ],
+        terminalCommands: [
+          {
+            title: 'Rimuovi tutti i job quando chiudi il test',
+            command: 'crontab -r',
+            output: '',
+            explanation: 'Serve per cleanup controllato dei test. Va usato con cautela perché elimina l’intero crontab dell’utente corrente.',
+            warning: '**crontab -r** rimuove tutti i job dell’utente corrente. Prima salva uno snapshot con **crontab -l > backup-crontab.txt**.',
+          },
+        ],
+      },
+    ],
+    keyTakeaways: [
+      'Cron è utile solo quando la schedule è accompagnata da verifica reale.',
+      'I job affidabili sono piccoli, espliciti e con percorsi assoluti.',
+      'Automazione senza osservabilità crea più dubbi che valore.',
+    ],
+    discussionPrompts: [
+      'Perché un job che “esiste nel crontab” non è ancora prova che funzioni?',
+      'Qual è il rischio di schedulare subito script complessi senza log o output?',
+    ],
+    quiz: [
+      {
+        id: 'ch15-q1',
+        type: 'multiple_choice',
+        question: 'Qual è il primo controllo sano prima di modificare automazioni periodiche di un utente?',
+        options: ['crontab -l', 'killall cron', 'sudo su', 'ls /tmp'],
+        correctAnswer: 0,
+        explanation: 'crontab -l mostra lo stato corrente e ti evita duplicazioni o modifiche cieche. Le altre azioni non danno il contesto giusto o sono fuori scala.',
+      },
+      {
+        id: 'ch15-q2',
+        type: 'multiple_choice',
+        question: 'Quale approccio rende più verificabile un nuovo cron job?',
+        options: [
+          'Far girare subito uno script lungo e silenzioso senza output',
+          'Usare un comando semplice che scrive timestamp su file',
+          'Affidarsi al fatto che cron mostrerà sempre errori a schermo',
+          'Usare percorsi relativi per rendere il job più portabile',
+        ],
+        correctAnswer: 1,
+        explanation: 'Un job semplice con output osservabile è il punto di partenza migliore. Le alternative riducono visibilità o aumentano la probabilità di errore.',
+      },
+      {
+        id: 'ch15-q3',
+        type: 'multiple_choice',
+        question: 'Perché i path assoluti sono raccomandati nei cron job?',
+        options: [
+          'Perché cron esegue sempre come root',
+          'Perché cron usa un ambiente diverso e i path relativi possono rompersi',
+          'Perché migliorano la velocità del job',
+          'Perché sono obbligatori solo quando si usa tail',
+        ],
+        correctAnswer: 1,
+        explanation: 'Cron gira spesso con un ambiente ridotto e senza il contesto della tua shell interattiva. I path assoluti riducono ambiguità e failure silenziose.',
+      },
+    ],
+    glossary: ['shell', 'terminal', 'process', 'permissions', 'cron', 'crontab', 'scheduler', 'redirection', 'log'],
   },
 ];
 

@@ -38,3 +38,13 @@ Add ESLint import restrictions so `data/` stays presentation-free and `lib/` doe
 - The chapter sidebar opened from the hamburger menu must use an opaque overlay and an opaque panel background to preserve text readability over page content.
 - The roadmap header block (title, close action, and progress) should stay sticky within the sidebar scroll area so close/navigation controls remain immediately reachable.
 - Avoid sticky layouts that depend on negative margins when they introduce visible gaps during scroll.
+- Show the hamburger trigger whenever the desktop sidebar is not visible (including tablet breakpoints), not only on narrow phone widths.
+
+## Glossary interaction guardrail
+- Glossary-linked terms should always open the glossary modal on click/tap.
+- Lightweight tooltip previews may be shown only on devices that report hover + fine pointer capability.
+- Do not force tooltip-only interaction patterns on touch-first devices.
+
+## Sandbox entrypoint guardrail
+- The primary sandbox access pattern is a modal launched from the floating sandbox trigger.
+- Avoid duplicating prominent sandbox CTAs in the home header when the floating trigger is already present.

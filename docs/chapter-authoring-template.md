@@ -23,6 +23,16 @@ Use this order as the default flow:
 - At least one `commonMistakes` item must add value beyond quiz explanations.
 - Avoid duplicating the same sentence between `commonMistakes` and quiz explanation text.
 
+## Operational module pattern
+- For command-heavy chapters, prefer a task-driven structure over flat command dumps.
+- Use short concept framing, then move quickly to an operational workflow with explicit step goals.
+- Reserve `terminalCommands` for quick references, spot checks, or contrasting examples.
+- Use `labBlock.steps` as the primary pattern for sequences such as create/configure/verify/remove or inspect/observe/intervene.
+- Every destructive or state-changing command should be followed by a verification step.
+- Add a short `title` to command blocks when the goal is not already obvious from the command itself.
+- Prefer workflows that produce observable output or artifacts (files, logs, IDs, changed state) instead of purely declarative examples.
+- Start with the smallest safe workflow that can be validated manually before introducing more complex automation.
+
 ## Quiz quality rules
 - Keep quiz options cognitively meaningful: avoid joke answers and obviously impossible distractors.
 - Use plausible distractors that reflect common reasoning errors, not random wrong facts.
@@ -43,8 +53,20 @@ Use this order as the default flow:
   - deep-dive resources
   - `miniTask`
   - command-heavy support blocks
+- For operational modules, command references may stay collapsible when the guided workflow already covers the main learning path.
 - Comparative chapters with dense tables can keep `commonMistakes` and `real-world mapping` expanded in compact mode when readability benefits.
 - If `interactivePilot` already includes an equivalent guided task, hide duplicated `miniTask` content.
+
+## Glossary interaction rules
+- Ensure chapter `description`, `objectives`, and section theory text include glossary-friendly wording for key terms.
+- Prefer terms that map to existing glossary entries (or add missing entries before publishing content).
+- Glossary term chips should open the modal on click/tap in all environments.
+- Tooltip previews are optional and should be capability-based (`hover + fine pointer`), not mobile-vs-desktop only.
+
+## Sandbox UX rules
+- Do not rely on inline "execute sandbox" buttons inside guided labs unless explicitly requested for the chapter.
+- Keep operational steps readable without embedded execution controls.
+- If sandbox access is provided globally (floating trigger), avoid duplicate high-priority sandbox CTAs in chapter/home headers.
 
 ## Language rules
 - Documentation and developer-facing comments must be in English.
@@ -58,9 +80,12 @@ Use this order as the default flow:
 - [ ] No duplicate guided practice when `interactivePilot` is present
 - [ ] No hydration mismatch introduced
 - [ ] No lint errors in touched files
+- [ ] Command-heavy sections use clear step goals or titled command cards
+- [ ] Destructive commands include warning plus post-action verification
 
 ## Mobile Sidebar QA checklist
 - [ ] Open chapter page on mobile viewport (for example `390x844`) and trigger hamburger sidebar.
+- [ ] Open chapter page on tablet viewport (for example `1024x768`) and verify hamburger is present whenever desktop sidebar is hidden.
 - [ ] Overlay is opaque enough to preserve readability of sidebar text over page content.
 - [ ] Sidebar panel background is opaque (no bleed-through from page content while scrolling).
 - [ ] Sticky roadmap header remains visible while scrolling the chapter list.

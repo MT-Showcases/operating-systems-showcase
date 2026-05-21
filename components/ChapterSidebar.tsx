@@ -61,7 +61,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
               ref={closeButtonRef}
               type="button"
               onClick={() => setIsOpen(false)}
-              className="inline-flex h-11 w-11 items-center justify-center border-2 border-accent-cyan/40 bg-bg-primary text-text-secondary md:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center border-2 border-accent-cyan/40 bg-bg-primary text-text-secondary lg:hidden"
               aria-label="Chiudi navigazione"
             >
               <X className="h-5 w-5" />
@@ -97,7 +97,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
               }`}
             >
               <div className="flex items-start gap-3">
-                <span className={`mt-0.5 flex-shrink-0 inline-flex h-7 w-7 items-center justify-center border-2 text-[11px] ${
+                <span className={`mt-0.5 shrink-0 inline-flex h-7 w-7 items-center justify-center border-2 text-[11px] ${
                   active
                     ? 'border-accent-green/40 bg-accent-green text-bg-primary'
                     : 'border-accent-cyan/40 bg-bg-primary text-text-secondary'
@@ -134,16 +134,16 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 left-6 z-40 inline-flex h-12 w-12 items-center justify-center border-2 border-accent-green/30 bg-bg-surface text-accent-green shadow-black/30 md:hidden"
+        className="fixed bottom-6 left-6 z-40 inline-flex h-12 w-12 items-center justify-center border-2 border-accent-green/30 bg-bg-surface text-accent-green shadow-black/30 lg:hidden"
         aria-label="Apri navigazione capitolo"
       >
         <Menu className="h-6 w-6" />
       </button>
 
       {isDesktopVisible ? (
-        <div className="hidden lg:block lg:w-80 lg:flex-shrink-0 lg:self-start lg:sticky lg:top-6">{sidebar}</div>
+        <div className="hidden lg:block lg:w-80 lg:shrink-0 lg:self-start lg:sticky lg:top-6">{sidebar}</div>
       ) : (
-        <div className="hidden lg:block lg:w-14 lg:flex-shrink-0 lg:self-start lg:sticky lg:top-6">
+        <div className="hidden lg:block lg:w-14 lg:shrink-0 lg:self-start lg:sticky lg:top-6">
           <button
             type="button"
             onClick={() => setIsDesktopVisible(true)}

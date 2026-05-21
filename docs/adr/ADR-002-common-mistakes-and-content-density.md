@@ -19,6 +19,8 @@ For dense chapters, allow progressive disclosure (accordion/details) on secondar
 
 Adopt a quiz-quality policy that prevents answer guessing from visual or positional patterns.
 
+Adopt a task-driven operational pattern for command-heavy chapters.
+
 ## Rationale
 - Preventive + corrective learning together reduce misconception persistence.
 - A dedicated misconception list gives a quicker mental model than scattered per-question feedback.
@@ -27,8 +29,10 @@ Adopt a quiz-quality policy that prevents answer guessing from visual or positio
 ## Consequences
 - Positive: better conceptual clarity, especially for beginners.
 - Positive: reusable chapter authoring pattern for future content.
+- Positive: operational chapters become easier to scan and closer to real workflows.
 - Risk: content bloat if common mistakes duplicate quiz wording.
 - Risk: quiz answers become guessable if option length/order follows visible patterns.
+- Risk: command-heavy chapters degrade into flat snippets without narrative or verification.
 - Mitigation: add authoring constraints and checklist.
 
 ## Authoring rules
@@ -52,6 +56,14 @@ Adopt a quiz-quality policy that prevents answer guessing from visual or positio
 - Collapsible on dense chapters: real-world examples, deep-dive resources, mini-task, command-heavy support blocks.
 - Comparative chapters with dense tables (for example OS comparison chapters) may keep `commonMistakes` and `realWorld` expanded in compact mode when this improves scanability.
 - If an interactive pilot already includes an equivalent guided task, hide duplicated mini-task content for that chapter.
+
+## Operational chapter policy
+- Prefer task-driven workflows over flat command lists when the goal is procedural learning.
+- Use `labBlock.steps` for sequences such as create/configure/verify/remove or inspect/observe/intervene.
+- Keep `terminalCommands` for quick references, spot checks, or short contrasting examples.
+- Add verification after destructive or state-changing commands.
+- When a command card is shown outside a workflow, include a short semantic title if the command purpose is not obvious at a glance.
+- Favor examples that produce observable artifacts or state changes over purely abstract command snippets.
 
 ## Language policy
 - Documentation and developer-facing comments must be written in English.

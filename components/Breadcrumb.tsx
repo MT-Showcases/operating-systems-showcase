@@ -14,7 +14,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
   return (
     <nav
       aria-label="breadcrumb"
-      className="mb-4 flex items-center gap-2 overflow-x-auto whitespace-nowrap bg-bg-primary/90 px-4 py-3 text-sm shadow-[0_8px_24px_rgba(0,0,0,0.28)] backdrop-blur"
+      className="flex items-center gap-2 overflow-x-auto whitespace-nowrap bg-bg-primary/90 px-4 py-3 text-sm backdrop-blur"
     >
       {items.map((item, idx) => (
         <React.Fragment key={idx}>

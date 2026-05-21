@@ -113,7 +113,7 @@ export default function TutorFloatingChat() {
     <>
       <button
         onClick={() => setOpen((value) => !value)}
-        className="fixed bottom-6 right-5 z-[90] rounded-none bg-accent-green text-bg-primary px-4 py-3 font-semibold flex items-center gap-2 hover:bg-accent-cyan hover:text-bg-primary transition"
+        className="fixed bottom-6 right-5 z-90 rounded-none bg-accent-green text-bg-primary px-4 py-3 font-semibold flex items-center gap-2 hover:bg-accent-cyan hover:text-bg-primary transition"
         aria-label={`Apri ${TUTOR_NAME}`}
       >
         ✓ {TUTOR_NAME}
@@ -121,8 +121,8 @@ export default function TutorFloatingChat() {
 
       {open ? (
         <>
-          <div className="fixed inset-0 z-[89] bg-black/60 sm:hidden" onClick={() => setOpen(false)} aria-hidden="true" />
-          <div className="fixed bottom-24 right-4 z-[90] w-[calc(100vw-2rem)] max-w-md overflow-hidden rounded-none border border-accent-cyan/40 bg-bg-surface shadow-2xl">
+          <div className="fixed inset-0 z-89 bg-black/60 sm:hidden" onClick={() => setOpen(false)} aria-hidden="true" />
+          <div className="fixed bottom-24 right-4 z-90 w-[calc(100vw-2rem)] max-w-md overflow-hidden rounded-none border border-accent-cyan/40 bg-bg-surface shadow-2xl">
             <div className="p-3 border-b border-accent-cyan/40 flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold text-accent-cyan">{TUTOR_NAME}</p>
@@ -185,7 +185,7 @@ export default function TutorFloatingChat() {
                 }}
                 placeholder={TUTOR_PLACEHOLDER}
                 rows={1}
-                className="flex-1 rounded-none bg-bg-primary border border-accent-cyan/40 px-3 py-2 text-sm resize-none min-h-[44px] max-h-48 overflow-y-auto text-text-primary"
+                className="flex-1 rounded-none bg-bg-primary border border-accent-cyan/40 px-3 py-2 text-sm resize-none min-h-11 max-h-48 overflow-y-auto text-text-primary"
               />
               <button onClick={ask} disabled={loading} className="rounded-none bg-accent-green/15 text-accent-green px-3 py-2 text-sm font-semibold disabled:opacity-50">
                 {loading ? '...' : 'Invia'}

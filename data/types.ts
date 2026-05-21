@@ -36,6 +36,7 @@ export interface GlossaryEntry {
 }
 
 export interface TerminalCommandBlock {
+  title?: string;
   command: string;
   output?: string;
   explanation: string;

@@ -1,9 +1,14 @@
+'use client';
+
+import { renderInline } from './RichText';
+
 interface ChapterHeaderProps {
   title: string;
   description: string;
   chapterNumber: number;
   duration: string;
   objectives: string[];
+  glossaryIds?: string[];
 }
 
 export default function ChapterHeader({
@@ -12,6 +17,7 @@ export default function ChapterHeader({
   chapterNumber,
   duration,
   objectives,
+  glossaryIds = [],
 }: ChapterHeaderProps) {
   return (
     <header className="overflow-hidden border-2 border-accent-green bg-bg-primary p-8">
@@ -30,7 +36,9 @@ export default function ChapterHeader({
             Linux / Kernel / Shell
           </p>
           <h1 className="terminal-heading mt-3 text-4xl font-bold text-text-primary sm:text-5xl">{title}</h1>
-          <p className="mt-4 max-w-3xl text-base leading-8 text-text-secondary sm:text-lg">{description}</p>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-text-secondary sm:text-lg">
+            {renderInline(description, glossaryIds, `chapter-description-${chapterNumber}`)}
+          </p>
         </div>
 
         <div className="border-2 border-accent-green/60 bg-bg-surface p-5">
@@ -54,7 +62,7 @@ export default function ChapterHeader({
             <p className="terminal-heading mb-2 text-xs uppercase tracking-[0.22em] text-accent-amber">
               Checkpoint {index + 1}
             </p>
-            <p>{objective}</p>
+            <p>{renderInline(objective, glossaryIds, `chapter-objective-${chapterNumber}-${index}`)}</p>
           </div>
         ))}
       </div>
