@@ -12,11 +12,14 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ items }: BreadcrumbProps) {
   return (
-    <nav aria-label="breadcrumb" className="flex items-center flex-wrap gap-1 text-sm mb-4">
+    <nav
+      aria-label="breadcrumb"
+      className="mb-4 flex items-center gap-2 overflow-x-auto whitespace-nowrap bg-bg-primary/90 px-4 py-3 text-sm shadow-[0_8px_24px_rgba(0,0,0,0.28)] backdrop-blur"
+    >
       {items.map((item, idx) => (
         <React.Fragment key={idx}>
           {idx > 0 && (
-            <svg className="w-3.5 h-3.5 text-text-secondary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="h-3.5 w-3.5 shrink-0 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           )}
@@ -30,7 +33,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
               {item.label}
             </Link>
           ) : (
-            <span className="text-text-primary font-medium truncate max-w-[200px] sm:max-w-xs" aria-current="page">
+            <span className="max-w-50 truncate font-medium text-text-primary sm:max-w-xs" aria-current="page">
               {item.label}
             </span>
           )}

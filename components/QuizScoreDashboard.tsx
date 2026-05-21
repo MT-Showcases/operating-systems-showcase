@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { chapters } from '@/data/chapters';
 import { buildQuizStorageKey } from '@/lib/quiz-storage';
 
@@ -25,7 +25,11 @@ function loadScores(): Record<string, ScoreEntry> {
 }
 
 export default function QuizScoreDashboard() {
-  const [scores, setScores] = useState<Record<string, ScoreEntry>>(() => loadScores());
+  const [scores, setScores] = useState<Record<string, ScoreEntry>>({});
+
+  useEffect(() => {
+    setScores(loadScores());
+  }, []);
 
   const quizChapters = useMemo(() => chapters.filter((chapter) => (chapter.quiz?.length ?? 0) > 0), []);
   const totals = useMemo(

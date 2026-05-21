@@ -156,7 +156,7 @@ export default async function ChapterPage({ params }: Props) {
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,rgba(13,17,23,1),rgba(22,27,34,1),rgba(13,17,23,1))]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-        <div className="pl-12 md:pl-0 mb-6">
+        <div className="sticky top-0 z-40 mb-6">
           <Breadcrumb
             items={[
               { label: 'Home', href: '/' },
