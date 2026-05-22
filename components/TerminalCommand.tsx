@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Check, Copy, X } from 'lucide-react';
 import type { TerminalCommandBlock } from '@/data/types';
 import NixButton from './NixButton';
@@ -12,7 +12,7 @@ function toHref(urlOrDomain: string): string {
 
 function renderCommandWithLinks(command: string) {
   const pattern = /https?:\/\/[^\s|]+|(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s|]*)?/gi;
-  const nodes: Array<string | JSX.Element> = [];
+  const nodes: ReactNode[] = [];
   let lastIndex = 0;
 
   for (const match of command.matchAll(pattern)) {
