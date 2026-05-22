@@ -5,6 +5,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
 import { getTermById } from '@/data/glossary';
 import { useFocusTrap } from './FocusTrap';
+import useBodyScrollLock from '@/lib/useBodyScrollLock';
 
 interface GlossaryModalProps {
   termId: string;
@@ -16,6 +17,7 @@ export default function GlossaryModal({ termId, open, onOpenChange }: GlossaryMo
   const contentRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   useFocusTrap(contentRef);
+  useBodyScrollLock(open);
 
   const term = getTermById(termId);
 
@@ -26,13 +28,6 @@ export default function GlossaryModal({ termId, open, onOpenChange }: GlossaryMo
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [open]);
 
   if (!term) return null;
 
@@ -45,7 +40,7 @@ export default function GlossaryModal({ termId, open, onOpenChange }: GlossaryMo
         />
         <Dialog.Content
           ref={contentRef}
-          className={`fixed z-[60] mx-auto overflow-y-auto border border-accent-cyan/40 bg-bg-surface p-6 text-text-primary shadow-2xl transition-all duration-300 animate-in ${
+          className={`fixed z-60 mx-auto overflow-y-auto border border-accent-cyan/40 bg-bg-surface p-6 text-text-primary shadow-2xl transition-all duration-300 animate-in ${
             isMobile
               ? 'inset-0 rounded-none md:rounded-none md:inset-auto md:top-1/2 md:-translate-y-1/2 md:left-1/2 md:-translate-x-1/2 md:max-w-2xl md:max-h-[90vh]'
               : 'inset-auto top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 max-w-2xl max-h-[90vh] rounded-none'
@@ -59,7 +54,7 @@ export default function GlossaryModal({ termId, open, onOpenChange }: GlossaryMo
             </div>
             <Dialog.Close asChild>
               <button
-                className="inline-flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-none border border-accent-cyan/40 text-text-secondary transition hover:border-accent-cyan hover:text-accent-cyan"
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-none border border-accent-cyan/40 text-text-secondary transition hover:border-accent-cyan hover:text-accent-cyan"
                 aria-label="Chiudi glossario"
               >
                 <X className="h-5 w-5" />

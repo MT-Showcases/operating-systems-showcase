@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { X } from 'lucide-react';
 import { TUTOR_NAME, TUTOR_PLACEHOLDER, TUTOR_TAGLINE } from '@/lib/tutor-config';
+import useBodyScrollLock from '@/lib/useBodyScrollLock';
 
 type AnswerData = { summary: string; bullets?: string[]; suggestions?: Array<{ label: string; url: string }> };
 type Msg = { role: 'user' | 'assistant'; text: string; data?: AnswerData };
@@ -27,6 +28,8 @@ export default function TutorFloatingChat() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
+  useBodyScrollLock(open);
+
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -48,14 +51,6 @@ export default function TutorFloatingChat() {
       el.scrollTop = el.scrollHeight;
     });
   }, [messages, open]);
-
-  useEffect(() => {
-    if (open) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [open]);
 
   useEffect(() => {
     const el = textareaRef.current;

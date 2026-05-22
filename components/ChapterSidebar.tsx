@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import Link from 'next/link';
 import { X, Menu, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import { chapters } from '@/data/chapters';
+import useBodyScrollLock from '@/lib/useBodyScrollLock';
 
 interface SidebarSection {
   id: string;
@@ -23,6 +24,8 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
   const activeChapterRef = useRef<HTMLAnchorElement>(null);
   const currentIndex = chapters.findIndex((chapter) => chapter.slug === currentSlug);
 
+  useBodyScrollLock(isOpen);
+
   useEffect(() => {
     if (!isOpen) return;
     closeButtonRef.current?.focus();
@@ -31,11 +34,9 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
       if (event.key === 'Escape') setIsOpen(false);
     };
 
-    document.body.style.overflow = 'hidden';
     document.addEventListener('keydown', onKeyDown);
 
     return () => {
-      document.body.style.overflow = '';
       document.removeEventListener('keydown', onKeyDown);
     };
   }, [isOpen]);
@@ -49,6 +50,21 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
     const targetTop = Math.max(0, activeItem.offsetTop - container.clientHeight * 0.35);
     container.scrollTo({ top: targetTop, behavior: 'smooth' });
   }, [currentSlug]);
+
+  const handleSectionClick = (event: MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    event.preventDefault();
+
+    const target = document.getElementById(sectionId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }
+
+    if (window.location.hash !== `#${sectionId}`) {
+      window.history.replaceState(null, '', `#${sectionId}`);
+    }
+
+    setIsOpen(false);
+  };
 
   const sidebar = (
     <aside
@@ -135,7 +151,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
             <a
               key={section.id}
               href={`#${section.id}`}
-              onClick={() => setIsOpen(false)}
+              onClick={(event) => handleSectionClick(event, section.id)}
               className="block border-2 border-transparent bg-bg-surface px-4 py-3 text-sm text-text-secondary transition hover:border-accent-cyan/40 hover:bg-bg-primary hover:text-text-primary"
             >
               {section.title}
