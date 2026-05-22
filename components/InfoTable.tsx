@@ -8,7 +8,7 @@ export default function InfoTable({ title, headers, rows }: InfoTableType) {
           <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-cyan">{title}</p>
         </div>
       )}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto overscroll-x-contain">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-accent-cyan/40 bg-bg-surface">

@@ -94,7 +94,7 @@ export default function TerminalCommand({ title, command, output, explanation, w
           </p>
         ) : null}
         <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-          <pre className="terminal-heading min-w-0 flex-1 overflow-x-auto text-sm text-accent-green">
+          <pre className="terminal-heading min-w-0 flex-1 overflow-x-auto overscroll-x-contain text-sm text-accent-green">
             <code>$ {renderCommandWithLinks(command)}</code>
           </pre>
           <button
@@ -109,7 +109,7 @@ export default function TerminalCommand({ title, command, output, explanation, w
           </button>
         </div>
         {output ? (
-          <pre className="mt-3 overflow-x-auto rounded-none border border-accent-cyan/40 bg-bg-primary/80 p-3 text-sm text-text-secondary">
+          <pre className="mt-3 overflow-x-auto overscroll-x-contain rounded-none border border-accent-cyan/40 bg-bg-primary/80 p-3 text-sm text-text-secondary">
             <code>{output}</code>
           </pre>
         ) : null}

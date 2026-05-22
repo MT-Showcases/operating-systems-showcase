@@ -54,14 +54,13 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
   const handleSectionClick = (event: MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     event.preventDefault();
 
-    const target = document.getElementById(sectionId);
-    if (target) {
-      target.scrollIntoView({ behavior: 'auto', block: 'start' });
-    }
-
+    // Set hash before scrolling — prevents browser from firing a competing
+    // native hash-scroll that would race with (and abort) the smooth scroll.
     if (window.location.hash !== `#${sectionId}`) {
       window.history.replaceState(null, '', `#${sectionId}`);
     }
+
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     setIsOpen(false);
   };
