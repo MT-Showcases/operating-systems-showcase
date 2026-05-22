@@ -18,6 +18,8 @@ import { getTermsByIds } from '@/data/glossary';
 import { ChevronRight } from 'lucide-react';
 import PilotBlock from '@/components/PilotBlock';
 import ChapterInteractivePilot from '@/components/ChapterInteractivePilot';
+import ChapterScrollProgress from '@/components/ChapterScrollProgress';
+import type { CSSProperties } from 'react';
 
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -155,7 +157,10 @@ export default async function ChapterPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-bg-primary">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+      <div
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12"
+        style={{ '--chapter-breadcrumb-height': '2.75rem' } as CSSProperties}
+      >
         <div className="sticky top-0 z-40 mb-1">
           <Breadcrumb
             items={[
@@ -173,6 +178,10 @@ export default async function ChapterPage({ params }: Props) {
           />
 
           <main className="flex-1 min-w-0">
+            <div className="sticky top-[var(--chapter-breadcrumb-height)] z-30 mb-1">
+              <ChapterScrollProgress />
+            </div>
+
             <div className="border-2 border-accent-cyan/40 bg-bg-surface px-5 py-4 mb-6">
               <div className="flex items-center justify-between mb-3">
                 <span className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">

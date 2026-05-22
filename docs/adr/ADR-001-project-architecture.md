@@ -53,3 +53,9 @@ Add ESLint import restrictions so `data/` stays presentation-free and `lib/` doe
 ## Sandbox entrypoint guardrail
 - The primary sandbox access pattern is a modal launched from the floating sandbox trigger.
 - Avoid duplicating prominent sandbox CTAs in the home header when the floating trigger is already present.
+
+## Chapter scroll progress guardrail
+- The scroll progress bar (`ChapterScrollProgress`) must be scoped inside the `<main>` content column, not placed as a full-width sibling of the flex container that holds both sidebar and main.
+- Placing it outside that flex container causes the bar to visually overlap the sidebar column at all viewport widths.
+- The progress bar uses `sticky` positioning relative to `--chapter-breadcrumb-height` (currently `2.75rem`). The sidebar `sticky top` must reference the same variable so both elements align horizontally when fixed.
+- Do not introduce additional sticky-stack CSS variables unless a new independently-sticky element is added above the progress bar.

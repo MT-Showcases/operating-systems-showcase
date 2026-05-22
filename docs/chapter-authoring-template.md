@@ -72,12 +72,22 @@ Use this order as the default flow:
 - Documentation and developer-facing comments must be in English.
 - User-facing UI text may remain in Italian for now.
 
+## Media block rules
+- Chapters may include a `media` array at the top level (`MediaPlaceholder[]`).
+- Supported types: `'infographic'`, `'video'`, `'podcast'`, `'resource'`.
+- Place media files under `public/media/ch{NN}-{slug}/` — for example `public/media/ch06-linux-fundamentals/infographic.webp`.
+- For infographics: convert source PNG to WebP at quality 85, max width 2752px using sharp.
+- For videos: encode with H.264 CRF 26, preset slow, `+faststart`, max width 1280px, AAC 96kbps using ffmpeg.
+- Set `notes: 'ready'` when the file is present and optimized in `public/`.
+- Do not link raw high-resolution source files directly; always use the optimized output.
+
 ## Implementation checklist
 - [ ] `data/types.ts` supports new chapter fields (if needed)
 - [ ] `data/chapters/index.ts` chapter object is complete
 - [ ] `app/chapters/[slug]/page.tsx` rendering logic follows established block order
 - [ ] `components/SectionCard.tsx` behavior stays consistent with UX density policy
 - [ ] No duplicate guided practice when `interactivePilot` is present
+- [ ] If `media` is present, files are optimized and placed in `public/media/ch{NN}-{slug}/`
 - [ ] No hydration mismatch introduced
 - [ ] No lint errors in touched files
 - [ ] Command-heavy sections use clear step goals or titled command cards

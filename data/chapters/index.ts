@@ -938,6 +938,22 @@ export const chapters: Chapter[] = [
       },
     ],
     glossary: ['distribution', 'shell', 'terminal', 'file-system', 'operating-system'],
+    media: [
+      {
+        type: 'infographic',
+        title: 'Infografica Capitolo 6',
+        description: 'Sintesi visiva: ecosistema Linux, shell, struttura del file system e distribuzioni principali.',
+        placeholderPath: 'media/ch06-linux-fundamentals/infographic.webp',
+        notes: 'ready',
+      },
+      {
+        type: 'video',
+        title: 'Video Capitolo 6',
+        description: 'Video pratico: fondamenti di Linux, terminale, shell e navigazione del file system.',
+        placeholderPath: 'media/ch06-linux-fundamentals/video.mp4',
+        notes: 'ready',
+      },
+    ],
   },
   {
     id: 7,
@@ -1636,6 +1652,22 @@ export const chapters: Chapter[] = [
       },
     ],
     glossary: ['shell', 'terminal', 'process', 'file-system', 'root', 'sudo'],
+    media: [
+      {
+        type: 'infographic',
+        title: 'Infografica Capitolo 9',
+        description: 'Sintesi visiva: orientamento nel terminale, gestione file, identita di sistema e uso corretto di sudo.',
+        placeholderPath: 'media/ch09-linux-commands/infographic.webp',
+        notes: 'ready',
+      },
+      {
+        type: 'video',
+        title: 'Video Capitolo 9',
+        description: 'Video pratico: comandi Linux essenziali per navigazione, gestione file e identità utente.',
+        placeholderPath: 'media/ch09-linux-commands/video.mp4',
+        notes: 'ready',
+      },
+    ],
   },
   {
     id: 10,
@@ -1647,6 +1679,22 @@ export const chapters: Chapter[] = [
       'Leggere e modificare permessi con chmod in notazione ottale e simbolica.',
       'Cambiare proprietario e gruppo con chown.',
       'Creare, configurare e rimuovere utenti e gruppi in modo operativo.',
+    ],
+    media: [
+      {
+        type: 'infographic',
+        title: 'Infografica Capitolo 10',
+        description: 'Sintesi visiva: permessi file, chmod/chown, gestione utenti e gruppi in Linux.',
+        placeholderPath: 'media/ch10-permissions-users/infographic.webp',
+        notes: 'ready',
+      },
+      {
+        type: 'video',
+        title: 'Video Capitolo 10',
+        description: 'Video pratico: controllo degli accessi, chmod, chown e amministrazione utenti Linux.',
+        placeholderPath: 'media/ch10-permissions-users/video.mp4',
+        notes: 'ready',
+      },
     ],
     pilotContent: {
       whyItMatters: [
@@ -2183,6 +2231,22 @@ export const chapters: Chapter[] = [
       'Capire quando servono privilegi elevati e quando no.',
       'Riconoscere errori operativi comuni su Linux.',
       'Adottare un comportamento più professionale e sicuro sul sistema.',
+    ],
+    media: [
+      {
+        type: 'infographic',
+        title: 'Infografica Capitolo 11',
+        description: 'Sintesi visiva: principio del privilegio minimo, errori operativi comuni e buone pratiche di sicurezza Linux.',
+        placeholderPath: 'media/ch11-security-best-practices/infographic.webp',
+        notes: 'ready',
+      },
+      {
+        type: 'video',
+        title: 'Video Capitolo 11',
+        description: 'Video pratico: sicurezza di base in Linux, uso corretto di sudo e comportamento operativo professionale.',
+        placeholderPath: 'media/ch11-security-best-practices/video.mp4',
+        notes: 'ready',
+      },
     ],
     pilotContent: {
       whyItMatters: [
