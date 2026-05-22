@@ -40,6 +40,11 @@ Add ESLint import restrictions so `data/` stays presentation-free and `lib/` doe
 - Avoid sticky layouts that depend on negative margins when they introduce visible gaps during scroll.
 - Show the hamburger trigger whenever the desktop sidebar is not visible (including tablet breakpoints), not only on narrow phone widths.
 
+## Desktop chapter sidebar sizing guardrail
+- On desktop, prefer natural sidebar height with a viewport-based `max-height` cap instead of forcing a fixed height at all times.
+- Avoid layouts that stretch the chapter-list area and create large empty gaps before the anchor section on tall screens.
+- Keep overflow behavior local to the chapter-list container when content exceeds the max-height, so the roadmap header and anchor block remain stable.
+
 ## Glossary interaction guardrail
 - Glossary-linked terms should always open the glossary modal on click/tap.
 - Lightweight tooltip previews may be shown only on devices that report hover + fine pointer capability.

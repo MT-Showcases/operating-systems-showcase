@@ -19,6 +19,8 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktopVisible, setIsDesktopVisible] = useState(true);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const chapterListContainerRef = useRef<HTMLDivElement>(null);
+  const activeChapterRef = useRef<HTMLAnchorElement>(null);
   const currentIndex = chapters.findIndex((chapter) => chapter.slug === currentSlug);
 
   useEffect(() => {
@@ -38,8 +40,18 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    const container = chapterListContainerRef.current;
+    const activeItem = activeChapterRef.current;
+
+    if (!container || !activeItem) return;
+
+    const targetTop = Math.max(0, activeItem.offsetTop - container.clientHeight * 0.35);
+    container.scrollTo({ top: targetTop, behavior: 'smooth' });
+  }, [currentSlug]);
+
   const sidebar = (
-    <aside className="h-full overflow-y-auto border-2 border-accent-cyan/40 bg-bg-primary shadow-2xl">
+    <aside className="flex h-full min-h-0 flex-col overflow-hidden border-2 border-accent-cyan/40 bg-bg-primary shadow-2xl lg:h-auto lg:max-h-[calc(100dvh-2.5rem-3.5rem)]">
       <div className="sticky top-0 z-10 border-b border-accent-cyan/40 bg-bg-primary px-5 pb-4 pt-5">
         <div className="flex items-center justify-between gap-3">
           <div>
@@ -82,36 +94,39 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
         </div>
       </div>
 
-      <nav className="space-y-2 px-5 pt-5" aria-label="Capitoli">
-        {chapters.map((chapter, index) => {
-          const active = chapter.slug === currentSlug;
-          return (
-            <Link
-              key={chapter.slug}
-              href={`/chapters/${chapter.slug}`}
-              onClick={() => setIsOpen(false)}
-              className={`block border-2 px-4 py-3 text-sm transition ${
-                active
-                  ? 'border-accent-green/30 bg-bg-surface text-accent-green'
-                  : 'border-transparent bg-bg-surface text-text-secondary hover:border-accent-cyan/40 hover:bg-bg-primary hover:text-text-primary'
-              }`}
-            >
-              <div className="flex items-start gap-3">
-                <span className={`mt-0.5 shrink-0 inline-flex h-7 w-7 items-center justify-center border-2 text-[11px] ${
+      <div ref={chapterListContainerRef} className="min-h-0 flex-1 overflow-y-auto px-5 pt-5">
+        <nav className="space-y-2" aria-label="Capitoli">
+          {chapters.map((chapter, index) => {
+            const active = chapter.slug === currentSlug;
+            return (
+              <Link
+                ref={active ? activeChapterRef : null}
+                key={chapter.slug}
+                href={`/chapters/${chapter.slug}`}
+                onClick={() => setIsOpen(false)}
+                className={`block border-2 px-4 py-3 text-sm transition ${
                   active
-                    ? 'border-accent-green/40 bg-accent-green text-bg-primary'
-                    : 'border-accent-cyan/40 bg-bg-primary text-text-secondary'
-                }`}>
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <p className="leading-6">{chapter.title}</p>
-              </div>
-            </Link>
-          );
-        })}
-      </nav>
+                    ? 'border-accent-green/30 bg-bg-surface text-accent-green'
+                    : 'border-transparent bg-bg-surface text-text-secondary hover:border-accent-cyan/40 hover:bg-bg-primary hover:text-text-primary'
+                }`}
+              >
+                <div className="flex items-start gap-3">
+                  <span className={`mt-0.5 shrink-0 inline-flex h-7 w-7 items-center justify-center border-2 text-[11px] ${
+                    active
+                      ? 'border-accent-green/40 bg-accent-green text-bg-primary'
+                      : 'border-accent-cyan/40 bg-bg-primary text-text-secondary'
+                  }`}>
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <p className="leading-6">{chapter.title}</p>
+                </div>
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
 
-      <div className="mt-6 border-t border-accent-cyan/40 px-5 pb-5 pt-5">
+      <div className="mt-4 shrink-0 border-t border-accent-cyan/40 px-5 pb-5 pt-5">
         <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-accent-cyan">Anchor del capitolo</p>
         <div className="mt-3 space-y-2">
           {sections.map((section) => (
@@ -141,9 +156,9 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
       </button>
 
       {isDesktopVisible ? (
-        <div className="hidden lg:block lg:w-80 lg:shrink-0 lg:self-start lg:sticky lg:top-6">{sidebar}</div>
+        <div className="hidden lg:block lg:w-80 lg:shrink-0 lg:self-start lg:sticky lg:top-12">{sidebar}</div>
       ) : (
-        <div className="hidden lg:block lg:w-14 lg:shrink-0 lg:self-start lg:sticky lg:top-6">
+        <div className="hidden lg:block lg:w-14 lg:shrink-0 lg:self-start lg:sticky lg:top-12">
           <button
             type="button"
             onClick={() => setIsDesktopVisible(true)}
