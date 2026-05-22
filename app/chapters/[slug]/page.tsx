@@ -178,7 +178,7 @@ export default async function ChapterPage({ params }: Props) {
           />
 
           <main className="flex-1 min-w-0">
-            <div className="sticky top-[var(--chapter-breadcrumb-height)] z-30 mb-1">
+            <div className="sticky top-(--chapter-breadcrumb-height) z-30 mb-1">
               <ChapterScrollProgress />
             </div>
 
@@ -191,7 +191,7 @@ export default async function ChapterPage({ params }: Props) {
               </div>
               <div className="h-1.5 bg-black/30 overflow-hidden">
                 <div
-                  className="h-1.5 bg-accent-green transition-all duration-700"
+                  className="h-1.5 bg-accent-green"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>

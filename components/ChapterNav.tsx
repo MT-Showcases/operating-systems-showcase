@@ -32,7 +32,7 @@ export default function ChapterNav({
         </div>
         <div className="w-full max-w-xs">
           <div className="h-2 bg-black/30">
-            <div className="h-2 bg-accent-green transition-all" style={{ width: `${progress}%` }} />
+            <div className="h-2 bg-accent-green" style={{ width: `${progress}%` }} />
           </div>
         </div>
       </div>

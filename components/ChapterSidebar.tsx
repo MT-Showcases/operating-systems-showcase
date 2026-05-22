@@ -48,7 +48,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
     if (!container || !activeItem) return;
 
     const targetTop = Math.max(0, activeItem.offsetTop - container.clientHeight * 0.35);
-    container.scrollTo({ top: targetTop, behavior: 'smooth' });
+    container.scrollTo({ top: targetTop, behavior: 'auto' });
   }, [currentSlug]);
 
   const handleSectionClick = (event: MouseEvent<HTMLAnchorElement>, sectionId: string) => {
@@ -60,7 +60,8 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
       window.history.replaceState(null, '', `#${sectionId}`);
     }
 
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: prefersReducedMotion ? 'instant' : 'smooth', block: 'start' });
 
     setIsOpen(false);
   };
@@ -104,7 +105,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
           </div>
           <div className="mt-3 h-2 bg-bg-surface">
             <div
-              className="h-2 bg-accent-green/70 transition-all"
+              className="h-2 bg-accent-green/70"
               style={{ width: `${((currentIndex + 1) / chapters.length) * 100}%` }}
             />
           </div>

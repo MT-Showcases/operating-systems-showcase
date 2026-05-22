@@ -17,7 +17,10 @@ export default function BackToTopButton() {
   return (
     <button
       type="button"
-      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      onClick={() => {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'instant' : 'smooth' });
+      }}
       className="fixed bottom-6 right-6 z-40 inline-flex h-12 w-12 items-center justify-center border-2 border-accent-cyan/60 bg-bg-primary text-accent-cyan transition hover:border-accent-green hover:text-accent-green"
       aria-label="Torna in alto"
       title="Torna in alto"

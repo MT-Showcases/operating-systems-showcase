@@ -79,7 +79,7 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
       </div>
 
       <div className="mt-4 h-2 bg-bg-surface">
-        <div className="h-2 bg-accent-green transition-all" style={{ width: `${((currentIndex + 1) / quiz.length) * 100}%` }} />
+        <div className="h-2 bg-accent-green transition-[width]" style={{ width: `${((currentIndex + 1) / quiz.length) * 100}%` }} />
       </div>
 
       <div className="mt-6 border-2 border-accent-cyan/40 bg-bg-surface p-5">

@@ -24,7 +24,7 @@ export default function ChapterScrollProgress() {
 
     updateProgress();
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener('resize', onScroll, { passive: true });
 
     return () => {
       cancelAnimationFrame(rafId);
