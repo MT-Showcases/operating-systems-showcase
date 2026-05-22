@@ -6,6 +6,45 @@ import type { TerminalCommandBlock } from '@/data/types';
 import NixButton from './NixButton';
 import { renderInline } from './RichText';
 
+function toHref(urlOrDomain: string): string {
+  return urlOrDomain.startsWith('http://') || urlOrDomain.startsWith('https://') ? urlOrDomain : `https://${urlOrDomain}`;
+}
+
+function renderCommandWithLinks(command: string) {
+  const pattern = /https?:\/\/[^\s|]+|(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s|]*)?/gi;
+  const nodes: Array<string | JSX.Element> = [];
+  let lastIndex = 0;
+
+  for (const match of command.matchAll(pattern)) {
+    const value = match[0];
+    const index = match.index ?? 0;
+
+    if (index > lastIndex) {
+      nodes.push(command.slice(lastIndex, index));
+    }
+
+    nodes.push(
+      <a
+        key={`${value}-${index}`}
+        href={toHref(value)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="cursor-pointer text-accent-cyan! underline! decoration-accent-cyan! decoration-2! underline-offset-2 hover:text-accent-green! hover:decoration-accent-green!"
+      >
+        {value}
+      </a>
+    );
+
+    lastIndex = index + value.length;
+  }
+
+  if (lastIndex < command.length) {
+    nodes.push(command.slice(lastIndex));
+  }
+
+  return nodes.length > 0 ? nodes : command;
+}
+
 function buildNixPrompt(command: string, explanation: string, title?: string): string {
   const contextPrefix = title ? `Obiettivo operativo: ${title}\n` : '';
   return `Comando: ${command}\n\n${contextPrefix}Spiegami cosa fa esattamente questo comando, il significato di ogni opzione e quando usarlo nella pratica. Contesto: ${explanation}`;
@@ -56,7 +95,7 @@ export default function TerminalCommand({ title, command, output, explanation, w
         ) : null}
         <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
           <pre className="terminal-heading min-w-0 flex-1 overflow-x-auto text-sm text-accent-green">
-            <code>$ {command}</code>
+            <code>$ {renderCommandWithLinks(command)}</code>
           </pre>
           <button
             type="button"

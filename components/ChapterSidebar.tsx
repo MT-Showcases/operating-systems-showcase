@@ -51,7 +51,9 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
   }, [currentSlug]);
 
   const sidebar = (
-    <aside className="flex h-full min-h-0 flex-col overflow-hidden border-2 border-accent-cyan/40 bg-bg-primary shadow-2xl lg:h-auto lg:max-h-[calc(100dvh-2.5rem-3.5rem)]">
+    <aside
+      className="flex h-full min-h-0 flex-col overflow-hidden border-2 border-accent-cyan/40 bg-bg-primary shadow-2xl lg:h-auto lg:max-h-[calc(100dvh-6rem)]"
+    >
       <div className="sticky top-0 z-10 border-b border-accent-cyan/40 bg-bg-primary px-5 pb-4 pt-5">
         <div className="flex items-center justify-between gap-3">
           <div>
@@ -94,7 +96,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
         </div>
       </div>
 
-      <div ref={chapterListContainerRef} className="min-h-0 flex-1 overflow-y-auto px-5 pt-5">
+      <div ref={chapterListContainerRef} className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-5 pt-5">
         <nav className="space-y-2" aria-label="Capitoli">
           {chapters.map((chapter, index) => {
             const active = chapter.slug === currentSlug;

@@ -1315,7 +1315,7 @@ export const chapters: Chapter[] = [
             {
               goal: 'Scarica VirtualBox e l\'ISO Ubuntu',
               command: {
-                command: '# virtualbox.org → Downloads  |  ubuntu.com/download/desktop → 24.04 LTS',
+                command: '# https://www.virtualbox.org/wiki/Downloads  |  https://www.ubuntu-it.org/download',
                 output: '',
                 explanation: 'Scarica VirtualBox per il tuo OS e l\'ISO Ubuntu LTS (circa 2GB). Tieni entrambi i file pronti prima di iniziare.',
               },
