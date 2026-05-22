@@ -154,7 +154,7 @@ export default async function ChapterPage({ params }: Props) {
   const glossaryTerms = getTermsByIds(chapter.glossary ?? []);
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(180deg,rgba(13,17,23,1),rgba(22,27,34,1),rgba(13,17,23,1))]">
+    <div className="min-h-screen bg-bg-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="sticky top-0 z-40 mb-3">
           <Breadcrumb
