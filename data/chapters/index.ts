@@ -2103,33 +2103,6 @@ export const chapters: Chapter[] = [
             },
           ],
         },
-        terminalCommands: [
-          {
-            title: 'Check stato gruppo',
-            command: 'getent group developers',
-            output: 'developers:x:1002:mike',
-            explanation: 'Mostra il gruppo **developers** con **GID** e lista dei membri. Equivale a cercare la riga corrispondente in **/etc/group**.',
-          },
-          {
-            title: 'Rimuovi membership specifica',
-            command: 'sudo gpasswd -d mike developers',
-            output: 'Rimozione dell\'utente mike dal gruppo developers',
-            explanation: 'Rimuove **mike** dal gruppo senza toccare altri attributi. Alternativa a **usermod** quando devi rimuovere da un gruppo specifico.',
-          },
-          {
-            title: 'Elimina account utente',
-            command: 'sudo userdel -r mike',
-            output: '',
-            explanation: 'Rimuove l\'utente e cancella la **home directory** con tutto il contenuto.',
-            warning: '**userdel -r** è irreversibile: la home e i file dell\'utente vengono eliminati. Fai sempre un backup prima.',
-          },
-          {
-            title: 'Elimina gruppo di progetto',
-            command: 'sudo groupdel developers',
-            output: '',
-            explanation: 'Elimina il gruppo. I file che appartenevano al gruppo restano nel sistema ma il **GID** diventa un numero senza nome associato.',
-          },
-        ],
         commandReferences: [
           {
             command: 'useradd',
@@ -2150,6 +2123,15 @@ export const chapters: Chapter[] = [
               'sudo usermod -s /bin/zsh mike',
               'sudo usermod -l nuovonome mike',
               'sudo usermod -L mike',
+            ],
+          },
+          {
+            command: 'userdel',
+            syntax: 'userdel [opzioni] <username>',
+            description: 'Rimuove un utente dal sistema. Senza -r lascia intatta la home directory; con -r elimina home e mail spool.',
+            examples: [
+              'sudo userdel mike',
+              'sudo userdel -r mike',
             ],
           },
         ],
