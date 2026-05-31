@@ -112,7 +112,7 @@ export default function ChapterSidebar({ currentSlug, sections }: ChapterSidebar
         </div>
       </div>
 
-      <div ref={chapterListContainerRef} className="min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-5 pt-5">
+      <div ref={chapterListContainerRef} className="min-h-0 flex-1 overflow-y-auto px-5 pt-5">
         <nav className="space-y-2" aria-label="Capitoli">
           {chapters.map((chapter, index) => {
             const active = chapter.slug === currentSlug;
