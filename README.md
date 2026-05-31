@@ -9,7 +9,7 @@ Interactive educational showcase about Operating Systems for Steve Jobs Academy 
 - Vercel
 
 ## Initial structure
-- `app/` — layout, homepage, and chapter route placeholder
+- `app/` — layout, homepage, and chapter route rendering
 - `components/` — reusable components
 - `data/` — chapter types and datasets
 - `lib/` — utilities and tutor/quiz configuration
