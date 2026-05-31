@@ -29,59 +29,59 @@ function useMediaQuery(query: string) {
 }
 
 export default function GlossaryTooltip({ termId, children }: GlossaryTooltipProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const isMobile = useMediaQuery('(max-width: 767px)');
+  const canHoverTooltip = useMediaQuery('(any-hover: hover) and (any-pointer: fine)');
   const tooltipId = useId();
 
   const term = getTermById(termId);
 
   if (!term) return <>{children}</>;
 
-  if (isMobile) {
-    return (
-      <>
-        <button
-          type="button"
-          onClick={() => setIsDrawerOpen(true)}
-          className="inline cursor-pointer text-accent-cyan underline decoration-dashed underline-offset-4 focus-visible:ring-2 focus-visible:ring-accent-cyan focus-visible:outline-none rounded transition-colors duration-150"
-          aria-label={`Apri definizione di ${term.term}`}
-        >
-          {children}
-        </button>
-
-        <GlossaryModal termId={termId} open={isDrawerOpen} onOpenChange={setIsDrawerOpen} />
-      </>
-    );
-  }
+  const trigger = (
+    <button
+      type="button"
+      onClick={() => setIsDrawerOpen(true)}
+      onMouseEnter={canHoverTooltip ? () => setIsTooltipOpen(true) : undefined}
+      onMouseLeave={canHoverTooltip ? () => setIsTooltipOpen(false) : undefined}
+      className="inline cursor-pointer text-accent-cyan underline decoration-dashed underline-offset-4 focus-visible:ring-2 focus-visible:ring-accent-cyan focus-visible:outline-none rounded transition-colors duration-150 hover:text-accent-green"
+      aria-label={`Apri definizione di ${term.term}`}
+    >
+      {children}
+    </button>
+  );
 
   return (
-    <Popover.Root open={isOpen} onOpenChange={setIsOpen}>
-      <Popover.Trigger asChild>
-        <button
-          type="button"
-          className="inline cursor-help text-accent-cyan underline decoration-dashed underline-offset-4 focus-visible:ring-2 focus-visible:ring-accent-cyan focus-visible:outline-none rounded transition-colors duration-150 hover:text-accent-green"
-          aria-describedby={tooltipId}
-        >
-          {children}
-        </button>
-      </Popover.Trigger>
+    <>
+      {canHoverTooltip ? (
+        <Popover.Root open={isTooltipOpen} onOpenChange={setIsTooltipOpen}>
+          <Popover.Trigger asChild>
+            {trigger}
+          </Popover.Trigger>
 
-      <Popover.Portal>
-        <Popover.Content
-          id={tooltipId}
-          role="tooltip"
-          sideOffset={10}
-          className="bg-bg-primary text-text-primary p-4 rounded-none border border-accent-cyan/20 max-w-sm z-[60] transition-all duration-150"
-        >
-          <div className="max-w-none text-sm leading-7">
-            <p>{term.shortDefinition || term.definition}</p>
-            <Link href={`/glossary#${term.id}`} className="text-accent-cyan hover:text-accent-green flex items-center gap-1 inline-flex">
-              Approfondisci <ChevronRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </Popover.Content>
-      </Popover.Portal>
-    </Popover.Root>
+          <Popover.Portal>
+            <Popover.Content
+              id={tooltipId}
+              role="tooltip"
+              sideOffset={10}
+              onOpenAutoFocus={(event) => event.preventDefault()}
+              onCloseAutoFocus={(event) => event.preventDefault()}
+              className="bg-bg-primary text-text-primary p-4 rounded-none border border-accent-cyan/20 max-w-sm z-[60] transition-all duration-150"
+            >
+              <div className="max-w-none text-sm leading-7">
+                <p>{term.shortDefinition || term.definition}</p>
+                <Link href={`/glossary#${term.id}`} className="text-accent-cyan hover:text-accent-green flex items-center gap-1 inline-flex">
+                  Approfondisci <ChevronRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </Popover.Content>
+          </Popover.Portal>
+        </Popover.Root>
+      ) : (
+        trigger
+      )}
+
+      <GlossaryModal termId={termId} open={isDrawerOpen} onOpenChange={setIsDrawerOpen} />
+    </>
   );
 }

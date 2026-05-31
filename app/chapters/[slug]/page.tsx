@@ -128,32 +128,11 @@ export default async function ChapterPage({ params }: Props) {
   const chapterNum = currentIndex + 1;
   const totalChapters = chapters.length;
   const progressPercent = (chapterNum / totalChapters) * 100;
-  const isChapter1 = chapter.slug === 'what-is-os';
-  const isChapter2 = chapter.slug === 'hardware-cpu';
-  const isChapter3 = chapter.slug === 'kernel';
-  const isChapter4 = chapter.slug === 'processes';
-  const isChapter5 = chapter.slug === 'memory-filesystem';
-  const isChapter6 = chapter.slug === 'linux-fundamentals';
-  const isChapter7 = chapter.slug === 'os-comparison';
-  const isChapter8 = chapter.slug === 'linux-environment-setup';
-  const isChapter9 = chapter.slug === 'linux-commands';
-  const isChapter10 = chapter.slug === 'permissions-users';
-  const isChapter11 = chapter.slug === 'security-best-practices';
-  const isCompactChapter =
-    isChapter1 ||
-    isChapter2 ||
-    isChapter3 ||
-    isChapter4 ||
-    isChapter5 ||
-    isChapter6 ||
-    isChapter7 ||
-    isChapter8 ||
-    isChapter9 ||
-    isChapter10 ||
-    isChapter11;
-  const keepComparisonInsightsExpanded = isChapter7;
+  const isCompactChapter = chapter.id <= 11;
+  const keepComparisonInsightsExpanded = chapter.slug === 'os-comparison';
   const shouldShowMiniTask = Boolean(chapter.pilotContent?.miniTask?.length) && !chapter.interactivePilot;
   const glossaryTerms = getTermsByIds(chapter.glossary ?? []);
+  const quizChapterSlugs = chapters.filter((entry) => (entry.quiz?.length ?? 0) > 0).map((entry) => entry.slug);
 
   return (
     <div className="min-h-screen bg-bg-primary">
@@ -399,7 +378,7 @@ export default async function ChapterPage({ params }: Props) {
             ) : null}
 
             <div className="mt-8">
-              <QuizScoreDashboard />
+              <QuizScoreDashboard quizChapterSlugs={quizChapterSlugs} />
             </div>
 
             {chapter.quiz && chapter.quiz.length > 0 ? (

@@ -79,7 +79,7 @@ export default function SandboxModal({ open, onOpenChange }: SandboxModalProps) 
               <div className="border border-accent-cyan/25 bg-bg-primary/30 p-4">
                 <p className="terminal-heading text-[10px] uppercase tracking-[0.2em] text-accent-cyan">Cosa aspettarti</p>
                 <p className="mt-3 text-sm leading-7 text-text-secondary">
-                  Sessione temporanea, ambiente pronto all'uso e libertà di sperimentare. Non trattarlo come ambiente persistente o produzione.
+                  Sessione temporanea, ambiente pronto all&apos;uso e libertà di sperimentare. Non trattarlo come ambiente persistente o produzione.
                 </p>
               </div>
               <div className="border border-accent-cyan/25 bg-bg-primary/30 p-4">

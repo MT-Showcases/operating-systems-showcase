@@ -13,7 +13,7 @@ Interactive educational showcase about Operating Systems for Steve Jobs Academy 
 - `components/` — reusable components
 - `data/` — chapter types and datasets
 - `lib/` — utilities and tutor/quiz configuration
-- `scripts/` — placeholder scripts for RAG build
+- `scripts/` — automation scripts for RAG index build and visual QA screenshots
 - `docs/adr/` — architecture and policy decisions
 
 ## Local development
@@ -25,6 +25,13 @@ npm run dev
 ## Build
 ```bash
 npm run build
+```
+
+## Visual QA screenshots
+```bash
+npm run build
+npm run start -- -p 3456
+node scripts/screenshot-qa.mjs
 ```
 
 ## Quick onboarding (humans and agents)

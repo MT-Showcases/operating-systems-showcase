@@ -35,8 +35,6 @@ export default function GlossaryTerm({ termId, children }: GlossaryTermProps) {
       onClick={() => setOpen(true)}
       onMouseEnter={canHoverTooltip ? () => setTooltipOpen(true) : undefined}
       onMouseLeave={canHoverTooltip ? () => setTooltipOpen(false) : undefined}
-      onFocus={canHoverTooltip ? () => setTooltipOpen(true) : undefined}
-      onBlur={canHoverTooltip ? () => setTooltipOpen(false) : undefined}
       className="inline border-b border-dotted border-accent-cyan/70 text-accent-cyan transition hover:text-accent-green hover:border-accent-green"
       aria-label={term ? `Apri definizione di ${term.term}` : 'Apri definizione'}
     >
@@ -54,6 +52,8 @@ export default function GlossaryTerm({ termId, children }: GlossaryTermProps) {
           <Popover.Portal>
             <Popover.Content
               sideOffset={8}
+              onOpenAutoFocus={(event) => event.preventDefault()}
+              onCloseAutoFocus={(event) => event.preventDefault()}
               className="z-60 max-w-sm border border-accent-cyan/20 bg-bg-primary p-4 text-text-primary"
             >
               <div className="text-sm leading-7 text-text-secondary">

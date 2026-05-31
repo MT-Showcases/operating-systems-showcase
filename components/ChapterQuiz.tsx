@@ -62,6 +62,7 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
       buildQuizStorageKey(chapterSlug),
       JSON.stringify({ correct: score, total: quiz.length, completedAt: new Date().toISOString() })
     );
+    window.dispatchEvent(new Event('quiz-score-updated'));
   }, [chapterSlug, completed, quiz.length, score]);
 
   const canGoNext = answers[currentIndex] !== undefined;

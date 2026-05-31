@@ -20,18 +20,18 @@ export interface GlossaryEntry {
   id: string;
   term: string;
   shortDefinition: string;
-  /** Alias di shortDefinition usato da alcuni consumer */
+  /** Alias of shortDefinition used by some consumers */
   shortDef?: string;
   definition: string;
   category: 'OS' | 'Hardware' | 'Linux' | 'Security' | 'Processes' | 'Files';
   aliases?: string[];
-  /** Sinonimi del termine (separati dagli alias quando serve distinzione semantica) */
+  /** Term synonyms (kept separate from aliases when semantic distinction matters) */
   synonyms?: string[];
-  /** Esempi pratici opzionali (codice, comandi, scenari) */
+  /** Optional practical examples (code, commands, scenarios) */
   examples?: string[];
-  /** Slug di capitoli correlati */
+  /** Related chapter slugs */
   relatedChapters?: string[];
-  /** ID di altri termini correlati */
+  /** IDs of related terms */
   relatedTerms?: string[];
 }
 

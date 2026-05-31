@@ -24,6 +24,18 @@ type ChatTurn = { role: 'user' | 'assistant'; text: string };
 
 let cachedIndex: Chunk[] | null = null;
 
+function isSafeSuggestionUrl(value: string): boolean {
+  const url = value.trim();
+  if (!url) return false;
+  if (url.startsWith('/')) return true;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:';
+  } catch {
+    return false;
+  }
+}
+
 async function loadIndex(): Promise<Chunk[]> {
   if (cachedIndex) return cachedIndex;
   const file = path.join(process.cwd(), 'public', 'rag', 'index.json');
@@ -150,7 +162,16 @@ function parseTutorAnswer(raw: string): TutorAnswer | null {
     return {
       summary: parsed.summary,
       bullets: Array.isArray(parsed.bullets) ? parsed.bullets.slice(0, 6) : [],
-      suggestions: Array.isArray(parsed.suggestions) ? parsed.suggestions.slice(0, 4) : [],
+      suggestions: Array.isArray(parsed.suggestions)
+        ? parsed.suggestions
+            .filter((suggestion) =>
+              suggestion &&
+              typeof suggestion.label === 'string' &&
+              typeof suggestion.url === 'string' &&
+              isSafeSuggestionUrl(suggestion.url)
+            )
+            .slice(0, 4)
+        : [],
     };
   } catch {
     return null;

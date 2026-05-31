@@ -34,7 +34,7 @@ export default function ChapterScrollProgress() {
   }, []);
 
   return (
-    <div className="flex items-center gap-3 px-4 h-7 bg-bg-primary/90 backdrop-blur-sm">
+    <div className="flex items-center gap-3 px-4 h-7 bg-bg-primary">
       <span className="terminal-heading shrink-0 uppercase tracking-[0.18em] text-[10px] text-accent-cyan">
         Status scroll
       </span>

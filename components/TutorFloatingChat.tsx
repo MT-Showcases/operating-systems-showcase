@@ -16,6 +16,21 @@ function normalizeAssistantText(text: string): string {
   return text.replace(/\*\*/g, '').replace(/\n{3,}/g, '\n\n').trim();
 }
 
+function sanitizeHref(rawUrl: string): string | null {
+  const value = rawUrl.trim();
+  if (!value) return null;
+  if (value.startsWith('/')) return value;
+  try {
+    const parsed = new URL(value);
+    if (parsed.protocol === 'https:' || parsed.protocol === 'http:') {
+      return parsed.toString();
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 export default function TutorFloatingChat() {
   const pathname = usePathname();
   const chapterSlug = useMemo(() => pathname?.match(/^\/chapters\/([^/]+)/)?.[1], [pathname]);
@@ -23,21 +38,22 @@ export default function TutorFloatingChat() {
   const [open, setOpen] = useState(false);
   const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState<Msg[]>([]);
+  const [messages, setMessages] = useState<Msg[]>(() => {
+    if (typeof window === 'undefined') return [];
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw) as { messages?: Msg[] };
+      return Array.isArray(parsed.messages) ? parsed.messages : [];
+    } catch {
+      return [];
+    }
+  });
   const [lastSources, setLastSources] = useState<Source[]>([]);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   useBodyScrollLock(open);
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const parsed = JSON.parse(raw) as { messages?: Msg[] };
-      if (parsed.messages) setMessages(parsed.messages);
-    } catch {}
-  }, []);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ messages }));
@@ -142,11 +158,21 @@ export default function TutorFloatingChat() {
                   ) : null}
                   {message.role === 'assistant' && message.data?.suggestions && message.data.suggestions.length > 0 ? (
                     <div className="mt-2 flex flex-wrap gap-2">
-                      {message.data.suggestions.map((suggestion, suggestionIndex) => (
-                        <a key={suggestionIndex} href={suggestion.url} className="text-[11px] px-2 py-1 rounded bg-accent-green/10 text-accent-green hover:bg-accent-green/20">
-                          {suggestion.label}
-                        </a>
-                      ))}
+                      {message.data.suggestions.map((suggestion, suggestionIndex) => {
+                        const href = sanitizeHref(suggestion.url);
+                        if (!href) {
+                          return (
+                            <span key={suggestionIndex} className="text-[11px] px-2 py-1 rounded bg-bg-surface text-text-secondary">
+                              {suggestion.label}
+                            </span>
+                          );
+                        }
+                        return (
+                          <a key={suggestionIndex} href={href} className="text-[11px] px-2 py-1 rounded bg-accent-green/10 text-accent-green hover:bg-accent-green/20">
+                            {suggestion.label}
+                          </a>
+                        );
+                      })}
                     </div>
                   ) : null}
                 </div>
@@ -158,7 +184,14 @@ export default function TutorFloatingChat() {
                   <ul className="space-y-1">
                     {lastSources.slice(0, 4).map((source, index) => (
                       <li key={index} className="text-[11px] text-text-secondary">
-                        <a href={source.url} className="text-accent-cyan hover:underline">{source.title}</a>
+                        {(() => {
+                          const href = sanitizeHref(source.url);
+                          return href ? (
+                            <a href={href} className="text-accent-cyan hover:underline">{source.title}</a>
+                          ) : (
+                            <span>{source.title}</span>
+                          );
+                        })()}
                         {source.filePath ? <span> · {source.filePath}</span> : null}
                       </li>
                     ))}

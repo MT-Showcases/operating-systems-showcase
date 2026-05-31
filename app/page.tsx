@@ -1,5 +1,3 @@
-'use client';
-
 import { chapters } from '@/data/chapters';
 import Card from '@/components/Card';
 import Button from '@/components/Button';
@@ -11,6 +9,16 @@ import GlossaryTooltip from '@/components/GlossaryTooltip';
 
 const totalHours = chapters.reduce((total, chapter) => total + Number.parseFloat(chapter.duration.replace('h', '')), 0);
 const totalQuizQuestions = chapters.reduce((total, chapter) => total + (chapter.quiz?.length ?? 0), 0);
+const quizChapterSlugs = chapters.filter((chapter) => (chapter.quiz?.length ?? 0) > 0).map((chapter) => chapter.slug);
+const searchableChapters = chapters.map((chapter) => ({
+  id: chapter.id,
+  slug: chapter.slug,
+  title: chapter.title,
+  description: chapter.description,
+  objectives: chapter.objectives,
+  sectionTitles: chapter.sections.map((section) => section.title),
+  keyTakeaways: chapter.keyTakeaways,
+}));
 
 export default function Home() {
   return (
@@ -64,7 +72,7 @@ export default function Home() {
 
       <section className="py-8 px-6 border-b border-border-subtle">
         <div className="max-w-6xl mx-auto">
-          <QuizScoreDashboard />
+          <QuizScoreDashboard quizChapterSlugs={quizChapterSlugs} />
         </div>
       </section>
 
@@ -78,7 +86,7 @@ export default function Home() {
             <span className="text-sm text-text-secondary">{chapters.length} capitoli disponibili</span>
           </div>
 
-          <SearchBar />
+          <SearchBar chapters={searchableChapters} />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {chapters.map((chapter) => {

@@ -57,6 +57,7 @@ export default function SectionMediaSlots({ chapterId, chapterSlug, sectionIndex
             {isReady(slot) ? (
               slot.type === 'infographic' ? (
                 <button onClick={() => setActive(slot)} className="block w-full text-left cursor-pointer" style={{ cursor: 'pointer' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={`/${slot.placeholderPath}`}
                     alt={slot.title}
@@ -140,7 +141,10 @@ export default function SectionMediaSlots({ chapterId, chapterSlug, sectionIndex
 
           <div className="w-full max-w-6xl max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
             {active.type === 'infographic' ? (
-              <img src={`/${active.placeholderPath}`} alt={active.title} className="w-full h-auto max-h-[90vh] object-contain" />
+              <>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={`/${active.placeholderPath}`} alt={active.title} className="w-full h-auto max-h-[90vh] object-contain" />
+              </>
             ) : active.type === 'video' ? (
               <video
                 src={`/${active.placeholderPath}`}

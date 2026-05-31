@@ -105,6 +105,7 @@ Use this order as the default flow:
 - [ ] Capture QA screenshots for at least:
   - sidebar open at top
   - sidebar open after internal scroll
+- [ ] Optional automation: run `node scripts/screenshot-qa.mjs` while app is served on `http://localhost:3456`.
 
 ## Acceptance scorecard (quick review)
 Score each area 0-2.

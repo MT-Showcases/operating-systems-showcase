@@ -4,19 +4,32 @@ import { useMemo, useState } from 'react';
 import Fuse from 'fuse.js';
 import Link from 'next/link';
 import { Search, X } from 'lucide-react';
-import { chapters } from '@/data/chapters';
 import { chapterEmojis } from '@/data/chapterEmojis';
 
-export default function SearchBar() {
+interface SearchableChapter {
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  objectives: string[];
+  sectionTitles: string[];
+  keyTakeaways: string[];
+}
+
+interface SearchBarProps {
+  chapters: SearchableChapter[];
+}
+
+export default function SearchBar({ chapters }: SearchBarProps) {
   const [query, setQuery] = useState('');
 
   const fuse = useMemo(
     () =>
       new Fuse(chapters, {
-        keys: ['title', 'description', 'objectives', 'sections.title', 'sections.content', 'keyTakeaways'],
+        keys: ['title', 'description', 'objectives', 'sectionTitles', 'keyTakeaways'],
         threshold: 0.34,
       }),
-    []
+    [chapters]
   );
 
   const results = query.trim().length >= 2 ? fuse.search(query.trim()).slice(0, 6) : [];

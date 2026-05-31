@@ -3,7 +3,6 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { glossaryTerms } from '@/data/glossary';
-import GlossaryTerm from '@/components/GlossaryTerm';
 import Breadcrumb from '@/components/Breadcrumb';
 import BackToTopButton from '@/components/BackToTopButton';
 import Button from '@/components/Button';

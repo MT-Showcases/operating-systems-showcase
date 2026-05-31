@@ -280,7 +280,7 @@ export function getTermsByIds(termIds: string[]) {
   return glossaryTerms.filter((term) => termIds.includes(term.id));
 }
 
-// Estrai categorie uniche dal glossario
+// Extract unique glossary categories
 export const CATEGORIES = Array.from(
   new Set(glossaryTerms.map((term) => term.category))
 );
