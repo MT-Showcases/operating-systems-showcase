@@ -51,7 +51,7 @@ export default function Home() {
             </div>
             <div className="w-px bg-border-subtle hidden sm:block" />
             <div className="flex items-center gap-2">
-              <span className="text-accent-cyan font-extrabold text-3xl">~{totalHours}h</span>
+              <span className="text-accent-cyan font-extrabold text-3xl">~30h</span>
               <span className="text-sm">di percorso</span>
             </div>
             <div className="w-px bg-border-subtle hidden sm:block" />

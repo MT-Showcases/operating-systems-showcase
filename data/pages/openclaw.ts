@@ -140,7 +140,7 @@ export const openclawPage: Page = {
   },
   metrics: [
     { label: 'Capitoli pubblicati', value: '15' },
-    { label: 'Ore di contenuto', value: '~34h' },
+    { label: 'Ore di contenuto', value: '~30h' },
     { label: 'Quiz per capitolo', value: '1+' },
     { label: 'Lab pratici', value: 'Disponibili' },
     { label: 'Glossario integrato', value: 'Sempre attivo' },
