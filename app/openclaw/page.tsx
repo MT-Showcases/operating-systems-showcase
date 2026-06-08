@@ -15,16 +15,17 @@ export const metadata: Metadata = {
 export default function OpenClawPage() {
   return (
     <main className="min-h-screen bg-bg-primary text-text-primary">
-      <nav className="px-6 py-4 border-b border-border-subtle bg-bg-surface">
+      <div className="sticky top-0 z-40 border-b border-border-subtle bg-bg-surface px-6">
         <div className="max-w-6xl mx-auto">
           <Breadcrumb
             items={[
               { label: 'Home', href: '/' },
               { label: 'OpenClaw', href: '/openclaw' },
             ]}
+            className="bg-bg-surface px-0 py-3"
           />
         </div>
-      </nav>
+      </div>
 
       <header className="border-b border-border-subtle bg-[linear-gradient(135deg,rgba(13,17,23,1),rgba(22,27,34,1),rgba(13,17,23,1))] py-12 px-6">
         <div className="max-w-6xl mx-auto">

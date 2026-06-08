@@ -21,7 +21,7 @@ export default function SandboxPage() {
           <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Sandbox', href: '/sandbox' }]} />
           <h1 className="mt-4 terminal-heading text-4xl md:text-5xl font-extrabold">Sandbox Linux</h1>
           <p className="mt-3 max-w-3xl text-text-secondary leading-8">
-            Ambiente libero di prova per comandi Linux reali tramite playground esterno. La sessione puo essere effimera, quindi e perfetta per pratica veloce.
+            Ambiente libero di prova per comandi Linux reali tramite playground esterno. La sessione può essere effimera, quindi è perfetta per pratica veloce.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -41,7 +41,7 @@ export default function SandboxPage() {
             <h2 className="mt-2 text-2xl font-bold text-text-primary">Ubuntu Playground Killercoda</h2>
             <p className="mt-3 text-sm leading-7 text-text-secondary max-w-3xl">
               Se vuoi una vera macchina Linux stile playground, puoi usarla direttamente qui sotto con iframe.
-              La sessione e effimera: se chiudi o ricarichi puoi perderla, e va benissimo per pratica rapida.
+              La sessione è effimera: se chiudi o ricarichi puoi perderla, e va benissimo per pratica rapida.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <a

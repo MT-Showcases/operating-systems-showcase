@@ -8,13 +8,14 @@ interface BreadcrumbItem {
 
 interface BreadcrumbProps {
   items: BreadcrumbItem[];
+  className?: string;
 }
 
-export default function Breadcrumb({ items }: BreadcrumbProps) {
+export default function Breadcrumb({ items, className }: BreadcrumbProps) {
   return (
     <nav
       aria-label="breadcrumb"
-      className="flex items-center gap-2 overflow-x-auto overscroll-x-contain whitespace-nowrap bg-bg-primary px-4 py-3 text-sm"
+      className={`flex items-center gap-2 overflow-x-auto overscroll-x-contain whitespace-nowrap text-sm ${className ?? 'bg-bg-primary px-4 py-3'}`}
     >
       {items.map((item, idx) => (
         <React.Fragment key={idx}>

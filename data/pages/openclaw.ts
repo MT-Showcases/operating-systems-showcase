@@ -63,7 +63,7 @@ export interface TeamMember {
 }
 
 export const openclawPage: Page = {
-  title: 'Come e stato costruito questo sito',
+  title: 'Come è stato costruito questo sito',
   slug: 'openclaw',
   description: 'Il sistema di agenti AI OpenClaw che ha creato e gestisce Operating Systems Showcase',
   eyebrow: 'OpenClaw AI Workflow',
@@ -102,7 +102,7 @@ export const openclawPage: Page = {
   },
   workflow: {
     title: 'Come Nasce un Capitolo',
-    intro: 'Dall idea iniziale alla pubblicazione, il flusso e in fasi coordinate.',
+    intro: "Dall'idea iniziale alla pubblicazione, il flusso è in fasi coordinate.",
     steps: [
       {
         title: 'Michele definisce argomento e target',
@@ -139,8 +139,8 @@ export const openclawPage: Page = {
     ],
   },
   metrics: [
-    { label: 'Capitoli pubblicati', value: '11' },
-    { label: 'Ore di contenuto', value: '~16h' },
+    { label: 'Capitoli pubblicati', value: '15' },
+    { label: 'Ore di contenuto', value: '~34h' },
     { label: 'Quiz per capitolo', value: '1+' },
     { label: 'Lab pratici', value: 'Disponibili' },
     { label: 'Glossario integrato', value: 'Sempre attivo' },
