@@ -17,9 +17,9 @@ export default function KeyTakeaway({ items }: KeyTakeawayProps) {
         </div>
       </div>
       <ul className="mt-4 space-y-3 text-sm leading-7 text-text-primary">
-        {items.map((item) => (
-          <li key={item} className="flex gap-3 border-2 border-accent-green/40 bg-bg-primary px-4 py-3">
-            <ChevronRight size={18} className="mt-0.5 flex-shrink-0 text-accent-green" />
+        {items.map((item, idx) => (
+          <li key={`takeaway-${idx}`} className="flex gap-3 border-2 border-accent-green/40 bg-bg-primary px-4 py-3">
+            <ChevronRight size={18} className="mt-0.5 shrink-0 text-accent-green" />
             <span>{item}</span>
           </li>
         ))}

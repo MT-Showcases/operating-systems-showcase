@@ -116,7 +116,7 @@ export default function GlossaryPage() {
                     <h3 className="text-lg font-bold text-accent-green leading-tight flex-1">
                       {term.term}
                     </h3>
-                    <span className="inline-block bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan px-2 py-1 rounded text-xs font-medium whitespace-nowrap">
+                    <span className="inline-block bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan px-2 py-1 rounded-none text-xs font-medium whitespace-nowrap">
                       {term.category}
                     </span>
                   </div>
@@ -132,7 +132,7 @@ export default function GlossaryPage() {
                         {term.aliases.map((alias, aliasIdx) => (
                           <span
                             key={`${alias}-${aliasIdx}`}
-                            className="text-xs bg-bg-surface border border-border-subtle px-2 py-1 rounded text-text-secondary"
+                            className="text-xs bg-bg-surface border border-border-subtle px-2 py-1 rounded-none text-text-secondary"
                           >
                             {alias}
                           </span>

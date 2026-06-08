@@ -58,7 +58,7 @@ export default function ChapterHeader({
 
       <div className="mt-6 grid gap-3 md:grid-cols-3">
         {objectives.map((objective, index) => (
-          <div key={objective} className="border-2 border-accent-amber/40 bg-bg-surface p-4 text-sm leading-7 text-text-secondary">
+          <div key={`objective-${index}`} className="border-2 border-accent-amber/40 bg-bg-surface p-4 text-sm leading-7 text-text-secondary">
             <p className="terminal-heading mb-2 text-xs uppercase tracking-[0.22em] text-accent-amber">
               Checkpoint {index + 1}
             </p>

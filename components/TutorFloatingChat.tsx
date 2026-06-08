@@ -162,13 +162,13 @@ export default function TutorFloatingChat() {
                         const href = sanitizeHref(suggestion.url);
                         if (!href) {
                           return (
-                            <span key={suggestionIndex} className="text-[11px] px-2 py-1 rounded bg-bg-surface text-text-secondary">
+                            <span key={suggestionIndex} className="text-[11px] px-2 py-1 rounded-none bg-bg-surface text-text-secondary">
                               {suggestion.label}
                             </span>
                           );
                         }
                         return (
-                          <a key={suggestionIndex} href={href} className="text-[11px] px-2 py-1 rounded bg-accent-green/10 text-accent-green hover:bg-accent-green/20">
+                          <a key={suggestionIndex} href={href} className="text-[11px] px-2 py-1 rounded-none bg-accent-green/10 text-accent-green hover:bg-accent-green/20">
                             {suggestion.label}
                           </a>
                         );

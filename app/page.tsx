@@ -94,7 +94,7 @@ export default function Home() {
               <Card key={chapter.id} className="h-full flex flex-col">
                 <div className="space-y-3 flex-1 pb-6">
                   <div className="flex items-center justify-between gap-3">
-                    <span className="bg-accent-green text-bg-primary px-2 py-0.5 rounded text-xs font-bold">
+                    <span className="bg-accent-green text-bg-primary px-2 py-0.5 rounded-none text-xs font-bold">
                       Cap. {chapter.id}
                     </span>
                     <span className="rounded-none border border-accent-cyan/20 bg-accent-cyan/10 px-3 py-1 text-xs text-accent-cyan">

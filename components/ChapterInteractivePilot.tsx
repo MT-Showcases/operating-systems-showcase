@@ -71,7 +71,7 @@ export default function ChapterInteractivePilot({ pilot, chapterTitle }: Chapter
                   <p className="text-xs uppercase tracking-[0.18em] text-text-secondary">Step {index + 1}</p>
                   <h3 className="mt-1 text-base font-semibold text-text-primary">{step.title}</h3>
                   <p className="mt-2 text-sm leading-7 text-text-secondary">{step.instruction}</p>
-                  <p className="mt-3 text-xs leading-6 text-accent-cyan">Perche conta: {step.whyItMatters}</p>
+                  <p className="mt-3 text-xs leading-6 text-accent-cyan">Perché conta: {step.whyItMatters}</p>
                 </div>
               </div>
             </button>
