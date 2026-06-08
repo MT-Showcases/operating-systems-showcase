@@ -68,7 +68,7 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
   const canGoNext = answers[currentIndex] !== undefined;
 
   return (
-    <section className=" border-2 border-accent-cyan/40 bg-bg-surface p-6">
+    <section className="border-2 border-accent-cyan/40 bg-bg-surface p-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-cyan">Quiz capitolo</p>

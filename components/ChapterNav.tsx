@@ -22,7 +22,7 @@ export default function ChapterNav({
   const progress = (currentChapter / totalChapters) * 100;
 
   return (
-    <div className=" border-2 border-accent-cyan/40 bg-bg-surface p-6">
+    <div className="border-2 border-accent-cyan/40 bg-bg-surface p-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="terminal-heading text-xs uppercase tracking-[0.24em] text-text-secondary">Navigazione</p>

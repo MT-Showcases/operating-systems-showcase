@@ -44,7 +44,7 @@ export default function GlossaryTooltip({ termId, children }: GlossaryTooltipPro
       onClick={() => setIsDrawerOpen(true)}
       onMouseEnter={canHoverTooltip ? () => setIsTooltipOpen(true) : undefined}
       onMouseLeave={canHoverTooltip ? () => setIsTooltipOpen(false) : undefined}
-      className="inline cursor-pointer text-accent-cyan underline decoration-dashed underline-offset-4 focus-visible:ring-2 focus-visible:ring-accent-cyan focus-visible:outline-none rounded transition-colors duration-150 hover:text-accent-green"
+      className="inline cursor-pointer text-accent-cyan underline decoration-dashed underline-offset-4 focus-visible:ring-2 focus-visible:ring-accent-cyan focus-visible:outline-none rounded-none transition-colors duration-150 hover:text-accent-green"
       aria-label={`Apri definizione di ${term.term}`}
     >
       {children}
