@@ -129,9 +129,9 @@ export default function GlossaryPage() {
                     <div className="pt-4 border-t border-border-subtle">
                       <p className="text-xs uppercase tracking-wider text-text-secondary mb-2">Alias</p>
                       <div className="flex flex-wrap gap-2">
-                        {term.aliases.map((alias) => (
+                        {term.aliases.map((alias, aliasIdx) => (
                           <span
-                            key={alias}
+                            key={`${alias}-${aliasIdx}`}
                             className="text-xs bg-bg-surface border border-border-subtle px-2 py-1 rounded text-text-secondary"
                           >
                             {alias}
