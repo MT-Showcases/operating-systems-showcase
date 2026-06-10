@@ -17,7 +17,7 @@ export default function NixButton({ prompt, size = 'sm' }: NixButtonProps) {
       <button
         onClick={handleClick}
         title={prompt}
-        className="inline-flex items-center gap-1.5 border border-accent-cyan/30 bg-bg-surface px-2 py-1 text-[10px] text-accent-cyan/70 transition hover:border-accent-cyan hover:bg-accent-cyan/10 hover:text-accent-cyan"
+        className="inline-flex items-center gap-1.5 border border-accent-cyan/30 bg-bg-surface px-2 py-1 text-[10px] text-accent-cyan/70 transition hover:border-accent-cyan hover:bg-accent-cyan/10 hover:text-accent-cyan btn-glow-cyan"
       >
         <MessageSquare className="h-3 w-3" />
         Nix
@@ -28,7 +28,7 @@ export default function NixButton({ prompt, size = 'sm' }: NixButtonProps) {
   return (
     <button
       onClick={handleClick}
-      className="inline-flex items-center gap-2 border border-accent-cyan/40 bg-bg-surface px-3 py-1.5 text-xs text-accent-cyan transition hover:border-accent-cyan hover:bg-accent-cyan/10"
+      className="inline-flex items-center gap-2 border border-accent-cyan/40 bg-bg-surface px-3 py-1.5 text-xs text-accent-cyan transition hover:border-accent-cyan hover:bg-accent-cyan/10 btn-glow-cyan"
     >
       <MessageSquare className="h-3.5 w-3.5" />
       Chiedi a Nix

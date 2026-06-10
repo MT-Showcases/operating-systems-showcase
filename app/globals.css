@@ -88,6 +88,19 @@ a {
   font-family: var(--font-mono);
 }
 
+@keyframes glow-pulse-green {
+  0%, 100% { box-shadow: 0 0 0px rgba(0, 255, 65, 0); }
+  50%       { box-shadow: 0 0 14px 3px rgba(0, 255, 65, 0.4); }
+}
+
+@keyframes glow-pulse-cyan {
+  0%, 100% { box-shadow: 0 0 0px rgba(88, 166, 255, 0); }
+  50%       { box-shadow: 0 0 12px 3px rgba(88, 166, 255, 0.35); }
+}
+
+.btn-glow-green { animation: glow-pulse-green 2.5s ease-in-out infinite; }
+.btn-glow-cyan  { animation: glow-pulse-cyan  2.5s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

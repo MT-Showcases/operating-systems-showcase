@@ -5,6 +5,7 @@ interface ButtonProps {
   children: React.ReactNode;
   href?: string;
   variant?: 'primary' | 'secondary';
+  glow?: boolean;
   className?: string;
   onClick?: () => void;
   target?: React.HTMLAttributeAnchorTarget;
@@ -15,6 +16,7 @@ export default function Button({
   children,
   href,
   variant = 'primary',
+  glow = false,
   className = '',
   onClick,
   target,
@@ -27,7 +29,9 @@ export default function Button({
     secondary: 'border-accent-cyan/60 bg-bg-primary text-accent-cyan hover:bg-bg-surface hover:border-accent-cyan',
   };
 
-  const finalClassName = `${baseStyles} ${variants[variant]} ${className}`;
+  const glowClass = glow ? (variant === 'primary' ? 'btn-glow-green' : 'btn-glow-cyan') : '';
+
+  const finalClassName = `${baseStyles} ${variants[variant]} ${glowClass} ${className}`;
 
   if (href) {
     const isInternal = href.startsWith('/');
