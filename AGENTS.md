@@ -34,6 +34,8 @@ If the user request is generic (for example "review the structure and documentat
 - Quiz: `components/ChapterQuiz.tsx`
 - Quiz score persistence and cross-tab sync: `components/QuizScoreDashboard.tsx`
 - Glossary hover/tap interaction: `components/GlossaryTerm.tsx`, `components/GlossaryTooltip.tsx`
+- Floating nav bar (mobile Video/Sandbox/Nix, md:hidden): `components/FloatingNav.tsx`
+- Desktop floating buttons (md:inline-flex only): `components/ShortsFloatingButton.tsx`, `components/SandboxFloatingButton.tsx`
 - Tutor chat UI (triggers via `nix:open` event): `components/TutorFloatingChat.tsx`
 - Tutor prompt config and endpoint base URL: `lib/tutor-config.ts`
 - Typed cross-component event bus: `lib/events.ts`

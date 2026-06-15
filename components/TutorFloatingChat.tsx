@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { X } from 'lucide-react';
+import { MessageSquare, X } from 'lucide-react';
 import { TUTOR_NAME, TUTOR_PLACEHOLDER, TUTOR_TAGLINE } from '@/lib/tutor-config';
 import { on } from '@/lib/events';
 import useBodyScrollLock from '@/lib/useBodyScrollLock';
@@ -123,10 +123,11 @@ export default function TutorFloatingChat() {
     <>
       <button
         onClick={() => setOpen((value) => !value)}
-        className="fixed bottom-6 right-5 z-90 rounded-none bg-accent-green text-bg-primary px-4 py-3 font-semibold flex items-center gap-2 hover:bg-accent-cyan hover:text-bg-primary transition btn-glow-green"
+        className="hidden md:flex fixed bottom-6 right-5 z-90 rounded-none bg-accent-green text-bg-primary px-4 py-3 font-semibold items-center gap-2 hover:bg-accent-cyan hover:text-bg-primary transition btn-glow-green"
         aria-label={`Apri ${TUTOR_NAME}`}
       >
-        ✓ {TUTOR_NAME}
+        <MessageSquare className="h-4 w-4" />
+        {TUTOR_NAME}
       </button>
 
       {open ? (

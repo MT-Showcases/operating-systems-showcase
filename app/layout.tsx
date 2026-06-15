@@ -5,6 +5,7 @@ import TutorFloatingChat from '@/components/TutorFloatingChat';
 import ServiceWorkerRegister from '@/components/ServiceWorkerRegister';
 import SandboxFloatingButton from '@/components/SandboxFloatingButton';
 import ShortsFloatingButton from '@/components/ShortsFloatingButton';
+import FloatingNav from '@/components/FloatingNav';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -65,6 +66,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <ServiceWorkerRegister />
         {children}
+        <FloatingNav />
         <ShortsFloatingButton />
         <SandboxFloatingButton />
         <TutorFloatingChat />
