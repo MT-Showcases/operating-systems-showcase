@@ -11,7 +11,7 @@ function toHref(urlOrDomain: string): string {
 }
 
 function renderCommandWithLinks(command: string) {
-  const pattern = /https?:\/\/[^\s|]+|(?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s|]*)?/gi;
+  const pattern = /https?:\/\/[^\s|<>"]+/gi;
   const nodes: ReactNode[] = [];
   let lastIndex = 0;
 

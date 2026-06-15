@@ -54,6 +54,18 @@ Add ESLint import restrictions so `data/` stays presentation-free and `lib/` doe
 - The primary sandbox access pattern is a modal launched from the floating sandbox trigger.
 - Avoid duplicating prominent sandbox CTAs in the home header when the floating trigger is already present.
 
+## Mobile bottom navigation guardrail
+- On mobile (`< md` breakpoint), the primary entry point for Video, Sandbox, and Nix is the `FloatingNav` grid bar fixed at `bottom-0` (`components/FloatingNav.tsx`).
+- Individual floating buttons (`ShortsFloatingButton`, `SandboxFloatingButton`, and the `TutorFloatingChat` trigger) are hidden on mobile (`hidden md:inline-flex` / `hidden md:flex`) and visible only on desktop.
+- The `<body>` carries `pb-14 md:pb-0` to prevent page content from being obscured by the 56px nav bar on mobile.
+- Do not duplicate Video/Sandbox/Nix entry points in page headers or footers when the floating nav is already present on all pages.
+- The `FloatingNav` owns a local `sandboxOpen` state and renders its own `SandboxModal`. The Nix button emits `nix:open` which `TutorFloatingChat` already listens to.
+
+## Terminal command link guardrail
+- Only strings that start with `https://` or `http://` are rendered as clickable anchors inside terminal command blocks (`renderCommandWithLinks` in `components/TerminalCommand.tsx`).
+- Bare domain-like strings (e.g. `killercoda.com`) and file names (e.g. `script.sh`, `note.txt`) must not be auto-linked; the regex is intentionally restricted to explicit URL protocols.
+- Any future auto-linking logic must use the same `https?://` prefix requirement to avoid false positives on file paths and shell arguments.
+
 ## Chapter scroll progress guardrail
 - The scroll progress bar (`ChapterScrollProgress`) must be scoped inside the `<main>` content column, not placed as a full-width sibling of the flex container that holds both sidebar and main.
 - Placing it outside that flex container causes the bar to visually overlap the sidebar column at all viewport widths.

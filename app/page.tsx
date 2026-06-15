@@ -142,7 +142,7 @@ export default function Home() {
       <footer className="bg-bg-surface border-t border-border-subtle py-10 px-6 mt-12">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div>
+            <div className="text-center sm:text-left">
               <p className="text-text-primary font-semibold text-sm">Sistemi Operativi</p>
               <p className="text-text-secondary text-xs mt-0.5">Corso di Formazione Linux / OS</p>
             </div>
