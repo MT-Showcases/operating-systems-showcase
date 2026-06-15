@@ -149,8 +149,9 @@ export default function ShortsPlayer({ initialVideos, chapterFilter }: Props) {
           <section
             key={`${video.chapterSlug}-${idx}`}
             ref={(el) => { sectionRefs.current[idx] = el; }}
-            className="relative h-dvh snap-start flex items-center justify-center bg-black"
+            className="relative h-dvh snap-start flex flex-col items-center justify-center bg-black"
           >
+            {/* Video at natural aspect ratio — controls are always visible below the frame */}
             <video
               ref={(el) => { videoRefs.current[idx] = el; }}
               src={`/${video.videoPath}`}
@@ -158,20 +159,20 @@ export default function ShortsPlayer({ initialVideos, chapterFilter }: Props) {
               playsInline
               loop
               controls
-              className="w-full h-full object-contain"
+              className="w-full max-h-[65dvh]"
             />
 
-            {/* Bottom info overlay — pb-20 clears the native controls bar */}
-            <div className="absolute bottom-0 inset-x-0 bg-linear-to-t from-black/90 via-black/50 to-transparent px-5 pb-20 pt-20 pointer-events-none">
-              <div className="mb-2">
+            {/* Info block — in normal flow, below the video and its controls */}
+            <div className="w-full px-5 pt-3 pb-2">
+              <div className="mb-1.5">
                 <span className="border border-accent-green/60 bg-black/60 px-3 py-1 terminal-heading text-[10px] uppercase tracking-[0.24em] text-accent-green">
                   Capitolo {String(video.chapterId).padStart(2, '0')}
                 </span>
               </div>
-              <h2 className="terminal-heading text-base font-semibold text-text-primary leading-snug mb-1">
+              <h2 className="terminal-heading text-sm font-semibold text-text-primary leading-snug mb-1">
                 {video.chapterTitle}
               </h2>
-              <p className="text-text-secondary text-sm leading-6 line-clamp-2">
+              <p className="text-text-secondary text-xs leading-5 line-clamp-2">
                 {video.videoDescription}
               </p>
             </div>
@@ -189,7 +190,7 @@ export default function ShortsPlayer({ initialVideos, chapterFilter }: Props) {
             {idx < videos.length - 1 && (
               <button
                 onClick={() => scrollToIndex(idx + 1)}
-                className="absolute bottom-24 right-4 border-2 border-accent-cyan/40 bg-black/60 p-2 text-accent-cyan hover:border-accent-cyan transition"
+                className="absolute bottom-4 right-4 border-2 border-accent-cyan/40 bg-black/60 p-2 text-accent-cyan hover:border-accent-cyan transition"
                 aria-label="Video successivo"
               >
                 <ChevronDown className="h-4 w-4" />
