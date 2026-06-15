@@ -19,6 +19,7 @@ import { ChevronRight } from 'lucide-react';
 import PilotBlock from '@/components/PilotBlock';
 import ChapterInteractivePilot from '@/components/ChapterInteractivePilot';
 import ChapterScrollProgress from '@/components/ChapterScrollProgress';
+import ProjectLabBlock from '@/components/ProjectLabBlock';
 import type { CSSProperties } from 'react';
 
 export const revalidate = 60;
@@ -246,6 +247,15 @@ export default async function ChapterPage({ params }: Props) {
                 </div>
               ))}
             </div>
+
+            {chapter.projectLab ? (
+              <div className="mb-12">
+                <ProjectLabBlock
+                  projectLab={chapter.projectLab}
+                  glossaryIds={chapter.glossary ?? []}
+                />
+              </div>
+            ) : null}
 
             <KeyTakeaway items={chapter.keyTakeaways} />
 

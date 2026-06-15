@@ -154,6 +154,38 @@ export interface ChapterPilotContent {
   deepDive?: ChapterDeepDiveResource[];
 }
 
+export type UserGroupNodeType = 'root' | 'group' | 'user';
+
+export interface UserGroupNode {
+  id: string;
+  label: string;
+  type: UserGroupNodeType;
+  meta?: string;
+  children?: UserGroupNode[];
+}
+
+export interface ProjectLabDownloadLink {
+  label: string;
+  filename: string;
+  description?: string;
+}
+
+export interface ProjectLabStep {
+  goal: string;
+  context?: string;
+  command: TerminalCommandBlock;
+  whyItMatters?: string;
+}
+
+export interface ProjectLab {
+  title: string;
+  scenario: string;
+  diagram: UserGroupNode;
+  downloadLinks?: ProjectLabDownloadLink[];
+  steps: ProjectLabStep[];
+  winCondition?: string;
+}
+
 export interface Chapter {
   id: number;
   slug: string;
@@ -169,4 +201,5 @@ export interface Chapter {
   media?: MediaPlaceholder[];
   pilotContent?: ChapterPilotContent;
   interactivePilot?: ChapterInteractivePilot;
+  projectLab?: ProjectLab;
 }

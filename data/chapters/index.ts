@@ -3020,6 +3020,254 @@ export const chapters: Chapter[] = [
     ],
     glossary: ['shell', 'terminal', 'process', 'permissions', 'cron', 'crontab', 'scheduler', 'redirection', 'log'],
   },
+  {
+    id: 16,
+    slug: 'linux-users-project',
+    title: 'Progetto: Gestione Utenti TechStartup',
+    description: 'Scenario reale: sei il nuovo sysadmin di una startup. Devi configurare da zero utenti, gruppi e permessi per tre dipartimenti con policy di accesso distinte.',
+    duration: '2h',
+    objectives: [
+      'Creare gruppi Linux e assegnare utenti con policy distinte per dipartimento.',
+      'Configurare permessi directory coerenti con la struttura organizzativa.',
+      'Verificare e auditare gli accessi simulando utenti diversi.',
+      'Usare usermod, chown e chmod in un flusso realistico end-to-end.',
+    ],
+    sections: [
+      {
+        id: 'contesto',
+        title: 'Il mandato',
+        content:
+          'Hai appena firmato il contratto come sysadmin di **TechStartup srl**. Il tuo primo compito è configurare il sistema di accessi Linux per tre team: **sviluppo**, **operations** e **security**.\n\nOgni team ha esigenze diverse: i dev devono scrivere codice, ops gestisce log e backup, security monitora tutto senza modificare nulla. Il principio guida è il **minimo privilegio necessario**: ogni utente accede solo a ciò che serve per il suo lavoro.\n\nIn questo progetto costruirai l\'intera struttura passo dopo passo, esattamente come faresti in un ambiente reale.',
+        keyPoints: [
+          '**Principio del minimo privilegio**: ogni utente ha solo i permessi strettamente necessari.',
+          'I **gruppi** sono il meccanismo principale per condividere accessi tra più utenti.',
+          'La verifica degli accessi **negati** è importante quanto quella degli accessi consentiti.',
+        ],
+      },
+    ],
+    keyTakeaways: [
+      'I gruppi Linux sono il modo standard per applicare policy di accesso a più utenti contemporaneamente.',
+      'useradd -G assegna gruppi supplementari al momento della creazione; usermod -aG li aggiunge a un utente esistente senza sovrascrivere quelli già assegnati.',
+      'chmod 770 limita l\'accesso ai soli membri del gruppo proprietario. chmod 750 aggiunge il vincolo di sola lettura per altri.',
+      'Testare l\'accesso negato con sudo -u è parte integrante della verifica di una policy di sicurezza.',
+    ],
+    discussionPrompts: [
+      'Cosa succederebbe se usassi usermod -G security valentina senza il flag -a?',
+      'Come cambieresti la struttura se un utente deve passare da ops a dev mantenendo l\'accesso ai log?',
+      'Qual è il rischio di usare chmod 777 su /srv/techstartup/codice?',
+    ],
+    quiz: [
+      {
+        id: 'p9-q1',
+        type: 'multiple_choice',
+        question: 'Quale comando aggiunge marco al gruppo dev senza rimuoverlo dai suoi gruppi attuali?',
+        options: [
+          'sudo usermod -G dev marco',
+          'sudo usermod -aG dev marco',
+          'sudo groupadd dev marco',
+          'sudo useradd -G dev marco',
+        ],
+        correctAnswer: 1,
+        explanation: 'Il flag -a (append) è fondamentale: senza di esso, -G sovrascrive tutti i gruppi secondari dell\'utente con solo quello specificato.',
+      },
+      {
+        id: 'p9-q2',
+        type: 'multiple_choice',
+        question: 'Con chmod 770 su /srv/codice e chown root:dev, quale utente NON può leggere la directory?',
+        options: [
+          'marco (membro del gruppo dev)',
+          'root',
+          'giulia (membro del gruppo ops, non dev)',
+          'valentina (membro di dev, ops e security)',
+        ],
+        correctAnswer: 2,
+        explanation: 'chmod 770 significa: owner=rwx, group=rwx, others=---. Giulia non è nel gruppo dev, quindi cade nella categoria "others" e viene bloccata.',
+      },
+      {
+        id: 'p9-q3',
+        type: 'true_false',
+        question: 'Il comando getent group dev mostra tutti gli utenti che hanno dev come gruppo principale o secondario.',
+        correctAnswer: false,
+        explanation: 'getent group legge /etc/group e mostra solo i membri espliciti del gruppo. Gli utenti con dev come gruppo primario (impostato con useradd -g) potrebbero non apparire nella lista se il gruppo primario non è registrato lì.',
+      },
+      {
+        id: 'p9-q4',
+        type: 'multiple_choice',
+        question: 'Quale differenza c\'è tra chmod 770 e chmod 750 applicati a /srv/backup?',
+        options: [
+          'Nessuna differenza, sono equivalenti',
+          '770 permette al gruppo di scrivere, 750 permette solo lettura ed esecuzione al gruppo',
+          '750 è più permissivo perché usa numeri più piccoli',
+          '770 funziona solo su file, 750 solo su directory',
+        ],
+        correctAnswer: 1,
+        explanation: '770 = owner rwx, group rwx, others ---. 750 = owner rwx, group r-x, others ---. Il secondo cifra (7 vs 5) controlla i permessi del gruppo: 7=rwx, 5=r-x (no write).',
+      },
+      {
+        id: 'p9-q5',
+        type: 'multiple_choice',
+        question: 'Perché si usa sudo -u giulia ls /srv/codice per testare i permessi invece di fare il login come giulia?',
+        options: [
+          'Perché giulia non ha una password impostata di default',
+          'Perché permette di testare l\'accesso di giulia rimanendo nella sessione corrente, senza bisogno di logout',
+          'Perché ls funziona solo con sudo',
+          'Perché giulia non ha una home directory',
+        ],
+        correctAnswer: 1,
+        explanation: 'sudo -u <utente> <comando> esegue un singolo comando nel contesto di quell\'utente. È il modo standard per testare i permessi durante la configurazione senza aprire sessioni separate.',
+      },
+    ],
+    glossary: ['permissions', 'shell', 'terminal', 'process'],
+    projectLab: {
+      title: 'TechStartup srl — Configurazione accessi Linux',
+      scenario:
+        'Sei stato assunto come sysadmin di TechStartup srl, una startup milanese con 6 dipendenti distribuiti su 3 team. L\'HR ti ha inviato la lista: Marco, Sara e Luca lavorano nello sviluppo; Giulia e Antonio gestiscono le operations; Valentina è responsabile della sicurezza e deve monitorare l\'attività di tutti i team senza modificare nulla. Il CEO vuole che l\'ambiente sia configurato entro oggi. Il server gira su Ubuntu 22.04.',
+      diagram: {
+        id: 'root',
+        label: 'ubuntu-server',
+        type: 'root',
+        meta: 'TechStartup srl — Ubuntu 22.04',
+        children: [
+          {
+            id: 'dev',
+            label: 'dev',
+            type: 'group',
+            meta: '/srv/techstartup/codice — 770',
+            children: [
+              { id: 'marco', label: 'marco', type: 'user' },
+              { id: 'sara', label: 'sara', type: 'user' },
+              { id: 'luca', label: 'luca', type: 'user' },
+            ],
+          },
+          {
+            id: 'ops',
+            label: 'ops',
+            type: 'group',
+            meta: '/srv/techstartup/log — 770\n/srv/techstartup/backup — 750',
+            children: [
+              { id: 'giulia', label: 'giulia', type: 'user' },
+              { id: 'antonio', label: 'antonio', type: 'user' },
+            ],
+          },
+          {
+            id: 'security',
+            label: 'security',
+            type: 'group',
+            meta: 'accesso in lettura su tutti i gruppi',
+            children: [
+              {
+                id: 'valentina',
+                label: 'valentina',
+                type: 'user',
+                meta: 'gruppi secondari: dev, ops, security',
+              },
+            ],
+          },
+        ],
+      },
+      downloadLinks: [
+        {
+          label: 'Scarica script di reset',
+          filename: 'techstartup-setup.sh',
+          description: 'ricrea l\'ambiente da zero',
+        },
+      ],
+      steps: [
+        {
+          goal: 'Crea i tre gruppi dipartimentali',
+          context: 'I gruppi vanno creati prima degli utenti. Assegnare un utente a un gruppo inesistente restituisce un errore.',
+          command: {
+            command: 'sudo groupadd dev && sudo groupadd ops && sudo groupadd security',
+            output: '(nessun output = successo)',
+            explanation: 'groupadd crea un gruppo nel sistema. I tre gruppi corrispondono ai dipartimenti: sviluppo, operations e security.',
+          },
+          whyItMatters: 'In Linux l\'ordine conta: prima definisci i gruppi, poi gli utenti. Invertire crea dipendenze non risolte.',
+        },
+        {
+          goal: 'Crea gli utenti del team dev e assegnali al gruppo',
+          context: 'useradd -m crea la home directory, -s imposta la shell, -G assegna il gruppo supplementare.',
+          command: {
+            command: 'sudo useradd -m -s /bin/bash -G dev marco\nsudo useradd -m -s /bin/bash -G dev sara\nsudo useradd -m -s /bin/bash -G dev luca',
+            output: '(nessun output = successo)',
+            explanation: 'Ogni utente viene creato con home directory (/home/marco ecc.) e bash come shell di default, già assegnato al gruppo dev.',
+          },
+        },
+        {
+          goal: 'Verifica che i tre utenti siano nel gruppo dev',
+          command: {
+            command: 'getent group dev\nid marco',
+            output: 'dev:x:1001:marco,sara,luca\nuid=1001(marco) gid=1004(marco) groups=1004(marco),1001(dev)',
+            explanation: 'getent group mostra i membri del gruppo. id utente mostra tutti i gruppi (primario e supplementari) a cui l\'utente appartiene.',
+          },
+          whyItMatters: 'Verificare subito dopo la creazione previene errori silenziosi. Un\'assegnazione fallita non sempre produce un messaggio di errore visibile.',
+        },
+        {
+          goal: 'Crea gli utenti del team ops',
+          command: {
+            command: 'sudo useradd -m -s /bin/bash -G ops giulia\nsudo useradd -m -s /bin/bash -G ops antonio',
+            output: '(nessun output = successo)',
+            explanation: 'Stessa logica del team dev, ma con il gruppo ops. Giulia e Antonio avranno accesso a log e backup, non al codice.',
+          },
+        },
+        {
+          goal: 'Crea Valentina con accesso multi-gruppo (security + audit)',
+          context: 'Valentina deve leggere le directory di tutti i team. Questo si ottiene aggiungendola ai gruppi dev, ops e security come gruppi supplementari.',
+          command: {
+            command: 'sudo useradd -m -s /bin/bash valentina\nsudo usermod -aG dev,ops,security valentina',
+            output: '(nessun output = successo)',
+            explanation: 'Prima crea l\'utente, poi usa usermod -aG per aggiungere i gruppi supplementari. Il flag -a (append) è obbligatorio: senza, -G sovrascrive tutti i gruppi esistenti.',
+            warning: 'usermod -G dev,ops,security valentina SENZA -a rimuove valentina da tutti i suoi gruppi attuali prima di assegnare i nuovi. Sempre usare -aG.',
+          },
+          whyItMatters: 'Il flag -a è uno degli errori più frequenti nella gestione utenti. Dimenticarlo in produzione può togliere accessi critici senza messaggi di errore.',
+        },
+        {
+          goal: 'Audit completo: verifica struttura utenti e gruppi',
+          command: {
+            command: 'for u in marco sara luca giulia antonio valentina; do echo "=== $u ==="; id $u; done',
+            output: '=== marco ===\nuid=1001(marco) gid=1004(marco) groups=1004(marco),1001(dev)\n=== sara ===\nuid=1002(sara) gid=1005(sara) groups=1005(sara),1001(dev)\n=== luca ===\nuid=1003(luca) gid=1006(luca) groups=1006(luca),1001(dev)\n=== giulia ===\nuid=1004(giulia) gid=1007(giulia) groups=1007(giulia),1002(ops)\n=== antonio ===\nuid=1005(antonio) gid=1008(antonio) groups=1008(antonio),1002(ops)\n=== valentina ===\nuid=1006(valentina) gid=1009(valentina) groups=1009(valentina),1001(dev),1002(ops),1003(security)',
+            explanation: 'Il for loop itera su tutti gli utenti e stampa il risultato di id per ciascuno. È il modo veloce per verificare l\'intera struttura in un colpo solo.',
+          },
+        },
+        {
+          goal: 'Crea la struttura di directory del progetto',
+          command: {
+            command: 'sudo mkdir -p /srv/techstartup/{codice,log,backup}\nls -la /srv/techstartup/',
+            output: 'total 20\ndrwxr-xr-x 5 root root 4096 gen 15 10:23 .\ndrwxr-xr-x 3 root root 4096 gen 15 10:23 ..\ndrwxr-xr-x 2 root root 4096 gen 15 10:23 backup\ndrwxr-xr-x 2 root root 4096 gen 15 10:23 codice\ndrwxr-xr-x 2 root root 4096 gen 15 10:23 log',
+            explanation: 'La sintassi {codice,log,backup} è una brace expansion bash: crea le tre directory in un unico comando. Ora appartengono tutte a root — bisogna assegnare proprietà e permessi.',
+          },
+        },
+        {
+          goal: 'Configura accesso directory codice: solo team dev',
+          command: {
+            command: 'sudo chown root:dev /srv/techstartup/codice\nsudo chmod 770 /srv/techstartup/codice',
+            output: '(nessun output = successo)',
+            explanation: 'chown root:dev assegna la directory al gruppo dev. chmod 770 dà a owner e gruppo permessi completi (rwx), gli altri non possono accedere (---).',
+          },
+          whyItMatters: 'La combinazione chown + chmod è il flusso standard: prima definisci chi è il proprietario (gruppo), poi cosa può fare.',
+        },
+        {
+          goal: 'Configura accessi ops: log in scrittura, backup in sola lettura',
+          command: {
+            command: 'sudo chown root:ops /srv/techstartup/log && sudo chmod 770 /srv/techstartup/log\nsudo chown root:ops /srv/techstartup/backup && sudo chmod 750 /srv/techstartup/backup',
+            output: '(nessun output = successo)',
+            explanation: 'I log richiedono scrittura (ops deve aggiungere voci), quindi 770. Il backup è più critico: 750 permette al gruppo di leggere ma non modificare (r-x = 5).',
+          },
+        },
+        {
+          goal: 'Verifica finale: testa accessi consentiti e negati',
+          context: 'Il momento della verità. sudo -u simula il login come quell\'utente senza aprire una sessione completa.',
+          command: {
+            command: 'sudo -u marco ls /srv/techstartup/codice && echo "✓ marco: OK"\nsudo -u giulia ls /srv/techstartup/codice 2>&1 || echo "✗ giulia: bloccata (corretto!)"\nsudo -u valentina ls /srv/techstartup/codice && echo "✓ valentina: OK (multi-gruppo)"\nsudo -u giulia ls /srv/techstartup/log && echo "✓ giulia: accesso log OK"',
+            output: '✓ marco: OK\nls: cannot open directory \'/srv/techstartup/codice\': Permission denied\n✗ giulia: bloccata (corretto!)\n✓ valentina: OK (multi-gruppo)\n✓ giulia: accesso log OK',
+            explanation: 'Testare un accesso negato è tanto importante quanto testare quello consentito. Se giulia riuscisse ad accedere a /codice, la policy sarebbe rotta.',
+          },
+          whyItMatters: 'La verifica dell\'accesso negato è il collaudo di una policy di sicurezza. Senza questo step, non sai se il sistema funziona davvero.',
+        },
+      ],
+      winCondition:
+        'marco, sara e luca accedono a /srv/techstartup/codice. giulia e antonio accedono a /srv/techstartup/log (r/w) e /srv/techstartup/backup (r). valentina accede a tutte e tre le directory. Qualsiasi altro utente ottiene "Permission denied" su tutte le directory.',
+    },
+  },
 ];
 
 export const chaptersBySlug = chapters.reduce<Record<string, Chapter>>((accumulator, chapter) => {
