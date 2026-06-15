@@ -43,11 +43,16 @@ export interface TerminalCommandBlock {
   warning?: string;
 }
 
+export interface CommandExample {
+  command: string;
+  description: string;
+}
+
 export interface CommandReference {
   command: string;
   syntax: string;
   description: string;
-  examples: string[];
+  examples: Array<string | CommandExample>;
 }
 
 export interface InfoTableRow {

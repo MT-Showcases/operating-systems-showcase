@@ -1,4 +1,9 @@
-import type { CommandReference } from '@/data/types';
+import type { CommandReference, CommandExample } from '@/data/types';
+import { renderInline } from './RichText';
+
+function isCommandExample(example: string | CommandExample): example is CommandExample {
+  return typeof example === 'object';
+}
 
 export default function CommandReferenceCard({ command, syntax, description, examples }: CommandReference) {
   return (
@@ -14,11 +19,23 @@ export default function CommandReferenceCard({ command, syntax, description, exa
       <div className="mt-4 space-y-2">
         <p className="text-xs uppercase tracking-[0.2em] text-text-secondary">Esempi pratici</p>
         <ul className="space-y-2">
-          {examples.map((example) => (
-            <li key={example} className="rounded-none border border-accent-cyan/40 bg-bg-surface px-3 py-2 terminal-heading text-sm text-text-primary">
-              {example}
-            </li>
-          ))}
+          {examples.map((example) =>
+            isCommandExample(example) ? (
+              <li key={example.command} className="rounded-none border border-accent-cyan/40 bg-bg-surface px-3 py-2.5">
+                <div className="flex items-start gap-2">
+                  <span className="mt-0.5 shrink-0 text-xs text-accent-green/70 terminal-heading select-none">$</span>
+                  <span className="terminal-heading text-sm text-accent-cyan">{example.command}</span>
+                </div>
+                <p className="mt-1.5 pl-4 text-xs leading-5 text-text-secondary">
+                  {renderInline(example.description, [], `ex-${example.command}`)}
+                </p>
+              </li>
+            ) : (
+              <li key={example} className="rounded-none border border-accent-cyan/40 bg-bg-surface px-3 py-2 terminal-heading text-sm text-text-primary">
+                {example}
+              </li>
+            )
+          )}
         </ul>
       </div>
     </article>
