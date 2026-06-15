@@ -86,6 +86,8 @@ a {
 
 .terminal-heading {
   font-family: var(--font-mono);
+  font-feature-settings: "liga" 0, "calt" 0;
+  font-variant-ligatures: none;
 }
 
 @keyframes glow-pulse-green {
