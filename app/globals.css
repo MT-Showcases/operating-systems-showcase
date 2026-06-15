@@ -101,6 +101,18 @@ a {
 .btn-glow-green { animation: glow-pulse-green 2.5s ease-in-out infinite; }
 .btn-glow-cyan  { animation: glow-pulse-cyan  2.5s ease-in-out infinite; }
 
+@keyframes glow-pulse-green-bottom {
+  0%, 15%   { box-shadow: 0 6px 10px -10px rgba(0, 255, 65, 0.55); }
+  50%, 100% { box-shadow: 0 6px 10px -10px rgba(0, 255, 65, 0); }
+}
+.btn-glow-green-bottom {
+  animation: glow-pulse-green-bottom 2.5s ease-in-out infinite;
+}
+.btn-glow-green-bottom:hover {
+  animation: none;
+  box-shadow: 0 6px 10px -10px rgba(0, 255, 65, 0.65);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

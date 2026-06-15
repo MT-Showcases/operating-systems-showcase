@@ -1,7 +1,7 @@
 'use client';
 
 import type { CommandReference, InfoTable, LabBlock, TerminalCommandBlock } from '@/data/types';
-import { Lock, Terminal, Settings, Folder, Cpu, ChevronRight, HardDrive, Network, BookOpen, Shield, Clock, Monitor } from 'lucide-react';
+import { Lock, Terminal, Settings, Folder, Cpu, ChevronRight, HardDrive, Network, BookOpen, Shield, Clock, Monitor, FlaskConical } from 'lucide-react';
 import TerminalCommand from './TerminalCommand';
 import CommandReferenceCard from './CommandReferenceCard';
 import InfoTableComponent from './InfoTable';
@@ -106,11 +106,14 @@ export default function SectionCard({
         <div className="mt-6">
           <button
             type="button"
-            className="w-full flex items-center justify-between text-left text-accent-cyan font-semibold text-[11px] uppercase tracking-[0.16em] border-b border-accent-cyan/30 pb-2 mb-2"
+            className="w-full flex items-center justify-between text-left text-accent-green font-semibold text-[11px] uppercase tracking-[0.16em] border-b border-accent-green/30 pb-2 mb-2 btn-glow-green-bottom"
             onClick={() => setShowLab((v) => !v)}
             aria-expanded={showLab}
           >
-            {labBlock.title || 'Laboratorio'}
+            <span className="inline-flex items-center gap-2">
+              <FlaskConical size={14} className="text-accent-green" />
+              {labBlock.title || 'Laboratorio'}
+            </span>
             <span className="ml-2 text-text-secondary">{showLab ? '▲' : '▼'}</span>
           </button>
           {showLab ? <LabBlockComponent {...labBlock} glossaryIds={glossaryIds} chapterSlug={chapterSlug} /> : null}
