@@ -70,7 +70,7 @@ export default function Home() {
               href="/shorts"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-none bg-accent-amber/10 border border-accent-amber/30 text-accent-amber hover:bg-accent-amber/20 transition-all text-sm font-medium"
             >
-              Shorts
+              Video
             </Link>
           </div>
         </div>

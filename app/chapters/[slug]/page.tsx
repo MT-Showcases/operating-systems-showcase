@@ -207,7 +207,7 @@ export default async function ChapterPage({ params }: Props) {
                   className="inline-flex items-center gap-2 border-2 border-accent-cyan/40 px-4 py-2 text-sm text-text-primary hover:border-accent-cyan hover:text-accent-cyan transition"
                 >
                   <ChevronRight className="h-4 w-4" />
-                  <span className="terminal-heading text-[11px] uppercase tracking-[0.16em]">Shorts — solo questo capitolo</span>
+                  <span className="terminal-heading text-[11px] uppercase tracking-[0.16em]">Video — solo questo capitolo</span>
                 </Link>
               </div>
             )}

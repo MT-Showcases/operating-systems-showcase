@@ -3,7 +3,7 @@ import ShortsPlayer from '@/components/ShortsPlayer';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Shorts',
+  title: 'Video',
   description: 'Video pillole sui Sistemi Operativi — un capitolo alla volta.',
 };
 
