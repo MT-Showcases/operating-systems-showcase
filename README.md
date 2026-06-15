@@ -39,6 +39,17 @@ node scripts/screenshot-qa.mjs
 - `docs/README.md` - documentation index.
 - `docs/adr/` - stable project decisions.
 
+## Tutor integration
+The AI tutor (`TutorFloatingChat`) calls a POST endpoint defined in `lib/tutor-config.ts` (`TUTOR_API_URL`). The endpoint is external to this repo and must accept:
+```json
+{ "question": "...", "chapterSlug": "...", "context": "..." }
+```
+and return:
+```json
+{ "answer": "...", "sources": [...] }
+```
+Communication between `NixButton` and the chat panel uses a typed event bus (`lib/events.ts`, event `nix:open`).
+
 ## Language policy
 - Documentation, code comments, and internal developer-facing text must be in English.
 - User-facing UI text is currently allowed in Italian.

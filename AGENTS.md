@@ -32,6 +32,13 @@ If the user request is generic (for example "review the structure and documentat
 - Section card and operational blocks: `components/SectionCard.tsx`
 - Interactive pilot: `components/ChapterInteractivePilot.tsx`
 - Quiz: `components/ChapterQuiz.tsx`
+- Quiz score persistence and cross-tab sync: `components/QuizScoreDashboard.tsx`
+- Glossary hover/tap interaction: `components/GlossaryTerm.tsx`, `components/GlossaryTooltip.tsx`
+- Tutor chat UI (triggers via `nix:open` event): `components/TutorFloatingChat.tsx`
+- Tutor prompt config and endpoint base URL: `lib/tutor-config.ts`
+- Typed cross-component event bus: `lib/events.ts`
+- Quiz question normalisation and prompt builder: `lib/quiz-factory.ts`
+- Scroll-lock utility (used by modals): `lib/useBodyScrollLock.ts`
 - Chapter dataset: `data/chapters/index.ts`
 - Domain types: `data/types.ts`
 - Architecture and policy decisions: `docs/adr/`

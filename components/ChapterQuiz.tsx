@@ -4,36 +4,13 @@ import { useEffect, useMemo, useState } from 'react';
 import { CheckCircle2, AlertCircle, ChevronRight } from 'lucide-react';
 import type { QuizQuestion } from '@/data/types';
 import { buildQuizStorageKey } from '@/lib/quiz-storage';
+import { normalizeQuestion, buildWrongAnswerPrompt } from '@/lib/quiz-factory';
+import { emit } from '@/lib/events';
 import NixButton from './NixButton';
 
 interface ChapterQuizProps {
   quiz: QuizQuestion[];
   chapterSlug: string;
-}
-
-function normalizeQuestion(question: QuizQuestion) {
-  if (question.type === 'true_false') {
-    return {
-      options: ['Vero', 'Falso'],
-      correctIndex: question.correctAnswer === true ? 0 : 1,
-    };
-  }
-
-  return {
-    options: question.options ?? [],
-    correctIndex: Number(question.correctAnswer),
-  };
-}
-
-function buildWrongAnswerPrompt(question: QuizQuestion, selectedLabel: string, correctLabel: string) {
-  return [
-    `Domanda quiz: ${question.question}`,
-    `Risposta scelta: ${selectedLabel}`,
-    `Risposta corretta: ${correctLabel}`,
-    `Spiegazione disponibile: ${question.explanation}`,
-    '',
-    'Spiegami in modo semplice perche la mia risposta e sbagliata, quale concetto del sistema operativo sto confondendo e fammi un esempio concreto.',
-  ].join('\n');
 }
 
 export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
@@ -62,7 +39,7 @@ export default function ChapterQuiz({ quiz, chapterSlug }: ChapterQuizProps) {
       buildQuizStorageKey(chapterSlug),
       JSON.stringify({ correct: score, total: quiz.length, completedAt: new Date().toISOString() })
     );
-    window.dispatchEvent(new Event('quiz-score-updated'));
+    emit('quiz-score-updated', {});
   }, [chapterSlug, completed, quiz.length, score]);
 
   const canGoNext = answers[currentIndex] !== undefined;

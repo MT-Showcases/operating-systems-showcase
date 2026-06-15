@@ -8,7 +8,7 @@ import InfoTableComponent from './InfoTable';
 import LabBlockComponent from './LabBlock';
 import NixButton from './NixButton';
 import { renderInline, renderParagraph } from './RichText';
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 
 interface SectionCardProps {
   id: string;
@@ -24,6 +24,35 @@ interface SectionCardProps {
   isCompactChapter?: boolean;
 }
 
+
+interface CollapsibleSectionProps {
+  label: string;
+  icon: ReactNode;
+  headerClassName: string;
+  isOpen: boolean;
+  onToggle: () => void;
+  children: ReactNode;
+}
+
+function CollapsibleSection({ label, icon, headerClassName, isOpen, onToggle, children }: CollapsibleSectionProps) {
+  return (
+    <div className="mt-6">
+      <button
+        type="button"
+        className={`w-full flex items-center justify-between text-left font-semibold text-[11px] uppercase tracking-[0.16em] border-b pb-2 mb-2 ${headerClassName}`}
+        onClick={onToggle}
+        aria-expanded={isOpen}
+      >
+        <span className="inline-flex items-center gap-2">
+          {icon}
+          {label}
+        </span>
+        <span className="ml-2 text-text-secondary">{isOpen ? '▲' : '▼'}</span>
+      </button>
+      {isOpen ? children : null}
+    </div>
+  );
+}
 
 function getSectionIcon(title: string) {
   const lower = title.toLowerCase();
@@ -103,69 +132,47 @@ export default function SectionCard({
       ) : null}
 
       {labBlock ? (
-        <div className="mt-6">
-          <button
-            type="button"
-            className="w-full flex items-center justify-between text-left text-accent-green font-semibold text-[11px] uppercase tracking-[0.16em] border-b border-accent-green/30 pb-2 mb-2 btn-glow-green-bottom"
-            onClick={() => setShowLab((v) => !v)}
-            aria-expanded={showLab}
-          >
-            <span className="inline-flex items-center gap-2">
-              <FlaskConical size={14} className="text-accent-green" />
-              {labBlock.title || 'Laboratorio'}
-            </span>
-            <span className="ml-2 text-text-secondary">{showLab ? '▲' : '▼'}</span>
-          </button>
-          {showLab ? <LabBlockComponent {...labBlock} glossaryIds={glossaryIds} chapterSlug={chapterSlug} /> : null}
-        </div>
+        <CollapsibleSection
+          label={labBlock.title || 'Laboratorio'}
+          icon={<FlaskConical size={14} className="text-accent-green" />}
+          headerClassName="text-accent-green border-accent-green/30 btn-glow-green-bottom"
+          isOpen={showLab}
+          onToggle={() => setShowLab((v) => !v)}
+        >
+          <LabBlockComponent {...labBlock} glossaryIds={glossaryIds} chapterSlug={chapterSlug} />
+        </CollapsibleSection>
       ) : null}
 
       {terminalCommands && terminalCommands.length > 0 ? (
-        <div className="mt-6">
-          <button
-            type="button"
-            className="w-full flex items-center justify-between text-left text-accent-cyan font-semibold text-[11px] uppercase tracking-[0.16em] border-b border-accent-cyan/30 pb-2 mb-2"
-            onClick={() => setShowTerminals((v) => !v)}
-            aria-expanded={showTerminals}
-          >
-            <span className="inline-flex items-center gap-2">
-              <Terminal size={14} className="text-accent-cyan" />
-              Comandi terminale
-            </span>
-            <span className="ml-2 text-text-secondary">{showTerminals ? '▲' : '▼'}</span>
-          </button>
-          {showTerminals ? (
-            <div className="space-y-4">
-              {terminalCommands.map((block) => (
-                <TerminalCommand key={`${id}-${block.command}`} {...block} glossaryIds={glossaryIds} />
-              ))}
-            </div>
-          ) : null}
-        </div>
+        <CollapsibleSection
+          label="Comandi terminale"
+          icon={<Terminal size={14} className="text-accent-cyan" />}
+          headerClassName="text-accent-cyan border-accent-cyan/30"
+          isOpen={showTerminals}
+          onToggle={() => setShowTerminals((v) => !v)}
+        >
+          <div className="space-y-4">
+            {terminalCommands.map((block) => (
+              <TerminalCommand key={`${id}-${block.command}`} {...block} glossaryIds={glossaryIds} />
+            ))}
+          </div>
+        </CollapsibleSection>
       ) : null}
 
       {commandReferences && commandReferences.length > 0 ? (
-        <div className="mt-6">
-          <button
-            type="button"
-            className="w-full flex items-center justify-between text-left text-text-secondary font-semibold text-[11px] uppercase tracking-[0.16em] border-b border-text-secondary/30 pb-2 mb-2"
-            onClick={() => setShowReferences((v) => !v)}
-            aria-expanded={showReferences}
-          >
-            <span className="inline-flex items-center gap-2">
-              <BookOpen size={14} className="text-text-secondary" />
-              Riferimenti rapidi
-            </span>
-            <span className="ml-2 text-text-secondary">{showReferences ? '▲' : '▼'}</span>
-          </button>
-          {showReferences ? (
-            <div className="grid gap-4 lg:grid-cols-2">
-              {commandReferences.map((reference) => (
-                <CommandReferenceCard key={`${id}-${reference.command}`} {...reference} />
-              ))}
-            </div>
-          ) : null}
-        </div>
+        <CollapsibleSection
+          label="Riferimenti rapidi"
+          icon={<BookOpen size={14} className="text-text-secondary" />}
+          headerClassName="text-text-secondary border-text-secondary/30"
+          isOpen={showReferences}
+          onToggle={() => setShowReferences((v) => !v)}
+        >
+          <div className="grid gap-4 lg:grid-cols-2">
+            {commandReferences.map((reference) => (
+              <CommandReferenceCard key={`${id}-${reference.command}`} {...reference} />
+            ))}
+          </div>
+        </CollapsibleSection>
       ) : null}
 
       <div className="mt-6 flex justify-end">

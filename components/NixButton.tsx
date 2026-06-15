@@ -1,6 +1,7 @@
 'use client';
 
 import { MessageSquare } from 'lucide-react';
+import { emit } from '@/lib/events';
 
 interface NixButtonProps {
   prompt: string;
@@ -8,9 +9,7 @@ interface NixButtonProps {
 }
 
 export default function NixButton({ prompt, size = 'sm' }: NixButtonProps) {
-  const handleClick = () => {
-    window.dispatchEvent(new CustomEvent('nix:open', { detail: { prompt } }));
-  };
+  const handleClick = () => emit('nix:open', { prompt });
 
   if (size === 'xs') {
     return (

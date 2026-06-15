@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { X } from 'lucide-react';
 import { TUTOR_NAME, TUTOR_PLACEHOLDER, TUTOR_TAGLINE } from '@/lib/tutor-config';
+import { on } from '@/lib/events';
 import useBodyScrollLock from '@/lib/useBodyScrollLock';
 
 type AnswerData = { summary: string; bullets?: string[]; suggestions?: Array<{ label: string; url: string }> };
@@ -12,6 +13,7 @@ type Source = { title: string; url: string; filePath?: string };
 
 const STORAGE_KEY = 'os_tutor_session_v1';
 
+// The API sometimes returns markdown bold (**) and excessive blank lines; strip them for plain chat rendering.
 function normalizeAssistantText(text: string): string {
   return text.replace(/\*\*/g, '').replace(/\n{3,}/g, '\n\n').trim();
 }
@@ -76,13 +78,10 @@ export default function TutorFloatingChat() {
   }, [question]);
 
   useEffect(() => {
-    const handler = (e: Event) => {
-      const detail = (e as CustomEvent<{ prompt?: string }>).detail;
+    return on('nix:open', ({ prompt }) => {
       setOpen(true);
-      if (detail?.prompt) setQuestion(detail.prompt);
-    };
-    window.addEventListener('nix:open', handler);
-    return () => window.removeEventListener('nix:open', handler);
+      if (prompt) setQuestion(prompt);
+    });
   }, []);
 
   const ask = async () => {

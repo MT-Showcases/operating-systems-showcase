@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo, useRef, useSyncExternalStore } from 'react';
 import { buildQuizStorageKey } from '@/lib/quiz-storage';
+import { on, emit } from '@/lib/events';
 
 type ScoreEntry = { correct: number; total: number; completedAt?: string };
 type ScoreMap = Record<string, ScoreEntry>;
@@ -49,14 +50,16 @@ function areScoresEqual(a: ScoreMap, b: ScoreMap): boolean {
 export default function QuizScoreDashboard({ quizChapterSlugs }: QuizScoreDashboardProps) {
   const cachedSnapshotRef = useRef<ScoreMap>(EMPTY_SCORES);
 
+  // useSyncExternalStore lets React safely read from localStorage across server/client renders
+  // and re-sync when other tabs update scores ('storage') or the same tab finishes a quiz ('quiz-score-updated').
   const subscribe = useCallback((onStoreChange: () => void) => {
     if (typeof window === 'undefined') return () => undefined;
     const handler = () => onStoreChange();
     window.addEventListener('storage', handler);
-    window.addEventListener('quiz-score-updated', handler);
+    const unsubQuiz = on('quiz-score-updated', handler);
     return () => {
       window.removeEventListener('storage', handler);
-      window.removeEventListener('quiz-score-updated', handler);
+      unsubQuiz();
     };
   }, []);
 
@@ -81,7 +84,7 @@ export default function QuizScoreDashboard({ quizChapterSlugs }: QuizScoreDashbo
     for (const slug of quizChapterSlugs) {
       window.localStorage.removeItem(buildQuizStorageKey(slug));
     }
-    window.dispatchEvent(new Event('quiz-score-updated'));
+    emit('quiz-score-updated', {});
   };
 
   return (
