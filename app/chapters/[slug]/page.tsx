@@ -15,6 +15,7 @@ import GlossaryTerm from '@/components/GlossaryTerm';
 import QuizScoreDashboard from '@/components/QuizScoreDashboard';
 import ChapterNav from '@/components/ChapterNav';
 import { getTermsByIds } from '@/data/glossary';
+import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
 import PilotBlock from '@/components/PilotBlock';
 import ChapterInteractivePilot from '@/components/ChapterInteractivePilot';
@@ -134,6 +135,7 @@ export default async function ChapterPage({ params }: Props) {
   const shouldShowMiniTask = Boolean(chapter.pilotContent?.miniTask?.length) && !chapter.interactivePilot;
   const glossaryTerms = getTermsByIds(chapter.glossary ?? []);
   const quizChapterSlugs = chapters.filter((entry) => (entry.quiz?.length ?? 0) > 0).map((entry) => entry.slug);
+  const hasReadyVideo = chapter.media?.some((m) => m.type === 'video' && m.notes?.toLowerCase().includes('ready')) ?? false;
 
   return (
     <div className="min-h-screen bg-bg-primary">
@@ -197,7 +199,19 @@ export default async function ChapterPage({ params }: Props) {
               media={chapter.media}
               hideSourceToggle
             />
-            
+
+            {hasReadyVideo && (
+              <div className="mb-6">
+                <Link
+                  href={`/shorts?chapter=${chapter.slug}`}
+                  className="inline-flex items-center gap-2 border-2 border-accent-cyan/40 px-4 py-2 text-sm text-text-primary hover:border-accent-cyan hover:text-accent-cyan transition"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                  <span className="terminal-heading text-[11px] uppercase tracking-[0.16em]">Shorts — solo questo capitolo</span>
+                </Link>
+              </div>
+            )}
+
             <SourceToggle source={buildChapterSource(chapter)} label="Mostra fonte capitolo" />
 
             {glossaryTerms.length > 0 ? (
