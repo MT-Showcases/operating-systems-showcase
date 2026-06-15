@@ -83,13 +83,6 @@ export default function ShortsPlayer({ initialVideos, chapterFilter }: Props) {
     else router.push('/');
   };
 
-  const toggleVideo = (idx: number) => {
-    const video = videoRefs.current[idx];
-    if (!video) return;
-    if (video.paused) video.play().catch(() => {});
-    else video.pause();
-  };
-
   if (videos.length === 0) {
     return (
       <div className="fixed inset-0 z-200 bg-bg-primary flex flex-col items-center justify-center gap-6">
@@ -164,12 +157,12 @@ export default function ShortsPlayer({ initialVideos, chapterFilter }: Props) {
               preload="metadata"
               playsInline
               loop
-              className="w-full h-full object-contain cursor-pointer"
-              onClick={() => toggleVideo(idx)}
+              controls
+              className="w-full h-full object-contain"
             />
 
-            {/* Bottom info overlay */}
-            <div className="absolute bottom-0 inset-x-0 bg-linear-to-t from-black/90 via-black/50 to-transparent px-5 pb-8 pt-20 pointer-events-none">
+            {/* Bottom info overlay — pb-20 clears the native controls bar */}
+            <div className="absolute bottom-0 inset-x-0 bg-linear-to-t from-black/90 via-black/50 to-transparent px-5 pb-20 pt-20 pointer-events-none">
               <div className="mb-2">
                 <span className="border border-accent-green/60 bg-black/60 px-3 py-1 terminal-heading text-[10px] uppercase tracking-[0.24em] text-accent-green">
                   Capitolo {String(video.chapterId).padStart(2, '0')}
