@@ -84,6 +84,12 @@ a {
   color: var(--text-primary);
 }
 
+pre,
+code {
+  font-feature-settings: "liga" 0, "calt" 0;
+  font-variant-ligatures: none;
+}
+
 .terminal-heading {
   font-family: var(--font-mono);
   font-feature-settings: "liga" 0, "calt" 0;
