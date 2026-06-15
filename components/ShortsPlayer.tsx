@@ -139,6 +139,28 @@ export default function ShortsPlayer({ initialVideos, chapterFilter }: Props) {
         </button>
       </div>
 
+      {/* Navigation arrows — fixed on screen, show/hide based on current position */}
+      <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2">
+        {currentIndex > 0 && (
+          <button
+            onClick={() => scrollToIndex(currentIndex - 1)}
+            className="border-2 border-accent-cyan/40 bg-black/60 p-2 text-accent-cyan hover:border-accent-cyan transition"
+            aria-label="Video precedente"
+          >
+            <ChevronUp className="h-4 w-4" />
+          </button>
+        )}
+        {currentIndex < videos.length - 1 && (
+          <button
+            onClick={() => scrollToIndex(currentIndex + 1)}
+            className="border-2 border-accent-cyan/40 bg-black/60 p-2 text-accent-cyan hover:border-accent-cyan transition"
+            aria-label="Video successivo"
+          >
+            <ChevronDown className="h-4 w-4" />
+          </button>
+        )}
+      </div>
+
       {/* Scroll container */}
       <div
         ref={containerRef}
@@ -177,25 +199,6 @@ export default function ShortsPlayer({ initialVideos, chapterFilter }: Props) {
               </p>
             </div>
 
-            {/* Navigation arrows */}
-            {idx > 0 && (
-              <button
-                onClick={() => scrollToIndex(idx - 1)}
-                className="absolute top-16 right-4 border-2 border-accent-cyan/40 bg-black/60 p-2 text-accent-cyan hover:border-accent-cyan transition"
-                aria-label="Video precedente"
-              >
-                <ChevronUp className="h-4 w-4" />
-              </button>
-            )}
-            {idx < videos.length - 1 && (
-              <button
-                onClick={() => scrollToIndex(idx + 1)}
-                className="absolute bottom-4 right-4 border-2 border-accent-cyan/40 bg-black/60 p-2 text-accent-cyan hover:border-accent-cyan transition"
-                aria-label="Video successivo"
-              >
-                <ChevronDown className="h-4 w-4" />
-              </button>
-            )}
           </section>
         ))}
       </div>
