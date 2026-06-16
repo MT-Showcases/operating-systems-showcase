@@ -15,7 +15,7 @@ export default function CommandReferenceCard({ command, syntax, description, exa
         </span>
       </div>
       <p className="mt-3 terminal-heading text-sm text-text-primary">{syntax}</p>
-      <p className="mt-3 text-sm leading-7 text-text-secondary">{description}</p>
+      <p className="mt-3 text-sm leading-7 text-text-secondary">{renderInline(description, [], `cmd-ref-${command}`)}</p>
       <div className="mt-4 space-y-2">
         <p className="text-xs uppercase tracking-[0.2em] text-text-secondary">Esempi pratici</p>
         <ul className="space-y-2">

@@ -5,6 +5,7 @@ import { Download, FlaskConical, Trophy } from 'lucide-react';
 import TerminalCommand from '@/components/content/TerminalCommand';
 import NixButton from '@/components/tutor/NixButton';
 import UserGroupTree from '@/components/content/UserGroupTree';
+import { renderInline } from '@/components/ui/RichText';
 
 function buildStepPrompt(goal: string, command: string, context?: string): string {
   return [
@@ -46,7 +47,7 @@ export default function ProjectLabBlock({ projectLab, glossaryIds = [] }: Projec
             Il tuo mandato
           </p>
           <p className="text-sm leading-7 text-text-primary border-l-2 border-accent-green/40 pl-4">
-            {scenario}
+            {renderInline(scenario, glossaryIds, 'proj-scenario')}
           </p>
         </div>
 
@@ -117,7 +118,7 @@ export default function ProjectLabBlock({ projectLab, glossaryIds = [] }: Projec
 
                   {step.context && (
                     <p className="mb-3 text-sm leading-6 text-text-secondary italic">
-                      {step.context}
+                      {renderInline(step.context, glossaryIds, `proj-ctx-${i}`)}
                     </p>
                   )}
 
@@ -133,7 +134,7 @@ export default function ProjectLabBlock({ projectLab, glossaryIds = [] }: Projec
                         <span className="terminal-heading text-accent-amber text-[10px] uppercase tracking-wider mr-2">
                           perché:
                         </span>
-                        {step.whyItMatters}
+                        {renderInline(step.whyItMatters, glossaryIds, `proj-why-${i}`)}
                       </p>
                     </div>
                   )}
@@ -151,7 +152,7 @@ export default function ProjectLabBlock({ projectLab, glossaryIds = [] }: Projec
               <p className="terminal-heading text-[10px] uppercase tracking-[0.22em] text-accent-green mb-1">
                 Hai completato il progetto se…
               </p>
-              <p className="text-sm leading-7 text-text-primary">{winCondition}</p>
+              <p className="text-sm leading-7 text-text-primary">{renderInline(winCondition, glossaryIds, 'proj-win')}</p>
             </div>
           </div>
         )}

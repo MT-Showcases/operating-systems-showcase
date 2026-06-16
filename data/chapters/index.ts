@@ -843,7 +843,7 @@ export const chapters: Chapter[] = [
           {
             command: 'pwd',
             syntax: 'pwd',
-            description: 'Mostra il percorso assoluto della directory corrente.',
+            description: 'Mostra il **percorso assoluto** della directory corrente.',
             examples: [
               { command: 'pwd', description: 'Stampa il percorso **assoluto** della directory in cui si trova la shell in questo momento.' },
               { command: 'cd /etc && pwd', description: 'Entra in `/etc` e conferma subito dove sei atterrato: **&&** esegue il secondo comando solo se il primo riesce.' },
@@ -1233,14 +1233,14 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Prima sessione su KillerCoda',
-          intro: 'Avvia il tuo primo ambiente Linux nel browser in meno di un minuto.',
+          intro: 'Avvia il tuo primo ambiente **Linux** nel **browser** in meno di un minuto.',
           steps: [
             {
               goal: 'Apri un ambiente Ubuntu',
               command: {
                 command: '# Vai su killercoda.com → Ubuntu Playground',
                 output: '',
-                explanation: 'Scegli Ubuntu Playground dalla home di KillerCoda. Il terminale si apre in pochi secondi — nessuna registrazione richiesta.',
+                explanation: 'Scegli **Ubuntu Playground** dalla home di **KillerCoda**. Il terminale si apre in pochi secondi — nessuna registrazione richiesta.',
               },
             },
             {
@@ -1248,7 +1248,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'whoami && pwd',
                 output: 'root\n/root',
-                explanation: 'In KillerCoda sei root per default. pwd conferma che sei nella home di root. Puoi usare tutti i comandi del corso senza sudo.',
+                explanation: 'In KillerCoda sei **root** per default. **pwd** conferma che sei nella home di root. Puoi usare tutti i comandi del corso senza **sudo**.',
               },
             },
             {
@@ -1256,7 +1256,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'cat /etc/os-release | grep PRETTY',
                 output: 'PRETTY_NAME="Ubuntu 22.04.3 LTS"',
-                explanation: 'Conferma che stai usando Ubuntu 22.04 LTS — la stessa versione su milioni di server in produzione.',
+                explanation: 'Conferma che stai usando **Ubuntu 22.04 LTS** — la stessa versione su milioni di server in produzione.',
               },
             },
           ],
@@ -1274,14 +1274,14 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Installare WSL2 con Ubuntu',
-          intro: 'Installazione completa in pochi minuti da PowerShell come amministratore.',
+          intro: 'Installazione completa in pochi minuti da **PowerShell** come **amministratore**.',
           steps: [
             {
               goal: 'Abilita e installa WSL2 con Ubuntu',
               command: {
                 command: 'wsl --install',
                 output: 'Installazione in corso...\nRiavvio necessario.',
-                explanation: 'Esegui in PowerShell come Amministratore. Installa WSL2 e Ubuntu di default. Richiede riavvio del sistema.',
+                explanation: 'Esegui in **PowerShell** come **Amministratore**. Installa **WSL2** e **Ubuntu** di default. Richiede riavvio del sistema.',
                 warning: 'Esegui PowerShell come Amministratore (click destro → Esegui come amministratore). La virtualizzazione deve essere abilitata nel BIOS.',
               },
             },
@@ -1290,7 +1290,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: '# Ubuntu chiede username e password al primo avvio',
                 output: 'Inserisci il nuovo nome utente UNIX: mike\nNuova password:',
-                explanation: 'Crea un utente Linux separato dall\'account Windows. Questa password viene usata per sudo.',
+                explanation: 'Crea un utente **Linux** separato dall\'account **Windows**. Questa password viene usata per **sudo**.',
               },
             },
             {
@@ -1298,7 +1298,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'wsl --list --verbose',
                 output: '  NAME      STATE    VERSION\n* Ubuntu    Running  2',
-                explanation: 'Esegui in PowerShell per verificare che Ubuntu usi WSL2 (Version 2). Poi dentro Ubuntu: sudo apt update && sudo apt upgrade -y',
+                explanation: 'Esegui in **PowerShell** per verificare che **Ubuntu** usi **WSL2** (Version 2). Poi dentro Ubuntu: `sudo apt update && sudo apt upgrade -y`',
               },
             },
           ],
@@ -1329,14 +1329,14 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Creare una VM Ubuntu con VirtualBox',
-          intro: 'Da zero a Ubuntu funzionante in VirtualBox.',
+          intro: 'Da zero a **Ubuntu** funzionante in **VirtualBox**.',
           steps: [
             {
               goal: 'Scarica VirtualBox e l\'ISO Ubuntu',
               command: {
                 command: '# https://www.virtualbox.org/wiki/Downloads  |  https://www.ubuntu-it.org/download',
                 output: '',
-                explanation: 'Scarica VirtualBox per il tuo OS e l\'ISO Ubuntu LTS (circa 2GB). Tieni entrambi i file pronti prima di iniziare.',
+                explanation: 'Scarica **VirtualBox** per il tuo OS e l\'**ISO Ubuntu LTS** (circa 2GB). Tieni entrambi i file pronti prima di iniziare.',
               },
             },
             {
@@ -1344,7 +1344,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: '# VirtualBox → Nuova → Nome: Ubuntu → Tipo: Linux 64-bit',
                 output: '',
-                explanation: 'Assegna almeno 2GB RAM (consigliati 4GB) e 25GB di disco. VirtualBox crea un disco virtuale VDI — è un file sul tuo disco, non partiziona nulla.',
+                explanation: 'Assegna almeno **2GB RAM** (consigliati 4GB) e **25GB di disco**. VirtualBox crea un **disco virtuale VDI** — è un file sul tuo disco, non partiziona nulla.',
               },
             },
             {
@@ -1352,7 +1352,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: '# Impostazioni → Archiviazione → Controller IDE → Scegli ISO',
                 output: '',
-                explanation: 'Collega l\'ISO come CD virtuale. Al primo avvio parte l\'installer Ubuntu. Scegli installazione normale e lascia le opzioni predefinite.',
+                explanation: 'Collega l\'**ISO** come **CD virtuale**. Al primo avvio parte l\'installer **Ubuntu**. Scegli installazione normale e lascia le opzioni predefinite.',
                 warning: 'Seleziona Cancella disco e installa Ubuntu — opera solo sul disco virtuale della VM, non tocca il tuo disco reale.',
               },
             },
@@ -1469,7 +1469,7 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Orientarsi nel file system',
-          intro: 'Due comandi, un solo obiettivo: sapere dove sei e cosa c\'è intorno.',
+          intro: 'Due comandi, un solo obiettivo: sapere **dove sei** e **cosa c\'è intorno**.',
           steps: [
             {
               goal: 'Dove sono adesso?',
@@ -1493,7 +1493,7 @@ export const chapters: Chapter[] = [
           {
             command: 'cd',
             syntax: 'cd <percorso>',
-            description: 'Sposta la shell in un\'altra directory.',
+            description: 'Sposta la **shell** in un\'altra directory.',
             examples: [
               { command: 'cd /etc', description: 'Entra in `/etc` usando un percorso **assoluto** — parte sempre dalla radice `/`.' },
               { command: 'cd ..', description: 'Risale di **un livello** verso la directory genitore.' },
@@ -1513,7 +1513,7 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Flusso pratico di gestione file',
-          intro: 'Un ciclo completo: crea, leggi, rimuovi con cautela.',
+          intro: 'Un ciclo completo: **crea**, **leggi**, **rimuovi** con cautela.',
           steps: [
             {
               goal: 'Crea una directory di lavoro e un file iniziale',
@@ -1546,7 +1546,7 @@ export const chapters: Chapter[] = [
           {
             command: 'cp',
             syntax: 'cp <origine> <destinazione>',
-            description: 'Copia file o directory con opzioni adeguate.',
+            description: 'Copia **file** o **directory** con opzioni adeguate.',
             examples: [
               { command: 'cp note.txt backup-note.txt', description: 'Crea una **copia** di `note.txt` nella stessa directory con nome diverso.' },
               { command: 'cp -r progetto progetto-backup', description: 'Flag **-r** (ricorsivo): copia l\'intera directory con tutto il suo contenuto.' },
@@ -1555,7 +1555,7 @@ export const chapters: Chapter[] = [
           {
             command: 'mv',
             syntax: 'mv <origine> <destinazione>',
-            description: 'Sposta o rinomina file e cartelle.',
+            description: 'Sposta o **rinomina** file e cartelle.',
             examples: [
               { command: 'mv bozza.txt finale.txt', description: '**Rinomina** il file nella stessa directory — nessuna copia, il file originale sparisce.' },
               { command: 'mv immagini ./backup/', description: '**Sposta** l\'intera directory `immagini` dentro `backup/`.' },
@@ -1581,7 +1581,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'whoami',
                 output: 'mike',
-                explanation: 'Risposta immediata: sei questo utente. Utile nei contesti in cui non sei sicuro di chi sta eseguendo lo script o il comando.',
+                explanation: 'Risposta immediata: sei questo utente. Utile nei contesti in cui non sei sicuro di chi sta eseguendo lo **script** o il **comando**.',
               },
             },
             {
@@ -1597,7 +1597,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'touch prova-accesso.txt && chmod 600 prova-accesso.txt && sudo -u mike2 cat prova-accesso.txt',
                 output: 'cat: prova-accesso.txt: Permission denied',
-                explanation: 'Colleghi identita e permessi con un test concreto: l\'utente diverso viene bloccato se non e owner o nel gruppo corretto.',
+                explanation: 'Colleghi **identità** e **permessi** con un test concreto: l\'utente diverso viene bloccato se non è **owner** o nel **gruppo** corretto.',
               },
             },
             {
@@ -1605,7 +1605,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'id mike2 && ls -l prova-accesso.txt',
                 output: 'uid=1002(mike2) gid=1002(mike2) groups=1002(mike2)',
-                explanation: 'Verifica sempre le due fonti della decisione: membership gruppi e bit attivi su file/directory.',
+                explanation: 'Verifica sempre le due fonti della decisione: **membership gruppi** e **bit attivi** su file/directory.',
               },
             },
           ],
@@ -1614,7 +1614,7 @@ export const chapters: Chapter[] = [
           {
             command: 'sudo -u',
             syntax: 'sudo -u <utente> <comando>',
-            description: 'Esegue un singolo comando come un altro utente senza aprire una nuova sessione completa.',
+            description: 'Esegue un singolo **comando** come un altro **utente** senza aprire una nuova sessione.',
             examples: [
               { command: 'sudo -u mike whoami', description: 'Esegue `whoami` con l\'identità di **mike** — risponde `mike`, non il tuo utente.' },
               { command: 'sudo -u mike cat /home/mike/file.txt', description: 'Legge un file **come mike**: utile per testare se mike ha accesso senza davvero cambiare sessione.' },
@@ -1623,7 +1623,7 @@ export const chapters: Chapter[] = [
           {
             command: 'sudo -iu',
             syntax: 'sudo -iu <utente>',
-            description: 'Apre una shell login completa come un altro utente. Utile per più operazioni consecutive.',
+            description: 'Apre una **shell login** completa come un altro **utente**. Utile per più operazioni consecutive.',
             examples: [
               { command: 'sudo -iu mike', description: 'Apre una **shell login completa** come mike, con le sue variabili d\'ambiente e la sua home.' },
               { command: 'sudo -iu mike bash -c "whoami && pwd"', description: 'Esegue più comandi nell\'**ambiente di mike** senza aprire una shell interattiva.' },
@@ -1632,7 +1632,7 @@ export const chapters: Chapter[] = [
           {
             command: 'groups',
             syntax: 'groups <utente>',
-            description: 'Mostra i gruppi di appartenenza dell\'utente in formato rapido.',
+            description: 'Mostra i **gruppi** di appartenenza dell\'utente in formato rapido.',
             examples: [
               { command: 'groups mike', description: 'Lista tutti i gruppi di **mike**: il primario in testa, poi i secondari.' },
               { command: 'groups', description: 'Senza argomenti mostra i gruppi dell\'**utente corrente** — rapido per verificare la propria appartenenza.' },
@@ -1868,7 +1868,7 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Leggere e modificare i permessi',
-          intro: 'Il flusso corretto è sempre lo stesso: leggi lo stato attuale, poi agisci. Micro-test: accesso reale tra utenti in 3 step.',
+          intro: 'Il flusso corretto è sempre lo stesso: **leggi** lo stato attuale, poi **agisci**. Micro-test: accesso reale tra utenti in 3 step.',
           steps: [
             {
               goal: 'Leggi i permessi correnti del file',
@@ -1938,7 +1938,7 @@ export const chapters: Chapter[] = [
           {
             command: 'namei -l /home/mike/progetto/deploy.sh',
             output: 'drwxr-xr-x root root /\ndrwxr-xr-x root root home\ndrwx------ mike mike mike\ndrwxr-x--- mike developers progetto\n-rwxr-x--- mike developers deploy.sh',
-            explanation: 'Mostra i permessi di ogni segmento del percorso. Utile quando un file "sembra giusto" ma l\'accesso fallisce per colpa di una directory intermedia.',
+            explanation: 'Mostra i **permessi** di ogni segmento del **percorso**. Utile quando un file "sembra giusto" ma l\'accesso fallisce per colpa di una **directory intermedia**.',
             warning: 'Se una directory nel path non ha bit **x** per il tuo utente/gruppo, non puoi attraversarla anche se il file finale è leggibile.',
           },
         ],
@@ -1946,7 +1946,7 @@ export const chapters: Chapter[] = [
           {
             command: 'chmod',
             syntax: 'chmod [opzioni] permessi file',
-            description: 'Modifica i permessi di file e directory. Accetta notazione ottale (755) o simbolica (u+x, g-w, o=r).',
+            description: 'Modifica i **permessi** di file e directory. Accetta notazione **ottale** (755) o **simbolica** (u+x, g-w, o=r).',
             examples: [
               { command: 'chmod 644 note.txt', description: '**owner** legge e scrive, **group** e **others** solo leggono — il caso tipico per documenti e configurazioni.' },
               { command: 'chmod u+x script.sh', description: 'Notazione **simbolica**: aggiunge il bit **eseguibile** solo all\'owner senza toccare group e others.' },
@@ -1957,7 +1957,7 @@ export const chapters: Chapter[] = [
           {
             command: 'chown',
             syntax: 'chown [utente][:gruppo] file',
-            description: 'Cambia proprietario e gruppo di un file. Richiede sudo se non sei il proprietario attuale.',
+            description: 'Cambia **proprietario** e **gruppo** di un file. Richiede **sudo** se non sei il proprietario attuale.',
             examples: [
               { command: 'chown mike note.txt', description: 'Assegna il file all\'utente **mike** lasciando invariato il gruppo.' },
               { command: 'chown mike:developers progetto/', description: 'Cambia **owner e gruppo** in un solo comando: mike proprietario, developers come gruppo.' },
@@ -2011,7 +2011,7 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Ciclo completo: crea, configura, verifica, rimuovi',
-          intro: 'Il flusso reale di un amministratore: creare un utente funzionante, assegnarlo a un gruppo, verificare ogni passaggio e chiudere il ciclo con rimozione controllata.',
+          intro: 'Il flusso reale di un **amministratore**: **creare** un utente funzionante, **assegnarlo** a un gruppo, **verificare** ogni passaggio e chiudere il ciclo con rimozione controllata.',
           steps: [
             {
               goal: 'Crea l\'utente in modo rapido con wizard interattivo',
@@ -2083,7 +2083,7 @@ export const chapters: Chapter[] = [
                 title: 'Remove membership',
                 command: 'sudo gpasswd -d mike developers',
                 output: 'Rimozione dell\'utente mike dal gruppo developers',
-                explanation: 'Prima di eliminare account o gruppi, sgancia l\'utente in modo esplicito dal gruppo secondario: semplifica teardown e verifica dello stato finale.',
+                explanation: 'Prima di eliminare **account** o **gruppi**, sgancia l\'utente in modo esplicito dal **gruppo secondario**: semplifica il teardown e verifica dello stato finale.',
               },
             },
             {
@@ -2092,7 +2092,7 @@ export const chapters: Chapter[] = [
                 title: 'Verify group state',
                 command: 'getent group developers',
                 output: 'developers:x:1002:',
-                explanation: 'Conferma che la membership è stata rimossa: il gruppo esiste ancora ma non contiene più mike.',
+                explanation: 'Conferma che la **membership** è stata rimossa: il gruppo esiste ancora ma non contiene più **mike**.',
               },
             },
             {
@@ -2101,7 +2101,7 @@ export const chapters: Chapter[] = [
                 title: 'Remove user',
                 command: 'sudo userdel -r mike',
                 output: '',
-                explanation: 'Esegue il teardown dell\'account e pulisce la home. Fallo solo quando hai già verificato backup e ownership dei file importanti.',
+                explanation: 'Esegue il **teardown** dell\'account e pulisce la **home**. Fallo solo quando hai già verificato **backup** e **ownership** dei file importanti.',
                 warning: '**userdel -r** è irreversibile: la home e i file dell\'utente vengono eliminati. Verifica backup e ownership prima di procedere.',
               },
             },
@@ -2111,7 +2111,7 @@ export const chapters: Chapter[] = [
                 title: 'Verify user removal',
                 command: 'getent passwd mike',
                 output: '',
-                explanation: 'Se il comando non produce output, l\'utente è stato rimosso dal database identità del sistema.',
+                explanation: 'Se il comando non produce output, l\'utente è stato rimosso dal **database identità** del sistema.',
               },
             },
             {
@@ -2120,7 +2120,7 @@ export const chapters: Chapter[] = [
                 title: 'Remove group',
                 command: 'sudo groupdel developers',
                 output: '',
-                explanation: 'Chiude il ciclo completo: elimina il gruppo quando non è più usato da utenti o processi.',
+                explanation: 'Chiude il **ciclo completo**: elimina il **gruppo** quando non è più usato da utenti o processi.',
               },
             },
             {
@@ -2129,7 +2129,7 @@ export const chapters: Chapter[] = [
                 title: 'Verify teardown completeness',
                 command: 'getent group developers',
                 output: '',
-                explanation: 'Nessun output conferma che anche il gruppo è stato rimosso. A questo punto il ciclo create-configure-verify-remove è concluso.',
+                explanation: 'Nessun output conferma che anche il **gruppo** è stato rimosso. A questo punto il ciclo **create-configure-verify-remove** è concluso.',
               },
             },
           ],
@@ -2138,7 +2138,7 @@ export const chapters: Chapter[] = [
           {
             command: 'useradd',
             syntax: 'useradd [opzioni] <username>',
-            description: 'Crea un nuovo utente. Senza opzioni crea l\'utente senza home, shell di default /bin/sh e senza password.',
+            description: 'Crea un nuovo **utente**. Senza opzioni: nessuna **home**, shell **/bin/sh** di default, nessuna password impostata.',
             examples: [
               { command: 'sudo useradd -m -s /bin/bash mike', description: '**-m** crea la home directory, **-s** imposta bash come shell di default.' },
               { command: 'sudo useradd -m -s /bin/bash -G sudo,developers mike', description: '**-G** aggiunge mike ai gruppi `sudo` e `developers` direttamente al momento della creazione.' },
@@ -2148,7 +2148,7 @@ export const chapters: Chapter[] = [
           {
             command: 'usermod',
             syntax: 'usermod [opzioni] <username>',
-            description: 'Modifica gli attributi di un utente esistente. -aG è la combinazione più usata per aggiungere ai gruppi.',
+            description: 'Modifica gli attributi di un **utente** esistente. **-aG** è la combinazione più usata per aggiungere ai **gruppi**.',
             examples: [
               { command: 'sudo usermod -aG sudo mike', description: '**-aG** aggiunge mike al gruppo `sudo` senza rimuoverlo dagli altri — la **-a** (append) è fondamentale.' },
               { command: 'sudo usermod -s /bin/zsh mike', description: 'Cambia la **shell di default** di mike in zsh; attiva al prossimo login.' },
@@ -2159,7 +2159,7 @@ export const chapters: Chapter[] = [
           {
             command: 'userdel',
             syntax: 'userdel [opzioni] <username>',
-            description: 'Rimuove un utente dal sistema. Senza -r lascia intatta la home directory; con -r elimina home e mail spool.',
+            description: 'Rimuove un **utente** dal sistema. Senza **-r** lascia intatta la **home**; con **-r** elimina home e mail spool.',
             examples: [
               { command: 'sudo userdel mike', description: 'Rimuove l\'utente lasciando **intatta la home** in `/home/mike` — i file restano orfani nel sistema.' },
               { command: 'sudo userdel -r mike', description: '**-r** rimuove anche la **home directory** e il mail spool: nessun file residuo.' },
@@ -2319,14 +2319,14 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Micro-check pre-sudo in 3 passi',
-          intro: 'Prima di qualsiasi comando privilegiato, fai tre controlli veloci: contesto, target, impatto.',
+          intro: 'Prima di qualsiasi comando **privilegiato**, fai tre controlli veloci: **contesto**, **target**, **impatto**.',
           steps: [
             {
               goal: 'Contesto: chi sei e dove sei',
               command: {
                 command: 'whoami && pwd',
                 output: 'mike\n/home/mike/progetto',
-                explanation: 'Eviti errori banali verificando utente e directory corrente prima di operazioni sensibili.',
+                explanation: 'Eviti errori banali verificando **utente** e **directory corrente** prima di operazioni sensibili.',
               },
             },
             {
@@ -2334,7 +2334,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'ls -la /etc/hosts',
                 output: '-rw-r--r-- 1 root root 244 mag 21 09:10 /etc/hosts',
-                explanation: 'Leggi owner, gruppo e permessi del target per capire se sudo serve davvero e quale rischio comporta.',
+                explanation: 'Leggi **owner**, **gruppo** e **permessi** del target per capire se **sudo** serve davvero e quale rischio comporta.',
               },
             },
             {
@@ -2342,7 +2342,7 @@ export const chapters: Chapter[] = [
               command: {
                 command: 'sudo cp /etc/hosts /etc/hosts.bak',
                 output: '',
-                explanation: 'Prima azione privilegiata minima e reversibile: backup immediato per ridurre impatto e facilitare rollback.',
+                explanation: 'Prima azione privilegiata **minima e reversibile**: **backup** immediato per ridurre impatto e facilitare **rollback**.',
               },
             },
           ],
@@ -2472,7 +2472,7 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Workflow operativo: raccogli, filtra, consolida',
-          intro: 'Sequenza breve in stile runbook: prima osservi output e errori, poi li separi, poi li trasformi in informazione utile.',
+          intro: 'Sequenza breve in stile **runbook**: prima osservi **output** e **errori**, poi li separi, poi li trasformi in informazione utile.',
           steps: [
             {
               goal: 'Salva output normale in file',
@@ -2507,7 +2507,7 @@ export const chapters: Chapter[] = [
                 title: 'Pipeline leggibile',
                 command: 'cat /etc/passwd | grep bash | wc -l',
                 output: '3',
-                explanation: 'Prima filtri le righe, poi le conti. Tre comandi semplici collegati da pipe.',
+                explanation: 'Prima **filtri** le righe, poi le **conti**. Tre comandi semplici collegati da **pipe**.',
               },
             },
             {
@@ -2516,7 +2516,7 @@ export const chapters: Chapter[] = [
                 title: 'Unify streams',
                 command: 'find /etc -maxdepth 1 -name "*.conf" > report.txt 2>&1',
                 output: '',
-                explanation: 'Quando vuoi un solo artefatto da condividere o allegare a un ticket, unisci stdout e stderr nello stesso file in modo esplicito.',
+                explanation: 'Quando vuoi un solo artefatto da condividere o allegare a un ticket, unisci **stdout** e **stderr** nello stesso file in modo esplicito.',
               },
             },
           ],
@@ -2537,7 +2537,7 @@ export const chapters: Chapter[] = [
             title: 'Conta gli shell user interattivi',
             command: 'grep bash /etc/passwd | cut -d: -f1 | sort',
             output: 'mike\nroot',
-            explanation: 'Esempio semplice di pipeline con scopo chiaro: filtrare, estrarre un campo, ordinare il risultato finale.',
+            explanation: 'Esempio semplice di **pipeline** con scopo chiaro: **filtrare**, **estrarre un campo**, **ordinare** il risultato finale.',
           },
         ],
       },
@@ -2622,7 +2622,7 @@ export const chapters: Chapter[] = [
             title: 'Trova PID per nome',
             command: 'pgrep -a ssh',
             output: '912 /usr/sbin/sshd -D',
-            explanation: 'Riduce il rumore rispetto a ps | grep e produce direttamente PID e comando completo.',
+            explanation: 'Riduce il rumore rispetto a `ps | grep` e produce direttamente **PID** e **comando completo**.',
           },
         ],
       },
@@ -2638,7 +2638,7 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Workflow di diagnosi: identifica, osserva, intervieni',
-          intro: 'Scenario realistico: un servizio sembra lento o bloccato. L’obiettivo non è “riavviare e sperare”, ma produrre evidenza prima di cambiare stato al sistema.',
+          intro: 'Scenario realistico: un servizio sembra lento o bloccato. L’obiettivo non è “riavviare e sperare”, ma produrre **evidenza** prima di cambiare **stato al sistema**.',
           steps: [
             {
               goal: 'Trova processo e PID',
@@ -2646,7 +2646,7 @@ export const chapters: Chapter[] = [
                 title: 'Identify process',
                 command: 'pgrep -a node',
                 output: '1823 node server.js',
-                explanation: 'Recuperi PID e comando completo in modo più pulito di un grep generico.',
+                explanation: 'Recuperi **PID** e **comando completo** in modo più pulito di un `grep` generico.',
               },
             },
             {
@@ -2655,7 +2655,7 @@ export const chapters: Chapter[] = [
                 title: 'Observe live behavior',
                 command: 'top',
                 output: '',
-                explanation: 'Verifica se CPU/memoria mostrano picchi coerenti con il problema riportato.',
+                explanation: 'Verifica se **CPU**/**memoria** mostrano picchi coerenti con il problema riportato.',
               },
             },
             {
@@ -2664,7 +2664,7 @@ export const chapters: Chapter[] = [
                 title: 'Correlate logs',
                 command: 'tail -f /var/log/syslog',
                 output: '',
-                explanation: 'Correla errori o warning al momento in cui il servizio mostra il sintomo.',
+                explanation: 'Correla **errori** o **warning** al momento in cui il servizio mostra il sintomo.',
               },
             },
             {
@@ -2682,7 +2682,7 @@ export const chapters: Chapter[] = [
                 title: 'Controlled stop',
                 command: 'kill 1823',
                 output: '',
-                explanation: 'Invia SIGTERM prima di usare approcci forzati. È la strada più sicura in produzione.',
+                explanation: 'Invia **SIGTERM** prima di usare approcci forzati. È la strada più sicura in produzione.',
                 warning: 'Usa kill -9 solo come ultima risorsa e dopo aver verificato impatto sul servizio.',
               },
             },
@@ -2704,7 +2704,7 @@ export const chapters: Chapter[] = [
             title: 'Salva evidenza prima di agire',
             command: 'ps aux > baseline-processes.txt',
             output: '',
-            explanation: 'Quando la situazione è instabile, salvare una baseline prima di intervenire ti permette di confrontare stato prima/dopo e condividere evidenza nel team.',
+            explanation: 'Quando la situazione è instabile, salvare una **baseline** prima di intervenire ti permette di confrontare stato **prima/dopo** e condividere evidenza nel team.',
           },
         ],
       },
@@ -2804,7 +2804,7 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Workflow: metadati e path resolution',
-          intro: 'Mini laboratorio in stile operativo: prima leggi il file, poi scomponi il percorso e infine confronti i tipi di link.',
+          intro: 'Mini laboratorio in stile operativo: prima **leggi il file**, poi **scomponi il percorso** e infine confronti i tipi di **link**.',
           steps: [
             {
               goal: 'Leggi inode e numero di link',
@@ -2812,7 +2812,7 @@ export const chapters: Chapter[] = [
                 title: 'Inspect file metadata',
                 command: 'stat /var/log/syslog',
                 output: '',
-                explanation: 'Osservi inode, numero di link, owner, gruppo e timestamp in una sola vista.',
+                explanation: 'Osservi **inode**, numero di **link**, **owner**, **gruppo** e **timestamp** in una sola vista.',
               },
             },
             {
@@ -2821,7 +2821,7 @@ export const chapters: Chapter[] = [
                 title: 'Resolve path components',
                 command: 'namei -l /var/log/syslog',
                 output: 'f: /var/log/syslog\ndrwxr-xr-x root root /\ndrwxr-xr-x root root var\ndrwxr-xr-x root adm  log\n-rw-r----- syslog adm syslog',
-                explanation: 'Mostra ogni segmento del path con relativi permessi e ownership. È perfetto quando “il file esiste ma non riesco ad aprirlo”.',
+                explanation: 'Mostra ogni segmento del **path** con relativi **permessi** e **ownership**. È perfetto quando “il file esiste ma non riesco ad aprirlo”.',
               },
             },
             {
@@ -2830,7 +2830,7 @@ export const chapters: Chapter[] = [
                 title: 'Compare hard link inode',
                 command: 'ln notes.txt notes-hardlink.txt && stat notes.txt notes-hardlink.txt',
                 output: '',
-                explanation: 'Un hard link condivide lo stesso inode del file originale: cambiano i nomi, non l’identità del file.',
+                explanation: 'Un **hard link** condivide lo stesso **inode** del file originale: cambiano i nomi, non l’identità del file.',
               },
             },
             {
@@ -2839,7 +2839,7 @@ export const chapters: Chapter[] = [
                 title: 'Compare symbolic link',
                 command: 'ln -s notes.txt notes-link.txt && ls -l notes-link.txt',
                 output: 'lrwxr-xr-x 1 mike staff 9 May 21 10:00 notes-link.txt -> notes.txt',
-                explanation: 'Il symlink è un riferimento a un percorso, non allo stesso inode del file di partenza. Per questo può rompersi se il target cambia o sparisce.',
+                explanation: 'Il **symlink** è un riferimento a un **percorso**, non allo stesso **inode** del file di partenza. Per questo può rompersi se il target cambia o sparisce.',
               },
             },
           ],
@@ -2926,7 +2926,7 @@ export const chapters: Chapter[] = [
             title: 'Visualizza i job attuali',
             command: 'crontab -l',
             output: '# nessun crontab per mike',
-            explanation: 'È il primo controllo da fare prima di aggiungere o modificare automazioni: capire lo stato corrente evita duplicazioni o conflitti.',
+            explanation: 'È il primo controllo da fare prima di aggiungere o modificare **automazioni**: capire lo **stato corrente** evita duplicazioni o conflitti.',
           },
         ],
       },
@@ -2942,7 +2942,7 @@ export const chapters: Chapter[] = [
         ],
         labBlock: {
           title: 'Workflow: crea, osserva, correggi',
-          intro: 'Mini laboratorio di automazione prudente: prima controlli lo stato, poi aggiungi un job semplice, infine verifichi l’effetto concreto.',
+          intro: 'Mini laboratorio di automazione prudente: prima **controlli lo stato**, poi aggiungi un **job** semplice, infine verifichi l’effetto concreto.',
           steps: [
             {
               goal: 'Controlla i job attuali',
@@ -2950,7 +2950,7 @@ export const chapters: Chapter[] = [
                 title: 'Inspect current crontab',
                 command: 'crontab -l',
                 output: '',
-                explanation: 'Leggi il contesto corrente prima di aggiungere automazioni nuove o duplicate.',
+                explanation: 'Leggi il **contesto corrente** prima di aggiungere **automazioni** nuove o duplicate.',
               },
             },
             {
@@ -2959,7 +2959,7 @@ export const chapters: Chapter[] = [
                 title: 'Create observable job',
                 command: '(crontab -l 2>/dev/null; echo "*/5 * * * * date >> /tmp/cron-heartbeat.log") | crontab -',
                 output: '',
-                explanation: 'Job semplice e osservabile: ogni 5 minuti aggiunge una riga a un file. È il modo più pratico per verificare che la schedule funzioni davvero.',
+                explanation: '**Job** semplice e **osservabile**: ogni 5 minuti aggiunge una riga a un file. È il modo più pratico per verificare che la **schedule** funzioni davvero.',
               },
             },
             {
@@ -2968,7 +2968,7 @@ export const chapters: Chapter[] = [
                 title: 'Verify schedule',
                 command: 'crontab -l',
                 output: '*/5 * * * * date >> /tmp/cron-heartbeat.log',
-                explanation: 'Prima verifichi la definizione, poi il suo effetto. Sono due check diversi e servono entrambi.',
+                explanation: 'Prima verifichi la **definizione**, poi il suo **effetto**. Sono due check diversi e servono entrambi.',
               },
             },
             {
@@ -2977,7 +2977,7 @@ export const chapters: Chapter[] = [
                 title: 'Verify job output',
                 command: 'tail -n 5 /tmp/cron-heartbeat.log',
                 output: 'Thu May 21 10:00:00 CEST 2026',
-                explanation: 'Il job non va considerato “funzionante” finché non vedi l’effetto osservabile che hai deciso di produrre.',
+                explanation: 'Il job non va considerato “funzionante” finché non vedi l’**effetto osservabile** che hai deciso di produrre.',
               },
             },
           ],
@@ -2998,7 +2998,7 @@ export const chapters: Chapter[] = [
             title: 'Rimuovi tutti i job quando chiudi il test',
             command: 'crontab -r',
             output: '',
-            explanation: 'Serve per cleanup controllato dei test. Va usato con cautela perché elimina l’intero crontab dell’utente corrente.',
+            explanation: 'Serve per **cleanup** controllato dei test. Va usato con cautela perché elimina l’intero **crontab** dell’utente corrente.',
             warning: '**crontab -r** rimuove tutti i job dell’utente corrente. Prima salva uno snapshot con **crontab -l > backup-crontab.txt**.',
           },
         ],
@@ -3206,21 +3206,21 @@ export const chapters: Chapter[] = [
       steps: [
         {
           goal: 'Crea i tre gruppi dipartimentali',
-          context: 'I gruppi vanno creati prima degli utenti. Assegnare un utente a un gruppo inesistente restituisce un errore.',
+          context: 'I **gruppi** vanno creati prima degli **utenti**. Assegnare un utente a un gruppo inesistente restituisce un errore.',
           command: {
             command: 'sudo groupadd dev && sudo groupadd ops && sudo groupadd security',
             output: '(nessun output = successo)',
-            explanation: 'groupadd crea un gruppo nel sistema. I tre gruppi corrispondono ai dipartimenti: sviluppo, operations e security.',
+            explanation: '**groupadd** crea un **gruppo** nel sistema. I tre gruppi corrispondono ai dipartimenti: **sviluppo**, **operations** e **security**.',
           },
-          whyItMatters: 'In Linux l\'ordine conta: prima definisci i gruppi, poi gli utenti. Invertire crea dipendenze non risolte.',
+          whyItMatters: 'In Linux l\'ordine conta: prima definisci i **gruppi**, poi gli **utenti**. Invertire crea dipendenze non risolte.',
         },
         {
           goal: 'Crea gli utenti del team dev e assegnali al gruppo',
-          context: 'useradd -m crea la home directory, -s imposta la shell, -G assegna il gruppo supplementare.',
+          context: '**useradd -m** crea la **home directory**, **-s** imposta la shell, **-G** assegna il gruppo supplementare.',
           command: {
             command: 'sudo useradd -m -s /bin/bash -G dev marco\nsudo useradd -m -s /bin/bash -G dev sara\nsudo useradd -m -s /bin/bash -G dev luca',
             output: '(nessun output = successo)',
-            explanation: 'Ogni utente viene creato con home directory (/home/marco ecc.) e bash come shell di default, già assegnato al gruppo dev.',
+            explanation: 'Ogni utente viene creato con **home directory** (`/home/marco` ecc.) e **bash** come shell di default, già assegnato al gruppo **dev**.',
           },
         },
         {
@@ -3228,43 +3228,43 @@ export const chapters: Chapter[] = [
           command: {
             command: 'getent group dev\nid marco',
             output: 'dev:x:1001:marco,sara,luca\nuid=1001(marco) gid=1004(marco) groups=1004(marco),1001(dev)',
-            explanation: 'getent group mostra i membri del gruppo. id utente mostra tutti i gruppi (primario e supplementari) a cui l\'utente appartiene.',
+            explanation: '**getent group** mostra i **membri del gruppo**. **id** utente mostra tutti i gruppi (**primario** e **supplementari**) a cui l\'utente appartiene.',
           },
-          whyItMatters: 'Verificare subito dopo la creazione previene errori silenziosi. Un\'assegnazione fallita non sempre produce un messaggio di errore visibile.',
+          whyItMatters: 'Verificare subito dopo la creazione previene **errori silenziosi**. Un\'assegnazione fallita non sempre produce un messaggio di errore visibile.',
         },
         {
           goal: 'Crea gli utenti del team ops',
           command: {
             command: 'sudo useradd -m -s /bin/bash -G ops giulia\nsudo useradd -m -s /bin/bash -G ops antonio',
             output: '(nessun output = successo)',
-            explanation: 'Stessa logica del team dev, ma con il gruppo ops. Giulia e Antonio avranno accesso a log e backup, non al codice.',
+            explanation: 'Stessa logica del team **dev**, ma con il gruppo **ops**. Giulia e Antonio avranno accesso a **log** e **backup**, non al codice.',
           },
         },
         {
           goal: 'Crea Valentina con accesso multi-gruppo (security + audit)',
-          context: 'Valentina deve leggere le directory di tutti i team. Questo si ottiene aggiungendola ai gruppi dev, ops e security come gruppi supplementari.',
+          context: 'Valentina deve leggere le directory di tutti i team. Questo si ottiene aggiungendola ai gruppi **dev**, **ops** e **security** come **gruppi supplementari**.',
           command: {
             command: 'sudo useradd -m -s /bin/bash valentina\nsudo usermod -aG dev,ops,security valentina',
             output: '(nessun output = successo)',
-            explanation: 'Prima crea l\'utente, poi usa usermod -aG per aggiungere i gruppi supplementari. Il flag -a (append) è obbligatorio: senza, -G sovrascrive tutti i gruppi esistenti.',
+            explanation: 'Prima crea l\'utente, poi usa **usermod -aG** per aggiungere i **gruppi supplementari**. Il flag **-a** (append) è obbligatorio: senza, **-G** sovrascrive tutti i gruppi esistenti.',
             warning: 'usermod -G dev,ops,security valentina SENZA -a rimuove valentina da tutti i suoi gruppi attuali prima di assegnare i nuovi. Sempre usare -aG.',
           },
-          whyItMatters: 'Il flag -a è uno degli errori più frequenti nella gestione utenti. Dimenticarlo in produzione può togliere accessi critici senza messaggi di errore.',
+          whyItMatters: 'Il flag **-a** è uno degli errori più frequenti nella gestione utenti. Dimenticarlo in produzione può togliere **accessi critici** senza messaggi di errore.',
         },
         {
-          goal: 'Audit completo: verifica struttura utenti e gruppi',
+          goal: 'Audit completo: verifica struttura gruppi e utente multi-gruppo',
           command: {
-            command: 'for u in marco sara luca giulia antonio valentina; do echo "=== $u ==="; id $u; done',
-            output: '=== marco ===\nuid=1001(marco) gid=1004(marco) groups=1004(marco),1001(dev)\n=== sara ===\nuid=1002(sara) gid=1005(sara) groups=1005(sara),1001(dev)\n=== luca ===\nuid=1003(luca) gid=1006(luca) groups=1006(luca),1001(dev)\n=== giulia ===\nuid=1004(giulia) gid=1007(giulia) groups=1007(giulia),1002(ops)\n=== antonio ===\nuid=1005(antonio) gid=1008(antonio) groups=1008(antonio),1002(ops)\n=== valentina ===\nuid=1006(valentina) gid=1009(valentina) groups=1009(valentina),1001(dev),1002(ops),1003(security)',
-            explanation: 'Il for loop itera su tutti gli utenti e stampa il risultato di id per ciascuno. È il modo veloce per verificare l\'intera struttura in un colpo solo.',
+            command: 'getent group dev\ngetent group ops\ngetent group security\nid valentina',
+            output: 'dev:x:1001:marco,sara,luca\nops:x:1002:giulia,antonio\nsecurity:x:1003:valentina\nuid=1006(valentina) gid=1009(valentina) groups=1009(valentina),1001(dev),1002(ops),1003(security)',
+            explanation: '**getent group** mostra i **membri** di ciascun gruppo. **id valentina** conferma che è nei tre **gruppi supplementari** — è il check principale per un utente **multi-gruppo**.',
           },
         },
         {
           goal: 'Crea la struttura di directory del progetto',
           command: {
-            command: 'sudo mkdir -p /srv/techstartup/{codice,log,backup}\nls -la /srv/techstartup/',
+            command: 'sudo mkdir /srv/techstartup\nsudo mkdir /srv/techstartup/codice /srv/techstartup/log /srv/techstartup/backup\nls -la /srv/techstartup/',
             output: 'total 20\ndrwxr-xr-x 5 root root 4096 gen 15 10:23 .\ndrwxr-xr-x 3 root root 4096 gen 15 10:23 ..\ndrwxr-xr-x 2 root root 4096 gen 15 10:23 backup\ndrwxr-xr-x 2 root root 4096 gen 15 10:23 codice\ndrwxr-xr-x 2 root root 4096 gen 15 10:23 log',
-            explanation: 'La sintassi {codice,log,backup} è una brace expansion bash: crea le tre directory in un unico comando. Ora appartengono tutte a root — bisogna assegnare proprietà e permessi.',
+            explanation: 'Prima crea la **directory padre** `/srv/techstartup`, poi le tre **sottodirectory** in un solo comando passando più argomenti a **mkdir**. **ls -la** conferma che esistono tutte e tre e appartengono a **root**.',
           },
         },
         {
@@ -3272,31 +3272,40 @@ export const chapters: Chapter[] = [
           command: {
             command: 'sudo chown root:dev /srv/techstartup/codice\nsudo chmod 770 /srv/techstartup/codice',
             output: '(nessun output = successo)',
-            explanation: 'chown root:dev assegna la directory al gruppo dev. chmod 770 dà a owner e gruppo permessi completi (rwx), gli altri non possono accedere (---).',
+            explanation: '**chown root:dev** assegna la directory al gruppo **dev**. **chmod 770** dà a **owner** e **gruppo** permessi completi (**rwx**), gli altri non possono accedere (**---**).',
           },
-          whyItMatters: 'La combinazione chown + chmod è il flusso standard: prima definisci chi è il proprietario (gruppo), poi cosa può fare.',
+          whyItMatters: 'La combinazione **chown** + **chmod** è il flusso standard: prima definisci chi è il **proprietario** (gruppo), poi cosa può fare.',
         },
         {
           goal: 'Configura accessi ops: log in scrittura, backup in sola lettura',
           command: {
             command: 'sudo chown root:ops /srv/techstartup/log && sudo chmod 770 /srv/techstartup/log\nsudo chown root:ops /srv/techstartup/backup && sudo chmod 750 /srv/techstartup/backup',
             output: '(nessun output = successo)',
-            explanation: 'I log richiedono scrittura (ops deve aggiungere voci), quindi 770. Il backup è più critico: 750 permette al gruppo di leggere ma non modificare (r-x = 5).',
+            explanation: 'I **log** richiedono scrittura (ops deve aggiungere voci), quindi **770**. Il **backup** è più critico: **750** permette al gruppo di leggere ma non modificare (**r-x** = 5).',
           },
         },
         {
-          goal: 'Verifica finale: testa accessi consentiti e negati',
-          context: 'Il momento della verità. sudo -u simula il login come quell\'utente senza aprire una sessione completa.',
+          goal: 'Verifica finale: testa accessi consentiti',
+          context: 'Il momento della verità. **sudo -u** simula il login come quell\'utente senza aprire una sessione completa.',
           command: {
-            command: 'sudo -u marco ls /srv/techstartup/codice && echo "✓ marco: OK"\nsudo -u giulia ls /srv/techstartup/codice 2>&1 || echo "✗ giulia: bloccata (corretto!)"\nsudo -u valentina ls /srv/techstartup/codice && echo "✓ valentina: OK (multi-gruppo)"\nsudo -u giulia ls /srv/techstartup/log && echo "✓ giulia: accesso log OK"',
-            output: '✓ marco: OK\nls: cannot open directory \'/srv/techstartup/codice\': Permission denied\n✗ giulia: bloccata (corretto!)\n✓ valentina: OK (multi-gruppo)\n✓ giulia: accesso log OK',
-            explanation: 'Testare un accesso negato è tanto importante quanto testare quello consentito. Se giulia riuscisse ad accedere a /codice, la policy sarebbe rotta.',
+            command: 'sudo -u marco ls /srv/techstartup/codice && echo "marco: accesso OK"\nsudo -u valentina ls /srv/techstartup/codice && echo "valentina: accesso OK"\nsudo -u giulia ls /srv/techstartup/log && echo "giulia: accesso log OK"',
+            output: 'marco: accesso OK\nvalentina: accesso OK\ngiulia: accesso log OK',
+            explanation: '**sudo -u** esegue il comando nel contesto di quell\'utente senza aprire una **sessione separata**. Se il comando riesce, **&&** stampa il messaggio di conferma.',
           },
-          whyItMatters: 'La verifica dell\'accesso negato è il collaudo di una policy di sicurezza. Senza questo step, non sai se il sistema funziona davvero.',
+          whyItMatters: 'La verifica degli **accessi consentiti** conferma che la policy non blocca chi ha diritto di accedere.',
+        },
+        {
+          goal: 'Verifica finale: testa accesso negato (giulia su /codice)',
+          command: {
+            command: 'sudo -u giulia ls /srv/techstartup/codice 2>&1',
+            output: 'ls: cannot open directory \'/srv/techstartup/codice\': Permission denied',
+            explanation: '**"Permission denied"** è il risultato atteso: **giulia** appartiene al gruppo **ops**, non al gruppo **dev**. Se vedessi output diverso, la **policy** chmod/chown sarebbe configurata in modo errato.',
+          },
+          whyItMatters: 'Testare l\'**accesso negato** è tanto importante quanto testare quello consentito. Senza questo step, non sai se il sistema funziona davvero.',
         },
       ],
       winCondition:
-        'marco, sara e luca accedono a /srv/techstartup/codice. giulia e antonio accedono a /srv/techstartup/log (r/w) e /srv/techstartup/backup (r). valentina accede a tutte e tre le directory. Qualsiasi altro utente ottiene "Permission denied" su tutte le directory.',
+        '**marco**, **sara** e **luca** accedono a /srv/techstartup/codice. **giulia** e **antonio** accedono a /srv/techstartup/log (r/w) e /srv/techstartup/backup (r). **valentina** accede a tutte e tre le directory. Qualsiasi altro utente ottiene **"Permission denied"** su tutte le directory.',
     },
   },
 ];

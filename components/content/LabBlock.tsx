@@ -3,6 +3,7 @@
 import type { LabBlock as LabBlockType } from '@/data/types';
 import TerminalCommand from '@/components/content/TerminalCommand';
 import NixButton from '@/components/tutor/NixButton';
+import { renderInline } from '@/components/ui/RichText';
 
 function buildStepPrompt(goal: string, command: string, explanation: string): string {
   return `Passo: "${goal}"\nComando: ${command}\n\n${explanation}\n\nPerché si fa così? Quali errori comuni si fanno in questo passaggio e come si verificano i risultati?`;
@@ -24,7 +25,7 @@ export default function LabBlock({ title, intro, steps, glossaryIds = [] }: LabB
       </div>
 
       {intro && (
-        <p className="px-5 pt-4 text-sm leading-7 text-text-secondary">{intro}</p>
+        <p className="px-5 pt-4 text-sm leading-7 text-text-secondary">{renderInline(intro, glossaryIds, 'lab-intro')}</p>
       )}
 
       <div className="px-5 py-4 space-y-6">
