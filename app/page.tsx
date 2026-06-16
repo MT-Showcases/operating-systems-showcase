@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { Activity, ChevronRight, ClipboardList, Clock3, Command, Cpu, GitBranch, HardDrive, KeyRound, Laptop, Link2, Monitor, Scale, Shield, ShieldCheck, TerminalSquare, Users, Wrench } from 'lucide-react';
 import GlossaryTooltip from '@/components/glossary/GlossaryTooltip';
 
-const totalHours = Math.round(chapters.reduce((total, chapter) => total + Number.parseFloat(chapter.duration.replace('h', '')), 0));
 const totalQuizQuestions = chapters.reduce((total, chapter) => total + (chapter.quiz?.length ?? 0), 0);
 const quizChapterSlugs = chapters.filter((chapter) => (chapter.quiz?.length ?? 0) > 0).map((chapter) => chapter.slug);
 const searchableChapters = chapters.map((chapter) => ({
