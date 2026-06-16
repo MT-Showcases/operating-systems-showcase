@@ -4,7 +4,7 @@ import Button from '@/components/ui/Button';
 import SearchBar from '@/components/nav/SearchBar';
 import QuizScoreDashboard from '@/components/ui/QuizScoreDashboard';
 import Link from 'next/link';
-import { Activity, ChevronRight, Clock3, Command, Cpu, GitBranch, HardDrive, KeyRound, Laptop, Link2, Monitor, Scale, Shield, ShieldCheck, TerminalSquare, Users, Wrench } from 'lucide-react';
+import { Activity, ChevronRight, ClipboardList, Clock3, Command, Cpu, GitBranch, HardDrive, KeyRound, Laptop, Link2, Monitor, Scale, Shield, ShieldCheck, TerminalSquare, Users, Wrench } from 'lucide-react';
 import GlossaryTooltip from '@/components/glossary/GlossaryTooltip';
 
 const totalHours = Math.round(chapters.reduce((total, chapter) => total + Number.parseFloat(chapter.duration.replace('h', '')), 0));
@@ -65,6 +65,12 @@ export default function Home() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-none bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan hover:bg-accent-cyan/20 transition-all text-sm font-medium"
             >
               Glossario
+            </Link>
+            <Link
+              href="/exam"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-none bg-accent-green/10 border border-accent-green/30 text-accent-green hover:bg-accent-green/20 transition-all text-sm font-medium"
+            >
+              <ClipboardList className="h-4 w-4" /> Esame Finale
             </Link>
           </div>
         </div>

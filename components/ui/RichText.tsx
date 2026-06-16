@@ -29,9 +29,21 @@ export function wrapGlossaryTerms(text: string, glossaryIds: string[], keyPrefix
 }
 
 export function renderInline(text: string, glossaryIds: string[], keyPrefix: string) {
-  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean);
+  const parts = text.split(/(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*)/g).filter(Boolean);
 
   return parts.map((part, index) => {
+    if (part.startsWith('`') && part.endsWith('`')) {
+      const content = part.slice(1, -1);
+      return (
+        <code
+          key={`${keyPrefix}-code-${index}`}
+          className="border border-accent-cyan/30 bg-bg-primary px-1.5 py-0.5 font-mono text-[0.9em] text-accent-cyan"
+        >
+          {content}
+        </code>
+      );
+    }
+
     if (part.startsWith('**') && part.endsWith('**')) {
       const content = part.slice(2, -2);
       return (
@@ -78,6 +90,16 @@ export function renderParagraph(text: string, glossaryIds: string[], key: string
       {renderInline(trimmed, glossaryIds, key)}
     </p>
   );
+}
+
+export function renderBlocks(text: string, glossaryIds: string[], keyPrefix: string) {
+  const blocks = text
+    .trim()
+    .split(/\n{2,}/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+
+  return blocks.map((block, index) => renderParagraph(block, glossaryIds, `${keyPrefix}-${index}`));
 }
 
 interface RichTextProps {

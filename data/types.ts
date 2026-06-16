@@ -13,7 +13,13 @@ export interface QuizQuestion {
   question: string;
   options?: string[];
   correctAnswer: number | boolean | string | string[];
+  matchPairs?: Array<{ left: string; right: string }>;
   explanation: string;
+}
+
+export interface ExamQuestion extends QuizQuestion {
+  chapterSlug: string;
+  chapterTitle: string;
 }
 
 export interface GlossaryEntry {

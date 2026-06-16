@@ -13,6 +13,13 @@ export function normalizeQuestion(question: QuizQuestion): { options: string[]; 
   };
 }
 
+export function normalizeMultipleSelectQuestion(question: QuizQuestion): { options: string[]; correctAnswers: string[] } {
+  return {
+    options: question.options ?? [],
+    correctAnswers: Array.isArray(question.correctAnswer) ? question.correctAnswer.map(String) : [],
+  };
+}
+
 export function buildWrongAnswerPrompt(
   question: QuizQuestion,
   selectedLabel: string,
