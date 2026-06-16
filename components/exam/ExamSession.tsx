@@ -240,12 +240,13 @@ export default function ExamSession() {
     return [...map.values()].sort((a, b) => a.correct / a.total - b.correct / b.total);
   }, [session, answers]);
 
-  const scorePercent = Math.round((score / EXAM_SIZE) * 100);
+  const totalQuestions = session.length;
+  const scorePercent = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
   const passed = scorePercent >= 70;
 
   if (phase === 'start') {
     return (
-      <div className="mx-auto max-w-2xl border-2 border-accent-green/40 bg-bg-surface p-8 text-center space-y-6">
+      <div className="mx-auto max-w-2xl border-2 border-accent-green/40 bg-bg-surface p-8 pb-24 text-center space-y-6 md:pb-8">
         <div className="flex justify-center">
           <ClipboardList className="h-10 w-10 text-accent-green" strokeWidth={1.5} />
         </div>
@@ -269,7 +270,7 @@ export default function ExamSession() {
         <button
           type="button"
           onClick={startExam}
-          className="inline-flex items-center gap-2 border-2 border-accent-green bg-accent-green/10 px-8 py-3 text-sm font-semibold text-accent-green transition hover:bg-accent-green/20"
+          className="inline-flex min-h-11 w-full items-center justify-center gap-2 border-2 border-accent-green bg-accent-green/10 px-8 py-3 text-sm font-semibold text-accent-green transition hover:bg-accent-green/20 sm:w-auto"
         >
           Inizia Esame <ChevronRight className="h-4 w-4" />
         </button>
@@ -279,7 +280,7 @@ export default function ExamSession() {
 
   if (phase === 'result') {
     return (
-      <div className="mx-auto max-w-2xl space-y-6">
+      <div className="mx-auto max-w-2xl space-y-6 pb-20 md:pb-0">
         <div className={`border-2 p-6 text-center space-y-3 ${passed ? 'border-accent-green/50 bg-accent-green/5' : 'border-accent-amber/50 bg-accent-amber/5'}`}>
           <Trophy className={`mx-auto h-8 w-8 ${passed ? 'text-accent-green' : 'text-accent-amber'}`} strokeWidth={1.5} />
           <div>
@@ -287,7 +288,7 @@ export default function ExamSession() {
               {passed ? 'Esame superato' : 'Esame non superato'}
             </p>
             <p className="text-4xl font-extrabold text-text-primary">{scorePercent}%</p>
-            <p className="mt-1 text-sm text-text-secondary">{score} su {EXAM_SIZE} risposte corrette</p>
+            <p className="mt-1 text-sm text-text-secondary">{score} su {totalQuestions} risposte corrette</p>
           </div>
           {!passed && (
             <p className="text-xs text-text-secondary">Soglia di superamento: 70%. Riprova — le domande e le opzioni saranno diverse.</p>
@@ -360,7 +361,7 @@ export default function ExamSession() {
   })();
 
   return (
-    <div className="mx-auto max-w-2xl space-y-6">
+    <div className="mx-auto max-w-2xl space-y-6 pb-20 md:pb-0">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-green">Esame finale</p>
@@ -401,8 +402,8 @@ export default function ExamSession() {
                 if (!answered && isPicked) cls = 'border-accent-cyan/70 bg-accent-cyan/10 text-text-primary';
 
                 return (
-                  <button
-                    key={option}
+                    <button
+                      key={`${option}-${optionIndex}`}
                     type="button"
                     disabled={answered}
                     onClick={() => {

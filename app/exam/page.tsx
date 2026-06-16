@@ -14,7 +14,7 @@ export default function ExamPage() {
         <div className="max-w-3xl mx-auto flex items-center gap-4">
           <Link
             href="/"
-            className="flex items-center gap-1 text-xs text-text-secondary hover:text-accent-cyan transition-colors"
+            className="-mx-2 inline-flex min-h-9 items-center gap-1 px-2 text-xs text-text-secondary hover:text-accent-cyan transition-colors"
           >
             <ChevronLeft className="h-3.5 w-3.5" /> Home
           </Link>
@@ -25,7 +25,7 @@ export default function ExamPage() {
         </div>
       </header>
 
-      <section className="px-6 py-12">
+      <section className="px-6 py-12 pb-28 md:pb-12">
         <div className="max-w-3xl mx-auto">
           <ExamSession />
         </div>
