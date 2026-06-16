@@ -1,6 +1,6 @@
 'use client';
 
-import { renderInline, renderParagraph } from './RichText';
+import { renderInline, renderParagraph } from '@/components/ui/RichText';
 
 interface PilotBlockProps {
   items: string[];

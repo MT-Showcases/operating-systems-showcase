@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
-import Breadcrumb from '@/components/Breadcrumb';
-import BackToTopButton from '@/components/BackToTopButton';
+import Breadcrumb from '@/components/nav/Breadcrumb';
+import BackToTopButton from '@/components/nav/BackToTopButton';
 
 const KILLERCODA_UBUNTU_URL = 'https://killercoda.com/playgrounds/scenario/ubuntu';
 const KILLERCODA_PLAYGROUNDS_URL = 'https://killercoda.com/playgrounds';

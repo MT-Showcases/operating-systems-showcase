@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { X } from 'lucide-react';
 import { getTermById } from '@/data/glossary';
-import { useFocusTrap } from './FocusTrap';
+import { useFocusTrap } from '@/components/ui/FocusTrap';
 import useBodyScrollLock from '@/lib/useBodyScrollLock';
 
 interface GlossaryModalProps {

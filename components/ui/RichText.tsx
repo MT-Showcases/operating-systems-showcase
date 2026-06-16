@@ -1,7 +1,7 @@
 'use client';
 
 import { getTermsByIds } from '@/data/glossary';
-import GlossaryTerm from './GlossaryTerm';
+import GlossaryTerm from '@/components/glossary/GlossaryTerm';
 
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

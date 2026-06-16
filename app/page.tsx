@@ -1,11 +1,11 @@
 import { chapters } from '@/data/chapters';
-import Card from '@/components/Card';
-import Button from '@/components/Button';
-import SearchBar from '@/components/SearchBar';
-import QuizScoreDashboard from '@/components/QuizScoreDashboard';
+import Card from '@/components/ui/Card';
+import Button from '@/components/ui/Button';
+import SearchBar from '@/components/nav/SearchBar';
+import QuizScoreDashboard from '@/components/ui/QuizScoreDashboard';
 import Link from 'next/link';
-import { Activity, ChevronRight, Clock3, Command, Cpu, GitBranch, HardDrive, KeyRound, Laptop, Link2, Monitor, Scale, Shield, ShieldCheck, TerminalSquare, Wrench } from 'lucide-react';
-import GlossaryTooltip from '@/components/GlossaryTooltip';
+import { Activity, ChevronRight, Clock3, Command, Cpu, GitBranch, HardDrive, KeyRound, Laptop, Link2, Monitor, Scale, Shield, ShieldCheck, TerminalSquare, Users, Wrench } from 'lucide-react';
+import GlossaryTooltip from '@/components/glossary/GlossaryTooltip';
 
 const totalHours = Math.round(chapters.reduce((total, chapter) => total + Number.parseFloat(chapter.duration.replace('h', '')), 0));
 const totalQuizQuestions = chapters.reduce((total, chapter) => total + (chapter.quiz?.length ?? 0), 0);
@@ -118,6 +118,7 @@ export default function Home() {
                     {chapter.id === 13 && <Monitor className="h-8 w-8" />}
                     {chapter.id === 14 && <Link2 className="h-8 w-8" />}
                     {chapter.id === 15 && <Clock3 className="h-8 w-8" />}
+                    {chapter.id === 16 && <Users className="h-8 w-8" />}
                   </div>
 
                   <h3 className="text-base font-bold text-text-primary leading-snug">

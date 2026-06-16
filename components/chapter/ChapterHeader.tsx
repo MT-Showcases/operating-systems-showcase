@@ -1,6 +1,6 @@
 'use client';
 
-import { renderInline } from './RichText';
+import { renderInline } from '@/components/ui/RichText';
 
 interface ChapterHeaderProps {
   title: string;

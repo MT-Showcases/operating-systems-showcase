@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import TutorFloatingChat from '@/components/TutorFloatingChat';
-import ServiceWorkerRegister from '@/components/ServiceWorkerRegister';
-import SandboxFloatingButton from '@/components/SandboxFloatingButton';
-import ShortsFloatingButton from '@/components/ShortsFloatingButton';
-import FloatingNav from '@/components/FloatingNav';
+import TutorFloatingChat from '@/components/tutor/TutorFloatingChat';
+import ServiceWorkerRegister from '@/components/ui/ServiceWorkerRegister';
+import SandboxFloatingButton from '@/components/sandbox/SandboxFloatingButton';
+import ShortsFloatingButton from '@/components/nav/ShortsFloatingButton';
+import FloatingNav from '@/components/nav/FloatingNav';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

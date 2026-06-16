@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Check, Copy, X } from 'lucide-react';
 import type { TerminalCommandBlock } from '@/data/types';
-import NixButton from './NixButton';
-import { renderInline } from './RichText';
+import NixButton from '@/components/tutor/NixButton';
+import { renderInline } from '@/components/ui/RichText';
 
 function toHref(urlOrDomain: string): string {
   return urlOrDomain.startsWith('http://') || urlOrDomain.startsWith('https://') ? urlOrDomain : `https://${urlOrDomain}`;

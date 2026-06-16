@@ -1,5 +1,5 @@
 import type { CommandReference, CommandExample } from '@/data/types';
-import { renderInline } from './RichText';
+import { renderInline } from '@/components/ui/RichText';
 
 function isCommandExample(example: string | CommandExample): example is CommandExample {
   return typeof example === 'object';

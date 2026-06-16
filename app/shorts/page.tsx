@@ -1,5 +1,5 @@
 import { getAllVideos, getVideosByChapter } from '@/lib/shorts';
-import ShortsPlayer from '@/components/ShortsPlayer';
+import ShortsPlayer from '@/components/shorts/ShortsPlayer';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

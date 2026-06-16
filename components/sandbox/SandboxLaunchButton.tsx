@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react';
 import { useState } from 'react';
-import SandboxModal from './SandboxModal';
+import SandboxModal from '@/components/sandbox/SandboxModal';
 
 interface SandboxLaunchButtonProps {
   children: ReactNode;

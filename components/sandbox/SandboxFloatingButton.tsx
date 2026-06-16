@@ -1,7 +1,7 @@
 'use client';
 
 import { TerminalSquare } from 'lucide-react';
-import SandboxLaunchButton from './SandboxLaunchButton';
+import SandboxLaunchButton from '@/components/sandbox/SandboxLaunchButton';
 
 export default function SandboxFloatingButton() {
   return (

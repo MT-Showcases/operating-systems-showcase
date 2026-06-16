@@ -2,9 +2,9 @@
 
 import type { ProjectLab } from '@/data/types';
 import { Download, FlaskConical, Trophy } from 'lucide-react';
-import TerminalCommand from './TerminalCommand';
-import NixButton from './NixButton';
-import UserGroupTree from './UserGroupTree';
+import TerminalCommand from '@/components/content/TerminalCommand';
+import NixButton from '@/components/tutor/NixButton';
+import UserGroupTree from '@/components/content/UserGroupTree';
 
 function buildStepPrompt(goal: string, command: string, context?: string): string {
   return [

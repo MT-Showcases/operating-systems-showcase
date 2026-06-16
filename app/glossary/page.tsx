@@ -3,10 +3,10 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { glossaryTerms } from '@/data/glossary';
-import Breadcrumb from '@/components/Breadcrumb';
-import BackToTopButton from '@/components/BackToTopButton';
-import Button from '@/components/Button';
-import Card from '@/components/Card';
+import Breadcrumb from '@/components/nav/Breadcrumb';
+import BackToTopButton from '@/components/nav/BackToTopButton';
+import Button from '@/components/ui/Button';
+import Card from '@/components/ui/Card';
 
 const CATEGORIES = Array.from(new Set(glossaryTerms.map((term) => term.category))).sort();
 

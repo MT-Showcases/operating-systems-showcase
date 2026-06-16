@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Breadcrumb from '@/components/Breadcrumb';
-import BackToTopButton from '@/components/BackToTopButton';
-import Card from '@/components/Card';
+import Breadcrumb from '@/components/nav/Breadcrumb';
+import BackToTopButton from '@/components/nav/BackToTopButton';
+import Card from '@/components/ui/Card';
 import { ChevronRight } from 'lucide-react';
 import { openclawPage } from '@/data/pages/openclaw';
 

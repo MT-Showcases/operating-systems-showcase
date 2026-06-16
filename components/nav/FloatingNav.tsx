@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Play, TerminalSquare, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
 import { emit } from '@/lib/events';
-import SandboxModal from './SandboxModal';
+import SandboxModal from '@/components/sandbox/SandboxModal';
 
 // Mobile-only bottom nav bar. On desktop each button is individually positioned.
 export default function FloatingNav() {

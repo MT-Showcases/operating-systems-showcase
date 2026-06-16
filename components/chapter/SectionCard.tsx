@@ -2,12 +2,12 @@
 
 import type { CommandReference, InfoTable, LabBlock, TerminalCommandBlock } from '@/data/types';
 import { Lock, Terminal, Settings, Folder, Cpu, ChevronRight, HardDrive, Network, BookOpen, Shield, Clock, Monitor, FlaskConical } from 'lucide-react';
-import TerminalCommand from './TerminalCommand';
-import CommandReferenceCard from './CommandReferenceCard';
-import InfoTableComponent from './InfoTable';
-import LabBlockComponent from './LabBlock';
-import NixButton from './NixButton';
-import { renderInline, renderParagraph } from './RichText';
+import TerminalCommand from '@/components/content/TerminalCommand';
+import CommandReferenceCard from '@/components/content/CommandReferenceCard';
+import InfoTableComponent from '@/components/content/InfoTable';
+import LabBlockComponent from '@/components/content/LabBlock';
+import NixButton from '@/components/tutor/NixButton';
+import { renderInline, renderParagraph } from '@/components/ui/RichText';
 import { useState, type ReactNode } from 'react';
 
 interface SectionCardProps {

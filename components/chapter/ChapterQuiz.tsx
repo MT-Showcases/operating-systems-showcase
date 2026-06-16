@@ -6,7 +6,7 @@ import type { QuizQuestion } from '@/data/types';
 import { buildQuizStorageKey } from '@/lib/quiz-storage';
 import { normalizeQuestion, buildWrongAnswerPrompt } from '@/lib/quiz-factory';
 import { emit } from '@/lib/events';
-import NixButton from './NixButton';
+import NixButton from '@/components/tutor/NixButton';
 
 interface ChapterQuizProps {
   quiz: QuizQuestion[];

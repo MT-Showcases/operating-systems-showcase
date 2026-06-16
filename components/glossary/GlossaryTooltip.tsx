@@ -5,7 +5,7 @@ import Link from 'next/link';
 import * as Popover from '@radix-ui/react-popover';
 import { ChevronRight } from 'lucide-react';
 import { getTermById } from '@/data/glossary';
-import GlossaryModal from './GlossaryModal';
+import GlossaryModal from '@/components/glossary/GlossaryModal';
 
 interface GlossaryTooltipProps {
   termId: string;

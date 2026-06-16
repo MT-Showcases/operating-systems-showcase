@@ -1,6 +1,6 @@
 'use client';
 
-import ChapterSidebar from '@/components/ChapterSidebar';
+import ChapterSidebar from '@/components/chapter/ChapterSidebar';
 
 interface SidebarToggleWrapperProps {
   currentSlug: string;

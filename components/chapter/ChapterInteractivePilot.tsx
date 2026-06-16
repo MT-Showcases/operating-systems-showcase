@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import { CheckCircle2, Circle, Sparkles } from 'lucide-react';
 import type { ChapterInteractivePilot as ChapterInteractivePilotType } from '@/data/types';
-import NixButton from './NixButton';
+import NixButton from '@/components/tutor/NixButton';
 
 interface ChapterInteractivePilotProps {
   pilot: ChapterInteractivePilotType;

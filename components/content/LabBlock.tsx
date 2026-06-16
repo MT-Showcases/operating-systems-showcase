@@ -1,8 +1,8 @@
 'use client';
 
 import type { LabBlock as LabBlockType } from '@/data/types';
-import TerminalCommand from './TerminalCommand';
-import NixButton from './NixButton';
+import TerminalCommand from '@/components/content/TerminalCommand';
+import NixButton from '@/components/tutor/NixButton';
 
 function buildStepPrompt(goal: string, command: string, explanation: string): string {
   return `Passo: "${goal}"\nComando: ${command}\n\n${explanation}\n\nPerché si fa così? Quali errori comuni si fanno in questo passaggio e come si verificano i risultati?`;
