@@ -1,11 +1,20 @@
 import { chapters } from '@/data/chapters';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+import TerminalRotator from '@/components/ui/TerminalRotator';
 import SearchBar from '@/components/nav/SearchBar';
 import QuizScoreDashboard from '@/components/ui/QuizScoreDashboard';
 import Link from 'next/link';
 import { Activity, ChevronRight, ClipboardList, Clock3, Command, Cpu, GitBranch, HardDrive, KeyRound, Laptop, Link2, Monitor, Scale, Shield, ShieldCheck, TerminalSquare, Users, Wrench } from 'lucide-react';
 import GlossaryTooltip from '@/components/glossary/GlossaryTooltip';
+
+const subtitlePhrases = [
+  'Capire Linux e i Sistemi Operativi — davvero.',
+  'Dal kernel ai processi, fino al terminale.',
+  'Per chi vuole capire, non solo copiare comandi.',
+  'Permessi, scheduling, file system: il livello che conta.',
+  `${chapters.length} capitoli. Nessuna scorciatoia.`,
+];
 
 const totalQuizQuestions = chapters.reduce((total, chapter) => total + (chapter.quiz?.length ?? 0), 0);
 const quizChapterSlugs = chapters.filter((chapter) => (chapter.quiz?.length ?? 0) > 0).map((chapter) => chapter.slug);
@@ -28,7 +37,7 @@ export default function Home() {
             Sistemi Operativi
           </h1>
           <p className="text-accent-green text-xl font-medium mb-2">
-            Capire Linux e i Sistemi Operativi — davvero.
+            <TerminalRotator phrases={subtitlePhrases} />
           </p>
           <p className="text-text-secondary text-base mb-8 max-w-3xl leading-8">
             Dal <GlossaryTooltip termId="kernel">kernel</GlossaryTooltip> ai comandi Linux, dai <GlossaryTooltip termId="process">processi</GlossaryTooltip> ai <GlossaryTooltip termId="permissions">permessi</GlossaryTooltip>: un percorso completo pensato per chi vuole usare Linux con consapevolezza reale.

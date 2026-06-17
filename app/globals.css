@@ -96,6 +96,21 @@ code {
   font-variant-ligatures: none;
 }
 
+@keyframes terminal-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.8em;
+  background: var(--accent-green);
+  vertical-align: baseline;
+  margin-left: 5px;
+  animation: terminal-blink 1s step-end infinite;
+}
+
 @keyframes glow-pulse-green {
   0%, 100% { box-shadow: 0 0 0px rgba(0, 255, 65, 0); }
   50%       { box-shadow: 0 0 14px 3px rgba(0, 255, 65, 0.4); }
