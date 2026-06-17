@@ -1,11 +1,12 @@
 'use client';
 
 import type { ProjectLab } from '@/data/types';
-import { Download, FlaskConical, Trophy } from 'lucide-react';
+import { Check, ChevronDown, ChevronUp, Copy, Download, FlaskConical, Trophy } from 'lucide-react';
 import TerminalCommand from '@/components/content/TerminalCommand';
 import NixButton from '@/components/tutor/NixButton';
 import UserGroupTree from '@/components/content/UserGroupTree';
 import { renderInline } from '@/components/ui/RichText';
+import { useState } from 'react';
 
 function buildStepPrompt(goal: string, command: string, context?: string | string[]): string {
   const contextStr = Array.isArray(context) ? context.join(' ') : context;
@@ -23,6 +24,62 @@ function buildStepPrompt(goal: string, command: string, context?: string | strin
 interface ProjectLabBlockProps {
   projectLab: ProjectLab;
   glossaryIds?: string[];
+}
+
+function DownloadLinkRow({ link }: { link: ProjectLab['downloadLinks'] extends (infer T)[] | undefined ? T : never }) {
+  const [open, setOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  function copyContent() {
+    if (!link.content) return;
+    navigator.clipboard.writeText(link.content).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
+
+  return (
+    <div className="border border-accent-cyan/40 bg-bg-surface">
+      <div className="flex flex-wrap items-center gap-2 px-3 py-2.5">
+        <a
+          href={`/downloads/${link.filename}`}
+          download
+          className="inline-flex items-center gap-2 border border-accent-cyan/50 bg-accent-cyan/10 px-3 py-1.5 text-sm font-medium text-accent-cyan transition hover:bg-accent-cyan/20 hover:border-accent-cyan"
+        >
+          <Download className="h-4 w-4 shrink-0" />
+          {link.label}
+        </a>
+        {link.description && (
+          <span className="text-text-secondary text-xs">{link.description}</span>
+        )}
+        {link.content && (
+          <div className="ml-auto flex items-center gap-2">
+            <button
+              type="button"
+              onClick={copyContent}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs text-text-secondary border border-border-subtle hover:text-accent-cyan hover:border-accent-cyan/40 transition"
+            >
+              {copied ? <Check className="h-3 w-3 text-accent-green" /> : <Copy className="h-3 w-3" />}
+              {copied ? 'Copiato' : 'Copia'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs text-text-secondary border border-border-subtle hover:text-accent-cyan hover:border-accent-cyan/40 transition"
+            >
+              {open ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+              {open ? 'Nascondi' : 'Mostra'}
+            </button>
+          </div>
+        )}
+      </div>
+      {open && link.content && (
+        <pre className="border-t border-border-subtle bg-bg-primary px-4 py-4 text-xs text-text-secondary font-mono leading-6 overflow-x-auto whitespace-pre">
+          {link.content}
+        </pre>
+      )}
+    </div>
+  );
 }
 
 export default function ProjectLabBlock({ projectLab, glossaryIds = [] }: ProjectLabBlockProps) {
@@ -58,20 +115,9 @@ export default function ProjectLabBlock({ projectLab, glossaryIds = [] }: Projec
             <p className="terminal-heading text-[10px] uppercase tracking-[0.22em] text-text-secondary mb-3">
               Script e risorse
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-col gap-2">
               {downloadLinks.map((link) => (
-                <a
-                  key={link.filename}
-                  href={`/downloads/${link.filename}`}
-                  download
-                  className="inline-flex items-center gap-2 border border-accent-cyan/40 bg-bg-surface px-4 py-2 text-sm text-accent-cyan transition hover:border-accent-cyan hover:bg-accent-cyan/10"
-                >
-                  <Download className="h-4 w-4" />
-                  {link.label}
-                  {link.description && (
-                    <span className="text-text-secondary text-xs">— {link.description}</span>
-                  )}
-                </a>
+                <DownloadLinkRow key={link.filename} link={link} />
               ))}
             </div>
           </div>

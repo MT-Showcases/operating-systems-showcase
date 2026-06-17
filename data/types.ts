@@ -179,6 +179,7 @@ export interface ProjectLabDownloadLink {
   label: string;
   filename: string;
   description?: string;
+  content?: string;
 }
 
 export interface ProjectLabStep {
