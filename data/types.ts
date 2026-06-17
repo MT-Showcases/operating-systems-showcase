@@ -183,7 +183,7 @@ export interface ProjectLabDownloadLink {
 
 export interface ProjectLabStep {
   goal: string;
-  context?: string;
+  context?: string | string[];
   command: TerminalCommandBlock;
   whyItMatters?: string;
 }

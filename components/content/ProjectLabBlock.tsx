@@ -7,10 +7,11 @@ import NixButton from '@/components/tutor/NixButton';
 import UserGroupTree from '@/components/content/UserGroupTree';
 import { renderInline } from '@/components/ui/RichText';
 
-function buildStepPrompt(goal: string, command: string, context?: string): string {
+function buildStepPrompt(goal: string, command: string, context?: string | string[]): string {
+  const contextStr = Array.isArray(context) ? context.join(' ') : context;
   return [
     `Passo del progetto: "${goal}"`,
-    context ? `Contesto: ${context}` : '',
+    contextStr ? `Contesto: ${contextStr}` : '',
     `Comando: ${command}`,
     '',
     'Spiegami perché si fa così, cosa può andare storto e come verifico che il risultato sia corretto.',
@@ -117,9 +118,20 @@ export default function ProjectLabBlock({ projectLab, glossaryIds = [] }: Projec
                   </div>
 
                   {step.context && (
-                    <p className="mb-3 text-sm leading-6 text-text-secondary italic">
-                      {renderInline(step.context, glossaryIds, `proj-ctx-${i}`)}
-                    </p>
+                    Array.isArray(step.context) ? (
+                      <ul className="mb-3 space-y-1">
+                        {step.context.map((line, j) => (
+                          <li key={j} className="flex gap-2 text-sm leading-6 text-text-secondary italic">
+                            <span className="shrink-0 text-accent-green/50">·</span>
+                            {renderInline(line, glossaryIds, `proj-ctx-${i}-${j}`)}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="mb-3 text-sm leading-6 text-text-secondary italic">
+                        {renderInline(step.context, glossaryIds, `proj-ctx-${i}`)}
+                      </p>
+                    )
                   )}
 
                   <TerminalCommand
