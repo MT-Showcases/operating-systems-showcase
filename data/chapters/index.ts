@@ -2765,7 +2765,7 @@ export const chapters: Chapter[] = [
     id: 14,
     slug: 'inode-links-filesystem-ops',
     title: 'Inode, Link e Metadati del File System',
-    description: ‘Capire cosa c’è davvero dietro file e percorsi: inode, stat, namei, hard link e symlink in pratica.’,
+    description: "Capire cosa c’è davvero dietro file e percorsi: inode, stat, namei, hard link e symlink in pratica.",
     duration: '2.5h',
     objectives: [
       'Leggere metadati di file e directory con stat e namei.',
