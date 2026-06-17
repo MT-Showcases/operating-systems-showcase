@@ -3216,7 +3216,11 @@ export const chapters: Chapter[] = [
         },
         {
           goal: 'Crea gli utenti del team dev e assegnali al gruppo',
-          context: '**useradd -m** crea la **home directory**, **-s** imposta la shell, **-G** assegna il gruppo supplementare.',
+          context: [
+            '**-m** (--create-home) — crea la home directory dell\'utente (/home/marco ecc.). Senza, l\'account esiste nel sistema ma non ha cartella personale e il login non funziona normalmente.',
+            '**-s /bin/bash** (--shell) — imposta bash come shell di login. Senza questa flag la distro potrebbe assegnare /bin/sh o nessuna shell interattiva.',
+            '**-G dev** (--groups) — assegna dev come gruppo supplementare al momento della creazione. Il gruppo primario resta quello omonimo all\'utente (marco, sara, luca).',
+          ],
           command: {
             command: 'sudo useradd -m -s /bin/bash -G dev marco\nsudo useradd -m -s /bin/bash -G dev sara\nsudo useradd -m -s /bin/bash -G dev luca',
             output: '(nessun output = successo)',
@@ -3225,6 +3229,7 @@ export const chapters: Chapter[] = [
         },
         {
           goal: 'Verifica che i tre utenti siano nel gruppo dev',
+          context: 'Il formato di **getent group** è nome:password:GID:membri. Il campo password è sempre "x" (gestita da /etc/shadow, non qui). **id** mostra gid (gruppo primario dell\'utente) e groups (tutti i gruppi a cui appartiene, primario incluso).',
           command: {
             command: 'getent group dev\nid marco',
             output: 'dev:x:1001:marco,sara,luca\nuid=1001(marco) gid=1004(marco) groups=1004(marco),1001(dev)',
@@ -3235,14 +3240,13 @@ export const chapters: Chapter[] = [
         {
           goal: 'Crea gli utenti del team ops',
           context: [
-            '**-m** (--create-home): crea la home directory dell\'utente (/home/giulia ecc.). Senza questa flag l\'utente esiste nel sistema ma non ha cartella personale.',
-            '**-s** (--shell): imposta la shell di login. /bin/bash garantisce bash interattivo; senza, la distro potrebbe assegnare /bin/sh o nessuna shell.',
-            '**-G** (--groups): assegna ops come gruppo supplementare al momento della creazione. Il gruppo primario resta quello omonimo all\'utente (giulia, antonio).',
+            '**-m -s /bin/bash** — garantisce home directory e shell interattiva. Senza, l\'account esiste tecnicamente ma non è usabile per fare login.',
+            '**-G ops** — ops è il gruppo con accesso a log e backup. Assegnarlo qui evita un usermod separato dopo la creazione.',
           ],
           command: {
             command: 'sudo useradd -m -s /bin/bash -G ops giulia\nsudo useradd -m -s /bin/bash -G ops antonio',
             output: '(nessun output = successo)',
-            explanation: 'Giulia e Antonio vengono creati con home directory, bash come shell e accesso al gruppo **ops** (log e backup). Il gruppo **primario** resta quello personale dell\'utente (`giulia`, `antonio`); **ops** è un gruppo **supplementare** — i permessi si sommano, non si sostituiscono.',
+            explanation: 'Giulia e Antonio entrano nel sistema con home, bash e il gruppo **ops** come supplementare. Il loro gruppo **primario** è quello omonimo (`giulia`, `antonio`) — **ops** si aggiunge, non sostituisce.',
           },
         },
         {
@@ -3258,6 +3262,7 @@ export const chapters: Chapter[] = [
         },
         {
           goal: 'Audit completo: verifica struttura gruppi e utente multi-gruppo',
+          context: 'Prima di creare le directory è fondamentale avere la certezza che tutti gli utenti siano nei gruppi corretti. Un errore qui — un utente mancante o nel gruppo sbagliato — si propaga nei permessi delle directory ed è difficile da rintracciare dopo.',
           command: {
             command: 'getent group dev\ngetent group ops\ngetent group security\nid valentina',
             output: 'dev:x:1001:marco,sara,luca\nops:x:1002:giulia,antonio\nsecurity:x:1003:valentina\nuid=1006(valentina) gid=1009(valentina) groups=1009(valentina),1001(dev),1002(ops),1003(security)',
@@ -3266,6 +3271,10 @@ export const chapters: Chapter[] = [
         },
         {
           goal: 'Crea la struttura di directory del progetto',
+          context: [
+            '**/srv** è la directory standard Linux per dati serviti da applicazioni e servizi (definita dall\'FHS, Filesystem Hierarchy Standard). Non /home (dati utente) né /tmp (temporanei).',
+            'Si crea prima la directory padre, poi le figlie. In alternativa si può usare mkdir -p con espansione: mkdir -p /srv/techstartup/{codice,log,backup}.',
+          ],
           command: {
             command: 'sudo mkdir /srv/techstartup\nsudo mkdir /srv/techstartup/codice /srv/techstartup/log /srv/techstartup/backup\nls -la /srv/techstartup/',
             output: 'total 20\ndrwxr-xr-x 5 root root 4096 gen 15 10:23 .\ndrwxr-xr-x 3 root root 4096 gen 15 10:23 ..\ndrwxr-xr-x 2 root root 4096 gen 15 10:23 backup\ndrwxr-xr-x 2 root root 4096 gen 15 10:23 codice\ndrwxr-xr-x 2 root root 4096 gen 15 10:23 log',
@@ -3274,6 +3283,10 @@ export const chapters: Chapter[] = [
         },
         {
           goal: 'Configura accesso directory codice: solo team dev',
+          context: [
+            '**chown root:dev** — imposta root come owner e dev come gruppo proprietario. Il formato è sempre utente:gruppo.',
+            '**chmod 770** — in ottale: owner=rwx (7), gruppo=rwx (7), altri=--- (0). Dev legge, scrive ed esegue; chiunque altro non ha nessun accesso.',
+          ],
           command: {
             command: 'sudo chown root:dev /srv/techstartup/codice\nsudo chmod 770 /srv/techstartup/codice',
             output: '(nessun output = successo)',
@@ -3283,6 +3296,10 @@ export const chapters: Chapter[] = [
         },
         {
           goal: 'Configura accessi ops: log in scrittura, backup in sola lettura',
+          context: [
+            '**log (chmod 770 = rwxrwx---)** — ops deve poter aggiungere voci ai log, quindi serve la scrittura per il gruppo.',
+            '**backup (chmod 750 = rwxr-x---)** — ops può leggere i backup ma non modificarli o eliminarli. Il valore 5 = r-x: lettura ed esecuzione, nessuna scrittura. I backup sono dati critici: limitare la scrittura riduce il rischio di cancellazioni accidentali.',
+          ],
           command: {
             command: 'sudo chown root:ops /srv/techstartup/log && sudo chmod 770 /srv/techstartup/log\nsudo chown root:ops /srv/techstartup/backup && sudo chmod 750 /srv/techstartup/backup',
             output: '(nessun output = successo)',
@@ -3301,6 +3318,7 @@ export const chapters: Chapter[] = [
         },
         {
           goal: 'Verifica finale: testa accesso negato (giulia su /codice)',
+          context: '**2>&1** redirige stderr (canale 2) su stdout (canale 1). Senza questa redirezione, il messaggio "Permission denied" verrebbe scritto su stderr e potrebbe non apparire nel terminale a seconda del contesto. Qui serve per vedere l\'errore nell\'output normale.',
           command: {
             command: 'sudo -u giulia ls /srv/techstartup/codice 2>&1',
             output: 'ls: cannot open directory \'/srv/techstartup/codice\': Permission denied',

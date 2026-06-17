@@ -101,7 +101,7 @@ export default function ProjectLabBlock({ projectLab, glossaryIds = [] }: Projec
                     {String(i + 1).padStart(2, '0')}
                   </div>
                   {i < steps.length - 1 && (
-                    <div className="w-px flex-1 bg-accent-green/15 min-h-[1.5rem]" />
+                    <div className="w-px flex-1 bg-accent-green/15 min-h-6" />
                   )}
                 </div>
 
@@ -123,7 +123,7 @@ export default function ProjectLabBlock({ projectLab, glossaryIds = [] }: Projec
                         {step.context.map((line, j) => (
                           <li key={j} className="flex gap-2 text-sm leading-6 text-text-secondary italic">
                             <span className="shrink-0 text-accent-green/50">·</span>
-                            {renderInline(line, [], `proj-ctx-${i}-${j}`)}
+                            <span className="flex-1 [&_strong]:whitespace-nowrap">{renderInline(line, [], `proj-ctx-${i}-${j}`)}</span>
                           </li>
                         ))}
                       </ul>
