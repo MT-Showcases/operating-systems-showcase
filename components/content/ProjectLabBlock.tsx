@@ -123,13 +123,13 @@ export default function ProjectLabBlock({ projectLab, glossaryIds = [] }: Projec
                         {step.context.map((line, j) => (
                           <li key={j} className="flex gap-2 text-sm leading-6 text-text-secondary italic">
                             <span className="shrink-0 text-accent-green/50">·</span>
-                            {renderInline(line, glossaryIds, `proj-ctx-${i}-${j}`)}
+                            {renderInline(line, [], `proj-ctx-${i}-${j}`)}
                           </li>
                         ))}
                       </ul>
                     ) : (
                       <p className="mb-3 text-sm leading-6 text-text-secondary italic">
-                        {renderInline(step.context, glossaryIds, `proj-ctx-${i}`)}
+                        {renderInline(step.context, [], `proj-ctx-${i}`)}
                       </p>
                     )
                   )}
