@@ -2427,7 +2427,7 @@ export const chapters: Chapter[] = [
     id: 12,
     slug: 'streams-pipes-redirection',
     title: 'Streams, Pipe e Redirection',
-    description: 'Passare da comandi isolati a flussi reali: **stdin**, **stdout**, **stderr**, **redirection** e **pipe** operative.',
+    description: 'Passare da comandi isolati a flussi reali: stdin, stdout, stderr, redirection e pipe operative.',
     duration: '2.5h',
     objectives: [
       'Distinguere **stdin**, **stdout** e **stderr** senza confonderli.',
@@ -2593,7 +2593,7 @@ export const chapters: Chapter[] = [
     id: 13,
     slug: 'process-logs-troubleshooting',
     title: 'Processi, Log e Troubleshooting',
-    description: 'Osservabilità operativa Linux: leggere **processi**, seguire **log** e diagnosticare problemi senza andare a tentoni.',
+    description: 'Osservabilità operativa Linux: leggere processi, seguire log e diagnosticare problemi senza andare a tentoni.',
     duration: '3h',
     objectives: [
       'Usare ps, top e pgrep per capire cosa sta succedendo nel sistema.',
@@ -2765,7 +2765,7 @@ export const chapters: Chapter[] = [
     id: 14,
     slug: 'inode-links-filesystem-ops',
     title: 'Inode, Link e Metadati del File System',
-    description: 'Capire cosa c’è davvero dietro file e percorsi: **inode**, stat, namei, **hard link** e **symlink** in pratica.',
+    description: ‘Capire cosa c’è davvero dietro file e percorsi: inode, stat, namei, hard link e symlink in pratica.’,
     duration: '2.5h',
     objectives: [
       'Leggere metadati di file e directory con stat e namei.',
@@ -2903,7 +2903,7 @@ export const chapters: Chapter[] = [
     id: 15,
     slug: 'cron-jobs-automation-basics',
     title: 'Cron Jobs e Automazione di Base',
-    description: 'Automatizzare senza perdere controllo: **crontab**, scheduling, verifica risultati ed errori comuni dei **cron job** periodici.',
+    description: 'Automatizzare senza perdere controllo: crontab, scheduling, verifica risultati ed errori comuni dei cron job periodici.',
     duration: '2.5h',
     objectives: [
       'Capire come ragiona **cron** e come leggere una schedule base.',
