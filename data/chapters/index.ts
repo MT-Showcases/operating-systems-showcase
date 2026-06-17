@@ -3234,10 +3234,11 @@ export const chapters: Chapter[] = [
         },
         {
           goal: 'Crea gli utenti del team ops',
+          context: '**-m** crea automaticamente la **home directory** (`/home/giulia`, `/home/antonio`): senza questa flag l\'utente esiste nel sistema ma non ha una cartella personale. **-s /bin/bash** imposta **bash** come shell di login — senza, l\'utente potrebbe ritrovarsi con `/bin/sh` o nessuna shell interattiva a seconda della distro. **-G ops** assegna **ops** come gruppo supplementare al momento della creazione, senza toccare il gruppo primario dell\'utente.',
           command: {
             command: 'sudo useradd -m -s /bin/bash -G ops giulia\nsudo useradd -m -s /bin/bash -G ops antonio',
             output: '(nessun output = successo)',
-            explanation: 'Stessa logica del team **dev**, ma con il gruppo **ops**. Giulia e Antonio avranno accesso a **log** e **backup**, non al codice.',
+            explanation: 'Giulia e Antonio vengono creati con home directory, bash come shell e accesso al gruppo **ops** (log e backup). Il gruppo **primario** resta quello personale dell\'utente (`giulia`, `antonio`); **ops** è un gruppo **supplementare** — i permessi si sommano, non si sostituiscono.',
           },
         },
         {
