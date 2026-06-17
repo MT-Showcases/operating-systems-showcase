@@ -69,7 +69,7 @@ export default function Home() {
               href="/exam"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-none bg-accent-green/10 border border-accent-green/30 text-accent-green hover:bg-accent-green/20 transition-all text-sm font-medium"
             >
-              <ClipboardList className="h-4 w-4" /> Esame Finale
+              <ClipboardList className="h-4 w-4" /> Test Finale
             </Link>
           </div>
         </div>

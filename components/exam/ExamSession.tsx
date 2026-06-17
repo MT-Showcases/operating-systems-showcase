@@ -252,7 +252,7 @@ export default function ExamSession() {
         </div>
         <div>
           <p className="terminal-heading text-xs uppercase tracking-[0.28em] text-accent-green/60 mb-2">
-            Esame finale
+            Test finale
           </p>
           <h2 className="text-2xl font-bold text-text-primary">Sistemi Operativi</h2>
           <p className="mt-3 text-sm leading-7 text-text-secondary max-w-sm mx-auto">
@@ -265,14 +265,14 @@ export default function ExamSession() {
           <li className="flex gap-2"><span className="text-accent-green">·</span> {EXAM_SIZE} domande per tentativo (bilanciate per capitolo)</li>
           <li className="flex gap-2"><span className="text-accent-green">·</span> Mix di scelta singola, multipla, matching e riordino</li>
           <li className="flex gap-2"><span className="text-accent-green">·</span> Alcune domande richiedono conferma esplicita</li>
-          <li className="flex gap-2"><span className="text-accent-green">·</span> Puoi rifare l&apos;esame quante volte vuoi</li>
+          <li className="flex gap-2"><span className="text-accent-green">·</span> Puoi rifare il test quante volte vuoi</li>
         </ul>
         <button
           type="button"
           onClick={startExam}
           className="inline-flex min-h-11 w-full items-center justify-center gap-2 border-2 border-accent-green bg-accent-green/10 px-8 py-3 text-sm font-semibold text-accent-green transition hover:bg-accent-green/20 sm:w-auto"
         >
-          Inizia Esame <ChevronRight className="h-4 w-4" />
+          Inizia Test <ChevronRight className="h-4 w-4" />
         </button>
       </div>
     );
@@ -285,7 +285,7 @@ export default function ExamSession() {
           <Trophy className={`mx-auto h-8 w-8 ${passed ? 'text-accent-green' : 'text-accent-amber'}`} strokeWidth={1.5} />
           <div>
             <p className={`terminal-heading text-xs uppercase tracking-[0.28em] mb-1 ${passed ? 'text-accent-green/70' : 'text-accent-amber/70'}`}>
-              {passed ? 'Esame superato' : 'Esame non superato'}
+              {passed ? 'Test superato' : 'Test non superato'}
             </p>
             <p className="text-4xl font-extrabold text-text-primary">{scorePercent}%</p>
             <p className="mt-1 text-sm text-text-secondary">{score} su {totalQuestions} risposte corrette</p>
@@ -364,7 +364,7 @@ export default function ExamSession() {
     <div className="mx-auto max-w-2xl space-y-6 pb-20 md:pb-0">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-green">Esame finale</p>
+          <p className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-green">Test finale</p>
           <p className="mt-1 text-xs text-text-secondary">{current.question.chapterTitle}</p>
         </div>
         <span className="border-2 border-accent-green/40 bg-bg-surface px-3 py-1 text-xs text-text-secondary">

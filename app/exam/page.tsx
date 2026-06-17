@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 
 export const metadata = {
-  title: 'Esame Finale — Sistemi Operativi',
+  title: 'Test Finale — Sistemi Operativi',
   description: 'Metti alla prova le tue conoscenze con 30 domande casuali tratte da tutti i 16 capitoli del corso.',
 };
 
@@ -20,7 +20,7 @@ export default function ExamPage() {
           </Link>
           <span className="text-border-subtle select-none">/</span>
           <span className="terminal-heading text-xs uppercase tracking-[0.22em] text-accent-green">
-            Esame Finale
+            Test Finale
           </span>
         </div>
       </header>
