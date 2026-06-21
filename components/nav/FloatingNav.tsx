@@ -41,7 +41,7 @@ export default function FloatingNav() {
         <button
           type="button"
           onClick={() => emit('nix:open', { prompt: '' })}
-          className="flex h-14 items-center justify-center gap-2 text-accent-green transition hover:bg-accent-green/10"
+          className="flex h-14 items-center justify-center gap-2 bg-accent-green text-bg-primary transition hover:bg-accent-green/80"
           aria-label="Apri Nix"
         >
           <MessageSquare className="h-4 w-4" />
