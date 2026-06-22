@@ -6,6 +6,7 @@ import { MessageSquare, X } from 'lucide-react';
 import { TUTOR_NAME, TUTOR_PLACEHOLDER, TUTOR_TAGLINE } from '@/lib/tutor-config';
 import { on } from '@/lib/events';
 import useBodyScrollLock from '@/lib/useBodyScrollLock';
+import NixPopup from './NixPopup';
 
 const nixMessages = [
   'Hai dubbi? Sono qui.',
@@ -66,7 +67,7 @@ export default function TutorFloatingChat() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const popupIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const popupHideRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const popupActiveRef = useRef(false);
 
   useBodyScrollLock(open);
 
@@ -94,10 +95,10 @@ export default function TutorFloatingChat() {
     if (open) return;
 
     const showPopup = () => {
+      if (popupActiveRef.current) return;
+      popupActiveRef.current = true;
       const msg = nixMessages[Math.floor(Math.random() * nixMessages.length)];
       setPopupMessage(msg);
-      if (popupHideRef.current) clearTimeout(popupHideRef.current);
-      popupHideRef.current = setTimeout(() => setPopupMessage(null), 5000);
     };
 
     const firstTimer = setTimeout(() => {
@@ -108,13 +109,14 @@ export default function TutorFloatingChat() {
     return () => {
       clearTimeout(firstTimer);
       if (popupIntervalRef.current) clearInterval(popupIntervalRef.current);
-      if (popupHideRef.current) clearTimeout(popupHideRef.current);
     };
   }, [open]);
 
   useEffect(() => {
     return on('nix:open', ({ prompt }) => {
       setOpen(true);
+      setPopupMessage(null);
+      popupActiveRef.current = false;
       if (prompt) setQuestion(prompt);
     });
   }, []);
@@ -159,17 +161,11 @@ export default function TutorFloatingChat() {
       {/* Mobile popup: appare sopra la navbar, allineato al bottone Nix (colonna destra) */}
       {popupMessage && !open && (
         <div className="md:hidden fixed bottom-14 right-0 z-89 pointer-events-none flex justify-end pr-3 pb-2">
-          <div className="relative bg-bg-surface border border-accent-green/50 px-3 py-2 text-xs text-accent-green shadow-lg w-max max-w-[80vw] whitespace-nowrap">
-            {popupMessage}
-            <div
-              className="absolute top-full right-6 w-0 h-0"
-              style={{
-                borderLeft: '5px solid transparent',
-                borderRight: '5px solid transparent',
-                borderTop: '5px solid rgba(74,222,128,0.5)',
-              }}
-            />
-          </div>
+          <NixPopup
+            message={popupMessage}
+            triangleClass="right-6"
+            onDone={() => { setPopupMessage(null); popupActiveRef.current = false; }}
+          />
         </div>
       )}
 
@@ -177,21 +173,15 @@ export default function TutorFloatingChat() {
       <div className="hidden md:block fixed bottom-6 right-5 z-90">
         {popupMessage && !open && (
           <div className="absolute bottom-full right-0 mb-2 pointer-events-none">
-            <div className="relative bg-bg-surface border border-accent-green/50 px-3 py-2 text-xs text-accent-green shadow-lg w-max max-w-[80vw] whitespace-nowrap">
-              {popupMessage}
-              <div
-                className="absolute top-full right-4 w-0 h-0"
-                style={{
-                  borderLeft: '5px solid transparent',
-                  borderRight: '5px solid transparent',
-                  borderTop: '5px solid rgba(74,222,128,0.5)',
-                }}
-              />
-            </div>
+            <NixPopup
+              message={popupMessage}
+              triangleClass="right-4"
+              onDone={() => { setPopupMessage(null); popupActiveRef.current = false; }}
+            />
           </div>
         )}
         <button
-          onClick={() => setOpen((value) => !value)}
+          onClick={() => { setOpen((value) => !value); setPopupMessage(null); popupActiveRef.current = false; }}
           className="flex rounded-none bg-accent-green text-bg-primary px-4 py-3 font-semibold items-center gap-2 hover:bg-accent-cyan hover:text-bg-primary transition btn-glow-green"
           aria-label={`Apri ${TUTOR_NAME}`}
         >
